@@ -1,0 +1,5 @@
+main=true
+gui=true
+jade_domain_df_autocleanup=true
+platform-id=tdia04
+#local-port=1099
