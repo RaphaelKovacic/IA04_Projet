@@ -1,1 +1,1 @@
-( ap-description  :name "tdia04" :ap-services (set ( ap-service  :name fipa.mts.mtp.http.std :type fipa.mts.mtp.http.std :addresses (sequence http://Portable_Benoit:7778/acc))))
+( ap-description  :name "tdia04" :ap-services (set ( ap-service  :name fipa.mts.mtp.http.std :type fipa.mts.mtp.http.std :addresses (sequence http://localhost:7778/acc))))

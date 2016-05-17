@@ -1,5 +1,5 @@
 main=false
 gui=false
 container-name = Parlement
-host = 192.168.1.51
+host = 192.168.1.77
 #local-port=1099

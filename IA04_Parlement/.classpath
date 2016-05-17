@@ -2,30 +2,30 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Librairies_utiles/jackson-annotations-2.6.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Librairies_utiles/jackson-core-2.6.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Librairies_utiles/jackson-databind-2.6.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Librairies_utiles/jade4.3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/commons-codec-1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/commons-csv-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/commons-lang3-3.3.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/httpclient-4.2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/httpclient-cache-4.2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/httpcore-4.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jackson-annotations-2.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jackson-core-2.3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jackson-databind-2.3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jcl-over-slf4j-1.7.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jena-arq-2.13.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jena-core-2.13.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jena-iri-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jena-tdb-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/jsonld-java-0.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/libthrift-0.9.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/slf4j-api-1.7.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/slf4j-log4j12-1.7.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/xercesImpl-2.11.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/GI04/IA04/Lib_jena/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/jade4.3.3.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/slf4j-log4j12-1.7.6.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/slf4j-api-1.7.6.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/libthrift-0.9.2.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jsonld-java-0.5.1.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jena-tdb-1.1.2.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jena-iri-1.1.2.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jena-core-2.13.0.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jena-arq-2.13.0.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jcl-over-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jackson-databind-2.3.3.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jackson-core-2.3.3.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/jackson-annotations-2.3.0.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/httpcore-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/httpclient-cache-4.2.6.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/httpclient-4.2.6.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/commons-csv-1.0.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-jena/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-json/jackson-databind-2.6.4.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-json/jackson-core-2.6.4.jar"/>
+	<classpathentry kind="lib" path="/media/raphael/DISQUEDUR/gitIA04/IA04_Projet/IA04_Parlement/libs/lib-json/jackson-annotations-2.6.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
