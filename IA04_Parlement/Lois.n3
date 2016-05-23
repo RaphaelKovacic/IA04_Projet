@@ -89,3 +89,35 @@ parlement:loi11 rdfs:type law:Loi;
 	law:eco_effect 20;
 	law:life_effect -10;
 	law:politic_party "Audacieux", "Erudits".
+
+parlement:loi12 rdfs:type law:Loi;	
+	law:id 12;
+	law:name "Retirer le pouvoir judiciaire à l'Empreur";
+	law:desc "Ceci évitera les représailles politiques";
+	law:eco_effect -5;
+	law:life_effect 10;
+	law:politic_party "Sinceres".
+
+parlement:loi13 rdfs:type law:Loi;	
+	law:id 13;
+	law:name "Augmenter les normes de sécurité sur les chantiers de la Death Star";
+	law:desc "Les travailleurs doivent arrêter de s'amuser avec les armes";
+	law:eco_effect 3;
+	law:life_effect 10;
+	law:politic_party "Erudits".
+
+parlement:loi14 rdfs:type law:Loi;	
+	law:id 14;
+	law:name "Distribuer de chocogrenouilles aux citoyens de l'Empire";
+	law:desc "Il faut rendre le peuple heureux";
+	law:eco_effect -5;
+	law:life_effect 10;
+	law:politic_party "Altruistes".
+
+parlement:loi15 rdfs:type law:Loi;	
+	law:id 15;
+	law:name "Augmenter le nombre de contrôles aux frontières de l'Empire";
+	law:desc "Il faut réduire l'import ilégal de chocogrenouilles";
+	law:eco_effect 8;
+	law:life_effect -10;
+	law:politic_party "Sinceres", "Audacieux".
