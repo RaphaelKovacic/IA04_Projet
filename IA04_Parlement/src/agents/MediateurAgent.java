@@ -29,6 +29,7 @@ public class MediateurAgent extends Agent{
 	int num_tour_actuel;
 	int nb_tour_proposeloi = 3;
 	int nb_tour_sondage = 2;
+	int nb_tour_changerparti = 1;
 	boolean vote_en_cours;
 
 	AID ALoi;
@@ -40,7 +41,7 @@ public class MediateurAgent extends Agent{
 
 	protected void setup() 
 	{ 
-		// Enregistrement auprès du DF
+		// Enregistrement auprï¿½s du DF
 		DFAgentDescription dafd = new DFAgentDescription();
 		dafd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
@@ -61,7 +62,7 @@ public class MediateurAgent extends Agent{
 
 			@Override
 			public void action() {
-				// On récupère les AID des agents nécessaires
+				// On rï¿½cupï¿½re les AID des agents nï¿½cessaires
 				while (ALoi == null || AUtilisateur == null || ASondage == null || ASimulation == null){
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
 					AUtilisateur = parl_mana.getReceiver(myAgent, "Parlement", "AUtilisateur");
@@ -69,23 +70,23 @@ public class MediateurAgent extends Agent{
 					ASimulation = parl_mana.getReceiver(myAgent, "Parlement", "ASimulation");
 				}
 
-				addBehaviour(new TourFromSimulation()); // recéption d'un message marquant le début d'un nouveau tour de jeu de l'agent simulation (REQUEST)
+				addBehaviour(new TourFromSimulation()); // recï¿½ption d'un message marquant le dï¿½but d'un nouveau tour de jeu de l'agent simulation (REQUEST)
 				// --> Envoie d'un message a AUtilisateur avec la liste des actions possibles
 
-				addBehaviour(new ActionFromUtilisateur()); // réception de l'action choisit par l'utilisateur (ACCEPT_PROPOSAL)
-				// --> Suivant l'action possibilité de lui renvoyer un message pour lui demander (loi,personne visé, etc...)
+				addBehaviour(new ActionFromUtilisateur()); // rï¿½ception de l'action choisit par l'utilisateur (ACCEPT_PROPOSAL)
+				// --> Suivant l'action possibilitï¿½ de lui renvoyer un message pour lui demander (loi,personne visï¿½, etc...)
 
-				addBehaviour(new PrecisionFromUtilisateur()); // réception de l'information nécessaire pour faire l'action. (INFORM)
-				// --> Suivant l'action traitement différents.
+				addBehaviour(new PrecisionFromUtilisateur()); // rï¿½ception de l'information nï¿½cessaire pour faire l'action. (INFORM)
+				// --> Suivant l'action traitement diffï¿½rents.
 
-				addBehaviour(new FinVoteFromLoi()); // réception de la fin d'un vote de loi (REQUEST)
-				// --> Suivant l'action traitement différents.
+				addBehaviour(new FinVoteFromLoi()); // rï¿½ception de la fin d'un vote de loi (REQUEST)
+				// --> Suivant l'action traitement diffï¿½rents.
 
 			}});
 
 
 
-		System.out.println("Agent Mediateur créé : "+this.getLocalName());
+		System.out.println("Agent Mediateur crï¿½ï¿½ : "+this.getLocalName());
 	}
 
 	class TourFromSimulation extends CyclicBehaviour{
@@ -101,7 +102,7 @@ public class MediateurAgent extends Agent{
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
 
-				//On récupère la variable tour envoyé par l'agent Simulation et on la stocke
+				//On rï¿½cupï¿½re la variable tour envoyï¿½ par l'agent Simulation et on la stocke
 				NumTour NumTour = new NumTour();
 				ObjectMapper mapper = new ObjectMapper();
 				try {
@@ -114,7 +115,7 @@ public class MediateurAgent extends Agent{
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
 
-				// On construit la liste des actions a proposer au joueur suivant le numéro du tour
+				// On construit la liste des actions a proposer au joueur suivant le numï¿½ro du tour
 				L_Actions.clear();
 				L_Actions.add("Aucune");
 				action_choisit = null;
@@ -122,9 +123,9 @@ public class MediateurAgent extends Agent{
 
 				if (num_tour_actuel % nb_tour_proposeloi == 0){
 					L_Actions.add("Proposer une loi");
-				}else{	// Si ce n'est pas à l'utilisateur de proposer une loi, alors il faut prévenir l'agent Loi qu'il demande à un député d'en proposer une
+				}else{	// Si ce n'est pas ï¿½ l'utilisateur de proposer une loi, alors il faut prï¿½venir l'agent Loi qu'il demande ï¿½ un dï¿½putï¿½ d'en proposer une
 
-					//Envoie d'un message à l'Agent loi pour lancer une proposition de loi par un député
+					//Envoie d'un message ï¿½ l'Agent loi pour lancer une proposition de loi par un dï¿½putï¿½
 					if (ALoi != null) {
 						ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
 						message2.addReceiver(ALoi);
@@ -138,8 +139,11 @@ public class MediateurAgent extends Agent{
 				if (num_tour_actuel % nb_tour_sondage == 0){
 					L_Actions.add("Faire un sondage");
 				}
-
-				// Envoie d'un message à l'agent Utilisateur pour qu'il choisisse quelle actions faire.
+				
+				if (num_tour_actuel % nb_tour_changerparti == 0){
+					L_Actions.add("Changer de parti");
+				}
+				// Envoie d'un message ï¿½ l'agent Utilisateur pour qu'il choisisse quelle actions faire.
 				if (L_Actions.size() > 1)
 					myAgent.addBehaviour(new ProposeActionsToUser());
 			}else{
@@ -153,7 +157,7 @@ public class MediateurAgent extends Agent{
 		// Task to do
 		public void action() {
 
-			// On serialise le message contenant la liste des actions possibles et on l'envoie à l'agent utilisateur
+			// On serialise le message contenant la liste des actions possibles et on l'envoie ï¿½ l'agent utilisateur
 			if (AUtilisateur != null) {
 				ObjectMapper mapper1 = new ObjectMapper();
 				StringWriter sw = new StringWriter();
@@ -185,17 +189,18 @@ public class MediateurAgent extends Agent{
 			if (message != null){
 				action_choisit = message.getContent();
 				switch(action_choisit){				
-
+					
 				case "Proposer une loi":
-					// Il faut demander à l'utilisateur de préciser quelle loi veut-il proposer.
+					// Il faut demander ï¿½ l'utilisateur de prï¿½ciser quelle loi veut-il proposer.
 					ACLMessage message1 = new ACLMessage(ACLMessage.REQUEST);
 					message1.addReceiver(AUtilisateur);
 					message1.setContent("Loi?");
 					myAgent.send(message1);
 					break;
+					
 
 				case "Faire un sondage":
-					// Envoyer une demande à l'agent Sondage.
+					// Envoyer une demande ï¿½ l'agent Sondage.
 					if (ASondage != null) {
 						ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
 						message2.addReceiver(ASondage);
@@ -203,16 +208,28 @@ public class MediateurAgent extends Agent{
 						myAgent.send(message2);
 					}
 					break;	
+					
+				case "Changer de parti":
+					// Il faut demander Ã  l'utilisateur de changer de parti et d'adapter ainsi ses variables d'environnement
+					ACLMessage message3 = new ACLMessage(ACLMessage.REQUEST);
+					message3.addReceiver(AUtilisateur);
+					message3.setContent("Change de parti");
+					myAgent.send(message3);
+					break;
 
 				case "Aucune":
-					if(vote_en_cours == false)
-						// Envoyer une demande à l'agent Sondage.
+					if(vote_en_cours == false){
+						// Terminer le tour en informant l'agent de simulation
 						if (ASondage != null) {
 							ACLMessage message2 = new ACLMessage(ACLMessage.INFORM);
 							message2.addReceiver(ASimulation);
 							message2.setContent("Fin du tour");
 							myAgent.send(message2);
 						}
+					}
+					else
+						System.out.println("N'oubliez pas de voter pour la loi proposÃ©e pour finir le tour. Envoyer un message Ã  l'agent LOI avec ACCEPT OU REJECT PROPOSAL.");
+						
 					break;
 				}
 			}else{
@@ -245,10 +262,10 @@ public class MediateurAgent extends Agent{
 					}
 
 					System.out.println();
-					System.out.println("Vous avez proposé cette loi : ");
+					System.out.println("Vous avez proposï¿½ cette loi : ");
 					loi.affiche();
 					
-					//Envoie de la loi choisit par l'utilisateur à l'Agent Loi.
+					//Envoie de la loi choisit par l'utilisateur ï¿½ l'Agent Loi.
 					if (ALoi != null) {
 						ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
 						message2.addReceiver(ALoi);

@@ -25,14 +25,14 @@ import jade.lang.acl.MessageTemplate;
 
 
 public class UtilisateurAgent extends Agent{
-	//Caractéristiques dynamiques
+	//Caractï¿½ristiques dynamiques
 	float Influence;
 	float Popularite;
 	float Notoriete;
 	float Credibilite;
 	String Parti_Politique;
 	
-	//Caractéristiques statiques
+	//Caractï¿½ristiques statiques
 	float Charisme;
 	
 	//Liste de tous les partis existants.
@@ -45,7 +45,7 @@ public class UtilisateurAgent extends Agent{
 
 	protected void setup() 
 	{ 
-		// Enregistrement auprès du DF
+		// Enregistrement auprï¿½s du DF
 		DFAgentDescription dafd = new DFAgentDescription();
 		dafd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
@@ -64,31 +64,32 @@ public class UtilisateurAgent extends Agent{
 		L_Parti.add("Altruistes");L_Parti.add("Erudits");L_Parti.add("Audacieux");
 		L_Parti.add("Sinceres");L_Parti.add("Fraternels");
 		
-		// Initialisation des caractéristiques dynamiques
-		Credibilite = (float)(Math.random() * 100); // Entre 0 et 100 au départ
-		Influence = (float)(Math.random() * 70); // Entre 0 et 70 au départ
-		Parti_Politique = L_Parti.get((int)(Math.random() * L_Parti.size())); // aléatoire
-		Popularite = (float)(Math.random() * 100); // Entre 0 et 100 au départ
-		Notoriete =  (float)(Math.random() * 100); // Entre 0 et 100 au départ
+		// Initialisation des caractï¿½ristiques dynamiques
+		Credibilite = (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
+		Influence = (float)(Math.random() * 70); // Entre 0 et 70 au dï¿½part
+		Parti_Politique = L_Parti.get((int)(Math.random() * L_Parti.size())); // alï¿½atoire
+		Popularite = (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
+		Notoriete =  (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
 		
-		// Initialisation des caractéristiques statiques
-		Charisme = (float)(Math.random() * 100); // Entre 0 et 100 au départ
+		// Initialisation des caractï¿½ristiques statiques
+		Charisme = (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
 
-		System.out.println("Agent Utilisateur créé : "+this.getLocalName());
+		System.out.println("Agent Utilisateur crï¿½ï¿½ : "+this.getLocalName());
 
 		addBehaviour(new OneShotBehaviour(){
 
 			@Override
 			public void action() {
-				// On récupère les AID des agents nécessaires
+				// On rï¿½cupï¿½re les AID des agents nï¿½cessaires
 				while (AMediateur == null || ALoi == null){
 					AMediateur = parl_mana.getReceiver(myAgent, "Parlement", "AMediateur");
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");				
 				}
-				addBehaviour(new LActionsFromMediateur()); // recéption d'un message proposant de choisir une action parmis plusieurs actions.
-				addBehaviour(new PrecisonActionFromMediateur()); // recéption d'un message demandant des précisions sur l'action choisit
-				addBehaviour(new RequestToVote()); // réception d'un message proventant de l'ALoi demandant de voter pour une loi
-				addBehaviour(new RequestToModifCara()); // réception d'un message proventant de l'ALoi demandant de modifier ses caract
+				addBehaviour(new LActionsFromMediateur()); // recï¿½ption d'un message proposant de choisir une action parmis plusieurs actions.
+				addBehaviour(new PrecisonActionFromMediateur()); // recï¿½ption d'un message demandant des prï¿½cisions sur l'action choisit
+				addBehaviour(new RequestToVote()); // rï¿½ception d'un message proventant de l'ALoi demandant de voter pour une loi
+				addBehaviour(new RequestToModifCara()); // rï¿½ception d'un message proventant de l'ALoi demandant de modifier ses caract
+				addBehaviour(new ChangeParty()); // Changer de parti
 			}});
 		
 
@@ -99,14 +100,14 @@ public class UtilisateurAgent extends Agent{
 		@Override
 		public void action() {
 
-			// On attend la reception d'un message de type PROPOSE venant de l'agent Mediateur contenant la Liste des Actions possibles à ce tour
+			// On attend la reception d'un message de type PROPOSE venant de l'agent Mediateur contenant la Liste des Actions possibles ï¿½ ce tour
 			MessageTemplate mt = MessageTemplate.and(
 					MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
 					MessageTemplate.MatchSender(AMediateur)
 					);
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
-				// On désérialise la liste d'actions.
+				// On dï¿½sï¿½rialise la liste d'actions.
 				List<String> L_Actions = new ArrayList<String>();
 				ObjectMapper mapper = new ObjectMapper();
 				try {
@@ -116,7 +117,7 @@ public class UtilisateurAgent extends Agent{
 					System.out.println();
 					System.out.println("Voici la liste des actions possibles ce tour-ci");
 					System.out.println(L_Actions.toString());
-					System.out.println("Renvoyer un message (ACCEPT_PROPOSAL) à l'agent Mediateur avec pour contenu une de ces actions");
+					System.out.println("Renvoyer un message (ACCEPT_PROPOSAL) ï¿½ l'agent Mediateur avec pour contenu une de ces actions");
 				}
 				catch(Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -145,9 +146,21 @@ public class UtilisateurAgent extends Agent{
 					case "Loi?": 
 						//Ecrit sur la console
 						System.out.println();
-						System.out.println("Précisez votre loi à l'agent Médiateur (INFORM).");
-						System.out.println("La forme du message doit être comme suit : ");
+						System.out.println("Prï¿½cisez votre loi ï¿½ l'agent Mï¿½diateur (INFORM).");
+						System.out.println("La forme du message doit ï¿½tre comme suit : ");
 						System.out.println("{\"id\":1,\"description\":\"description\",\"effet_qualite_vie\":-5.0,\"effet_context_eco\":5.0,\"proposant\":\"ADepute1\",\"influence\":4.639233,\"charisme\":13.48552,\"popularite\":26.205364,\"notoriete\":47.22229,\"l_PartiPolitique\":[\"Erudits\"]}");
+						break;
+						
+					case "Change de parti": 
+						//Construction de la liste des partis que l'utilisateur peut choisir lors de son changement de parti
+						List<String> liste_partis_possibles = L_Parti;
+						liste_partis_possibles.remove(Parti_Politique);
+						//Ecrit sur la console
+						System.out.println("Vous Ãªtes actuellement membre des "+Parti_Politique);
+						System.out.println("PrÃ©ciser le nouveau parti que vous voulez intÃ©grer en envoyant un message comme suit :");
+						System.out.println("Voici la liste des partis possibles : "+liste_partis_possibles.toString());
+						System.out.println("Vous allez perdre influence, popularitÃ©, notorietÃ© et credibilitÃ©;");
+						System.out.println("Merci de rÃ©pondre Ã  l'Agent Utilisateur (INFORM) avec le nom du parti voulu pour le changement");
 						break;
 				}
 				
@@ -156,6 +169,46 @@ public class UtilisateurAgent extends Agent{
 			}
 		}
 	}
+
+	
+	class ChangeParty extends CyclicBehaviour{
+
+		@Override
+		public void action() {
+
+			String parti_a_rejoindre;
+			// On attend la reception d'un message de type Request venant de l'agent Mediateur
+			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+
+			ACLMessage message = myAgent.receive(mt);
+			if (message != null){
+				parti_a_rejoindre = message.getContent();
+				System.out.println("parti Ã  rejoindre : "+parti_a_rejoindre);
+				if(L_Parti.contains(parti_a_rejoindre)){
+					
+					//TODO Ajuster l'impact du changement de parti : actuellement -20% Ã  toutes les caractÃ©ristiques.
+					Influence = Influence - ((Influence *20)/100);
+					Popularite = Popularite - ((Popularite *20)/100);
+					Notoriete = Notoriete - ((Notoriete *20)/100);
+					Credibilite = Credibilite - ((Credibilite *20)/100);
+					VerifierCarac();
+				
+					//Rendre effectif le changement de parti
+					Parti_Politique = parti_a_rejoindre;
+					System.out.println("Vous venez de rejoindre les "+Parti_Politique+" ! Bienvenue !");
+						
+					System.out.println("Voter pour la loi proposÃ©e ci-dessus pour finir le tour.");
+				}
+				else
+					System.out.println("Nom de parti non valide, veuillez recommencer votre changement de parti en renvoyant un message de type INFORM Ã  l'agent Utilisateur");		
+				
+			}else{
+				block();
+			}
+		}
+	}
+	
+	
 
 	class RequestToVote extends CyclicBehaviour{
 
@@ -170,7 +223,7 @@ public class UtilisateurAgent extends Agent{
 			if (message != null){			
 				// L'utilisateur doit voter
 
-				//Récupération de loi (On deserialise le message)
+				//Rï¿½cupï¿½ration de loi (On deserialise le message)
 				Loi loi_en_cours = new Loi();
 				ObjectMapper mapper = new ObjectMapper();
 				try {
@@ -183,7 +236,7 @@ public class UtilisateurAgent extends Agent{
 				System.out.println();
 				System.out.println("Vous devez voter pour la loi ci-desous");
 				loi_en_cours.affiche();
-				System.out.println("Merci de répondre à l'Agent Loi (ACCEPT_PROPOSAL ou REJECT_PROPOSAL)");
+				System.out.println("Merci de rï¿½pondre ï¿½ l'Agent Loi (ACCEPT_PROPOSAL ou REJECT_PROPOSAL)");
 				
 			}else{
 				block();
@@ -202,8 +255,8 @@ public class UtilisateurAgent extends Agent{
 					MessageTemplate.MatchSender(ALoi));
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
-				// A la reception, on met à jour les caract de l'agent
-				// On deserialise le message contenant les valeurs de variables à modifer.
+				// A la reception, on met ï¿½ jour les caract de l'agent
+				// On deserialise le message contenant les valeurs de variables ï¿½ modifer.
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					MajDepute ort = mapper.readValue(message.getContent(),MajDepute.class);
@@ -213,6 +266,7 @@ public class UtilisateurAgent extends Agent{
 					Notoriete+= ort.getEffet_Notoriete();
 					Credibilite += ort.getEffet_Credibilite();
 					
+					//TODO Utiliser fonction VerifCarac()
 					if (Influence< 0)
 						Influence = 0;
 					if (Popularite< 0)
@@ -239,5 +293,16 @@ public class UtilisateurAgent extends Agent{
 				block();
 			}
 		}
+	}
+	
+	public void VerifierCarac(){
+		if (Influence< 0)
+			Influence = 0;
+		if (Popularite< 0)
+			Popularite = 0;
+		if (Notoriete< 0)
+			Notoriete = 0;
+		if (Credibilite< 0)
+			Credibilite = 0;
 	}
 }
