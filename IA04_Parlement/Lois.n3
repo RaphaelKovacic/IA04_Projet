@@ -64,4 +64,28 @@ parlement:loi8 rdfs:type law:Loi;
 	law:desc "La base";
 	law:eco_effect -10;
 	law:life_effect -10;
-	law:politic_party "Audacieux".	
+	law:politic_party "Audacieux".
+
+parlement:loi9 rdfs:type law:Loi;	
+	law:id 9;
+	law:name "Pour qu'on interdise le port des sabres laser aux Wookies";
+	law:desc "Les wookies sont devenus furieux - il faut limiter leur accès aux armes";
+	law:eco_effect 0;
+	law:life_effect 10;
+	law:politic_party "Fraternels", "Altruistes".
+
+parlement:loi10 rdfs:type law:Loi;	
+	law:id 10;
+	law:name "Mettre de la publicité sur les robots de SkyNet";
+	law:desc "Coller un ecran sur le front des T-800";
+	law:eco_effect 15;
+	law:life_effect 5;
+	law:politic_party "Erudits".
+
+parlement:loi11 rdfs:type law:Loi;	
+	law:id 11;
+	law:name "Subventionner la production de Destroyers";
+	law:desc "Ceci pour augmenter la taille de la flotte impériale";
+	law:eco_effect 20;
+	law:life_effect -10;
+	law:politic_party "Audacieux", "Erudits".
