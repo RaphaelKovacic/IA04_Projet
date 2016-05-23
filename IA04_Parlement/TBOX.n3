@@ -1,0 +1,52 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix parlement:    <http://xmlns.com/parlement/0.1/> .
+@prefix law: <http://xmlns.com/law/0.1/> .
+
+law:id
+      a       rdf:Property , owl:ObjectProperty ;
+      rdfs:comment "An id for a law" ;
+      rdfs:domain parlement:loi ;
+      rdfs:label "identification" ;
+      rdfs:range rdfs:Literal .
+
+law:name
+      a       rdf:Property , owl:ObjectProperty ;
+      rdfs:comment "A name for a law" ;
+      rdfs:domain parlement:loi ;
+      rdfs:label "law name" ;
+      rdfs:range rdfs:Literal .
+
+law:desc
+      a       rdf:Property , owl:ObjectProperty ;
+      rdfs:comment "A description for a law" ;
+      rdfs:domain parlement:loi ;
+      rdfs:label "law description" ;
+      rdfs:range rdfs:Literal .
+
+law:eco_effect
+      a       rdf:Property , owl:ObjectProperty ;
+      rdfs:comment "Give the economical impact of application of this law" ;
+      rdfs:domain parlement:loi ;
+      rdfs:label "Economical impact" ;
+      rdfs:range rdfs:Literal .
+
+law:life_effect
+      a       rdf:Property , owl:ObjectProperty ;
+      rdfs:comment "Give the life impact of application of this law" ;
+      rdfs:domain parlement:loi ;
+      rdfs:label "Life impact" ;
+      rdfs:range rdfs:Literal .
+
+law:politic_party
+      a       rdf:Property , owl:ObjectProperty ;
+      rdfs:comment "Political parties that can purpose the law" ;
+      rdfs:domain parlement:loi ;
+      rdfs:label "Political parties" ;
+      rdfs:range rdfs:Literal .
+
+parlement:loi
+      a       owl:Class , rdfs:Class ;
+      rdfs:comment "A law." ;
+      rdfs:label "Law" .
