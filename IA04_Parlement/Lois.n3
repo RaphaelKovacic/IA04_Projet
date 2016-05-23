@@ -121,3 +121,19 @@ parlement:loi15 rdfs:type law:Loi;
 	law:eco_effect 8;
 	law:life_effect -10;
 	law:politic_party "Sinceres", "Audacieux".
+	
+parlement:loi16 rdfs:type law:Loi;	
+	law:id 16;
+	law:name "Tricher pour que la France gagne l'Euro2016";
+	law:desc "Prendre exemple sur la Russie";
+	law:eco_effect 10;
+	law:life_effect 10;
+	law:politic_party "Audacieux".
+
+parlement:loi17 rdfs:type law:Loi;	
+	law:id 17;
+	law:name "Pour que Mimie Mathy soit à la hauteur";
+	law:desc "Pour prendre exemple sur Renaud Lavillenie";
+	law:eco_effect 0;
+	law:life_effect 5;
+	law:politic_party "Erudits".
