@@ -1,7 +1,67 @@
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix ex: <http://www.owl-ontologies.com/ex#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix parlement:    <http://xmlns.com/parlement/0.1/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix law: <http://xmlns.com/law/0.1/> .
 
+parlement:loi1 rdfs:type law:Loi;
+	law:id 1;
+	law:name "L Comme Ri";
+	law:desc "Pour faire baisser le chaud m'âge";
+	law:eco_effect 10;
+	law:life_effect -20;
+	law:politic_party "Erudits", "Audacieux".
+	
+parlement:loi2 rdfs:type law:Loi;
+	law:id 2;
+	law:name "CP euhhhhhhh";
+	law:desc "Pour que les jeunes balancent des pavés comme en 68";
+	law:eco_effect 5;
+	law:life_effect -10;
+	law:politic_party "Altruistes", "Audacieux", "Sinceres".
+	
+parlement:loi3 rdfs:type law:Loi;
+	law:id 3;
+	law:name "Pour promouvoir la merde audio MADE IN FRANCE";
+	law:desc "De 8h à 20 h, 70% de la musique qui passent à la radio doit être de la musique française ";
+	law:eco_effect 15;
+	law:life_effect -15;
+	law:politic_party "Fraternels", "Audacieux".	
+
+parlement:loi4 rdfs:type law:Loi;	
+	law:id 4;
+	law:name "Pour promouvoir la merde audio MADE IN FRANCE";
+	law:desc "De 8h à 20 h, 70% de la musique qui passent à la radio doit être de la musique française ";
+	law:eco_effect 15;
+	law:life_effect -15;
+	law:politic_party "Fraternels", "Audacieux", "Erudits".	
+	
+parlement:loi5 rdfs:type law:Loi;	
+	law:id 5;
+	law:name "Pour l'obligation d'adoption d'un Pikachu";
+	law:desc "Le monde s'en porterait mieux";
+	law:eco_effect 10;
+	law:life_effect 10;
+	law:politic_party "Fraternels", "Sinceres".
+	
+parlement:loi6 rdfs:type law:Loi;	
+	law:id 6;
+	law:name "Pour qu'on arrête de taper sans cesse sur les Stark dans GoT";
+	law:desc "Un peu de fraternité je vous prie";
+	law:eco_effect 0;
+	law:life_effect 15;
+	law:politic_party "Fraternels", "Sinceres", "Altruistes".
+	
+parlement:loi7 rdfs:type law:Loi;	
+	law:id 7;
+	law:name "Pour qu'on retrouve l'orange du marchand";
+	law:desc "Depuis le temps qu'on la cherche";
+	law:eco_effect 10;
+	law:life_effect -5;
+	law:politic_party "Fraternels", "Erudits", "Audacieux".	
+	
+parlement:loi8 rdfs:type law:Loi;	
+	law:id 8;
+	law:name "Pour qu'on interdise le chocolat à ceux qui n'ont pa de bras";
+	law:desc "La base";
+	law:eco_effect -10;
+	law:life_effect -10;
+	law:politic_party "Audacieux".	
