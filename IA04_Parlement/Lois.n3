@@ -3,137 +3,163 @@
 @prefix law: <http://xmlns.com/law/0.1/> .
 
 parlement:loi1 rdfs:type law:Loi;
-	law:id 1;
+	law:id "1";
 	law:name "L Comme Ri";
 	law:desc "Pour faire baisser le chaud m'âge";
 	law:eco_effect 10;
 	law:life_effect -20;
-	law:politic_party "Erudits", "Audacieux".
+	law:politic_party "Erudits", "Audacieux", "Altruistes";
+	law:is_voted "false".
 	
 parlement:loi2 rdfs:type law:Loi;
-	law:id 2;
+	law:id "2";
 	law:name "CP euhhhhhhh";
 	law:desc "Pour que les jeunes balancent des pavés comme en 68";
 	law:eco_effect 5;
 	law:life_effect -10;
-	law:politic_party "Altruistes", "Audacieux", "Sinceres".
+	law:politic_party "Altruistes", "Audacieux", "Sinceres";
+	law:is_voted "false".
 	
 parlement:loi3 rdfs:type law:Loi;
-	law:id 3;
+	law:id "3";
 	law:name "Pour promouvoir la merde audio MADE IN FRANCE";
 	law:desc "De 8h à 20 h, 70% de la musique qui passent à la radio doit être de la musique française ";
 	law:eco_effect 15;
 	law:life_effect -15;
-	law:politic_party "Fraternels", "Audacieux".	
+	law:politic_party "Fraternels", "Audacieux";
+	law:is_voted "false".
 
 parlement:loi4 rdfs:type law:Loi;	
-	law:id 4;
+	law:id "4";
 	law:name "Pour promouvoir la merde audio MADE IN FRANCE";
 	law:desc "De 8h à 20 h, 70% de la musique qui passent à la radio doit être de la musique française ";
 	law:eco_effect 15;
 	law:life_effect -15;
-	law:politic_party "Fraternels", "Audacieux", "Erudits".	
+	law:politic_party "Fraternels", "Audacieux", "Erudits";
+	law:is_voted "false".
 	
 parlement:loi5 rdfs:type law:Loi;	
-	law:id 5;
+	law:id "5";
 	law:name "Pour l'obligation d'adoption d'un Pikachu";
 	law:desc "Le monde s'en porterait mieux";
 	law:eco_effect 10;
 	law:life_effect 10;
-	law:politic_party "Fraternels", "Sinceres".
+	law:politic_party "Fraternels", "Sinceres";
+	law:is_voted "false".
 	
 parlement:loi6 rdfs:type law:Loi;	
-	law:id 6;
+	law:id "6";
 	law:name "Pour qu'on arrête de taper sans cesse sur les Stark dans GoT";
 	law:desc "Un peu de fraternité je vous prie";
 	law:eco_effect 0;
 	law:life_effect 15;
-	law:politic_party "Fraternels", "Sinceres", "Altruistes".
+	law:politic_party "Fraternels", "Sinceres", "Altruistes";
+	law:is_voted "false".
 	
 parlement:loi7 rdfs:type law:Loi;	
-	law:id 7;
+	law:id "7";
 	law:name "Pour qu'on retrouve l'orange du marchand";
 	law:desc "Depuis le temps qu'on la cherche";
 	law:eco_effect 10;
 	law:life_effect -5;
-	law:politic_party "Fraternels", "Erudits", "Audacieux".	
+	law:politic_party "Fraternels", "Erudits", "Audacieux";
+	law:is_voted "false".
 	
 parlement:loi8 rdfs:type law:Loi;	
-	law:id 8;
+	law:id "8";
 	law:name "Pour qu'on interdise le chocolat à ceux qui n'ont pa de bras";
 	law:desc "La base";
 	law:eco_effect -10;
 	law:life_effect -10;
-	law:politic_party "Audacieux".
+	law:politic_party "Audacieux";
+	law:is_voted "false".
 
 parlement:loi9 rdfs:type law:Loi;	
-	law:id 9;
+	law:id "9";
 	law:name "Pour qu'on interdise le port des sabres laser aux Wookies";
 	law:desc "Les wookies sont devenus furieux - il faut limiter leur accès aux armes";
 	law:eco_effect 0;
 	law:life_effect 10;
-	law:politic_party "Fraternels", "Altruistes".
+	law:politic_party "Fraternels", "Altruistes";
+	law:is_voted "false".
 
 parlement:loi10 rdfs:type law:Loi;	
-	law:id 10;
+	law:id "10";
 	law:name "Mettre de la publicité sur les robots de SkyNet";
 	law:desc "Coller un ecran sur le front des T-800";
 	law:eco_effect 15;
 	law:life_effect 5;
-	law:politic_party "Erudits".
+	law:politic_party "Erudits";
+	law:is_voted "false".
 
 parlement:loi11 rdfs:type law:Loi;	
-	law:id 11;
+	law:id "11";
 	law:name "Subventionner la production de Destroyers";
 	law:desc "Ceci pour augmenter la taille de la flotte impériale";
 	law:eco_effect 20;
 	law:life_effect -10;
-	law:politic_party "Audacieux", "Erudits".
+	law:politic_party "Audacieux", "Erudits";
+	law:is_voted "false".
 
 parlement:loi12 rdfs:type law:Loi;	
-	law:id 12;
+	law:id "12";
 	law:name "Retirer le pouvoir judiciaire à l'Empreur";
 	law:desc "Ceci évitera les représailles politiques";
 	law:eco_effect -5;
 	law:life_effect 10;
-	law:politic_party "Sinceres".
+	law:politic_party "Sinceres";
+	law:is_voted "false".
 
 parlement:loi13 rdfs:type law:Loi;	
-	law:id 13;
+	law:id "13";
 	law:name "Augmenter les normes de sécurité sur les chantiers de la Death Star";
 	law:desc "Les travailleurs doivent arrêter de s'amuser avec les armes";
 	law:eco_effect 3;
 	law:life_effect 10;
-	law:politic_party "Erudits".
+	law:politic_party "Erudits";
+	law:is_voted "false".
 
 parlement:loi14 rdfs:type law:Loi;	
-	law:id 14;
+	law:id "14";
 	law:name "Distribuer de chocogrenouilles aux citoyens de l'Empire";
 	law:desc "Il faut rendre le peuple heureux";
 	law:eco_effect -5;
 	law:life_effect 10;
-	law:politic_party "Altruistes".
+	law:politic_party "Altruistes";
+	law:is_voted "false".
 
 parlement:loi15 rdfs:type law:Loi;	
-	law:id 15;
+	law:id "15";
 	law:name "Augmenter le nombre de contrôles aux frontières de l'Empire";
 	law:desc "Il faut réduire l'import ilégal de chocogrenouilles";
 	law:eco_effect 8;
 	law:life_effect -10;
-	law:politic_party "Sinceres", "Audacieux".
+	law:politic_party "Sinceres", "Audacieux";
+	law:is_voted "false".
 	
 parlement:loi16 rdfs:type law:Loi;	
-	law:id 16;
+	law:id "16";
 	law:name "Tricher pour que la France gagne l'Euro2016";
 	law:desc "Prendre exemple sur la Russie";
 	law:eco_effect 10;
 	law:life_effect 10;
-	law:politic_party "Audacieux".
+	law:politic_party "Audacieux";
+	law:is_voted "false".
 
 parlement:loi17 rdfs:type law:Loi;	
-	law:id 17;
+	law:id "17";
 	law:name "Pour que Mimie Mathy soit à la hauteur";
 	law:desc "Pour prendre exemple sur Renaud Lavillenie";
 	law:eco_effect 0;
 	law:life_effect 5;
-	law:politic_party "Erudits".
+	law:politic_party "Erudits";
+	law:is_voted "false".
+	
+parlement:loi18 rdfs:type law:Loi;	
+	law:id "18";
+	law:name "Pour qu'on abolisse le mot chocolatine";
+	law:desc "Afin de mettre fin à ce conflit inter-galactique";
+	law:eco_effect 5;
+	law:life_effect 5;
+	law:politic_party "Sinceres";
+	law:is_voted "false".
