@@ -1,5 +1,6 @@
 package agents;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Class_For_JSON.Loi;
 import Class_For_JSON.MajDepute;
+import Class_For_JSON.MajEnv;
 import Class_For_JSON.NumTour;
 import ParlementSim.ParlementManager;
 import agents.SondageAgent.ReponseOfEnvironnement;
@@ -144,11 +146,38 @@ public class UtilisateurAgent extends Agent{
 				switch(message.getContent()){
 				
 					case "Loi?": 
+						
+						//TODO Ajouter ici le traitement de la loi
+						
 						//Ecrit sur la console
 						System.out.println();
 						System.out.println("Pr�cisez votre loi � l'agent M�diateur (INFORM).");
 						System.out.println("La forme du message doit �tre comme suit : ");
 						System.out.println("{\"id\":1,\"description\":\"description\",\"effet_qualite_vie\":-5.0,\"effet_context_eco\":5.0,\"proposant\":\"ADepute1\",\"influence\":4.639233,\"charisme\":13.48552,\"popularite\":26.205364,\"notoriete\":47.22229,\"l_PartiPolitique\":[\"Erudits\"]}");
+						
+						//Envoi des informations de l'utilisateurs à l'agent médiateur qui va les stocker pour les incorporer à la loi choisie par le joueur
+						List<String> notre_parti = L_Parti;
+						notre_parti.clear();
+						notre_parti.add(Parti_Politique);
+						System.out.println("Debug, notre parti en string : "+notre_parti.toString());
+						Loi information_utilisateur_loi = new Loi(0, null, 0, 0, notre_parti, "Utilisateur", Influence, Charisme, Popularite, Notoriete);
+						
+						//On serialize la loi (incomplète avec les informations de l'utilisateur)
+						ObjectMapper mapper1 = new ObjectMapper();
+						StringWriter sw = new StringWriter();
+
+						try {
+							mapper1.writeValue(sw, information_utilisateur_loi);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						String s1 = sw.toString();
+						
+						ACLMessage message1 = new ACLMessage(ACLMessage.CONFIRM);
+						message1.addReceiver(AMediateur);
+						message1.setContent(s1);
+						myAgent.send(message1);
 						break;
 						
 					case "Change de parti": 
@@ -160,7 +189,7 @@ public class UtilisateurAgent extends Agent{
 						System.out.println("Préciser le nouveau parti que vous voulez intégrer en envoyant un message comme suit :");
 						System.out.println("Voici la liste des partis possibles : "+liste_partis_possibles.toString());
 						System.out.println("Vous allez perdre influence, popularité, notorieté et credibilité;");
-						System.out.println("Merci de répondre à l'Agent Utilisateur (INFORM) avec le nom du parti voulu pour le changement");
+						System.out.println("Merci de répondre à l'Agent Utilisateur (CONFIRM) avec le nom du parti voulu pour le changement");
 						break;
 				}
 				
@@ -178,7 +207,7 @@ public class UtilisateurAgent extends Agent{
 
 			String parti_a_rejoindre;
 			// On attend la reception d'un message de type Request venant de l'agent Mediateur
-			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.CONFIRM);
 
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
