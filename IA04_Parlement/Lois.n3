@@ -181,3 +181,93 @@ parlement:loi20 rdfs:type law:Loi;
 	law:life_effect 0;
 	law:politic_party "Audacieux", "Sinceres";
 	law:is_voted "false".
+
+parlement:loi21 rdfs:type law:Loi;	
+	law:id "21";
+	law:name "Autoriser les formations des padawans en alternance";
+	law:desc "Il faut qu'ils apprennent aussi par la pratique";
+	law:eco_effect 5;
+	law:life_effect 5;
+	law:politic_party "Audacieux", "Sinceres", "Erudits";
+	law:is_voted "false".
+
+parlement:loi22 rdfs:type law:Loi;	
+	law:id "22";
+	law:name "Mettre en place une patrouille de T-800 sur les planètes suspectes";
+	law:desc "Il faut trouver où se cachent les rebelles";
+	law:eco_effect -10;
+	law:life_effect -5;
+	law:politic_party "Audacieux";
+	law:is_voted "false".
+
+parlement:loi23 rdfs:type law:Loi;	
+	law:id "23";
+	law:name "Aider à la recherche sur l'IA dans les systèmes de pilotage";
+	law:desc "L'IA assure mieux la poursuite de la mission";
+	law:eco_effect 5;
+	law:life_effect -5;
+	law:politic_party "Erudits";
+	law:is_voted "false".
+
+parlement:loi24 rdfs:type law:Loi;	
+	law:id "24";
+	law:name "Financer la recherche sur l'intégration des midichloriens chez les non-possesseurs de la Force";
+	law:desc "Rendons la Force au peuple";
+	law:eco_effect 5;
+	law:life_effect 5;
+	law:politic_party "Fraternels", "Sinceres", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi25 rdfs:type law:Loi;	
+	law:id "25";
+	law:name "Imposer du travail forcé aux Stormtroopers qui ne savent pas tirer";
+	law:desc "Il faut qu'ils servent l'Empire d'une certaine manière";
+	law:eco_effect 20;
+	law:life_effect -15;
+	law:politic_party "Erudits";
+	law:is_voted "false".
+
+parlement:loi26 rdfs:type law:Loi;	
+	law:id "26";
+	law:name "Remplacer les drones par des armées de clones";
+	law:desc "Les instincts de survie humains surpassent les algorithmes de combat des drones";
+	law:eco_effect -10;
+	law:life_effect 15;
+	law:politic_party "Audacieux";
+	law:is_voted "false".
+
+parlement:loi27 rdfs:type law:Loi;	
+	law:id "27";
+	law:name "Intégrer la série Vikings aux cours de histoire-géo";
+	law:desc "Les batailles seront mémorisées plus facilement";
+	law:eco_effect -5;
+	law:life_effect 10;
+	law:politic_party "Audacieux", "Sinceres";
+	law:is_voted "false".
+
+parlement:loi28 rdfs:type law:Loi;	
+	law:id "28";
+	law:name "Interdire Yu-Gi-Oh dans les casinos";
+	law:desc "Les gens perdent trop d'argent avec cela";
+	law:eco_effect 10;
+	law:life_effect 0;
+	law:politic_party "Fraternels", "Erudits", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi29 rdfs:type law:Loi;	
+	law:id "29";
+	law:name "Réguler le partage de transport interstellaire";
+	law:desc "Les conducteurs se font de l'argent sans payer d'impôts";
+	law:eco_effect 10;
+	law:life_effect -5;
+	law:politic_party "Sincères", "Erudits", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi30 rdfs:type law:Loi;	
+	law:id "30";
+	law:name "Autoriser la relocation des populations depuis les planètes surpeuplées vers les frontières de l'Empire";
+	law:desc "Des ressources précieuses se trouvent là-bas";
+	law:eco_effect 18;
+	law:life_effect -17;
+	law:politic_party "Fraternels", "Erudits";
+	law:is_voted "false".
