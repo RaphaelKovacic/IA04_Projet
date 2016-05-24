@@ -271,3 +271,183 @@ parlement:loi30 rdfs:type law:Loi;
 	law:life_effect -17;
 	law:politic_party "Fraternels", "Erudits";
 	law:is_voted "false".
+
+parlement:loi31 rdfs:type law:Loi;	
+	law:id "31";
+	law:name "Faire de Gangnam Style l'hymne national de l'Empire";
+	law:desc "C'est la chanson préferée de l'Empreur";
+	law:eco_effect -5;
+	law:life_effect 0;
+	law:politic_party "Fraternels", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi32 rdfs:type law:Loi;	
+	law:id "32";
+	law:name "Imposer une initiation à l'utilisation d'armes à plasma dans les écoles";
+	law:desc "Le peuple doit savoir se défendre";
+	law:eco_effect -3;
+	law:life_effect 5;
+	law:politic_party "Audacieux";
+	law:is_voted "false".
+
+parlement:loi33 rdfs:type law:Loi;	
+	law:id "33";
+	law:name "Créer une allocation familiale pour les Wookies en difficulté";
+	law:desc "Leur rendre la vie meilleure";
+	law:eco_effect -10;
+	law:life_effect 20;
+	law:politic_party "Altruistes";
+	law:is_voted "false".
+
+parlement:loi34 rdfs:type law:Loi;	
+	law:id "34";
+	law:name "Créer un organisme pour combattre les abus envers les Pokémons";
+	law:desc "Ce sont des êtres vivants, il faut les traiter avec respect";
+	law:eco_effect -3;
+	law:life_effect 7;
+	law:politic_party "Fraternels", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi35 rdfs:type law:Loi;	
+	law:id "35";
+	law:name "Arrêter l'exploitation des Pokémons dans les mines de kryptonite";
+	law:desc "C'est un travail nécessitant l'intervention des humanoïdes";
+	law:eco_effect -10;
+	law:life_effect -10;
+	law:politic_party "Erudits", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi36 rdfs:type law:Loi;	
+	law:id "36";
+	law:name "Signer l'accord d'abolition des visas avec Asgard";
+	law:desc "Facilitons les flux entre les états";
+	law:eco_effect 10;
+	law:life_effect 5;
+	law:politic_party "Sinceres", "Fraternels";
+	law:is_voted "false".
+
+parlement:loi37 rdfs:type law:Loi;	
+	law:id "37";
+	law:name "Autoriser la lecture des pensées par la Force dans les procès juridiques";
+	law:desc "Il faut connaître la vérité";
+	law:eco_effect 0;
+	law:life_effect 5;
+	law:politic_party "Sinceres";
+	law:is_voted "false".
+
+parlement:loi38 rdfs:type law:Loi;	
+	law:id "38";
+	law:name "Autoriser l'analyse de données depuis les sabres laser";
+	law:desc "Les producteurs veulent mieux connaître le profil des utilisateurs";
+	law:eco_effect 15;
+	law:life_effect -5;
+	law:politic_party "Sinceres";
+	law:is_voted "false".
+
+parlement:loi39 rdfs:type law:Loi;	
+	law:id "39";
+	law:name "Imposer des jours fériés à l'occasion du centenaire de l'Empire";
+	law:desc "Le peuple doit le fêter";
+	law:eco_effect -10;
+	law:life_effect 10;
+	law:politic_party "Altruistes";
+	law:is_voted "false".
+
+parlement:loi40 rdfs:type law:Loi;	
+	law:id "40";
+	law:name "Imposer un quota sur le nombre de planètes détruites par mois";
+	law:desc "La quantité de débris spatiaux devient trop importante";
+	law:eco_effect 0;
+	law:life_effect 10;
+	law:politic_party "Erudits", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi41 rdfs:type law:Loi;	
+	law:id "41";
+	law:name "Subventionner l'achat de vaisseaux écologiques";
+	law:desc "Réduisons la consommation d'énergie stellaire";
+	law:eco_effect 5;
+	law:life_effect 5;
+	law:politic_party "Fraternels";
+	law:is_voted "false".
+
+parlement:loi42 rdfs:type law:Loi;	
+	law:id "42";
+	law:name "Interdire les rassemblements de mouvements anti-Pokémons";
+	law:desc "La xénophobie ne sera pas tolérée";
+	law:eco_effect 0;
+	law:life_effect 10;
+	law:politic_party "Altruistes", "Sinceres", "Fraternels";
+	law:is_voted "false".
+
+parlement:loi43 rdfs:type law:Loi;	
+	law:id "43";
+	law:name "Autoriser l'inspections des fermes de Pokémons";
+	law:desc "S'assurer du respect des normes sanitaires";
+	law:eco_effect 5;
+	law:life_effect 0;
+	law:politic_party "Erudits";
+	law:is_voted "false".
+
+parlement:loi44 rdfs:type law:Loi;	
+	law:id "44";
+	law:name "Imposer l'achat de T-800 pour assurer la sécurité des propriété privées";
+	law:desc "Les T-800 ont prouvé leur efficacité dans la protection des populations";
+	law:eco_effect 5;
+	law:life_effect -20;
+	law:politic_party "Audacieux", "Erudits", "Sinceres";
+	law:is_voted "false".
+
+parlement:loi45 rdfs:type law:Loi;	
+	law:id "45";
+	law:name "Interdir les manifestations contre l'Empreur";
+	law:desc "Il faut imposer le respect et l'ordre";
+	law:eco_effect 0;
+	law:life_effect -10;
+	law:politic_party "Sinceres";
+	law:is_voted "false".
+
+parlement:loi46 rdfs:type law:Loi;	
+	law:id "46";
+	law:name "Augmenter l'impôt sur le revenu des nains";
+	law:desc "Ils ont trop de richesses sous la montagne";
+	law:eco_effect -10;
+	law:life_effect -5;
+	law:politic_party "Altruistes", "Fraternels";
+	law:is_voted "false".
+
+parlement:loi47 rdfs:type law:Loi;	
+	law:id "47";
+	law:name "Interdir les expéditions non-autorisées à Mordor";
+	law:desc "Il faut éviter tout conflit avec";
+	law:eco_effect -5;
+	law:life_effect 0;
+	law:politic_party "Audacieux", "Erudits";
+	law:is_voted "false".
+
+parlement:loi48 rdfs:type law:Loi;	
+	law:id "48";
+	law:name "Introduire un service militaire obligatoire pour les trolls";
+	law:desc "Ils peuvent être utiles pour combattre dans les jungles sans les brûler";
+	law:eco_effect -10;
+	law:life_effect -10;
+	law:politic_party "Audacieux";
+	law:is_voted "false".
+
+parlement:loi49 rdfs:type law:Loi;	
+	law:id "49";
+	law:name "Interdire l'export d'armes stratégiques vers les galaxies voisines";
+	law:desc "Assurons la sécurité de l'empire";
+	law:eco_effect -10;
+	law:life_effect 5;
+	law:politic_party "Audacieux", "Erudits";
+	law:is_voted "false".
+
+parlement:loi50 rdfs:type law:Loi;	
+	law:id "50";
+	law:name "Créer une aide de mérite pour les padawans doués";
+	law:desc "Ils faut qu'ils soient récompensés pour leurs efforts";
+	law:eco_effect 5;
+	law:life_effect 10;
+	law:politic_party "Altruistes", "Fraternels";
+	law:is_voted "false".
