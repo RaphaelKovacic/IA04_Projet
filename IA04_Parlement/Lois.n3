@@ -163,3 +163,21 @@ parlement:loi18 rdfs:type law:Loi;
 	law:life_effect 5;
 	law:politic_party "Sinceres";
 	law:is_voted "false".
+
+parlement:loi19 rdfs:type law:Loi;	
+	law:id "19";
+	law:name "Rendre accès gratuit à la fibre aux habitants de Tatooine";
+	law:desc "56kbps, c'est ridicule";
+	law:eco_effect -10;
+	law:life_effect 10;
+	law:politic_party "Fraternels", "Altruistes";
+	law:is_voted "false".
+
+parlement:loi20 rdfs:type law:Loi;	
+	law:id "20";
+	law:name "Interdire le commerce de bijoux avec Mordor";
+	law:desc "Les anneaux possèdent les audacieux";
+	law:eco_effect 5;
+	law:life_effect 0;
+	law:politic_party "Audacieux", "Sinceres";
+	law:is_voted "false".
