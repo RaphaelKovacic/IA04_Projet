@@ -1,12 +1,43 @@
 package launcher;
 
 import jade.core.ProfileImpl;
+
+
 import jade.core.Runtime;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
+
+/**
+ * <b>AgentLauncher est la classe représentant servant à initialiser notre conteneur spécifique Parlement .</b>
+ * <p>
+ *  La classe AgentLauncher possède l'attribut suivant : 
+ * <ul>
+ * <li>Le nombre de député à intialiser dans notre parlement</li>
+ * </ul>
+ * </p>
+ * 
+ * 
+ * @author Benoit
+ * @version 1.0
+ */
+
 public class AgentLauncher {
+	
+	/**
+     * Le nombre d'agent Depute à instancier dans notre conteneur Parlement.
+     * 
+     * @see main()
+     */
 	public static int NB_DEPUTE = 5;
 
+	/**
+     * Méthode de création de notre conteneur secondaire Parlement.
+     * <p>
+     * On crée notre conteneur secondaire à l'aide du fichier de propriétés SecondaryProperties.txr du dossier Proprietes
+     * On crée tous les agents nécessaires en définissant leur nom qui nous servira pour communiquer, plus tard, avec eux.
+     * Chaque nom est préfixé par un "A" signifiant "Agent".
+     * </p>
+     */
 	public static void main(String[] args) {
 
 		Runtime rt = Runtime.instance();
@@ -34,7 +65,7 @@ public class AgentLauncher {
 			//Agent Utilisateur
 			(cc.createNewAgent("AUtilisateur","agents.UtilisateurAgent", null)).start();
 
-			//Agents D�put�s
+			//Agents Députés
 			int i = 0;
 			while(i<NB_DEPUTE){
 				(cc.createNewAgent("ADepute"+i,"agents.DeputeAgent", null)).start();

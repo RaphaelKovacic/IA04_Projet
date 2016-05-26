@@ -16,9 +16,7 @@ import Class_For_JSON.MajDepute;
 import Class_For_JSON.MajEnv;
 import ParlementSim.Aid_vote;
 import ParlementSim.ParlementManager;
-import agents.MediateurAgent.ActionFromUtilisateur;
-import agents.MediateurAgent.PrecisionFromUtilisateur;
-import agents.MediateurAgent.TourFromSimulation;
+
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -27,6 +25,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import launcher.AgentLauncher;
 
+@SuppressWarnings("serial")
 public class LoiAgent extends Agent{
 
 	List<Aid_vote> L_AID_Vote = new ArrayList<Aid_vote>();
@@ -39,13 +38,14 @@ public class LoiAgent extends Agent{
 	AID AMediateur;
 	AID AUtilisateur;
 	AID AEnvironnement;
+	AID AKB;
 	List<AID> List_Depute = new ArrayList<AID>();
 
 	ParlementManager parl_mana = new ParlementManager();
 
 	protected void setup() 
 	{ 
-		// Enregistrement auprès du DF
+		// Enregistrement auprÃ¨s du DF
 		DFAgentDescription dafd = new DFAgentDescription();
 		dafd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
@@ -65,25 +65,26 @@ public class LoiAgent extends Agent{
 		proposant = null;
 
 
-		System.out.println("Agent Loi créé : "+this.getLocalName());
+		System.out.println("Agent Loi crÃ©Ã© : "+this.getLocalName());
 		addBehaviour(new OneShotBehaviour(){
 
 			@Override
 			public void action() {
-				// On récupère les AID des agents nécessaires
-				while (AMediateur == null || AUtilisateur == null || AEnvironnement == null || List_Depute.size() != AgentLauncher.NB_DEPUTE){
+				// On rï¿½cupï¿½re les AID des agents nï¿½cessaires
+				while (AMediateur == null || AUtilisateur == null || AEnvironnement == null || List_Depute.size() != AgentLauncher.NB_DEPUTE|| AKB == null){
+					AKB = parl_mana.getReceiver(myAgent, "KB", "AKB");
 					AMediateur = parl_mana.getReceiver(myAgent, "Parlement", "AMediateur");
 					AUtilisateur = parl_mana.getReceiver(myAgent, "Parlement", "AUtilisateur");
 					AEnvironnement = parl_mana.getReceiver(myAgent, "Monde", "AEnvironnement");
 					List_Depute = parl_mana.getAllAidOf(myAgent, "Parlement", "ADepute");
 				}
 
-				nb_votant = List_Depute.size(); // tous les députés + l'utilisateur - proposant = tous les députés
+				nb_votant = List_Depute.size(); // tous les dï¿½putï¿½s + l'utilisateur - proposant = tous les dï¿½putï¿½s
 
-				addBehaviour(new RequestOfMediator()); // recéption d'un message demandant de faire proposer une loi ou de faire voter une loi
-				addBehaviour(new ProposalLawOfDepute()); // réception d'une proposition de loi d'un député
-				addBehaviour(new AcceptLawOfDepute()); // réception d'un vote favorable d'un député ou utilisateur.
-				addBehaviour(new RefuseLawOfDepute());// réception d'un vote défavorable d'un député ou utilisateur.
+				addBehaviour(new RequestOfMediator()); // recï¿½ption d'un message demandant de faire proposer une loi ou de faire voter une loi
+				addBehaviour(new ProposalLawOfDepute()); // rï¿½ception d'une proposition de loi d'un dï¿½putï¿½
+				addBehaviour(new AcceptLawOfDepute()); // rï¿½ception d'un vote favorable d'un dï¿½putï¿½ ou utilisateur.
+				addBehaviour(new RefuseLawOfDepute());// rï¿½ception d'un vote dï¿½favorable d'un dï¿½putï¿½ ou utilisateur.
 
 			}});
 
@@ -110,19 +111,21 @@ public class LoiAgent extends Agent{
 				proposant = null;
 				//remettre a 0 loi en cours
 
-				// Si le mediateur demande a l'agent Loi de faire proposer une loi par un député
+				// Si le mediateur demande a l'agent Loi de faire proposer une loi par un dÃ©putÃ©
 				if (message.getContent().contains("Proposer une loi")){
 
-					//l'agent loi demande à un agent député de proposer une loi
+					//l'agent loi demande Ã  un agent dÃ©putÃ© de proposer une loi
 					myAgent.addBehaviour(new DemandeLoi(message));
 
 					//Sinon
 				}else{
 
-					// Le proposant est forcément l'utilisateur
+					
+					//TODO DELETE ? USELESS ?
+					// Le proposant est forcÃ©ment l'utilisateur
 					proposant = AUtilisateur;
 
-					//Récupération de loi (On deserialise le message)
+					//RÃ©cupÃ©ration de loi (On deserialise le message)
 					ObjectMapper mapper = new ObjectMapper();
 					try {
 						loi_en_cours = mapper.readValue(message.getContent(), Loi.class);
@@ -131,8 +134,13 @@ public class LoiAgent extends Agent{
 						System.out.println("EXCEPTION" + ex.getMessage());
 					}
 
-					//l'agent loi demande à tous les députés de voter pour la loi proposée par l'utilisateur.
-					myAgent.addBehaviour(new VoteLoi(message));
+					if(message.getConversationId().equalsIgnoreCase("Proposition de loi"))
+						//l'agent loi demande Ã  tous les dÃ©putÃ©s de voter pour la loi proposÃ©e par l'utilisateur.
+						myAgent.addBehaviour(new VoteLoi(message));
+					
+					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage"))
+						//l'agent loi demande Ã  tous les dÃ©putÃ©s de se faire sonder par rapport Ã  une loi proposÃ©e par l'utilisateur.
+						myAgent.addBehaviour(new SondageLoi(message));;
 				}
 
 			}else{
@@ -152,10 +160,10 @@ public class LoiAgent extends Agent{
 		// Task to do
 		public void action() {
 
-			//Envoie d'un message a l'agent Député (aléatoire pour le moment) pour qu'il propose une loi
+			//Envoie d'un message a l'agent DÃ©putÃ© (alÃ©atoire pour le moment) pour qu'il propose une loi
 			ACLMessage forward = message.createReply();
 			forward.removeReceiver(message.getSender());
-			proposant = List_Depute.get((int)(Math.random() * (List_Depute.size()))); // Retourne un député au hasard parmi tous
+			proposant = List_Depute.get((int)(Math.random() * (List_Depute.size()))); // Retourne un dÃ©putÃ© au hasard parmi tous
 			forward.addReceiver(proposant);
 			forward.setPerformative(ACLMessage.REQUEST);
 			forward.setContent(message.getContent());
@@ -175,15 +183,16 @@ public class LoiAgent extends Agent{
 		// Task to do
 		public void action() {
 
-			//Envoie d'un message a tous les députés (et utilisateur si besoin) pour qu'ils votent pour la loi contenu dans le message
+			//Envoie d'un message a tous les dÃ©putÃ©s (et utilisateur si besoin) pour qu'ils votent pour la loi contenu dans le message
 			ACLMessage forward = message.createReply();
 			forward.removeReceiver(message.getSender());
 
-			// On ajoute tous les députés en tant que destinataire
+			// On ajoute tous les dÃ©putÃ©s en tant que destinataire
 			for (int i = 0 ; i < List_Depute.size() ; i++)
 				forward.addReceiver(List_Depute.get(i));
 
-			// Si la proposition de loi vient d'un député il faut rajouter l'utilisateur pour qu'il puisse voter...
+
+			// Si la proposition de loi vient d'un dÃ©putÃ© il faut rajouter l'utilisateur pour qu'il puisse voter...
 			if ( List_Depute.contains(message.getSender()))
 				forward.addReceiver(AUtilisateur);
 
@@ -192,6 +201,43 @@ public class LoiAgent extends Agent{
 
 			forward.setPerformative(ACLMessage.PROPOSE);
 			forward.setContent(message.getContent());
+			forward.setConversationId("Proposition de loi");
+			myAgent.send(forward);
+
+		}
+	}
+	
+	class SondageLoi extends OneShotBehaviour{
+		private ACLMessage message;
+
+		// Constructor
+		public SondageLoi(ACLMessage message2) {
+			this.message = message2;
+		}
+
+		// Task to do
+		public void action() {
+
+			//Envoie d'un message a tous les dÃ©putÃ©s (et utilisateur si besoin) pour qu'ils se fassent sonder pour la loi contenu dans le message
+			ACLMessage forward = message.createReply();
+			forward.removeReceiver(message.getSender());
+
+			// On ajoute tous les dÃ©putÃ©s en tant que destinataire
+			for (int i = 0 ; i < List_Depute.size() ; i++)
+				forward.addReceiver(List_Depute.get(i));
+
+			//TODO DELETE
+			// Si la proposition de loi vient d'un dÃ©putÃ© il faut rajouter l'utilisateur pour qu'il puisse voter...
+			if ( List_Depute.contains(message.getSender()))
+				forward.addReceiver(AUtilisateur);
+
+			//TODO DELETE
+			// Pas besoin de faire voter celui qui propose la loi...
+			forward.removeReceiver(proposant);
+
+			forward.setPerformative(ACLMessage.PROPOSE);
+			forward.setContent(message.getContent());
+			forward.setConversationId("Demande de sondage");
 			myAgent.send(forward);
 
 		}
@@ -210,7 +256,7 @@ public class LoiAgent extends Agent{
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
 
-				//Récupération de loi (On deserialise le message)
+				//RÃ©cupÃ©ration de loi (On deserialise le message)
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					loi_en_cours = mapper.readValue(message.getContent(), Loi.class);
@@ -219,7 +265,7 @@ public class LoiAgent extends Agent{
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
 
-				// On demande alors à tous (sauf la personne ayant proposé la loi) de voter la loi
+				// On demande alors Ã  tous (sauf la personne ayant proposÃ© la loi) de voter la loi
 				myAgent.addBehaviour(new VoteLoi(message));
 			}else{
 				block();
@@ -236,7 +282,7 @@ public class LoiAgent extends Agent{
 			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
-				// On met à jour les votes.
+				// On met Ã  jour les votes.
 				nb_vote_pour++;
 
 				if (List_Depute.contains(message.getSender())){
@@ -247,11 +293,20 @@ public class LoiAgent extends Agent{
 					L_AID_Vote.add(e);
 				}
 
-				// Si le nombre total des votants est atteint (vote terminé)
-				if(L_AID_Vote.size() == nb_votant)
+				// Si le nombre total des votants est atteint (vote terminÃ©)
+				if(L_AID_Vote.size() == nb_votant){
 
-					// Traitement des conséquences 
-					myAgent.addBehaviour(new ConsequenceLoi());
+					// Traitement des consÃ©quences du vote
+					if(message.getConversationId() == null || message.getConversationId().equalsIgnoreCase("Proposition de loi") == true)
+						myAgent.addBehaviour(new ConsequenceLoi());
+					//Traitement des consÃ©quences de la demande de sondage
+					else if(message.getConversationId().equalsIgnoreCase("Demande de sondage") == true)
+						myAgent.addBehaviour(new ConsequenceSondage());
+					else
+						myAgent.addBehaviour(new ConsequenceLoi());
+						
+				}
+				
 			}else{
 				block();
 			}
@@ -267,7 +322,7 @@ public class LoiAgent extends Agent{
 			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REJECT_PROPOSAL);
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
-				// On met à jour les votes.
+				// On met Ã  jour les votes.
 				nb_vote_contre++;
 
 				if (List_Depute.contains(message.getSender())){
@@ -278,12 +333,18 @@ public class LoiAgent extends Agent{
 					L_AID_Vote.add(e);
 				}
 
-				// Si le nombre total des votants est atteint (vote terminé)
-				if(L_AID_Vote.size() == nb_votant)
+				// Si le nombre total des votants est atteint (vote terminÃ©)
+				if(L_AID_Vote.size() == nb_votant){
 
-					// Traitement des conséquences 
-					myAgent.addBehaviour(new ConsequenceLoi());
-
+					// Traitement des consÃ©quences du vote
+					if(message.getConversationId() == null || message.getConversationId().equalsIgnoreCase("Proposition de loi") == true)
+						myAgent.addBehaviour(new ConsequenceLoi());
+					//Traitement des consÃ©quences de la demande de sondage
+					else if(message.getConversationId().equalsIgnoreCase("Demande de sondage") == true)
+						myAgent.addBehaviour(new ConsequenceSondage());
+					else
+						myAgent.addBehaviour(new ConsequenceLoi());
+				}
 			}else{
 				block();
 			}
@@ -295,10 +356,10 @@ public class LoiAgent extends Agent{
 		// Task to do
 		public void action() {
 
-			// Le vote est terminé...
-			System.out.println("La Loi a été voté avec : "+nb_vote_pour+" vote Pour et "+nb_vote_contre+" vote Contre.");
+			// Le vote est terminÃ©...
+			System.out.println("La Loi a Ã©tÃ© votÃ©e avec : "+nb_vote_pour+" vote Pour et "+nb_vote_contre+" vote Contre.");
 
-			//Pour chaque personne ayant voté
+			//Pour chaque personne ayant votÃ©
 			for (int i = 0 ; i < L_AID_Vote.size() ; i++){
 
 				ObjectMapper mapper1 = new ObjectMapper();
@@ -308,8 +369,9 @@ public class LoiAgent extends Agent{
 				// Si la loi passe
 				if (nb_vote_pour > nb_vote_contre){
 
-					// Les personnes ayant votés "pour" voit leur influence augmenter... (envoie de message de type INFORM)
-					// Les personnes ayant votés "contre" voit leur influence diminuer... (envoie de message de type INFORM)
+					
+					// Les personnes ayant votÃ©s "pour" voit leur influence augmenter... (envoie de message de type INFORM)
+					// Les personnes ayant votÃ©s "contre" voit leur influence diminuer... (envoie de message de type INFORM)
 					if (L_AID_Vote.get(i).getVote().contains("pour")){
 						or.setEffet_Influence(5);
 
@@ -365,8 +427,8 @@ public class LoiAgent extends Agent{
 
 					//Sinon
 				}else{
-					// Les personnes ayant votés "pour" voit leur influence diminuer... (envoie de message de type INFORM)
-					// Les personnes ayant votés "contre" voit leur influence augmenter... (envoie de message de type INFORM)
+					// Les personnes ayant votÃ©s "pour" voit leur influence diminuer... (envoie de message de type INFORM)
+					// Les personnes ayant votÃ©s "contre" voit leur influence augmenter... (envoie de message de type INFORM)
 
 					ACLMessage message1 = new ACLMessage(ACLMessage.INFORM);
 					message1.addReceiver(L_AID_Vote.get(i).getVotant());
@@ -425,8 +487,16 @@ public class LoiAgent extends Agent{
 
 			// Si la loi passe
 			if (nb_vote_pour > nb_vote_contre){
+				
+				//Envoi l'ACK Ã  l'agent KB pour lui dire que la loi a Ã©tÃ© votÃ©e et qu'elle n'est plus disponible 
+				ACLMessage message5 = new ACLMessage(ACLMessage.INFORM);
+				message5.addReceiver(AKB);
+				String loi_en_cours_id_string = String.valueOf(loi_en_cours.getId());
+				message5.setContent(loi_en_cours_id_string);
+				myAgent.send(message5);
+				
 				//Mise a jour des variables d'environnements.
-				// On serialise le message contenant les 2 "valeurs" de variables à modifer.
+				// On serialise le message contenant les 2 "valeurs" de variables Ã  modifer.
 				ObjectMapper mapper1 = new ObjectMapper();
 				StringWriter sw = new StringWriter();
 
@@ -444,7 +514,7 @@ public class LoiAgent extends Agent{
 				}
 			}
 
-			//Mise à jour des caracteritiques du proposant
+			//Mise Ã  jour des caracteritiques du proposant
 			ObjectMapper mapper1 = new ObjectMapper();
 			StringWriter sw = new StringWriter();
 			MajDepute or = new MajDepute(0,0,0,0);
@@ -481,10 +551,35 @@ public class LoiAgent extends Agent{
 				System.out.println(ex.getMessage());
 			}
 
-			// Dans tous les cas on envoie un message à l'agent Mediateur pour le prévenir que le vote est terminé (fin du tour).
+			// Dans tous les cas on envoie un message Ã  l'agent Mediateur pour le prÃ©venir que le vote est terminÃ© (fin du tour).
 			ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
 			message2.addReceiver(AMediateur);
-			message2.setContent("La loi a fini d'être votée.");
+			message2.setContent("La loi a fini d'Ãªtre votÃ©e.");
+			myAgent.send(message2);
+		}
+	}
+	
+	class ConsequenceSondage extends OneShotBehaviour{
+	
+		public void action() {
+
+			// Le sondage est terminÃ©...
+			System.out.println("--------------------------ESTIMATION-------------------");
+			
+			if(nb_vote_pour > nb_vote_contre)
+				System.out.println("La loi semblerait pouvoir passer ... avec "+nb_vote_pour+" vote 'Pour' et "+nb_vote_contre+" vote 'Contre'.");
+			else if (nb_vote_pour < nb_vote_contre)
+				System.out.println("La loi serait refoulÃ©e ... avec "+nb_vote_pour+" vote 'Pour' et "+nb_vote_contre+" vote 'Contre'.");
+			else
+				System.out.println("La loi en balance total ... avec "+nb_vote_pour+" vote 'Pour' et "+nb_vote_contre+" vote 'Contre'.");
+			
+			System.out.println("--------------------------FIN ESTIMATION-------------------");
+			
+			// Dans tous les cas on envoie un message Ã  l'agent Mediateur pour le prÃ©venir que le vote est terminÃ© (fin du tour).
+			ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
+			message2.addReceiver(AMediateur);
+			message2.setContent("La loi a fini d'Ãªtre sondÃ©e.");
+			message2.setConversationId("Demande de sondage");
 			myAgent.send(message2);
 		}
 	}

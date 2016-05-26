@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Class_For_JSON.Loi;
 import Class_For_JSON.MajDepute;
+
 import ParlementSim.ParlementManager;
 import jade.core.AID;
 import jade.core.Agent;
@@ -21,15 +22,52 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 
+@SuppressWarnings("serial")
 public class DeputeAgent extends Agent{
-	//Caractéristiques dynamiques
+	//Caractï¿½ristiques dynamiques
+	
+	/**
+     * L'influence du dÃ©putÃ©. Variable.
+     * 
+     * @see setup()
+     */
 	float Influence;
+	
+	/**
+     * La popularitÃ© du dÃ©putÃ©. Variable.
+     * 
+     * @see setup()
+     */
 	float Popularite;
+	
+	/**
+     * La notoriÃ©tÃ© du dÃ©putÃ©. Variable.
+     * 
+     * @see setup()
+     */
 	float Notoriete;
+	
+	/**
+     * La crÃ©dibilitÃ© du dÃ©putÃ©. Variable.
+     * 
+     * @see setup()
+     */
 	float Credibilite;
+	
+	/**
+     * Le parti politique du dÃ©putÃ©. Statique.
+     * 
+     * @see setup()
+     */
 	String Parti_Politique;
 	
-	//Caractéristiques statiques
+	//Caractï¿½ristiques statiques
+	
+	/**
+     * L'influence de l'utilisateur. Variable.
+     * 
+     * @see setup()
+     */
 	float Charisme;
 	float Hesitation;
 	
@@ -39,6 +77,7 @@ public class DeputeAgent extends Agent{
 	
 	// Agent avec qui il peut communiquer
 	AID ALoi;
+	AID AKB;
 	
 	//Liste de tous les partis existants.
 	List<String> L_Parti;
@@ -47,7 +86,7 @@ public class DeputeAgent extends Agent{
 
 	protected void setup() 
 	{ 
-		// Enregistrement auprès du DF
+		// Enregistrement auprï¿½s du DF
 		DFAgentDescription dafd = new DFAgentDescription();
 		dafd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
@@ -66,15 +105,15 @@ public class DeputeAgent extends Agent{
 		L_Parti.add("Altruistes");L_Parti.add("Erudits");L_Parti.add("Audacieux");
 		L_Parti.add("Sinceres");L_Parti.add("Fraternels");
 		
-		// Initialisation des caractéristiques dynamiques
-		Credibilite = (float)(Math.random() * 100); // Entre 0 et 100 au départ
-		Influence = (float)(Math.random() * 70); // Entre 0 et 70 au départ
-		Parti_Politique = L_Parti.get((int)(Math.random() * L_Parti.size())); // aléatoire
-		Popularite = (float)(Math.random() * 100); // Entre 0 et 100 au départ
-		Notoriete =  (float)(Math.random() * 100); // Entre 0 et 100 au départ
+		// Initialisation des caractï¿½ristiques dynamiques
+		Credibilite = (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
+		Influence = (float)(Math.random() * 70); // Entre 0 et 70 au dï¿½part
+		Parti_Politique = L_Parti.get((int)(Math.random() * L_Parti.size())); // alï¿½atoire
+		Popularite = (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
+		Notoriete =  (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
 		
-		// Initialisation des caractéristiques statiques
-		Charisme = (float)(Math.random() * 100); // Entre 0 et 100 au départ
+		// Initialisation des caractï¿½ristiques statiques
+		Charisme = (float)(Math.random() * 100); // Entre 0 et 100 au dï¿½part
 		
 		A = 2; 	// coeff influence
 		BP = 1;	// coeff EffetQualitedeVie
@@ -84,23 +123,26 @@ public class DeputeAgent extends Agent{
 		
 		APeuple = BPeuple = AEntreprise = BEntreprise = (float)Math.random(); //entre 0 et 1
 
-		// Soutien du peuple et des entreprises pas pris en compte (pas encore implémenté...)
+		// Soutien du peuple et des entreprises pas pris en compte (pas encore implï¿½mentï¿½...)
 		float higher = (A*100+BP*25+BE*25+G*100+D*1+(APeuple*100+BPeuple*25+AEntreprise*100+BEntreprise*25)); // maximum du score pour "voter une loi"
 		float lower = (A*0+BP*(-25)+BE*(-25)+G*0+D*0+(APeuple*0+BPeuple*(-25)+AEntreprise*0+BEntreprise*(-25)));// minimum du score pour "voter une loi"
 		Hesitation = (float)(Math.random() * (higher-lower)) + lower; // un peu de random ne fait pas de mal :D
 
-		System.out.println("Agent Député créé : "+this.getLocalName());
+		System.out.println("Agent Dï¿½putï¿½ crï¿½ï¿½ : "+this.getLocalName());
 		
 		addBehaviour(new OneShotBehaviour(){
 			@Override
 			public void action() {
-				// On récupère les AID des agents nécessaires
-				while (ALoi == null){
+				// On rï¿½cupï¿½re les AID des agents nï¿½cessaires
+				while (ALoi == null || AKB == null){
+					AKB = parl_mana.getReceiver(myAgent, "KB", "AKB");
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");				
 				}
-				addBehaviour(new RequestToProposeLaw()); // recéption d'un message demandant de proposer une loi (provient de ALoi)
-				addBehaviour(new RequestToVote()); // réception d'un message demandant de voter pour une loi (provient de ALoi)
-				addBehaviour(new RequestToModifCara()); // réception d'un message demandant de modifier ses cara (provient de ALoi)
+				addBehaviour(new RequestToProposeLaw()); // recï¿½ption d'un message demandant de proposer une loi (provient de ALoi)
+				addBehaviour(new RequestToVote()); // rï¿½ception d'un message demandant de voter pour une loi (provient de ALoi)
+				addBehaviour(new RequestToSondage()); // rï¿½ception d'un message demandant de donner son avis pour une loi (provient de ALoi)
+				addBehaviour(new RequestToModifCara()); // rï¿½ception d'un message demandant de modifier ses cara (provient de ALoi)
+				addBehaviour(new ProposeLaw()); //envoie de la loi rÃ©cupÃ©rÃ© par KB Ã  la loi
 			}});
 
 	}
@@ -118,47 +160,82 @@ public class DeputeAgent extends Agent{
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
 				// A la reception, l'agent propose a Aloi une loi qu'il aimerait faire passer.
-				myAgent.addBehaviour(new ProposeLaw(message));
+				myAgent.addBehaviour(new GetLawToProposeFromKB());
 			}else{
 				block();
 			}
 		}
 	}
 
-	class ProposeLaw extends OneShotBehaviour{
-		private String mess;
-		private ACLMessage message;
-
-		// Constructor
-		public ProposeLaw(ACLMessage message2) {
-			this.message = message2;
-			this.mess = message.getContent();
-		}
+	class GetLawToProposeFromKB extends OneShotBehaviour{
 
 		// Task to do
 		public void action() {
 
-			// On cherche quelle est la loi que l'on va proposer (plus tard dans l'onthologie... A MODIFIER)
+			// On envoie un message Ã  l'agent KB pour rÃ©cupÃ©rer une loi non encore votÃ©e correspondant Ã  notre parti
+			ACLMessage message1 = new ACLMessage(ACLMessage.REQUEST);
+			message1.addReceiver(AKB);
+			message1.setContent(Parti_Politique);
+			myAgent.send(message1);
+			
+			// On crÃ©e le behaviour pour rÃ©cupÃ©rer la loi proposÃ©e par KB et rÃ©pondre Ã  loi
+			//myAgent.addBehaviour(new ProposeLaw(message));
+		}
+	}
+	
+	class ProposeLaw extends CyclicBehaviour{
+		
+		// Task to do
+		public void action() {
+			
+			
+			// On attend la reception d'un message de type REQUEST venant de l'agent Loi
+			MessageTemplate mt = MessageTemplate.and(
+							MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+							MessageTemplate.MatchSender(AKB)
+							);
+			ACLMessage message = myAgent.receive(mt);
+			if (message != null){
+					
+				//On deserialize la loi envoyÃ©e par KB.
+				ObjectMapper mapper = new ObjectMapper();
+				try {
+					Loi loi_de_kb = mapper.readValue(message.getContent(),Loi.class);
+					//Ajout des informations du dÃ©putÃ©
+					loi_de_kb.setProposant(getAID().toString());
+					loi_de_kb.setInfluence(Influence);
+					loi_de_kb.setPopularite(Popularite);
+					loi_de_kb.setNotoriete(Notoriete);
+					loi_de_kb.setCharisme(Charisme);
+					
+					System.out.println("PARTI DU DÃ‰PUTÃ‰ PROPOSANT : "+Parti_Politique);
 
+					ObjectMapper mapper1 = new ObjectMapper();
+					StringWriter sw1 = new StringWriter();
 
-			// On renvoie un message de type PROPOSE serialise contenant cette loi
-			ObjectMapper mapper1 = new ObjectMapper();
-			StringWriter sw = new StringWriter();
-
-			// Ceci est A MODIFIER : loi écrite en dur ici pour commencer...
-			List<String> l_PartiPolitique = new ArrayList<String>();
-			l_PartiPolitique.add(Parti_Politique);
-			Loi or = new Loi(1, "description", -5 , 5, l_PartiPolitique,myAgent.getLocalName(),Influence,Charisme,Popularite,Notoriete);
-			try {
-				mapper1.writeValue(sw, or);
-				String s1 = sw.toString();
-
-				ACLMessage reply = message.createReply();
-				reply.setPerformative(ACLMessage.PROPOSE);
-				reply.setContent(String.valueOf(s1));
-				myAgent.send(reply);
+					try {
+						
+						mapper1.writeValue(sw1, loi_de_kb);
+						String s = sw1.toString();
+						System.out.println("Loi choisie pour dÃ©putÃ© dans dÃ©putÃ©: "+s);
+						
+						//RÃ©pons Ã  l'agent loi avec notre loi formatÃ©e en JSON avec les infos du dÃ©putÃ© en plus.
+						ACLMessage message2 = new ACLMessage(ACLMessage.PROPOSE);
+						message2.addReceiver(ALoi);
+						message2.setContent(String.valueOf(s));
+						myAgent.send(message2);
+						
+				}
+				catch(Exception ex) {
+					System.out.println("EXCEPTION" + ex.getMessage());
+				}
+				
+				}catch(Exception ex){}
+						
 			}
-			catch(Exception ex) {}
+			else
+				block();
+			
 		}
 	}
 
@@ -170,11 +247,32 @@ public class DeputeAgent extends Agent{
 			// On attend la reception d'un message de type PROPOSE venant de l'agent Loi
 			MessageTemplate mt = MessageTemplate.and(
 					MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
-					MessageTemplate.MatchSender(ALoi));
+					MessageTemplate.and(MessageTemplate.MatchSender(ALoi),
+					MessageTemplate.MatchConversationId("Proposition de loi")));
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
 				// A la reception, l'agent propose a Aloi une loi qu'il aimerait faire passer.
 				myAgent.addBehaviour(new VoteLoi(message));
+			}else{
+				block();
+			}
+		}
+	}
+	
+	class RequestToSondage extends CyclicBehaviour{
+
+		@Override
+		public void action() {
+
+			// On attend la reception d'un message de type PROPOSE venant de l'agent Loi demander l'avis du dÃ©putÃ© pour une loi
+			MessageTemplate mt = MessageTemplate.and(
+					MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
+					MessageTemplate.and(MessageTemplate.MatchSender(ALoi),
+					MessageTemplate.MatchConversationId("Demande de sondage")));
+			ACLMessage message = myAgent.receive(mt);
+			if (message != null){
+				
+				myAgent.addBehaviour(new SondageLoi(message));
 			}else{
 				block();
 			}
@@ -192,8 +290,8 @@ public class DeputeAgent extends Agent{
 					MessageTemplate.MatchSender(ALoi));
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null){
-				// A la reception, on met à jour les caract de l'agent
-				// On deserialise le message contenant les valeurs de variables à modifer.
+				// A la reception, on met ï¿½ jour les caract de l'agent
+				// On deserialise le message contenant les valeurs de variables ï¿½ modifer.
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					MajDepute ort = mapper.readValue(message.getContent(),MajDepute.class);
@@ -239,10 +337,10 @@ public class DeputeAgent extends Agent{
 		// Task to do
 		public void action() {
 
-			// 	L'agent répond en précisant son vote
+			// 	L'agent rï¿½pond en prï¿½cisant son vote
 			ACLMessage reply = message.createReply();
 			
-			//Récupération de loi (On deserialise le message)
+			//Rï¿½cupï¿½ration de loi (On deserialise le message)
 			Loi l = new Loi();
 			ObjectMapper mapper = new ObjectMapper();
 			try {
@@ -258,7 +356,7 @@ public class DeputeAgent extends Agent{
 			if (l.getL_PartiPolitique().contains(Parti_Politique))
 				scoreLoi += D;
 			
-			// Vote oui ou non suivant le score de la loi et son hésitation.
+			// Vote oui ou non suivant le score de la loi et son hï¿½sitation.
 			if (scoreLoi >= Hesitation){
 				reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
 				reply.setContent("Je vote pour");				
@@ -267,6 +365,62 @@ public class DeputeAgent extends Agent{
 				reply.setContent("Je vote contre");	
 			}
 			// Envoie du vote
+			myAgent.send(reply);
+		}
+	}
+	
+	class SondageLoi extends OneShotBehaviour{
+		private String mess;
+		private ACLMessage message;
+
+		// Constructor
+		public SondageLoi(ACLMessage message2) {
+			this.message = message2;
+			this.mess = message.getContent();
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent rÃ©pond en prÃ©cisant son avis sur la loi
+			ACLMessage reply = message.createReply();
+			
+			//RÃ©cupÃ©ration de loi (On deserialise le message)
+			Loi l = new Loi();
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				l = mapper.readValue(message.getContent(), Loi.class);
+			}
+			catch(Exception ex) {
+				System.out.println("EXCEPTION" + ex.getMessage());
+			}
+			//Calcul du score de la loi...
+			float scoreLoi = A*l.getInfluence()+BP*l.getEffet_qualite_vie()+BE*l.getEffet_context_eco();
+			scoreLoi += G*l.getCharisme()+APeuple*l.getPopularite()+BPeuple*l.getEffet_qualite_vie();
+			scoreLoi += AEntreprise*l.getNotoriete()+BEntreprise*l.getEffet_context_eco();
+			if (l.getL_PartiPolitique().contains(Parti_Politique))
+				scoreLoi += D;
+			
+			//Alteration de l'avis donnÃ© par la crÃ©dibilitÃ© du dÃ©putÃ©
+			if(Credibilite > 80)
+				scoreLoi -= (scoreLoi *2)/100;
+			else if(Credibilite >70)
+				scoreLoi -= (scoreLoi *7)/100;
+			else if(Credibilite >60)
+				scoreLoi -= (scoreLoi *12)/100;
+			else if(Credibilite >60)
+				scoreLoi -= (scoreLoi *20)/100;
+			
+			
+			// Vote oui ou non suivant le score de la loi et son hÃ©sitation.
+			if (scoreLoi >= Hesitation){
+				reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+				reply.setContent("Je vote pour");				
+			}else{
+				reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
+				reply.setContent("Je vote contre");	
+			}
+			// Envoie de l'avis :)
 			myAgent.send(reply);
 		}
 	}
