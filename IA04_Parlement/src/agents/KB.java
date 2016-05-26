@@ -200,7 +200,6 @@ public class KB extends Agent{
 					
 					mapper1.writeValue(sw1, liste_d_objet_loi_du_parti);
 					String s1 = sw1.toString();
-					System.out.println("Tableau JSON de loi pour utilisateur (Agent KB) : "+s1);
 					
 					// Réponse à celui qui nous a envoyé la demande
 					ACLMessage reply =  message.createReply();
@@ -344,12 +343,14 @@ public class KB extends Agent{
 		
 		
 		List<Loi> liste_d_objet_loi_du_parti = new ArrayList<Loi>();
-		
+		System.out.println();
+		System.out.println("-----------------------DEBUG KB LOIS POSSIBLES ------------------------------");
 		for( int w = 0; w < statement_lois_du_parti.size(); w++) 
 	       {
 				//Gestion selon le formalisme JENA pour chaque statement de la Arraylist on doit récupèrer le Sujet pour ainsi ensuite récupérer les valeurs de tous les objets en relation avec celui-ci
 				Statement current_statement = (Statement) statement_lois_du_parti.get(w);
 				Resource subject_law_current = current_statement.getSubject();
+				
 				System.out.println("Loi pour les "+_s+" intitulé : "+subject_law_current.toString());
 				
 				//Récupère l'id, le nom, la desc, l'effet éco, l'effect lifestyle de chaque loi
@@ -371,6 +372,8 @@ public class KB extends Agent{
 				//Ajoute à la liste
 				liste_d_objet_loi_du_parti.add(loi_temp);
 	       }
+		System.out.println("-----------------------FIN DEBUG KB LOIS POSSIBLES ------------------------------");
+		System.out.println();
 		
 		return liste_d_objet_loi_du_parti;
 	}

@@ -272,7 +272,7 @@ public class SimulationAgent extends Agent{
 	 * 
 	 * @author Benoit
 	 * @version : 1.2
-	 */
+	 */	
 	class WaitMessJoueur extends CyclicBehaviour{
 
 		@Override

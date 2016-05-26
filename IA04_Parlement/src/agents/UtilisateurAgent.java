@@ -239,9 +239,12 @@ public class UtilisateurAgent extends Agent{
 					
 					//Ecrit sur la console
 					System.out.println();
+					System.out.println("-------------------- ACTIONS POSSIBLES ---------------");
 					System.out.println("Voici la liste des actions possibles ce tour-ci");
 					System.out.println(L_Actions.toString());
 					System.out.println("Renvoyer un message (ACCEPT_PROPOSAL) à l'agent Mediateur avec pour contenu une de ces actions");
+					System.out.println("------------------FIN ACTIONS POSSIBLES ---------------");
+					System.out.println();
 				}
 				catch(Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -343,9 +346,10 @@ public class UtilisateurAgent extends Agent{
 				
 					//Rendre effectif le changement de parti
 					Parti_Politique = parti_a_rejoindre;
+					System.out.println("------------------------- NOUVEAU PARTI----------------------");
 					System.out.println("Vous venez de rejoindre les "+Parti_Politique+" ! Bienvenue !");
-						
 					System.out.println("Voter pour la loi proposée ci-dessus pour finir le tour.");
+					System.out.println("-------------------------FIN NOUVEAU PARTI----------------------");
 				}
 				else
 					System.out.println("Nom de parti non valide, veuillez recommencer votre changement de parti en renvoyant un message de type INFORM à l'agent Utilisateur");		
@@ -524,6 +528,7 @@ public class UtilisateurAgent extends Agent{
 						else
 							System.out.println("Envoyer un message de type INFORM_IF à l'agent médiateur avec seulement l'ID de la loi choisie et 'Demande de sondage' en conversation-id.");
 						System.out.println("------------------FIN RÉPONSE-------------------------");
+						System.out.println("-------------------------------------------------------");
 						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block

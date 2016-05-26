@@ -131,7 +131,10 @@ public class MediateurAgent extends Agent{
 					NumTour = mapper.readValue(message.getContent(), NumTour.class);
 					num_tour_actuel = NumTour.getNum();
 					System.out.println();
+					System.out.println("-----------------------TOUR ------------------------------");
 					System.out.println("Tour: "+num_tour_actuel);
+					System.out.println("----------------------------------------------------------");
+					System.out.println();
 				}
 				catch(Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -307,7 +310,10 @@ public class MediateurAgent extends Agent{
 			
 				//On affiche la loi choisit par l'utilisateur
 				System.out.println();
+				System.out.println("-------------------- DEBUG LOI QUE VOUS AVEZ PROPOSÉ ---------------");
 				System.out.println("Vous avez proposé cette loi : ");
+				System.out.println("--------------------------------FIN DEBUG----------------------------");
+				System.out.println();
 				loi_choisie.affiche_a_utilisateur();
 					
 				//On seriaalize la loi choisie puis on l'envoie à l'agent loi		
@@ -399,9 +405,6 @@ public class MediateurAgent extends Agent{
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					loi_choisie = mapper.readValue(message.getContent(),Loi.class);
-					
-					System.out.println("Debug : affichage de la loi incomplète seulement info de l'utilisateur reçue et stockées par médiateur : ");
-					loi_choisie.affiche();
 				}
 				catch(Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -434,8 +437,12 @@ public class MediateurAgent extends Agent{
 					utilisateur_information = mapper.readValue(message.getContent(),Loi.class);
 					
 					//TODO Delete
+					System.out.println();
+					System.out.println("-------------------- DEBUG INFO UTILISATEUR ---------------");
 					System.out.println("Loi utilisateur (ses infos): ");
 					utilisateur_information.affiche();
+					System.out.println("------------------------- FIN DEBUG ------------------------");
+					System.out.println();
 					
 					//Petit test pour voir si on est toujours dans l'action de proposition d'une loi
 					if(action_choisit.equalsIgnoreCase("Proposer une loi") || action_choisit.equalsIgnoreCase("Avis du parlement")){

@@ -128,7 +128,7 @@ public class DeputeAgent extends Agent{
 		float lower = (A*0+BP*(-25)+BE*(-25)+G*0+D*0+(APeuple*0+BPeuple*(-25)+AEntreprise*0+BEntreprise*(-25)));// minimum du score pour "voter une loi"
 		Hesitation = (float)(Math.random() * (higher-lower)) + lower; // un peu de random ne fait pas de mal :D
 
-		System.out.println("Agent D�put� cr�� : "+this.getLocalName());
+		System.out.println("Agent Député créé : "+this.getLocalName());
 		
 		addBehaviour(new OneShotBehaviour(){
 			@Override
@@ -207,9 +207,11 @@ public class DeputeAgent extends Agent{
 					loi_de_kb.setPopularite(Popularite);
 					loi_de_kb.setNotoriete(Notoriete);
 					loi_de_kb.setCharisme(Charisme);
-					
+					System.out.println();
+					System.out.println("-----------------------DEBUG PARTI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
 					System.out.println("PARTI DU DÉPUTÉ PROPOSANT : "+Parti_Politique);
-
+					System.out.println("-----------------------FIN PARTI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
+					System.out.println();
 					ObjectMapper mapper1 = new ObjectMapper();
 					StringWriter sw1 = new StringWriter();
 
@@ -217,8 +219,11 @@ public class DeputeAgent extends Agent{
 						
 						mapper1.writeValue(sw1, loi_de_kb);
 						String s = sw1.toString();
+						System.out.println();
+						System.out.println("-----------------------LOI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
 						System.out.println("Loi choisie pour député dans député: "+s);
-						
+						System.out.println("-----------------------FIN LOI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
+						System.out.println();
 						//Répons à l'agent loi avec notre loi formatée en JSON avec les infos du député en plus.
 						ACLMessage message2 = new ACLMessage(ACLMessage.PROPOSE);
 						message2.addReceiver(ALoi);

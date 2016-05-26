@@ -111,7 +111,7 @@ public class EnvironmentalAgent extends Agent{
 			fe.printStackTrace();
 		}
 
-		System.out.println("Agent Environment cr�� :"+this.getLocalName());
+		System.out.println("Agent Environment créé :"+this.getLocalName());
 		
 		// Initialisation des varibles internes (statique au depart...)
 		context_eco = 50; // 0 a 100
@@ -252,9 +252,10 @@ public class EnvironmentalAgent extends Agent{
 
 			// Juste pour debug
 			System.out.println("");
-			System.out.println(".....Debug....");
+			System.out.println("-----------------------DEBUG VARIABLE ENVIRONNEMENT ------------------------------");
 			System.out.println("Eco :"+context_eco);
 			System.out.println("Vie :"+qualite_vie);
+			System.out.println("---------------------------------FIN DEBUG ---------------------------------------");
 
 			// Si les valeurs sont en dessous d'un certain seuil... 
 			if (context_eco < 10 || qualite_vie < 10 || (context_eco + qualite_vie)/2 < 20 ){
