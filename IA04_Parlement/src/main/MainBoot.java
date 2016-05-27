@@ -6,10 +6,11 @@ import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
 
 /**
- * <b>MainBoot est la classe représentant servant à initialiser notre plateforme JADE.</b>
+ * <b>MainBoot est la classe représentant servant à initialiser notre plateforme
+ * JADE.</b>
  * <p>
- * La classe MainBoot possède ne possède aucun attribut.
- * La classe MainBoot possède une seule méthode.
+ * La classe MainBoot possède ne possède aucun attribut. La classe MainBoot
+ * possède une seule méthode.
  * </p>
  * 
  * 
@@ -19,22 +20,21 @@ import jade.wrapper.AgentContainer;
 
 public class MainBoot {
 
-	
 	/**
-     * Méthode d'instanciation de notre conteneur principal avec les agents DF, AMS et RMA
-     * La méthode utilise le fichier de configuration MainProperties.txt du dossier Properties.
-     */
+	 * Méthode d'instanciation de notre conteneur principal avec les agents DF,
+	 * AMS et RMA La méthode utilise le fichier de configuration
+	 * MainProperties.txt du dossier Properties.
+	 */
 	public static void main(String[] args) {
-		
+
 		String MAIN_PROPERTIES_FILE = "./Properties/MainProperties.txt";
 		Runtime rt = Runtime.instance();
 		Profile p = null;
-		try{
-		p = new ProfileImpl(MAIN_PROPERTIES_FILE);
-		AgentContainer mc = rt.createMainContainer(p);
-		}
-		catch(Exception ex) {
-			
+		try {
+			p = new ProfileImpl(MAIN_PROPERTIES_FILE);
+			AgentContainer mc = rt.createMainContainer(p);
+		} catch (Exception ex) {
+
 			System.out.println("ExceptionMainController");
 		}
 	}
