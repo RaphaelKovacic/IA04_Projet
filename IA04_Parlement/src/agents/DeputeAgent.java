@@ -21,6 +21,51 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
+/**
+ * <b>DeputeAgent est la classe représentant l'agent député dans
+ * notre SMA Parlement.</b>
+ * <p>
+ * L'agent député possède les attributs suivants
+ * <ul>
+ * <li>Un attribut Influence qui représente l'influence du député</li>
+ * <li>Un attribut Popularite qui représente la popularité du député</li>
+ * <li>Un attribut Notoriete qui représente la notoriété du député</li>
+ * <li>Un attribut Credibilite qui représente la crédibilité du député </li>
+ * <li>Un attribut Parti_Politique qui stocke le parti politique du
+ * député </li>
+ * <li>Un attribut Charisme qui représente la le charisme du député </li>
+ * <li>Un attribut Hésitation qui représente l'hésitation du député </li>
+ * 
+ * <li>Un attribut A qui représente l'importance de l'influence du député dans le calcul du score d'une loi préalable à la décision du député</li>
+ * <li>Un attribut BP qui représente l'importance du contexte social de la loi dans le calcul du score d'une loi préalable à la décision du député</li>
+ * <li>Un attribut BE qui représente l'importance du contexte économique de la loi dans le calcul du score d'une loi préalable à la décision du député</li>
+ * <li>Un attribut G qui représente l'importance du charisme du député proposant  dans le calcul du score d'une loi préalable à la décision du député</li>
+ * <li>Un attribut D qui représente le bonus si la loi provient d'un député du même parti dans le calcul du score d'une loi préalable à la décision du député</li>
+ * 
+ * <li>Un attribut APeuple qui représente l'importance de la popularité dans le calcul du score d'une loi</li>
+ * <li>Un attribut BPeuple qui représente l'importance du contexte social du pays dans le calcul du score d'une loi</li>
+ * <li>Un attribut AEntreprise qui représente l'importance de la notoriété dans le calcul du score d'une loi</li>
+ * <li>Un attribut BEntreprise qui représente l'importance du contexte éco du pays dans le calcul du score d'une loi</li>
+ * 
+ * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
+ * 
+ * <li>Un attribut L_Parti qui est une liste de tous les partis politiques
+ * possibles du jeu.</li>
+ * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
+ * 
+ * </ul>
+ * </p>
+ * <p>
+ * La première classe sert à l'instanciation de l'agent Les comportements de
+ * l'agent député sont spécifiés dans les classes suivantes
+ * </p>
+ * 
+ * 
+ * @author Benoit & Etienne
+ * @version 4.3
+ */
+
 @SuppressWarnings("serial")
 public class DeputeAgent extends Agent {
 	// Caractéristiques dynamiques
@@ -75,18 +120,112 @@ public class DeputeAgent extends Agent {
 	float Hesitation;
 
 	// Coefficient (calcul du score pour faire passer une loi)
-	float A, BP, BE, G, D;
-	float APeuple, BPeuple, AEntreprise, BEntreprise;
+	/**
+	 * Importance du député dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 */
+	float A; 
+	
+	/**
+	 * Importance de l'apport social d'une loi dans le calcul du score de cette loi. Statique.
+	 * 
+	 * @see setup()
+	 */
+	float BP;
+	
+	/**
+	 * Importance de l'apport économique d'une loi dans le calcul du score de cette loi. Statique.
+	 * 
+	 * @see setup()
+	 */
+	float BE;
+	
+	/**
+	 * Importance du charisme du député dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 *
+	 */
+	float G; 
+	
+	/**
+	 * Importancedu parti politique (bonus si même parti que le député) dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 *
+	 */
+	float D;
+	
+	/**
+	 * Importance de la popularité du député dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 *
+	 */
+	float APeuple;
+	
+	/**
+	 * Importancedu contexte social actuel dans le pays dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 *
+	 */
+	float BPeuple;
+	
+	/**
+	 * Importance de la notoriété du député dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 *
+	 */
+	float AEntreprise;
+	
+	/**
+	 * Importance du contexte économique actuel d pays dans le calcul du score d'une loi. Statique.
+	 * 
+	 * @see setup()
+	 *
+	 */
+	float BEntreprise;
 
-	// Agent avec qui il peut communiquer
+	/**
+	 * L'AID de l'agent loi. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID ALoi;
+	
+	/**
+	 * L'AID de l'agent KB. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AKB;
 
-	// Liste de tous les partis existants.
+	/**
+	 * La liste de tous les partis possibles de l'utilisateur. Constante.
+	 * 
+	 * @see setup()
+	 */
 	List<String> L_Parti;
 
+	/**
+	 * Le manager du parlement. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	ParlementManager parl_mana = new ParlementManager();
 
+	
+	/**
+	 * Méthode d'instanciation (appelée à la création) de notre agent
+	 * Deputé
+	 * <p>
+	 * Lors du lancement de notre plateforme JADE, chaque agent député est créé
+	 * grâce à cette méthode setup()
+	 * </p>
+	 */
 	protected void setup() {
 		// Enregistrement auprès du DF
 		DFAgentDescription dafd = new DFAgentDescription();
@@ -168,6 +307,24 @@ public class DeputeAgent extends Agent {
 
 	}
 
+	
+	/**
+	 * <b>RequestToProposeLaw est le premier Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent député est en constante attente
+	 * d'une requête REQUEST de l'agent Loi lui demandant de proposer une 
+	 * loi lors de ce tour.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Réalise la demande de l'agent
+	 * loi qui est de proposer une loi lors du tour de jeu en cours.
+	 * <p>
+	 * 
+	 * @see DeputeAgent#GetLawToProposeFromKB
+	 * @author Benoit
+	 * @version 1.1
+	 */
 	class RequestToProposeLaw extends CyclicBehaviour {
 
 		@Override
@@ -188,6 +345,24 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>RequestToProposeLaw est le second Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent député ne va requêter l'agent KB
+	 * pour connaitre la loi qu'il va proposer seulement lorsqu'il
+	 * a été lui même averti par message par l'agent loi qu'il doit proposer une 
+	 * loi lors de ce tour
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Réalise la demande à l'agent KB
+	 * pour connaitre la loi qu'il va proposer.
+	 * <p>
+	 * 
+	 * @see DeputeAgent#RequestToProposeLaw
+	 * @author Etienne
+	 * @version 1.3
+	 */
 	class GetLawToProposeFromKB extends OneShotBehaviour {
 
 		// Task to do
@@ -206,6 +381,22 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ProposeLaw est le troisième Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent KB
+	 * pour récupérer la loi qu'il va proposer lorsque KB envoie effectivement 
+	 * le message contenant cette loi.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère la loi envoyée par KB.
+	 * Loi qu'il doit proposer.
+	 * <p>
+	 * 
+	 * @author Etienne
+	 * @version 2.2
+	 */
 	class ProposeLaw extends CyclicBehaviour {
 
 		// Task to do
@@ -269,6 +460,23 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>RequestToVote est le quatirème Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi
+	 * pour intercepter le message lui demander de voter une loi.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de type PROPOSE
+	 * de la part de l'agent Loi avec le conversation ID correspondant à un 
+	 * vote de loi et lui demandant de voter une proposition de loi.
+	 * <p>
+	 * 
+	 * @see DeputeAgent#VoteLoi
+	 * @author Benoit
+	 * @version 1.3
+	 */
 	class RequestToVote extends CyclicBehaviour {
 
 		@Override
@@ -290,6 +498,24 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>RequestToSondage est le cinquième Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi
+	 * pour intercepter le message lui demandant son avis sur une loi proposée
+	 * par l'utilisateur.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de type PROPOSE
+	 * de la part de l'agent Loi avec le conversation ID correspondant à une demande
+	 * d'avis sur une loi et lui demandant de rendre son avis dessus.
+	 * <p>
+	 * 
+	 * @see DeputeAgent#SondageLoi
+	 * @author Etienne
+	 * @version 1.3
+	 */
 	class RequestToSondage extends CyclicBehaviour {
 
 		@Override
@@ -310,6 +536,25 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	
+	/**
+	 * <b>RequestToModifCara est le sixième Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi
+	 * pour intercepter le message lui demandant de mettre à jour ses caractéristiques
+	 * lorsque le contexte le demande (suite au vote d'une loi ou au résultat
+	 * d'une proposition de loi de sa part).
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de type INFORM
+	 * de la part de l'agent Loi avec lui demandant de mettre à jour ses caractéristiques
+	 * internes.
+	 * <p>
+	 * 
+	 * @author Benoit
+	 * @version 1.3
+	 */
 	class RequestToModifCara extends CyclicBehaviour {
 
 		@Override
@@ -356,6 +601,24 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	
+	/**
+	 * <b>VoteLoi est le septième Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type OneSHot. Notre agent ne doit rendre son vote sur une loi
+	 * seulement lorsqu'il a préalablement intercepter le message de vote d'une loi
+	 * venant de l'agent loi.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant :Vote la loi récupérée dans le message
+	 * demandant de voter une loi par envoyée par l'agent loi.
+	 * <p>
+	 * 
+	 * @see DeputeAgent#RequestToVote
+	 * @author Benoit
+	 * @version 1.3
+	 */
 	class VoteLoi extends OneShotBehaviour {
 		private String mess;
 		private ACLMessage message;
@@ -400,6 +663,25 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>SondageLoi est le septième Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type OneSHot. Notre agent ne doit rendre son avis sur une loi
+	 * seulement lorsqu'il a préalablement intercepter le message d'avis d'une loi
+	 * venant de l'agent loi.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant :Donne son avis sur
+	 * la loi récupérée dans le message demandant 
+	 * de donner son avis sur choisie par l'utilisateur
+	 *  une loi par envoyée par l'agent loi.
+	 * <p>
+	 * 
+	 * @see DeputeAgent#RequestToSondage
+	 * @author Etienne
+	 * @version 2.1
+	 */
 	class SondageLoi extends OneShotBehaviour {
 		private String mess;
 		private ACLMessage message;

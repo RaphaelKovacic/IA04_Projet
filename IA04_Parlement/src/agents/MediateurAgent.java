@@ -26,30 +26,179 @@ import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
+/**
+ * <b>DeputeAgent est la classe représentant l'agent député dans
+ * notre SMA Parlement.</b>
+ * <p>
+ * L'agent député possède les attributs suivants
+ * <ul>
+ * <li>Un attribut L_Actions qui représente la liste des actions possibles par l'utilisateur à chaque tour</li>
+ * <li>Un attribut action_choisit qui représente l'action sélectionnée par l'utilisateur à chaque tour</li>
+ * <li>Un attribut num_tour_actuel qui représente le numéro du tour actuel</li>
+ * 
+ * <li>Un attribut nb_tour_proposeloi qui représente la fréquence à laquelle l'action proposer une loi est possible </li>
+ * <li>Un attribut nb_tour_sondage qui représente la fréquence à laquelle l'action de faire un sondage dans le pays est possible </li>
+ * <li>Un attribut nb_tour_changerparti qui représente la fréquence à laquelle l'action changer de parti est possible </li>
+ * <li>Un attribut nb_tour_sondage_loi qui représente la fréquence à laquelle l'action faire un sondage dans le parlement pour une loi donnée est possible </li>
+ * <li>Un attribut vote_en_cours pour savoir si un vote est en cours. </li>
+ *
+ * <li>Un attribut Loi_possibles_user qui représente la liste des lois possiblement sélectionnables pour un vote de la part de l'utilisateur </li>
+ * <li>Un attribut loi_choisie qui représente la loi choisi pour un vote de la part de l'utilisateur </li>
+ * <li>Un attribut utilisateur_information qui représente les informations de l'utilisateur (son parti, et ses attributs statiques et dynamiques à incorporer à une loi quand on la propose au vote </li>
+ * 
+ * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent utilisateur pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent sondage pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent simulation pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
+ * 
+ * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
+ * 
+ * </ul>
+ * </p>
+ * <p>
+ * La première classe sert à l'instanciation de l'agent Les comportements de
+ * l'agent médiateur sont spécifiés dans les classes suivantes
+ * </p>
+ * 
+ * 
+ * @author Benoit & Etienne
+ * @version 5.2
+ */
 @SuppressWarnings("serial")
 public class MediateurAgent extends Agent {
+	
+	/**
+	 * La liste des actions possibles par l'utilisateur à ce tour. Variable.
+	 * 
+	 * @see setup()
+	 */
 	List<String> L_Actions = new ArrayList<String>();
+	
+	/**
+	 * L'action choisi par l'utilisateur à ce tour. Variable.
+	 * 
+	 * @see setup()
+	 */
 	String action_choisit;
+	
+	/**
+	 * Le numéro du tour actuel. Variable.
+	 * 
+	 * @see setup()
+	 */
 	int num_tour_actuel;
+	
+	/**
+	 * La fréquence à laquelle l'action de proposer une loi est valable pour l'utilisateur. Statique.
+	 * 
+	 * @see setup()
+	 */
 	int nb_tour_proposeloi = 1;
+	
+	/**
+	 * La fréquence à laquelle l'action de faire un sondage dans le pays est valable pour l'utilisateur. Statique.
+	 * 
+	 * @see setup()
+	 */
 	int nb_tour_sondage = 1;
+	
+	/**
+	 * La fréquence à laquelle l'action de changer de parti est valable pour l'utilisateur. Statique.
+	 * 
+	 * @see setup()
+	 */
 	int nb_tour_changerparti = 1;
+	
+	/**
+	 * La fréquence à laquelle l'action de demander l'avis au parlement pour une loi est valable pour l'utilisateur. Statique.
+	 * 
+	 * @see setup()
+	 */
 	int nb_tour_sondage_loi = 1;
+	
+	/**
+	 * Oui ou non y-a-t-il un vote en cours dans le parlement. Variable
+	 * 
+	 * @see setup()
+	 */
 	boolean vote_en_cours;
 
+	/**
+	 * La liste des lois proposables par l'utilisateur. Variable.
+	 * 
+	 * @see setup()
+	 */
 	List<Loi> Loi_possibles_user = new ArrayList<Loi>();
+	
+	/**
+	 * La loi soumise au vote par l'utilisateur. Variable.
+	 * 
+	 * @see setup()
+	 */
+	Loi loi_choisie = new Loi();
+	
+	/**
+	 * Les informations de l'utilisateur à incorporer à la loi qu'il va proposer. Variables.
+	 * 
+	 * @see setup()
+	 */
 	Loi utilisateur_information = new Loi();
 
+	/**
+	 * L'AID de l'agent Loi. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID ALoi;
+	
+
+	/**
+	 * L'AID de l'agent Utilisateur. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AUtilisateur;
+	
+
+	/**
+	 * L'AID de l'agent Sondage. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID ASondage;
+	
+
+	/**
+	 * L'AID de l'agent SImulation. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID ASimulation;
+	
+
+	/**
+	 * L'AID de l'agent KB. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AKB;
 
+	/**
+	 * Le manager du parlement. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	ParlementManager parl_mana = new ParlementManager();
 
-	Loi loi_choisie = new Loi();
-
+	/**
+	 * Méthode d'instanciation (appelée à la création) de notre agent
+	 * mediateur.
+	 * <p>
+	 * Lors du lancement de notre plateforme JADE, l'agent médiateur est crée
+	 * grâce à cette méthode setup()
+	 * </p>
+	 */
 	protected void setup() {
 		// Enregistrement auprès du DF
 		DFAgentDescription dafd = new DFAgentDescription();
@@ -99,12 +248,8 @@ public class MediateurAgent extends Agent {
 				addBehaviour(new FinVoteFromLoi()); // réception de la fin d'un vote de loi (REQUEST)
 				// --> Suivant l'action traitement différents.
 
-				addBehaviour(new ReceiveCaracFromUtilisateur()); // Récéption d'un message de type CONFIRM
-															     // de la part de l'agent utilisateur avec
-																 // comme contenu du message ses informations
-																 // sérialisées dans une loi incomplète.
 
-				addBehaviour(new ReceiveUserParty()); // Réception du INFORM_REF avec le nom du parti
+				addBehaviour(new ReceiveUserInfo()); // Réception du INFORM_REF avec le nom du parti
 													  // de l'user avant de requêter KB
 
 				addBehaviour(new ReceiveLawsFromKB()); // Recevoir loi envoyées par KB pour l'user
@@ -115,6 +260,24 @@ public class MediateurAgent extends Agent {
 		System.out.println("Agent Mediateur créé : " + this.getLocalName());
 	}
 
+	/**
+	 * <b>TourFromSimulation est le premier Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent mediateur est en constante attente
+	 * d'une requête REQUEST de l'agent simulation l'informant du début
+	 * d'un nouveau tour de jeu.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Affiche le numéro du tour,
+	 * et construit la liste des actions possibles en fonction du tour 
+	 * actuel.
+	 * <p>
+	 * 
+	 * @see MediateurAgent#ProposeActionsToUser
+	 * @author Benoit & Etienne
+	 * @version 2.5
+	 */
 	class TourFromSimulation extends CyclicBehaviour {
 
 		@Override
@@ -176,6 +339,25 @@ public class MediateurAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ProposeActionsToUser est le second Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent mediateur va envoyer
+	 * dans un messgae à l'agent utilisateur la liste des actions
+	 * possibles. On ne fait cette action qu'au début de chaque 
+	 * nouveau tour.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Envoie un message
+	 * avec la liste des actions possibles à ce tour à l'agent 
+	 * utilisateur
+	 * <p>
+	 * 
+	 * @see MediateurAgent#TourFromSimulation
+	 * @author Benoit & Etienne
+	 * @version 2.5
+	 */
 	class ProposeActionsToUser extends OneShotBehaviour {
 
 		// Task to do
@@ -202,6 +384,25 @@ public class MediateurAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ProposeActionsToUser est le troisième Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente
+	 * d'un message de la part du joueur avec l'action choisi
+	 * à ce tour.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message
+	 * contenant l'action choisi par l'utilisateur et envoi les messages 
+	 * correspondants à chaque action.
+	 * C'est le behaviour de décision et routing des messages après le choix
+	 * d'une action par le joueur.
+	 * <p>
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 3.5
+	 */
 	class ActionFromUtilisateur extends CyclicBehaviour {
 
 		@Override
@@ -296,7 +497,25 @@ public class MediateurAgent extends Agent {
 			}
 		}
 	}
-
+	
+	/**
+	 * <b>LawProposalFromUser est le quatrième Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente
+	 * d'un message de la part du joueur avec la loi qu'il a choisi
+	 * de proposer au vote lors de ce tour.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère l'id
+	 * de la loi choisi au vote, teste si celle-ci est bien proposable.
+	 * Il la serialise et l'envoi à l'agent loi qui s'occupera de la suite
+	 * du processus.
+	 * <p>
+	 * 
+	 * @author Etienne
+	 * @version 1.2
+	 */
 	class LawProposalFromUser extends CyclicBehaviour {
 
 		@Override
@@ -361,6 +580,23 @@ public class MediateurAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>FinVoteFromLoi est le cinquième Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente
+	 * d'un message de la part de l'agent loi lui signifiant la fin de ses activités.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de l'agent loi signifiant
+	 * que ses activités sont finies. Si l'action justement finie était une demande d'avis
+	 * du parlement alors il faut proposer une loi au vote.
+	 * Sinon c'est qu'on vient de voter une loi. Le tour est fini.
+	 * <p>
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 3.2
+	 */
 	class FinVoteFromLoi extends CyclicBehaviour {
 
 		@Override
@@ -409,34 +645,24 @@ public class MediateurAgent extends Agent {
 		}
 	}
 
-	class ReceiveCaracFromUtilisateur extends CyclicBehaviour {
 
-		@Override
-		public void action() {
-
-			// On attend la reception d'un message de type CONFIRM venant de
-			// l'agent Utilisateur
-			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.CONFIRM),
-					MessageTemplate.MatchSender(AUtilisateur));
-			ACLMessage message = myAgent.receive(mt);
-			if (message != null) {
-
-				// On deserialise le message contenant la loi incomplète (pour
-				// l'instant seulement les info de l'user)
-				ObjectMapper mapper = new ObjectMapper();
-				try {
-					loi_choisie = mapper.readValue(message.getContent(), Loi.class);
-				} catch (Exception ex) {
-					System.out.println("EXCEPTION" + ex.getMessage());
-				}
-			} else {
-				block();
-			}
-		}
-
-	}
-
-	class ReceiveUserParty extends CyclicBehaviour {
+	/**
+	 * <b>ReceiveUserInfo est le sixième Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente
+	 * d'un message de la part de l'agent utilisateur contenant des informations
+	 * sur son état.</p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de l'agent utilisateur
+	 * contenant les informations sur ses variables (parti politique et autres
+	 * caractéristiques statiques.).
+	 * <p>
+	 * 
+	 * @author Etienne
+	 * @version 2.2
+	 */
+	class ReceiveUserInfo extends CyclicBehaviour {
 
 		@Override
 		public void action() {
@@ -497,6 +723,25 @@ public class MediateurAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ReceiveLawsFromKB est le septième et dernier Behaviour de l'agent
+	 * mediateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente
+	 * d'un message de la part de l'agent KB contenant la liste des lois
+	 * que l'utilisateur peut proposer au vote lors de ce tour.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de l'agent KB
+	 * contenant les la liste de lois (en JSON) que l'utilisateur peut proposer. 
+	 * Il déserialise ce message, les stocke dans sa variable interne pour le futur test
+	 * lors du choix de l'utilisateur. Il forward ce message à l'agent Utilisateur
+	 * pour affichage des choix au joueur.
+	 * <p>
+	 * 
+	 * @author Etienne
+	 * @version 2.2
+	 */
 	class ReceiveLawsFromKB extends CyclicBehaviour {
 
 		@Override

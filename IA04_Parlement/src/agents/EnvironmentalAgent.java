@@ -256,7 +256,7 @@ public class EnvironmentalAgent extends Agent {
 
 		// Task to do
 		public void action() {
-			// On deserialise le message contenant les 2 valeurs de variables �
+			// On deserialise le message contenant les 2 valeurs de variables à
 			// modifer.
 			ObjectMapper mapper = new ObjectMapper();
 			try {

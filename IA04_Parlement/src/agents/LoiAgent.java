@@ -25,24 +25,135 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import launcher.AgentLauncher;
 
+/**
+ * <b>LoiAgent est la classe représentant l'agent loi dans
+ * notre SMA Parlement.</b>
+ * <p>
+ * L'agent loi possède les attributs suivants
+ * <ul>
+ * <li>Un attribut L_AID_Vote qui représente la liste des AID des députés ayant votés ou donnés leur avis.</li>
+ * <li>Un attribut loi_en_cours qui représente la loi en cours de vote ou de sondage.</li>
+ * <li>Un attribut proposant qui représente l'AID de l'agent proposant la loi à voter.</li>
+ * <li>Un attribut nb_votant qui représente le nombre de votant lors du tour de vote ou de sondage.</li>
+ * <li>Un attribut nb_vote_pour qui représente le nombre de députés POUR lors du tour de vote ou de sondage.</li>
+ * <li>Un attribut nb_vote_contre qui représente le nombre de député CONTRE lors du tour de vote ou de sondage.</li>
+
+ * <li>L'AID de l'agent mediateur pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent utilisateur pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent environnement pour pouvoir rapidement communiquer avec lui</li>
+ * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
+ * <li>Une liste avec tous les AID des députés dans notre SMA</li>
+ * 
+ * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
+ * 
+ * </ul>
+ * </p>
+ * <p>
+ * La première classe sert à l'instanciation de l'agent Les comportements de
+ * l'agent loi sont spécifiés dans les classes suivantes.
+ * </p>
+ * 
+ * 
+ * @author Benoit & Etienne
+ * @version 2.3
+ */
 @SuppressWarnings("serial")
 public class LoiAgent extends Agent {
 
+	/**
+	 * La liste des AID des agents ayant votés. Variable.
+	 * 
+	 * @see setup()
+	 */
 	List<Aid_vote> L_AID_Vote = new ArrayList<Aid_vote>();
+	
+	/**
+	 * La loi en cours d'étude (vote ou sondage) à ce tour. Variable.
+	 * 
+	 * @see setup()
+	 */
 	Loi loi_en_cours = new Loi();
+	
+	/**
+	 * L'AID du proposant à ce tour. Variable.
+	 * 
+	 * @see setup()
+	 */
 	AID proposant;
+	
+	/**
+	 * Le nombre total de votant attendu lors du tour. Variable.
+	 * 
+	 * @see setup()
+	 */
 	int nb_votant;
+	
+	/**
+	 * Le nombre de députés POUR lors de ce tour de vote ou sondage d'une loi. Variable.
+	 * 
+	 * @see setup()
+	 */
 	int nb_vote_pour;
+	
+	/**
+	 * Le nombre de députés CONTRE lors de ce tour de vote ou sondage d'une loi. Variable.
+	 * 
+	 * @see setup()
+	 */
 	int nb_vote_contre;
 
+	/**
+	 * L'AID de l'agent médiateur. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AMediateur;
+	
+	/**
+	 * L'AID de l'agent utilisateur. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AUtilisateur;
+	
+	/**
+	 * L'AID de l'agent environnement. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AEnvironnement;
+	
+	/**
+	 * L'AID de l'agent KB. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	AID AKB;
+	
+	/**
+	 * La liste des AID des agents députés du SMA. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	List<AID> List_Depute = new ArrayList<AID>();
 
+
+	/**
+	 * Le manager du parlement. Non modifiable
+	 * 
+	 * @see setup()
+	 */
 	ParlementManager parl_mana = new ParlementManager();
 
+	
+	/**
+	 * Méthode d'instanciation (appelée à la création) de notre agent
+	 * loi.
+	 * <p>
+	 * Lors du lancement de notre plateforme JADE, l'agent loi est crée
+	 * grâce à cette méthode setup()
+	 * </p>
+	 */
 	protected void setup() {
 		// Enregistrement auprès du DF
 		DFAgentDescription dafd = new DFAgentDescription();
@@ -97,6 +208,29 @@ public class LoiAgent extends Agent {
 
 	}
 
+	/**
+	 * <b>RequestOfMediator est le premier Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent loi est en constante attente
+	 * d'une requête REQUEST de l'agent mediateur l'informant que l'action
+	 * en cours lors de ce tour est soit une proposition ou un avis demandé
+	 * par l'utilisateur soit tout autre tour et dans ce cas il doit
+	 * demander au députés de lui soumettre une loi au vote.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère le message de la part
+	 * de l'agent mediateur. Analyse ce message et fait suivre le bon processus
+	 * en fonction du message.
+	 * <p>
+	 * 
+	 * @see LoiAgent#VoteLoi
+	 * @see LoiAgent#SondageLoi
+	 * @see LoiAgent#DemandeLoi
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 3.6
+	 */
 	class RequestOfMediator extends CyclicBehaviour {
 
 		@Override
@@ -157,6 +291,25 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+
+	/**
+	 * <b>DemandeLoi est le second Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent ne va engager le processus
+	 * de demander une loi à soumettre au vote que lorsque le bon
+	 * message est reçu de la part du médiateur (voir Behaviour parent).
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Selectionne un député au hasard et lui demande 
+	 * de proposer une loi.
+	 * <p>
+	 * 
+	 * @see LoiAgent#RequestOfMediator
+	 * 
+	 * @author Benoit 
+	 * @version 2.1
+	 */
 	class DemandeLoi extends OneShotBehaviour {
 		private ACLMessage message;
 
@@ -172,13 +325,7 @@ public class LoiAgent extends Agent {
 			// pour qu'il propose une loi
 			ACLMessage forward = message.createReply();
 			forward.removeReceiver(message.getSender());
-			proposant = List_Depute.get((int) (Math.random() * (List_Depute.size()))); // Retourne
-																						// un
-																						// député
-																						// au
-																						// hasard
-																						// parmi
-																						// tous
+			proposant = List_Depute.get((int) (Math.random() * (List_Depute.size()))); // Retourne un député au hasard parmi tous
 			forward.addReceiver(proposant);
 			forward.setPerformative(ACLMessage.REQUEST);
 			forward.setContent(message.getContent());
@@ -187,6 +334,24 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>VoteLoi est le troisième Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent ne va engager le processus
+	 * de faire voter une loi que lorsque le bon message est reçu de la part
+	 * du mediateur.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Envoie un message à tous les députés
+	 * leur demandant de voter la loi contenue dans le message.
+	 * <p>
+	 * 
+	 * @see LoiAgent#RequestOfMediator
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 2.3
+	 */
 	class VoteLoi extends OneShotBehaviour {
 		private ACLMessage message;
 
@@ -223,6 +388,24 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>SondageLoi est le troisième Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent ne va engager le processus
+	 * de demander l'avis aux députés sur une loi que lorsque le bon message est reçu de la part
+	 * du mediateur.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Envoie un message à tous les députés
+	 * leur demandant leur avis sur la loi contenue dans le message.
+	 * <p>
+	 * 
+	 * @see LoiAgent#RequestOfMediator
+	 * 
+	 * @author Etienne
+	 * @version 1.2
+	 */
 	class SondageLoi extends OneShotBehaviour {
 		private ACLMessage message;
 
@@ -261,6 +444,21 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ProposalLawOfDepute est le cinquième Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente d'une proposition
+	 * de loi faite par un député qu'il faut soumettre au vote de l'assemblée dans son ensemble.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère la loi à faire voter envoyée par un député.
+	 * Envoie un message à tous les autres députés ainsi qu'à l'utilisateur leur demandant de voter pour cette loi.
+	 * <p>
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 2.1
+	 */
 	class ProposalLawOfDepute extends CyclicBehaviour {
 
 		@Override
@@ -292,6 +490,26 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>AcceptLawOfDepute est le sixième Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente de la réponse positive (POUR)
+	 * concernant la loi en cours.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère la réponse positive, met à jour sa liste locale 
+	 * qji tient à jour le vote de chaque député.
+	 * Teste si on a reçu tous les votes pour la loi en cours d'étude.
+	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
+	 * <p>
+	 * 
+	 * @see LoiAgent#ConsequenceVote
+	 * @see LoiAgent#ConsequenceSondage
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 2.1
+	 */
 	class AcceptLawOfDepute extends CyclicBehaviour {
 
 		@Override
@@ -319,12 +537,12 @@ public class LoiAgent extends Agent {
 					// Traitement des conséquences du vote
 					if (message.getConversationId() == null
 							|| message.getConversationId().equalsIgnoreCase("Proposition de loi") == true)
-						myAgent.addBehaviour(new ConsequenceLoi());
+						myAgent.addBehaviour(new ConsequenceVote());
 					// Traitement des conséquences de la demande de sondage
 					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage") == true)
 						myAgent.addBehaviour(new ConsequenceSondage());
 					else
-						myAgent.addBehaviour(new ConsequenceLoi());
+						myAgent.addBehaviour(new ConsequenceVote());
 
 				}
 
@@ -334,6 +552,27 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+	
+	/**
+	 * <b>RefuseLawOfDepute est le septième Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent est en constante attente de la réponse négative (CONTRE)
+	 * concernant la loi en cours.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Récupère la réponse positive, met à jour sa liste locale 
+	 * qji tient à jour le vote de chaque député.
+	 * Teste si on a reçu tous les votes pour la loi en cours d'étude.
+	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
+	 * <p>
+	 * 
+	 * @see LoiAgent#ConsequenceVote
+	 * @see LoiAgent#ConsequenceSondage
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 2.1
+	 */
 	class RefuseLawOfDepute extends CyclicBehaviour {
 
 		@Override
@@ -361,12 +600,12 @@ public class LoiAgent extends Agent {
 					// Traitement des conséquences du vote
 					if (message.getConversationId() == null
 							|| message.getConversationId().equalsIgnoreCase("Proposition de loi") == true)
-						myAgent.addBehaviour(new ConsequenceLoi());
+						myAgent.addBehaviour(new ConsequenceVote());
 					// Traitement des conséquences de la demande de sondage
 					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage") == true)
 						myAgent.addBehaviour(new ConsequenceSondage());
 					else
-						myAgent.addBehaviour(new ConsequenceLoi());
+						myAgent.addBehaviour(new ConsequenceVote());
 				}
 			} else {
 				block();
@@ -374,7 +613,28 @@ public class LoiAgent extends Agent {
 		}
 	}
 
-	class ConsequenceLoi extends OneShotBehaviour {
+	/**
+	 * <b>ConsequenceVote est le huitième Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent va s'occuper de faire le récapitulatif du vote de la loi
+	 * en cours.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Il effectue le vote en cours. Décide si la loi est passée ou non.
+	 * Il va aussi envoyer un acquittement à l'agent KB si la loi est votée.
+	 * Il va envoyer un message à tous les députés (utilisateur compris) pour leur demander de mettre
+	 * à jour leur caractéristiques selon le résultat du vote.
+	 * Enfin il envoie un message au médiateur pour lui signifier la fin du vote.
+	 * <p>
+	 * 
+	 * @see LoiAgent#AcceptLawOfDepute
+	 * @see LoiAgent#RefuseLawOfDepute
+	 * 
+	 * @author Benoit & Etienne
+	 * @version 2.1
+	 */
+	class ConsequenceVote extends OneShotBehaviour {
 
 		// Task to do
 		public void action() {
@@ -581,6 +841,26 @@ public class LoiAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ConsequenceSondage est le neuvième et dernier Behaviour de l'agent
+	 * loi</b>
+	 * <p>
+	 * Il est de type OneShot. Notre agent va s'occuper de faire le récapitulatif de la demande de sondage
+	 * dans le parlement pour la loi soumise au sondage.
+	 * 
+	 * en cours.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Afficher le résultat de l'estimation.
+	 * Envoie un message au médiateur pour lui signifier la fin du sondage dans le parlement
+	 * <p>
+	 * 
+	 * @see LoiAgent#AcceptLawOfDepute
+	 * @see LoiAgent#RefuseLawOfDepute
+	 * 
+	 * @author Etienne
+	 * @version 1.2
+	 */
 	class ConsequenceSondage extends OneShotBehaviour {
 
 		public void action() {
