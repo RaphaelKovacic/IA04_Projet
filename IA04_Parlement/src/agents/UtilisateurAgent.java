@@ -566,7 +566,7 @@ public class UtilisateurAgent extends Agent {
 					System.out.println("--------------------LOIS-------------------------------");
 					for (int y = 0; y < Loi_a_choisir.size(); y++) {
 						Loi_a_choisir.get(y).affiche_a_utilisateur();
-						;
+
 					}
 					System.out.println("------------------FIN LOIS-----------------------------");
 

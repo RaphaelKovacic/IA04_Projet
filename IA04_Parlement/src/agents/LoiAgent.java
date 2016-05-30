@@ -282,7 +282,7 @@ public class LoiAgent extends Agent {
 						// sonder par rapport à une loi proposée par
 						// l'utilisateur.
 						myAgent.addBehaviour(new SondageLoi(message));
-					;
+
 				}
 
 			} else {
@@ -536,10 +536,10 @@ public class LoiAgent extends Agent {
 
 					// Traitement des conséquences du vote
 					if (message.getConversationId() == null
-							|| message.getConversationId().equalsIgnoreCase("Proposition de loi") == true)
+							|| message.getConversationId().equalsIgnoreCase("Proposition de loi"))
 						myAgent.addBehaviour(new ConsequenceVote());
 					// Traitement des conséquences de la demande de sondage
-					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage") == true)
+					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage"))
 						myAgent.addBehaviour(new ConsequenceSondage());
 					else
 						myAgent.addBehaviour(new ConsequenceVote());
@@ -599,10 +599,10 @@ public class LoiAgent extends Agent {
 
 					// Traitement des conséquences du vote
 					if (message.getConversationId() == null
-							|| message.getConversationId().equalsIgnoreCase("Proposition de loi") == true)
+							|| message.getConversationId().equalsIgnoreCase("Proposition de loi"))
 						myAgent.addBehaviour(new ConsequenceVote());
 					// Traitement des conséquences de la demande de sondage
-					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage") == true)
+					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage"))
 						myAgent.addBehaviour(new ConsequenceSondage());
 					else
 						myAgent.addBehaviour(new ConsequenceVote());

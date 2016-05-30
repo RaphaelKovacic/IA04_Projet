@@ -81,7 +81,7 @@ public class Loi implements Comparable<Loi> {
 	 * liste n'est pas modifiable.
 	 * 
 	 * @see Loi#getL_PartiPolitique()
-	 * @see Loi#setL_PartiPolitique(List<String>)
+	 * @see Loi#setL_PartiPolitique(List)
 	 */
 	@JsonProperty("l_PartiPolitique")
 	List<String> l_PartiPolitique;
@@ -202,7 +202,7 @@ public class Loi implements Comparable<Loi> {
 	 */
 
 	public Loi() {
-	};
+	}
 
 	/**
 	 * Méthode d'affichage des caractéristiques d'une loi

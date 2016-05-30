@@ -3,7 +3,6 @@ package agents;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
-import java.util.LinkedList;
 import java.util.List;
 
 import java.util.ArrayList;
@@ -225,9 +224,8 @@ public class KB extends Agent {
 				List<Loi> liste_d_objet_loi_du_parti = new ArrayList<Loi>();
 				liste_d_objet_loi_du_parti = PossibleLaws(parti_politique);
 
-				Loi au_hasard = (Loi) liste_d_objet_loi_du_parti
+				Loi au_hasard = liste_d_objet_loi_du_parti
 						.get((int) (Math.random() * liste_d_objet_loi_du_parti.size()));
-				;
 
 				ObjectMapper mapper = new ObjectMapper();
 				StringWriter sw = new StringWriter();
@@ -285,7 +283,7 @@ public class KB extends Agent {
 			if (message != null) {
 
 				// Récupère le nom du parti
-				id_voted = message.getContent().toString();
+				id_voted = message.getContent();
 
 				String lawPrefix = model.getNsPrefixURI("law");
 
@@ -317,7 +315,7 @@ public class KB extends Agent {
 				// Parcourir la liste de sstatement à modifier en passant leur
 				// object du triplet law:is_voted à "true"
 				for (int z = 0; z < statementsToModify.size(); z++) {
-					Statement current_statement_rm = (Statement) statementsToModify.get(z);
+					Statement current_statement_rm = statementsToModify.get(z);
 					current_statement_rm.changeObject("true");
 
 				}
@@ -358,7 +356,7 @@ public class KB extends Agent {
 			// Gestion selon le formalisme JENA pour chaque statement de la
 			// Arraylist on doit récupèrer le Sujet pour ainsi ensuite récupérer
 			// les valeurs de tous les objets en relation avec celui-ci
-			Statement current_statement = (Statement) statement_lois_du_parti.get(w);
+			Statement current_statement = statement_lois_du_parti.get(w);
 			Resource subject_law_current = current_statement.getSubject();
 
 			System.out.println("Loi pour les " + _s + " intitulé : " + subject_law_current.toString());
@@ -410,7 +408,7 @@ public class KB extends Agent {
 		String lawPrefix = model.getNsPrefixURI("law");
 
 		Property id_property = model.getProperty(lawPrefix + "id");
-		ExtendedIterator<Statement> it = model.listStatements(new SimpleSelector((Resource) null, id_property, _id));
+		ExtendedIterator<Statement> it = model.listStatements(new SimpleSelector(null, id_property, _id));
 
 		if (it.hasNext())
 			return it.next().getSubject();
@@ -443,7 +441,7 @@ public class KB extends Agent {
 		String lawPrefix = model.getNsPrefixURI("law");
 		Property politic_party_property = model.getProperty(lawPrefix + "politic_party");
 
-		StmtIterator it = model.listStatements(new SimpleSelector((Resource) null, politic_party_property, _parti));
+		StmtIterator it = model.listStatements(new SimpleSelector(null, politic_party_property, _parti));
 
 		if (it.hasNext())
 			while (it.hasNext()) {
@@ -479,11 +477,7 @@ public class KB extends Agent {
 
 		Resource rsc = _st.getSubject();
 
-		if (getIsVotedFromSubject(rsc).equalsIgnoreCase("false"))
-			return true;
-
-		else
-			return false;
+		return getIsVotedFromSubject(rsc).equalsIgnoreCase("false");
 
 	}
 

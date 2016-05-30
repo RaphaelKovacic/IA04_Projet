@@ -98,7 +98,7 @@ public class MajDepute {
 	 * </p>
 	 */
 	public MajDepute() {
-	};
+	}
 
 	/**
 	 * Retourne la valeur de l'effet sur l'influence.
