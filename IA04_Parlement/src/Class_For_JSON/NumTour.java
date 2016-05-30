@@ -27,7 +27,7 @@ public class NumTour {
 	 * Le numéro du tour en cours.
 	 * 
 	 * @see NumTour#getNum()
-	 * @see NumTour#setNumm(int)
+	 * @see NumTour#setNum(int)
 	 */
 	int num;
 

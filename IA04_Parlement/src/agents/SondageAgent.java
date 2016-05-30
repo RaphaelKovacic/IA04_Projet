@@ -44,21 +44,21 @@ public class SondageAgent extends Agent {
 	/**
 	 * L'AID de l'agent environnement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AEnvironnement;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AMediateur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 

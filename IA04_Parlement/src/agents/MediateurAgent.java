@@ -71,84 +71,84 @@ public class MediateurAgent extends Agent {
 	/**
 	 * La liste des actions possibles par l'utilisateur à ce tour. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	List<String> L_Actions = new ArrayList<String>();
 	
 	/**
 	 * L'action choisi par l'utilisateur à ce tour. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	String action_choisit;
 	
 	/**
 	 * Le numéro du tour actuel. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int num_tour_actuel;
 	
 	/**
 	 * La fréquence à laquelle l'action de proposer une loi est valable pour l'utilisateur. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_tour_proposeloi = 1;
 	
 	/**
 	 * La fréquence à laquelle l'action de faire un sondage dans le pays est valable pour l'utilisateur. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_tour_sondage = 1;
 	
 	/**
 	 * La fréquence à laquelle l'action de changer de parti est valable pour l'utilisateur. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_tour_changerparti = 1;
 	
 	/**
 	 * La fréquence à laquelle l'action de demander l'avis au parlement pour une loi est valable pour l'utilisateur. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_tour_sondage_loi = 1;
 	
 	/**
 	 * Oui ou non y-a-t-il un vote en cours dans le parlement. Variable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	boolean vote_en_cours;
 
 	/**
 	 * La liste des lois proposables par l'utilisateur. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	List<Loi> Loi_possibles_user = new ArrayList<Loi>();
 	
 	/**
 	 * La loi soumise au vote par l'utilisateur. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	Loi loi_choisie = new Loi();
 	
 	/**
 	 * Les informations de l'utilisateur à incorporer à la loi qu'il va proposer. Variables.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	Loi utilisateur_information = new Loi();
 
 	/**
 	 * L'AID de l'agent Loi. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ALoi;
 	
@@ -156,7 +156,7 @@ public class MediateurAgent extends Agent {
 	/**
 	 * L'AID de l'agent Utilisateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AUtilisateur;
 	
@@ -164,7 +164,7 @@ public class MediateurAgent extends Agent {
 	/**
 	 * L'AID de l'agent Sondage. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ASondage;
 	
@@ -172,7 +172,7 @@ public class MediateurAgent extends Agent {
 	/**
 	 * L'AID de l'agent SImulation. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ASimulation;
 	
@@ -180,14 +180,14 @@ public class MediateurAgent extends Agent {
 	/**
 	 * L'AID de l'agent KB. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AKB;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -274,7 +274,7 @@ public class MediateurAgent extends Agent {
 	 * actuel.
 	 * <p>
 	 * 
-	 * @see MediateurAgent#ProposeActionsToUser
+	 * @see ProposeActionsToUser
 	 * @author Benoit & Etienne
 	 * @version 2.5
 	 */
@@ -354,7 +354,7 @@ public class MediateurAgent extends Agent {
 	 * utilisateur
 	 * <p>
 	 * 
-	 * @see MediateurAgent#TourFromSimulation
+	 * @see TourFromSimulation
 	 * @author Benoit & Etienne
 	 * @version 2.5
 	 */

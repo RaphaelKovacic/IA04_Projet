@@ -46,42 +46,42 @@ public class SimulationAgent extends Agent {
 	/**
 	 * Le numéro du tour actuel. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int tour;
 
 	/**
 	 * Le nombre tour maximum dans une partie. Constant.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int FinJeu_tour;
 
 	/**
 	 * L'état actuel de la partie. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	public boolean partie_finie;
 
 	/**
 	 * L'AID de l'agent environnement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AEnvironnement = null;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AMediateur = null;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -152,7 +152,7 @@ public class SimulationAgent extends Agent {
 	 * 
 	 * Cette action faite suite à la fin d'un tour.
 	 * 
-	 * @see SimulationAgent#WaitMessMediateur
+	 * @see WaitMessMediateur
 	 * 
 	 * @author Benoit
 	 * @version : 1.2
@@ -208,7 +208,7 @@ public class SimulationAgent extends Agent {
 	 * <p>
 	 * 
 	 * 
-	 * @see SimulationAgent#NouvTourMediateur
+	 * @see NouvTourMediateur
 	 * 
 	 * @author Benoit
 	 * @version : 1.2
@@ -285,7 +285,7 @@ public class SimulationAgent extends Agent {
 	 * <p>
 	 * 
 	 * 
-	 * @see SimulationAgent#NouvTourMediateur
+	 * @see NouvTourMediateur
 	 * 
 	 * @author Benoit
 	 * @version : 1.2

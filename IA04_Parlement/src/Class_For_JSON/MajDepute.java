@@ -132,7 +132,7 @@ public class MajDepute {
 	/**
 	 * Met à jour l'effet sur la popularité.
 	 * 
-	 * @param _effet_Popularité
+	 * @param effet_Popularite
 	 *            La nouvelle valeur de l'effet sur la popularité.
 	 */
 	@JsonSetter
@@ -152,7 +152,7 @@ public class MajDepute {
 	/**
 	 * Met à jour l'effet sur la notoriété.
 	 * 
-	 * @param _effet_Notoriete.
+	 * @param effet_Notoriete
 	 *            La nouvelle valeur de l'effet sur la notoriété.
 	 */
 	@JsonSetter
@@ -172,7 +172,7 @@ public class MajDepute {
 	/**
 	 * Met à jour l'effet sur la crédibilité.
 	 * 
-	 * @param _effet_Credibilite
+	 * @param effet_Credibilite
 	 *            La nouvelle valeur de l'effet sur la crédibilité.
 	 */
 	@JsonSetter

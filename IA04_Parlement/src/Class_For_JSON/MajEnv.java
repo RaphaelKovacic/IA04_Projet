@@ -26,7 +26,7 @@ public class MajEnv {
 	 * La valeur correspondant au contexte économique du pays.
 	 * 
 	 * @see MajEnv#getContext_eco()
-	 * @see MajEnv#setContext_eco(float)
+	 * @see MajEnv#setContext_eco(int)
 	 */
 	float context_eco;
 
@@ -34,7 +34,7 @@ public class MajEnv {
 	 * La valeur correspondant à la qualité de vie des habitants du pays.
 	 * 
 	 * @see MajEnv#getQualite_vie()
-	 * @see MajEnv#setQualite_vie(float)
+	 * @see MajEnv#setQualite_vie(int)
 	 */
 	float qualite_vie;
 

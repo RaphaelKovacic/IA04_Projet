@@ -61,28 +61,28 @@ public class KB extends Agent {
 	/**
 	 * Le model à charger depuis notre fichier turle. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	Model model;
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ALoi;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AMediateur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -156,7 +156,7 @@ public class KB extends Agent {
 		/**
 		 * Le parti politique contenu dans le message reçu. Non modifiable.
 		 * 
-		 * @see action()
+		 * @see #action()
 		 */
 		String parti_politique;
 
@@ -341,7 +341,7 @@ public class KB extends Agent {
 	 * 
 	 * @return Une liste d'objets Loi.
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 
 	public List<Loi> PossibleLaws(String _s) {
@@ -431,8 +431,8 @@ public class KB extends Agent {
 	 * 
 	 * @return Une liste de statement.
 	 * 
-	 * @see getIsVotedFromSubject
-	 * @see checkIfNotVoted
+	 * @see #getIsVotedFromSubject(Resource)
+	 * @see #checkIfNotVoted(Statement)
 	 * 
 	 */
 
@@ -471,8 +471,8 @@ public class KB extends Agent {
 	 * 
 	 * @return Un booléen.
 	 * 
-	 * @see getLoiFromParti
-	 * @see getIsVotedFromSubject
+	 * @see #getLoiFromParti(String)
+	 * @see #getIsVotedFromSubject(Resource)
 	 */
 
 	public boolean checkIfNotVoted(Statement _st) {
@@ -500,7 +500,7 @@ public class KB extends Agent {
 	 * 
 	 * @return Une chaine de caractère
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 
 	public String getIdFromSubject(Resource _rsc) {
@@ -529,7 +529,7 @@ public class KB extends Agent {
 	 * 
 	 * @return Une chaine de caractère
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 
 	public String getNameFromSubject(Resource _rsc) {
@@ -550,7 +550,7 @@ public class KB extends Agent {
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
 	 * 
-	 * @param _st
+	 * @param _rsc
 	 *            Une ressource "objet" JENA
 	 * 
 	 * Retourne une chaine de caractère correspondant à la valeur de
@@ -558,7 +558,7 @@ public class KB extends Agent {
 	 * 
 	 * @return Une chaine de caractère
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 
 	public String getDescFromSubject(Resource _rsc) {
@@ -588,7 +588,7 @@ public class KB extends Agent {
 	 * 
 	 * @return Un float
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 
 	public float getEcoFromSubject(Resource _rsc) {
@@ -622,7 +622,7 @@ public class KB extends Agent {
 	 * 
 	 * @return Un float
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 	public float getLifeFromSubject(Resource _rsc) {
 
@@ -645,7 +645,7 @@ public class KB extends Agent {
 	 * Récupère le sujet du triplet RDF (loi_a_examiner, law:is_voted,
 	 * sujet_voulu) sous la forme d'une chaine de caractère.
 	 * 
-	 * @param _st
+	 * @param _rsc
 	 *            Une ressource JENA qui est un sujet "loi"
 	 * 
 	 * Retourne la chaine de caractère correspondant à la valeur de
@@ -653,9 +653,9 @@ public class KB extends Agent {
 	 * 
 	 * @return Une chaine de caractère
 	 * 
-	 * @see getLoiFromParti
-	 * @see checkIfNotVoted
-	 * @see Class_For_JSON#Loi.java
+	 * @see #getLoiFromParti(String)
+	 * @see #checkIfNotVoted(Statement)
+	 * @see Class_For_JSON.Loi
 	 */
 
 	public String getIsVotedFromSubject(Resource _rsc) {

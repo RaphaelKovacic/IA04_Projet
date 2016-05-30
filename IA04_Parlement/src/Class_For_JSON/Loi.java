@@ -150,9 +150,9 @@ public class Loi implements Comparable<Loi> {
 	 *            La description de la loi.
 	 * @param effet_qualite_vie
 	 *            L'effet sur la qualité de vie du pays.
-	 * @param effet_contexte_eco
+	 * @param effet_context_eco
 	 *            L'effet sur la santé économique du pays.
-	 * @param _l_PartiPolitique
+	 * @param l_PartiPolitique
 	 *            La liste des partis politiques pouvant proposer la loi.
 	 * @param proposant
 	 *            Le nom du proposant de la loi.
@@ -315,7 +315,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * Met à jour l'effet de la loi sur la santé économique du pays.
 	 * 
-	 * @param _effet_context_eco
+	 * @param effet_context_eco
 	 *            Le nouvel effet sur la santé économique.
 	 * 
 	 */

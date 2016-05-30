@@ -65,7 +65,7 @@ public class UtilisateurAgent extends Agent {
 	/**
 	 * L'influence de l'utilisateur. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Influence;
 
@@ -73,7 +73,7 @@ public class UtilisateurAgent extends Agent {
 	 * La popularité de l'utilisateur. Variable. Sa cote d'amour auprès du
 	 * peuple
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Popularite;
 
@@ -81,56 +81,56 @@ public class UtilisateurAgent extends Agent {
 	 * La notoriété de l'utilisateur. Variable. Sa cote d'amour auprès des
 	 * entreprises
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Notoriete;
 
 	/**
 	 * La crédibilité de l'utilisateur. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Credibilite;
 
 	/**
 	 * Le parti politique de l'utilisateur. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	String Parti_Politique;
 
 	/**
 	 * Le charisme de l'utilisateur. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Charisme;
 
 	/**
 	 * La liste de tous les partis possibles de l'utilisateur. Constante.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	List<String> L_Parti;
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ALoi;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AMediateur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -140,7 +140,7 @@ public class UtilisateurAgent extends Agent {
 	 * attributs statiques sont >65 3 : quand attributs statiques sont >80 4 :
 	 * quand attributs statiques sont >90
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int utilisateur_grade = 0;
 
@@ -726,7 +726,7 @@ public class UtilisateurAgent extends Agent {
 	 * Vérifie les informations de l'utilisateur afin qu'elles ne descendent
 	 * jamais dans les négatifs.
 	 * 
-	 * @see Class_For_JSON#Loi.java
+	 * @see Class_For_JSON.Loi
 	 */
 	public void VerifierCarac() {
 

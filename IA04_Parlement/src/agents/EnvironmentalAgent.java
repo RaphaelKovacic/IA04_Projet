@@ -48,42 +48,42 @@ public class EnvironmentalAgent extends Agent {
 	/**
 	 * L'état du contexte économique du pays dans un flottant. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float context_eco;
 
 	/**
 	 * L'état du contexte social du pays dans un flottant. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float qualite_vie;
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ALoi;
 
 	/**
 	 * L'AID de l'agent sondage. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ASondage;
 
 	/**
 	 * L'AID de l'agent simulation. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ASimulation;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -154,7 +154,7 @@ public class EnvironmentalAgent extends Agent {
 	 * suite du processus.
 	 * </p>
 	 * 
-	 * @see EnvironnementalAgent#MajBehaviour
+	 * @see MajBehaviour
 	 * 
 	 * @author Benoit
 	 * @version : 1.2
@@ -199,7 +199,7 @@ public class EnvironmentalAgent extends Agent {
 	 * suite du processus.
 	 * 
 	 * 
-	 * @see EnvironnementalAgent#RepSondageBehaviour
+	 * @see RepSondageBehaviour
 	 * 
 	 * 
 	 * @author Benoit
@@ -237,9 +237,9 @@ public class EnvironmentalAgent extends Agent {
 	 * 
 	 * Cette action faite suite au vote d'une loi.
 	 * 
-	 * @see EnvironnementalAgent#WaitSondageRequest
+	 * @see WaitSondageRequest
 	 * 
-	 * @see EnvironnementalAgent#RepSondageBehaviour
+	 * @see RepSondageBehaviour
 	 * 
 	 * @author Benoit
 	 * @version : 1.2
@@ -312,7 +312,7 @@ public class EnvironmentalAgent extends Agent {
 	 * 
 	 * Cette action faite à la demande de sondage de la part de l'utilisateur.
 	 * 
-	 * @see EnvironnementalAgent#WaitLoiRequest
+	 * @see WaitLoiRequest
 	 * 
 	 * @author Benoit
 	 * @version : 1.2

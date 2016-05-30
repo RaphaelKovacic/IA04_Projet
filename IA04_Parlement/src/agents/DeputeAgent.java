@@ -73,49 +73,49 @@ public class DeputeAgent extends Agent {
 	/**
 	 * L'influence du député. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Influence;
 
 	/**
 	 * La popularité du député. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Popularite;
 
 	/**
 	 * La notoriété du député. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Notoriete;
 
 	/**
 	 * La crédibilité du député. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Credibilite;
 
 	/**
 	 * Le parti politique du député. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	String Parti_Politique;
 
 	/**
 	 * L'influence de l'utilisateur. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Charisme;
 	
 	/**
 	 * La propension de l'utilisateur à hésiter. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float Hesitation;
 
@@ -123,28 +123,28 @@ public class DeputeAgent extends Agent {
 	/**
 	 * Importance du député dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float A; 
 	
 	/**
 	 * Importance de l'apport social d'une loi dans le calcul du score de cette loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float BP;
 	
 	/**
 	 * Importance de l'apport économique d'une loi dans le calcul du score de cette loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	float BE;
 	
 	/**
 	 * Importance du charisme du député dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 *
 	 */
 	float G; 
@@ -152,7 +152,7 @@ public class DeputeAgent extends Agent {
 	/**
 	 * Importancedu parti politique (bonus si même parti que le député) dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 *
 	 */
 	float D;
@@ -160,7 +160,7 @@ public class DeputeAgent extends Agent {
 	/**
 	 * Importance de la popularité du député dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+ * @see #setup()
 	 *
 	 */
 	float APeuple;
@@ -168,7 +168,7 @@ public class DeputeAgent extends Agent {
 	/**
 	 * Importancedu contexte social actuel dans le pays dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 *
 	 */
 	float BPeuple;
@@ -176,7 +176,7 @@ public class DeputeAgent extends Agent {
 	/**
 	 * Importance de la notoriété du député dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 *
 	 */
 	float AEntreprise;
@@ -184,7 +184,7 @@ public class DeputeAgent extends Agent {
 	/**
 	 * Importance du contexte économique actuel d pays dans le calcul du score d'une loi. Statique.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 *
 	 */
 	float BEntreprise;
@@ -192,28 +192,28 @@ public class DeputeAgent extends Agent {
 	/**
 	 * L'AID de l'agent loi. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID ALoi;
 	
 	/**
 	 * L'AID de l'agent KB. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AKB;
 
 	/**
 	 * La liste de tous les partis possibles de l'utilisateur. Constante.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	List<String> L_Parti;
 
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -320,8 +320,8 @@ public class DeputeAgent extends Agent {
 	 * Il implémente le comportement suivant : Réalise la demande de l'agent
 	 * loi qui est de proposer une loi lors du tour de jeu en cours.
 	 * <p>
-	 * 
-	 * @see DeputeAgent#GetLawToProposeFromKB
+	 *
+	 * @see GetLawToProposeFromKB
 	 * @author Benoit
 	 * @version 1.1
 	 */
@@ -359,7 +359,7 @@ public class DeputeAgent extends Agent {
 	 * pour connaitre la loi qu'il va proposer.
 	 * <p>
 	 * 
-	 * @see DeputeAgent#RequestToProposeLaw
+	 * @see RequestToProposeLaw
 	 * @author Etienne
 	 * @version 1.3
 	 */
@@ -473,7 +473,7 @@ public class DeputeAgent extends Agent {
 	 * vote de loi et lui demandant de voter une proposition de loi.
 	 * <p>
 	 * 
-	 * @see DeputeAgent#VoteLoi
+	 * @see VoteLoi
 	 * @author Benoit
 	 * @version 1.3
 	 */
@@ -512,7 +512,7 @@ public class DeputeAgent extends Agent {
 	 * d'avis sur une loi et lui demandant de rendre son avis dessus.
 	 * <p>
 	 * 
-	 * @see DeputeAgent#SondageLoi
+	 * @see SondageLoi
 	 * @author Etienne
 	 * @version 1.3
 	 */
@@ -615,7 +615,7 @@ public class DeputeAgent extends Agent {
 	 * demandant de voter une loi par envoyée par l'agent loi.
 	 * <p>
 	 * 
-	 * @see DeputeAgent#RequestToVote
+	 * @see RequestToVote
 	 * @author Benoit
 	 * @version 1.3
 	 */
@@ -678,7 +678,7 @@ public class DeputeAgent extends Agent {
 	 *  une loi par envoyée par l'agent loi.
 	 * <p>
 	 * 
-	 * @see DeputeAgent#RequestToSondage
+	 * @see RequestToSondage
 	 * @author Etienne
 	 * @version 2.1
 	 */

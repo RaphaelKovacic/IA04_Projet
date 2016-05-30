@@ -63,77 +63,77 @@ public class LoiAgent extends Agent {
 	/**
 	 * La liste des AID des agents ayant votés. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	List<Aid_vote> L_AID_Vote = new ArrayList<Aid_vote>();
 	
 	/**
 	 * La loi en cours d'étude (vote ou sondage) à ce tour. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	Loi loi_en_cours = new Loi();
 	
 	/**
 	 * L'AID du proposant à ce tour. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID proposant;
 	
 	/**
 	 * Le nombre total de votant attendu lors du tour. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_votant;
 	
 	/**
 	 * Le nombre de députés POUR lors de ce tour de vote ou sondage d'une loi. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_vote_pour;
 	
 	/**
 	 * Le nombre de députés CONTRE lors de ce tour de vote ou sondage d'une loi. Variable.
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	int nb_vote_contre;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AMediateur;
 	
 	/**
 	 * L'AID de l'agent utilisateur. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AUtilisateur;
 	
 	/**
 	 * L'AID de l'agent environnement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AEnvironnement;
 	
 	/**
 	 * L'AID de l'agent KB. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	AID AKB;
 	
 	/**
 	 * La liste des AID des agents députés du SMA. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	List<AID> List_Depute = new ArrayList<AID>();
 
@@ -141,7 +141,7 @@ public class LoiAgent extends Agent {
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
-	 * @see setup()
+	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
@@ -224,9 +224,9 @@ public class LoiAgent extends Agent {
 	 * en fonction du message.
 	 * <p>
 	 * 
-	 * @see LoiAgent#VoteLoi
-	 * @see LoiAgent#SondageLoi
-	 * @see LoiAgent#DemandeLoi
+	 * @see VoteLoi
+	 * @see SondageLoi
+	 * @see DemandeLoi
 	 * 
 	 * @author Benoit & Etienne
 	 * @version 3.6
@@ -305,7 +305,7 @@ public class LoiAgent extends Agent {
 	 * de proposer une loi.
 	 * <p>
 	 * 
-	 * @see LoiAgent#RequestOfMediator
+	 * @see RequestOfMediator
 	 * 
 	 * @author Benoit 
 	 * @version 2.1
@@ -347,7 +347,7 @@ public class LoiAgent extends Agent {
 	 * leur demandant de voter la loi contenue dans le message.
 	 * <p>
 	 * 
-	 * @see LoiAgent#RequestOfMediator
+	 * @see RequestOfMediator
 	 * 
 	 * @author Benoit & Etienne
 	 * @version 2.3
@@ -401,7 +401,7 @@ public class LoiAgent extends Agent {
 	 * leur demandant leur avis sur la loi contenue dans le message.
 	 * <p>
 	 * 
-	 * @see LoiAgent#RequestOfMediator
+	 * @see RequestOfMediator
 	 * 
 	 * @author Etienne
 	 * @version 1.2
@@ -504,8 +504,8 @@ public class LoiAgent extends Agent {
 	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
 	 * <p>
 	 * 
-	 * @see LoiAgent#ConsequenceVote
-	 * @see LoiAgent#ConsequenceSondage
+	 * @see ConsequenceVote
+	 * @see ConsequenceSondage
 	 * 
 	 * @author Benoit & Etienne
 	 * @version 2.1
@@ -567,8 +567,8 @@ public class LoiAgent extends Agent {
 	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
 	 * <p>
 	 * 
-	 * @see LoiAgent#ConsequenceVote
-	 * @see LoiAgent#ConsequenceSondage
+	 * @see ConsequenceVote
+	 * @see ConsequenceSondage
 	 * 
 	 * @author Benoit & Etienne
 	 * @version 2.1
@@ -628,8 +628,8 @@ public class LoiAgent extends Agent {
 	 * Enfin il envoie un message au médiateur pour lui signifier la fin du vote.
 	 * <p>
 	 * 
-	 * @see LoiAgent#AcceptLawOfDepute
-	 * @see LoiAgent#RefuseLawOfDepute
+	 * @see AcceptLawOfDepute
+	 * @see RefuseLawOfDepute
 	 * 
 	 * @author Benoit & Etienne
 	 * @version 2.1
@@ -855,8 +855,8 @@ public class LoiAgent extends Agent {
 	 * Envoie un message au médiateur pour lui signifier la fin du sondage dans le parlement
 	 * <p>
 	 * 
-	 * @see LoiAgent#AcceptLawOfDepute
-	 * @see LoiAgent#RefuseLawOfDepute
+	 * @see AcceptLawOfDepute
+	 * @see RefuseLawOfDepute
 	 * 
 	 * @author Etienne
 	 * @version 1.2
