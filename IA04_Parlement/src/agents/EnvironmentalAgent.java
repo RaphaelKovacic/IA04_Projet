@@ -284,7 +284,7 @@ public class EnvironmentalAgent extends Agent {
 				System.out.println("Vie :" + qualite_vie);
 
 				// On envoie un message a 'ASimulation' pour le prevenir que la
-				// partie est termin�e.
+				// partie est terminée.
 				if (ASimulation != null) {
 					ACLMessage message1 = new ACLMessage(ACLMessage.INFORM);
 					message1.addReceiver(ASimulation);

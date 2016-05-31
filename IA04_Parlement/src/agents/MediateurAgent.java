@@ -94,7 +94,7 @@ public class MediateurAgent extends Agent {
 	 * 
 	 * @see #setup()
 	 */
-	int nb_tour_proposeloi = 1;
+	int nb_tour_proposeloi = 2;
 	
 	/**
 	 * La fréquence à laquelle l'action de faire un sondage dans le pays est valable pour l'utilisateur. Statique.
@@ -108,7 +108,7 @@ public class MediateurAgent extends Agent {
 	 * 
 	 * @see #setup()
 	 */
-	int nb_tour_changerparti = 1;
+	int nb_tour_changerparti = 3;
 	
 	/**
 	 * La fréquence à laquelle l'action de demander l'avis au parlement pour une loi est valable pour l'utilisateur. Statique.
