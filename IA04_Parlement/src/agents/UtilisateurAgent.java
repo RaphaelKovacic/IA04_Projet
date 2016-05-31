@@ -495,7 +495,7 @@ public class UtilisateurAgent extends Agent {
 					// nos informations propres qui sont importantes
 					List<String> l_PartiPolitique = new ArrayList<String>();
 					l_PartiPolitique.add(Parti_Politique);
-					Loi utilisateur_carac = new Loi(0, null, 0, 0, l_PartiPolitique, "Utilisateur", Influence, Charisme,
+					Loi utilisateur_carac = new Loi(0, null, null, 0, 0, l_PartiPolitique, "Utilisateur", Influence, Charisme,
 							Popularite, Notoriete);
 
 					// On sérialize cette loi que l'on envoie dans le message

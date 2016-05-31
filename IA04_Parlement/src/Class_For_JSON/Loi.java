@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * Une loi possède les attributs suivants :
  * <ul>
  * <li>Un identifiant unique attribué définitivement.</li>
+ * <li>Le nom unique attribué définitivement.</li>
  * <li>Une description sur le contenu de la loi, non modifiable.</li>
  * <li>L'effet de la loi sur la qualité de vie du pays.</li>
  * <li>L'effet de la loi sur l'économie du pays.</li>
@@ -46,6 +47,15 @@ public class Loi implements Comparable<Loi> {
 	 */
 	@JsonProperty("id")
 	int id;
+
+	/**
+	 * Le nom de la loi. Ce nom n'est pas modifiable.
+	 *
+	 * @see Loi#getNom()
+	 * @see Loi#setNom(String)
+	 */
+	@JsonProperty("nom")
+	String nom;
 
 	/**
 	 * La description de la loi. Cette description n'est pas modifiable.
@@ -146,6 +156,8 @@ public class Loi implements Comparable<Loi> {
 	 * 
 	 * @param id
 	 *            L'identifiant unique de la loi.
+	 * @param nom
+	 * 			  Le nom de la loi.
 	 * @param description
 	 *            La description de la loi.
 	 * @param effet_qualite_vie
@@ -166,6 +178,7 @@ public class Loi implements Comparable<Loi> {
 	 *            La valeur de la notoriété du proposant
 	 * 
 	 * @see Loi#id
+	 * @see Loi#nom
 	 * @see Loi#description
 	 * @see Loi#effet_qualite_vie
 	 * @see Loi#l_PartiPolitique
@@ -177,11 +190,12 @@ public class Loi implements Comparable<Loi> {
 	 * 
 	 * 
 	 */
-	public Loi(int id, String description, float effet_qualite_vie, float effet_context_eco,
+	public Loi(int id, String nom, String description, float effet_qualite_vie, float effet_context_eco,
 			List<String> l_PartiPolitique, String proposant, float influence, float charisme, float popularite,
 			float notoriete) {
 		super();
 		this.id = id;
+		this.nom = nom;
 		this.description = description;
 		this.effet_qualite_vie = effet_qualite_vie;
 		this.effet_context_eco = effet_context_eco;
@@ -214,6 +228,7 @@ public class Loi implements Comparable<Loi> {
 
 	public void affiche() {
 		System.out.println("id : " + this.id);
+		System.out.println("nom : " + this.nom);
 		System.out.println("description : " + this.description);
 		System.out.println("effet_qualite_vie : " + this.effet_qualite_vie);
 		System.out.println("effet_context_eco : " + this.effet_context_eco);
@@ -237,6 +252,7 @@ public class Loi implements Comparable<Loi> {
 	public void affiche_a_utilisateur() {
 		System.out.println("------------------------------------------------------");
 		System.out.println("id : " + this.id);
+		System.out.println("nom : " + this.nom);
 		System.out.println("description : " + this.description);
 		System.out.println("------------------------------------------------------");
 	}
@@ -260,6 +276,30 @@ public class Loi implements Comparable<Loi> {
 	public void setId(int _id) {
 		this.id = _id;
 	}
+
+
+
+	/**
+	 * Retourne le nom de la loi.
+	 *
+	 * @return La chaine de caractère du nom la loi.
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	/**
+	 * Met à jour le nom de la loi.
+	 *
+	 * @param _nom
+	 *            Le nouveau nom de la loi.
+	 *
+	 */
+	@JsonSetter
+	public void setNom(String _nom) {
+		this.nom = _nom;
+	}
+
 
 	/**
 	 * Retourne la description de la loi.

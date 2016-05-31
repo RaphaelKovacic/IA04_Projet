@@ -364,8 +364,6 @@ public class KB extends Agent {
 			// Récupère l'id, le nom, la desc, l'effet éco, l'effect lifestyle
 			// de chaque loi
 			int id_current = (int) Long.valueOf(getIdFromSubject(subject_law_current)).longValue();
-
-			// TODO A DÉFINIR : RAJOUT D'UN NOM DE LOI OU PAS ?
 			String name_current = getNameFromSubject(subject_law_current);
 
 			String desc_current = getDescFromSubject(subject_law_current);
@@ -376,7 +374,7 @@ public class KB extends Agent {
 			L_PartiPolitique.add(_s);
 
 			// Instancie un objet de type loi
-			Loi loi_temp = new Loi(id_current, desc_current, life_impact_current, eco_impact_current, L_PartiPolitique,
+			Loi loi_temp = new Loi(id_current, name_current, desc_current, life_impact_current, eco_impact_current, L_PartiPolitique,
 					null, 0, 0, 0, 0);
 
 			// Ajoute à la liste
