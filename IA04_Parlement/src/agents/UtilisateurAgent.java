@@ -736,7 +736,7 @@ public class UtilisateurAgent extends Agent {
 			}
 
             //Rétrogradations
-            else if (moyenne < 50 && moyenne > 20) {
+            else if (moyenne < 50 && moyenne > 20 && grade_utilisateur >= 2) {
                 System.out.println("-----------RÉTROGRADATION-----------");
                 System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député.");
                 System.out.println("------------------------------------------");
