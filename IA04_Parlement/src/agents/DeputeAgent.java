@@ -1,5 +1,6 @@
 package agents;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import Class_For_JSON.Loi;
 import Class_For_JSON.MajDepute;
 
 import ParlementSim.ParlementManager;
+import ParlementSim.Aid_vote;
+
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -653,10 +656,40 @@ public class DeputeAgent extends Agent {
 			// Vote oui ou non suivant le score de la loi et son hésitation.
 			if (scoreLoi >= Hesitation) {
 				reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-				reply.setContent("Je vote pour");
+
+				//Serialise réponse POUR au vote sous la forme d'un AID-Vote
+
+				Aid_vote sondage_pour = new Aid_vote(myAgent.getAID().getLocalName(), "pour", Parti_Politique);
+
+				// Gestion JSON : serialization
+				ObjectMapper mapper1 = new ObjectMapper();
+				StringWriter sw1 = new StringWriter();
+
+				try {
+					mapper1.writeValue(sw1, sondage_pour);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				String s1 = sw1.toString();
+				reply.setContent(s1);
+
 			} else {
 				reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
-				reply.setContent("Je vote contre");
+
+				//Serialise réponse CONTRE au vote sous la forme d'un AID-Vote
+				Aid_vote sondage_contre = new Aid_vote(myAgent.getAID().getLocalName(), "contre", Parti_Politique);
+
+				// Gestion JSON : serialization
+				ObjectMapper mapper2 = new ObjectMapper();
+				StringWriter sw2 = new StringWriter();
+
+				try {
+					mapper2.writeValue(sw2, sondage_contre);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				String s2 = sw2.toString();
+				reply.setContent(s2);
 			}
 			// Envoie du vote
 			myAgent.send(reply);
@@ -725,11 +758,49 @@ public class DeputeAgent extends Agent {
 
 			// Vote oui ou non suivant le score de la loi et son hésitation.
 			if (scoreLoi >= Hesitation) {
+
+				System.out.print("Depute AID "+myAgent.getAID());
+
 				reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-				reply.setContent("Je vote pour");
+
+				//Serialise réponse POUR au sondage sous la forme d'un AID-Vote
+				Aid_vote sondage_pour = new Aid_vote(getAID().getLocalName(), "pour", Parti_Politique);
+
+				// Gestion JSON : serialization
+				ObjectMapper mapper1 = new ObjectMapper();
+				StringWriter sw1 = new StringWriter();
+
+				try {
+					mapper1.writeValue(sw1, sondage_pour);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.out.print("Debug sondage loi : "+sw1.toString());
+				String s1 = sw1.toString();
+				reply.setContent(s1);
+				
 			} else {
+
+				System.out.print("Depute AID "+myAgent.getAID());
+
 				reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
-				reply.setContent("Je vote contre");
+				//Serialise réponse CONTRE au sondage sous la forme d'un AID-Vote
+				Aid_vote sondage_contre = new Aid_vote(getAID().getLocalName(), "contre", Parti_Politique);
+
+				// Gestion JSON : serialization
+				ObjectMapper mapper2 = new ObjectMapper();
+				StringWriter sw2 = new StringWriter();
+
+
+				try {
+					mapper2.writeValue(sw2, sondage_contre);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.out.print("Debug sondage loi : "+sw2.toString());
+				String s2 = sw2.toString();
+				reply.setContent(s2);
+				
 			}
 			// Envoie de l'avis :)
 			myAgent.send(reply);

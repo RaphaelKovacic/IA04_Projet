@@ -524,10 +524,20 @@ public class LoiAgent extends Agent {
 				nb_vote_pour++;
 
 				if (List_Depute.contains(message.getSender())) {
-					Aid_vote e = new Aid_vote(message.getSender(), "pour");
-					L_AID_Vote.add(e);
+
+					//Deserialise le Aid_vote envoyé par le député contenant son vote/avis au sondage
+					Aid_vote current_vote = new Aid_vote();
+					ObjectMapper mapper = new ObjectMapper();
+					try {
+						current_vote = mapper.readValue(message.getContent(), Aid_vote.class);
+					} catch (Exception ex) {
+						System.out.println("EXCEPTION" + ex.getMessage());
+					}
+
+					L_AID_Vote.add(current_vote);
 				} else {
-					Aid_vote e = new Aid_vote(AUtilisateur, "pour");
+					//TODO Récupérer parti de l'utilisateur pour la liste sur l'historique du vote de chaque député au tour courant
+					Aid_vote e = new Aid_vote(AUtilisateur.getLocalName(), "pour", null);
 					L_AID_Vote.add(e);
 				}
 
@@ -587,10 +597,22 @@ public class LoiAgent extends Agent {
 				nb_vote_contre++;
 
 				if (List_Depute.contains(message.getSender())) {
-					Aid_vote e = new Aid_vote(message.getSender(), "contre");
-					L_AID_Vote.add(e);
+
+					//Deserialise le Aid_vote envoyé par le député contenant son vote/avis au sondage
+					Aid_vote current_vote = new Aid_vote();
+					ObjectMapper mapper = new ObjectMapper();
+					try {
+						current_vote = mapper.readValue(message.getContent(), Aid_vote.class);
+					} catch (Exception ex) {
+						System.out.println("EXCEPTION" + ex.getMessage());
+					}
+
+					L_AID_Vote.add(current_vote);
+
 				} else {
-					Aid_vote e = new Aid_vote(AUtilisateur, "contre");
+
+					//TODO Récupérer parti de l'utilisateur pour la liste sur l'historique du vote de chaque député au tour courant
+					Aid_vote e = new Aid_vote(AUtilisateur.getLocalName(), "contre", null);
 					L_AID_Vote.add(e);
 				}
 
@@ -638,6 +660,15 @@ public class LoiAgent extends Agent {
 
 		// Task to do
 		public void action() {
+
+			// Affichage récap vote
+			System.out.println("-----------------------QUI A VOTÉ QUOI ?-------------------------------");
+			for (int z = 0; z < L_AID_Vote.size(); z++){
+				Aid_vote current_AID_Vote = L_AID_Vote.get(z);
+				current_AID_Vote.affiche();
+			}
+			System.out.println("-----------------------------------------------------------------------");
+
 
 			// Le vote est terminé...
 			System.out.println("-----------------------RÉSULTAT VOTE ------------------------------");
@@ -701,7 +732,7 @@ public class LoiAgent extends Agent {
 						mapper1.writeValue(sw, or);
 						String s1 = sw.toString();
 						ACLMessage message1 = new ACLMessage(ACLMessage.INFORM);
-						message1.addReceiver(L_AID_Vote.get(i).getVotant());
+						message1.addReceiver(getAID(L_AID_Vote.get(i).getVotant()));
 						message1.setContent(s1);
 						myAgent.send(message1);
 					} catch (Exception ex) {
@@ -716,7 +747,7 @@ public class LoiAgent extends Agent {
 					// augmenter... (envoie de message de type INFORM)
 
 					ACLMessage message1 = new ACLMessage(ACLMessage.INFORM);
-					message1.addReceiver(L_AID_Vote.get(i).getVotant());
+					message1.addReceiver(getAID(L_AID_Vote.get(i).getVotant()));
 
 					if (L_AID_Vote.get(i).getVote().contains("pour")) {
 						or.setEffet_Influence(-5);
@@ -864,6 +895,15 @@ public class LoiAgent extends Agent {
 	class ConsequenceSondage extends OneShotBehaviour {
 
 		public void action() {
+
+			// Affichage récap sondage
+			System.out.println("-----------------------QUI PENSE QUOI ?-------------------------------");
+			for (int z = 0; z < L_AID_Vote.size(); z++){
+				Aid_vote current_AID_Vote = L_AID_Vote.get(z);
+				current_AID_Vote.affiche();
+			}
+			System.out.println("-----------------------------------------------------------------------");
+
 
 			// Le sondage est terminé...
 			System.out.println("--------------------------ESTIMATION-------------------");

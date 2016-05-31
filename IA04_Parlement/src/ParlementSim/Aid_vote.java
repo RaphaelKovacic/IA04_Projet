@@ -7,8 +7,9 @@ import jade.core.AID;
  * <p>
  * Un Aid_vote possède les attributs suivants :
  * <ul>
- * <li>Un AID qui est l'identifiant JADE du votant.</li>
+ * <li>Un string qui est le local name du votant.</li>
  * <li>Une chaine de caractère correspondant à son vote.</li>
+ * <li>Une chaine de caractère correspondant au parti politique du votant.</li>
  * </ul>
  * </p>
  *
@@ -18,19 +19,19 @@ import jade.core.AID;
  * chaque tour de vote (ou de demande d'avis)
  * </p>
  *
- * @author Benoit
- * @version 1.0
+ * @author Benoit & Etienne
+ * @version 2.1
  */
 
 public class Aid_vote {
 
 	/**
-	 * L'AID du votant.
+	 * Le local nome du votant.
 	 *
 	 * @see Aid_vote#getVotant()
-	 * @see Aid_vote#setVotant(AID)
+	 * @see Aid_vote#setVotant(String)
 	 */
-	AID votant;
+	String votant;
 
 	/**
 	 * La valeur du vote du votant.
@@ -40,7 +41,25 @@ public class Aid_vote {
 	 */
 	String vote;
 
+	/**
+	 * Le parti du votant.
+	 *
+	 * @see Aid_vote#getParti()
+	 * @see Aid_vote#setParti(String)
+	 */
+	String parti;
 
+
+	/**
+	 * Constructeur de Aid_vote vide .
+	 * <p>
+	 * Constructeur d'une loi vierge de toute initialisation d'attributs.
+	 * </p>
+	 *
+	 */
+
+	public Aid_vote() {
+	}
 	/**
 	 * Constructeur de Aid_vote.
 	 * <p>
@@ -51,14 +70,19 @@ public class Aid_vote {
 	 *            L'AID du votant.
 	 * @param vote
 	 *            La valeur du vote du votant.
+	 * @param parti
+	 * 			  La valeur du parti du votant
+	 *
 	 * @see Aid_vote#votant
 	 * @see Aid_vote#vote
+	 * @see Aid_vote#parti
 	 *
 	 *
 	 */
-	public Aid_vote(AID votant, String vote) {
+	public Aid_vote(String votant, String vote, String parti) {
 		this.votant = votant;
 		this.vote = vote;
+		this.parti = parti;
 	}
 
 	/**
@@ -66,7 +90,7 @@ public class Aid_vote {
 	 *
 	 * @return L'identifiant JADE de l'agent votant dans le SMA.
 	 */
-	public AID getVotant() {
+	public String getVotant() {
 		return votant;
 	}
 
@@ -76,7 +100,7 @@ public class Aid_vote {
 	 * @param votant
 	 *            Le nouvel AID du votant.
 	 */
-	public void setVotant(AID votant) {
+	public void setVotant(String votant) {
 		this.votant = votant;
 	}
 
@@ -98,5 +122,42 @@ public class Aid_vote {
 	public void setVote(String vote) {
 		this.vote = vote;
 	}
-	
+
+
+	/**
+	 * Retourne la valeur du parti du votant.
+	 *
+	 * @return La chaine de caractère qui correspond au parti du votant
+	 */
+	public String getParti() {
+		return parti;
+	}
+
+	/**
+	 * Met à jour le parti du votant.
+	 *
+	 * @param parti
+	 *            Le nouveau parti du votant.
+	 */
+	public void setParti(String parti) {
+		this.parti = parti;
+	}
+
+	/**
+	 * Méthode d'affichage des caractéristiques d'un Aid_vote
+	 * <p>
+	 * Affiche toutes les caractéristiques.
+	 * </p>
+	 *
+	 */
+
+	public void affiche() {
+		System.out.println();
+		System.out.println("AID : " + this.votant);
+		System.out.println("Vote : " + this.vote);
+		System.out.println("Parti : " + this.parti);
+		System.out.println();
+	}
+
+
 }
