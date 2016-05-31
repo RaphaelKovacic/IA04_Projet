@@ -44,6 +44,7 @@ import jade.lang.acl.MessageTemplate;
  * 
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent médiateur pour les mêmes raisons qu'au dessus</li>
+ * <li>L'AID de l'agent simulation pour les mêmes raisons qu'au dessus</li>
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
  * <li>Le grade actuel du joueur qui correspond à son niveau</li>
  * </ul>
@@ -127,6 +128,13 @@ public class UtilisateurAgent extends Agent {
 	 */
 	AID AMediateur;
 
+    /**
+     * L'AID de l'agent simulation. Non modifiable
+     *
+     * @see #setup()
+     */
+    AID ASimulation;
+
 	/**
 	 * Le manager du parlement. Non modifiable
 	 * 
@@ -142,7 +150,7 @@ public class UtilisateurAgent extends Agent {
 	 * 
 	 * @see #setup()
 	 */
-	int utilisateur_grade = 0;
+	int grade_utilisateur = 0;
 
 	/**
 	 * Méthode d'instanciation (appelée à la création) de notre agent
@@ -194,6 +202,7 @@ public class UtilisateurAgent extends Agent {
 				while (AMediateur == null || ALoi == null) {
 					AMediateur = parl_mana.getReceiver(myAgent, "Parlement", "AMediateur");
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
+                    ASimulation = parl_mana.getReceiver(myAgent, "Parlement", "ASimulation");
 				}
 				addBehaviour(new LActionsFromMediateur()); // recéption d'un message proposant de choisir une
 															// action parmis plusieurs actions.
@@ -365,7 +374,6 @@ public class UtilisateurAgent extends Agent {
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null) {
 				parti_a_rejoindre = message.getContent();
-				System.out.println("parti à rejoindre : " + parti_a_rejoindre);
 				if (L_Parti.contains(parti_a_rejoindre)) {
 
 					// TODO Ajuster l'impact du changement de parti :
@@ -657,6 +665,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("Popularite :" + Popularite);
 				System.out.println("Notoriete :" + Notoriete);
 				System.out.println("Credibilite :" + Credibilite);
+                System.out.println("Moyenne :" + (Influence + Popularite + Notoriete + Credibilite)/4);
+                System.out.println("Grade :" + grade_utilisateur);
 			} else
 				block();
 
@@ -673,51 +683,96 @@ public class UtilisateurAgent extends Agent {
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Met à jour le niveau de
-	 * l'utilisateur.
+	 * l'utilisateur et envoie un message de fin de partie à l'agent
+     * simulation si c'est nécessaire.
 	 * 
 	 * <p>
 	 * 
-	 * @author Benoit
+	 * @author Etienne
 	 * @version 1.6
 	 */
 	class ActualLevelOfUser extends CyclicBehaviour {
 
 		@Override
 		public void action() {
+            
+			float moyenne = (Influence + Popularite + Notoriete + Credibilite ) /4;
 
-			// TODO Gérer les rétrogradations..
-			// TODO Discuter des niveaux et de leur signification + des messages
-			// à afficher
-			if (Influence > 50 && Popularite > 50 && Notoriete > 50 && Credibilite > 50 && utilisateur_grade < 1) {
-				System.out.println("---------------ACHIEVEMENT-----------------");
-				System.out.println("FÉLICITATION vous devenez ..");
+			//Fin de la partie
+			if (moyenne <= 20){
+				System.out.println("---------------GAME OVER-----------------");
+				System.out.println("Partie terminée. Vos caractéristiques sont trop basses ..");
 				System.out.println("------------------------------------------");
-				utilisateur_grade = 1;
+				grade_utilisateur = -1;
 			}
 
-			if (Influence > 65 && Popularite > 65 && Notoriete > 65 && Credibilite > 65 && utilisateur_grade < 2) {
+            //Achievements
+			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur <= 1) {
 				System.out.println("---------------ACHIEVEMENT-----------------");
-				System.out.println("FÉLICITATION vous devenez ..");
+				System.out.println("FÉLICITATION on vous écoute enfin un minimum dans cette assemblée ! ");
 				System.out.println("------------------------------------------");
-				utilisateur_grade = 1;
+				grade_utilisateur = 2;
 			}
 
-			if (Influence > 50 && Popularite > 80 && Notoriete > 80 && Credibilite > 80 && utilisateur_grade < 3) {
+			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur <= 2) {
+				System.out.println("---------------ACHIEVEMENT-----------------");
+				System.out.println("FÉLICITATION vous devenez rapporteur au budget de l'assemblée ! ");
+				System.out.println("------------------------------------------");
+				grade_utilisateur = 3;
+			}
+
+			else if (moyenne >= 70 && moyenne < 80 && grade_utilisateur <= 3) {
 				System.out.println("---------------ACHIEVEMENT-----------------");
 				System.out.println("FÉLICITATION vous devenez président des " + Parti_Politique + " au parlement ..");
 				System.out.println("------------------------------------------");
-				utilisateur_grade = 1;
+				grade_utilisateur = 4;
 			}
 
-			if (Influence > 90 && Popularite > 90 && Notoriete > 90 && Credibilite > 90 && utilisateur_grade < 4) {
-				System.out.println("---------------ACHIEVEMENT-----------------");
+			else if (moyenne >= 80 && grade_utilisateur <= 4) {
+				System.out.println("---------------GAGNÉ-----------------");
 				System.out.println("FÉLICITATION vous devenez président de l'assemblée");
 				System.out.println("------------------------------------------");
-				utilisateur_grade = 1;
+				grade_utilisateur = 5;
 			}
 
-			// TODO Fin du jeu ? Envoie d'un message à l'agent simulation pour
-			// finir le GAME ?
+            //Rétrogradations
+            else if (moyenne < 50 && moyenne > 20) {
+                System.out.println("-----------RÉTROGRADATION-----------");
+                System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député.");
+                System.out.println("------------------------------------------");
+                grade_utilisateur = 1;
+            }
+            else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur >= 3) {
+                System.out.println("-----------RÉTROGRADATION-----------");
+                System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député écouté.");
+                System.out.println("------------------------------------------");
+                grade_utilisateur = 2;
+            }
+
+            else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur >= 4) {
+                System.out.println("-----------RÉTROGRADATION-----------");
+                System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député rapporteur.");
+                System.out.println("------------------------------------------");
+                grade_utilisateur = 3;
+            }
+
+
+            // Envoi d'un message à l'agent de simulation pour finir le jeu
+            if(grade_utilisateur == -1)
+            {
+                ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+                message.addReceiver(ASimulation);
+                message.setContent("perdu");
+                myAgent.send(message);
+            }
+
+            // Envoi d'un message à l'agent de simulation pour finir le jeu
+            else if (grade_utilisateur == 5){
+                ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+                message.addReceiver(ASimulation);
+                message.setContent("gagne");
+                myAgent.send(message);
+            }
 
 		}
 	}

@@ -27,12 +27,13 @@ import jade.core.Agent;
  * <li>Un booléen représentant l'état de la partie : finie ou en cours.</li>
  * <li>L'AID de l'agent environnement pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent médiateur pour les mêmes raisons qu'au dessus</li>
+ * <li>L'AID de l'agent utilisateur pour les mêmes raisons qu'au dessus</li>
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
  * </ul>
  * </p>
  * <p>
  * La première classe sert à l'instanciation de l'agent de simulation. Les
- * comportements de l'agent simulation sont spécifiés dans les quatre classes
+ * comportements de l'agent simulation sont spécifiés dans les cinq classes
  * suivantes
  * </p>
  * 
@@ -79,10 +80,19 @@ public class SimulationAgent extends Agent {
 	AID AMediateur = null;
 
 	/**
-	 * Le manager du parlement. Non modifiable
+	 * L'AID de l'agent utilisateur. Non modifiable
 	 * 
 	 * @see #setup()
 	 */
+
+	AID AUtilisateur = null;
+
+	/**
+	 * Le manager du parlement. Non modifiable
+	 *
+	 * @see #setup()
+	 */
+
 	ParlementManager parl_mana = new ParlementManager();
 
 	/**
@@ -121,6 +131,7 @@ public class SimulationAgent extends Agent {
 				while (AMediateur == null || AEnvironnement == null) {
 					AMediateur = parl_mana.getReceiver(myAgent, "Parlement", "AMediateur");
 					AEnvironnement = parl_mana.getReceiver(myAgent, "Monde", "AEnvironnement");
+					AUtilisateur = parl_mana.getReceiver(myAgent, "Parlement", "AUtilisateur");
 				}
 				addBehaviour(new WaitMessJoueur()); // Lancer le jeu (REQUEST)
 				
@@ -130,6 +141,10 @@ public class SimulationAgent extends Agent {
 				addBehaviour(new WaitMessEnvironnement()); // reception possible d'un message
 														  // d'environnement (fin de jeu
 														  // partie perdue) (INFORM)
+
+				addBehaviour(new WaitMessUtilisateur()); // Récéption d'un message de type INFORM
+														 // de l'utilisateur pour lui signifier la fin
+														 // de la partie.
 			}
 		});
 
@@ -271,7 +286,7 @@ public class SimulationAgent extends Agent {
 	}
 
 	/**
-	 * <b>WaitMessMediateur est le quatirème et dernier Behaviour de l'agent
+	 * <b>WaitMessMediateur est le quatrième et dernier Behaviour de l'agent
 	 * Simulation</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Simulation est constamment dans
@@ -306,5 +321,53 @@ public class SimulationAgent extends Agent {
 			}
 		}
 	}
+
+	/**
+	 * <b>WaitMessUtilisateur est le cinquième et dernier Behaviour de l'agent
+	 * Simulation</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent Simulation est constamment dans
+	 * l'attente de recevoir un message de type INFORM de la part de l'agent utilisateur.
+	 * Il va ensuite instancier afficher le message de fin de partie et s'auto-kill
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Réceptionne une communication par
+	 * message de la part de l'agent utilisateur.
+	 * <p>
+	 *
+	 *
+	 * @author Etienne
+	 * @version : 1.0
+	 */
+	class WaitMessUtilisateur extends CyclicBehaviour {
+
+		@Override
+		public void action() {
+			// On attend la reception d'un message de type INFORM venant de
+			// l'utilisateur
+
+			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+					MessageTemplate.MatchSender(AUtilisateur));
+			ACLMessage message = myAgent.receive(mt);
+
+			if (message != null) {
+				String contenu = message.getContent();
+
+				if(contenu.equalsIgnoreCase("gagne")){
+					System.out.println("Mort de l'agent Simulation (partie terminée et GAGNÉE)");
+					doDelete();
+				}
+
+				else if (contenu.equalsIgnoreCase("perdu")){
+					System.out.println("Mort de l'agent Simulation (partie terminée et PERDUE)");
+					doDelete();
+				}
+
+			} else {
+				block();
+			}
+		}
+	}
+
 
 }
