@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Class_For_JSON.DeputeAttRumeur;
 import Class_For_JSON.Loi;
 import Class_For_JSON.MajDepute;
 
@@ -52,6 +53,7 @@ import jade.lang.acl.MessageTemplate;
  * 
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
+ * <li>L'AID de l'agent rumeur pour les mêmes raisons qu'au dessus</li>
  * 
  * <li>Un attribut L_Parti qui est une liste de tous les partis politiques
  * possibles du jeu.</li>
@@ -200,6 +202,13 @@ public class DeputeAgent extends Agent {
 	AID ALoi;
 	
 	/**
+	 * L'AID de l'agent Rumeur. Non modifiable
+	 * 
+	 * @see #setup()
+	 */
+	AID ARumeur;
+	
+	/**
 	 * L'AID de l'agent KB. Non modifiable
 	 * 
 	 * @see #setup()
@@ -287,9 +296,10 @@ public class DeputeAgent extends Agent {
 			@Override
 			public void action() {
 				// On récupère les AID des agents nécessaires
-				while (ALoi == null || AKB == null) {
+				while (ALoi == null || AKB == null || ARumeur == null) {
 					AKB = parl_mana.getReceiver(myAgent, "KB", "AKB");
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
+					ARumeur = parl_mana.getReceiver(myAgent, "Parlement", "ARumeur");
 				}
 				addBehaviour(new RequestToProposeLaw()); // recéption d'un message demandant
 														 // de proposer une loi (provient de
@@ -305,6 +315,8 @@ public class DeputeAgent extends Agent {
 														// modifier ses cara (provient de ALoi)
 				
 				addBehaviour(new ProposeLaw()); // envoie de la loi récupéré par KB à la loi
+				
+				addBehaviour(new AnswerRequestCharacteristicsFromRumourAgent()); // envoie les caractéristiques (influence, ...) à la demande de l'agent Rumeur
 			}
 		});
 
@@ -544,19 +556,19 @@ public class DeputeAgent extends Agent {
 	 * <b>RequestToModifCara est le sixième Behaviour de l'agent
 	 * Député</b>
 	 * <p>
-	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi
+	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi et de l'agent rumeur
 	 * pour intercepter le message lui demandant de mettre à jour ses caractéristiques
 	 * lorsque le contexte le demande (suite au vote d'une loi ou au résultat
-	 * d'une proposition de loi de sa part).
+	 * d'une proposition de loi de sa part, ou bien suite à une rumeur).
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère le message de type INFORM
-	 * de la part de l'agent Loi avec lui demandant de mettre à jour ses caractéristiques
+	 * de la part de l'agent Loi ou de l'agent Rumeur lui demandant de mettre à jour ses caractéristiques
 	 * internes.
 	 * <p>
 	 * 
-	 * @author Benoit
-	 * @version 1.3
+	 * @author Benoit & Cristian
+	 * @version 1.4
 	 */
 	class RequestToModifCara extends CyclicBehaviour {
 
@@ -566,7 +578,7 @@ public class DeputeAgent extends Agent {
 			// On attend la reception d'un message de type INFORM venant de
 			// l'agent Loi
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
-					MessageTemplate.MatchSender(ALoi));
+					MessageTemplate.or(MessageTemplate.MatchSender(ALoi),MessageTemplate.MatchSender(ARumeur)));
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null) {
 				// A la reception, on met à jour les caract de l'agent
@@ -589,6 +601,7 @@ public class DeputeAgent extends Agent {
 						Notoriete = 0;
 					if (Credibilite < 0)
 						Credibilite = 0;
+					
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
@@ -806,4 +819,55 @@ public class DeputeAgent extends Agent {
 			myAgent.send(reply);
 		}
 	}
+
+	/**
+	 * <b>AnswerRequestCharacteristicsFromRumourAgent est le huitième Behaviour de l'agent
+	 * Député</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent député est en constante attente
+	 * d'une requête REQUEST de l'agent Rumeur lui demandant ses caractéristiques.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Renvoie l'influence, la popularité et la crédibilité du député à l'agent Rumeur
+	 * pour que celui-ci fasse le calcul.
+	 * <p>
+	 *
+	 * @author Cristian
+	 * @version 1.0
+	 */
+	class AnswerRequestCharacteristicsFromRumourAgent extends CyclicBehaviour {
+
+		@Override
+		public void action() {
+
+			// On attend la reception d'un message de type REQUEST venant de
+			// l'agent Rumeur
+			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST),
+					MessageTemplate.MatchSender(ARumeur));
+			ACLMessage message = myAgent.receive(mt);
+			if (message != null) {
+				// A la reception, l'agent député renvoie son influence, sa popularité et sa crédibilité
+				// a l'agent Rumeur.
+				ACLMessage answer = message.createReply();
+				answer.setPerformative(ACLMessage.INFORM);
+				
+				ObjectMapper mapper1 = new ObjectMapper();
+				StringWriter sw = new StringWriter();
+				DeputeAttRumeur depAt = new DeputeAttRumeur(Influence, Popularite, Credibilite);
+				
+				try {
+					mapper1.writeValue(sw, depAt);
+					String s1 = sw.toString();
+					answer.setContent(s1);
+					myAgent.send(answer);
+				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+				
+			} else {
+				block();
+			}
+		}
+	}
 }
+

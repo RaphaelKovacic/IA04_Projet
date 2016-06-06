@@ -51,6 +51,7 @@ import jade.lang.acl.MessageTemplate;
  * <li>L'AID de l'agent sondage pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent simulation pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
+ * <li>L'AID de l'agent rumeur pour les mêmes raisons qu'au dessus</li>
  * 
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
  * 
@@ -118,6 +119,13 @@ public class MediateurAgent extends Agent {
 	int nb_tour_sondage_loi = 1;
 	
 	/**
+	 * La fréquence à laquelle l'action de répandre une rumeur est valable pour l'utilisateur. Statique.
+	 * 
+	 * @see #setup()
+	 */
+	int nb_tour_rumeur = 1;
+	
+	/**
 	 * Oui ou non y-a-t-il un vote en cours dans le parlement. Variable
 	 * 
 	 * @see #setup()
@@ -183,6 +191,13 @@ public class MediateurAgent extends Agent {
 	 * @see #setup()
 	 */
 	AID AKB;
+	
+	/**
+	 * L'AID de l'agent Rumeur. Non modifiable
+	 * 
+	 * @see #setup()
+	 */
+	AID ARumeur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
@@ -221,13 +236,14 @@ public class MediateurAgent extends Agent {
 			@Override
 			public void action() {
 				// On récupère les AID des agents nécessaires
-				while (ALoi == null || AUtilisateur == null || ASondage == null || ASimulation == null || AKB == null) {
+				while (ALoi == null || AUtilisateur == null || ASondage == null || ASimulation == null || AKB == null || ARumeur == null) {
 
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
 					AUtilisateur = parl_mana.getReceiver(myAgent, "Parlement", "AUtilisateur");
 					ASondage = parl_mana.getReceiver(myAgent, "Parlement", "ASondage");
 					ASimulation = parl_mana.getReceiver(myAgent, "Parlement", "ASimulation");
 					AKB = parl_mana.getReceiver(myAgent, "KB", "AKB");
+					ARumeur = parl_mana.getReceiver(myAgent, "Parlement", "ARumeur");
 				}
 
 				addBehaviour(new TourFromSimulation()); // recéption d'un message marquant le
@@ -327,6 +343,10 @@ public class MediateurAgent extends Agent {
 
 				if (num_tour_actuel % nb_tour_sondage_loi == 0) {
 					L_Actions.add("Avis du parlement");
+				}
+				
+				if (num_tour_actuel % nb_tour_rumeur == 0) {
+					L_Actions.add("Repandre une rumeur");
 				}
 
 				// Envoie d'un message à l'agent Utilisateur pour qu'il
@@ -475,6 +495,14 @@ public class MediateurAgent extends Agent {
 					message3.addReceiver(AUtilisateur);
 					message3.setContent("Change de parti");
 					myAgent.send(message3);
+					break;
+					
+				case "Repandre une rumeur":
+					// Il faut demander à l'agent Rumeur quels sont les caractéristiques des députés
+					ACLMessage message10 = new ACLMessage(ACLMessage.REQUEST);
+					message10.addReceiver(ARumeur);
+					message10.setContent("Dis à l'agent utilisateur quels sont les 10 députés les plus influents (en envoyant leurs AID)");
+					myAgent.send(message10);
 					break;
 
 				case "Aucune":
