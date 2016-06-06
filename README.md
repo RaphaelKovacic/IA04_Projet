@@ -2,4 +2,5 @@
 
 TODO
 
-Faire l'action : répandre des rumeurs dans le parlement
+Tester les variables
+Faire l'affichage debug en mode console
