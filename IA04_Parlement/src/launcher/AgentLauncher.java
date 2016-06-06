@@ -74,6 +74,9 @@ public class AgentLauncher {
 				i += 1;
 			}
 
+			// Agent Rumeur
+			(cc.createNewAgent("ARumeur", "agents.RumeurAgent", null)).start();
+						
 			// Agent Simulation
 			AgentController ac = cc.createNewAgent("ASimulation", "agents.SimulationAgent", null);
 			ac.start();

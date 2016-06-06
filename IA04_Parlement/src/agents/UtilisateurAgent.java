@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import agents.DeputeAgent.AnswerRequestCharacteristicsFromRumourAgent;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Class_For_JSON.DeputeAttRumeur;
 import Class_For_JSON.Loi;
 import Class_For_JSON.MajDepute;
 
@@ -45,6 +48,7 @@ import jade.lang.acl.MessageTemplate;
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent médiateur pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent simulation pour les mêmes raisons qu'au dessus</li>
+ * <li>L'AID de l'agent rumeur pour les mêmes raisons qu'au dessus</li>
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
  * <li>Le grade actuel du joueur qui correspond à son niveau</li>
  * </ul>
@@ -134,6 +138,13 @@ public class UtilisateurAgent extends Agent {
      * @see #setup()
      */
     AID ASimulation;
+    
+    /**
+     * L'AID de l'agent simulation. Non modifiable
+     *
+     * @see #setup()
+     */
+    AID ARumeur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
@@ -199,10 +210,11 @@ public class UtilisateurAgent extends Agent {
 			@Override
 			public void action() {
 				// On récupère les AID des agents nécessaires
-				while (AMediateur == null || ALoi == null) {
+				while (AMediateur == null || ALoi == null || ARumeur == null) {
 					AMediateur = parl_mana.getReceiver(myAgent, "Parlement", "AMediateur");
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
                     ASimulation = parl_mana.getReceiver(myAgent, "Parlement", "ASimulation");
+                    ARumeur = parl_mana.getReceiver(myAgent, "Parlement", "ARumeur");
 				}
 				addBehaviour(new LActionsFromMediateur()); // recéption d'un message proposant de choisir une
 															// action parmis plusieurs actions.
@@ -224,6 +236,10 @@ public class UtilisateurAgent extends Agent {
 												// les afficher et d'en choisir une
 				
 				addBehaviour(new ActualLevelOfUser()); // Pour checker et afficher le niveau actuel du joueur
+				
+				addBehaviour(new AnswerRequestCharacteristicsFromRumourAgent()); // envoie les caractéristiques (influence, ...) à la demande de l'agent Rumeur
+			
+				addBehaviour(new ReceiveDeputiesChoiceForRumours()); // reçoit les caractéristiques des députés pour répandre des rumeurs
 			}
 		});
 
@@ -606,19 +622,19 @@ public class UtilisateurAgent extends Agent {
 	 * Utilisateur</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
-	 * d'une requête INFORM venant de l'agent loi et demandant à l'agent
-	 * utilisateur de modifier ses caractéristiques interne suite au votre d'une
-	 * loi (soit qu'il a proposé ou bien qu'il a voté).
+	 * d'une requête INFORM venant de l'agent loi ou rumeur et demandant à l'agent
+	 * utilisateur de modifier ses caractéristiques interne suite au vote d'une
+	 * loi (soit qu'il a proposé ou bien qu'il a voté) ou à une rumeur.
 	 * </p>
 	 * <p>
-	 * Il implémente le comportement suivant : Mets à jour les informations
-	 * internes de l'agent utilisateur après un vote.
+	 * Il implémente le comportement suivant : Met à jour les informations
+	 * internes de l'agent utilisateur après un vote ou une rumeur.
 	 * 
-	 * C'est la fin de l'action : Proposer une loi ou lorsque l'on vote une loi.
+	 * C'est la fin de l'action : Proposer une loi ou lorsque l'on vote une loi, ou bien lorsqu'on répand une rumeur.
 	 * <p>
 	 * 
-	 * @author Benoit
-	 * @version 1.6
+	 * @author Benoit & Cristian
+	 * @version 1.7
 	 */
 	class RequestToModifCara extends CyclicBehaviour {
 
@@ -626,9 +642,9 @@ public class UtilisateurAgent extends Agent {
 		public void action() {
 
 			// On attend la reception d'un message de type INFORM venant de
-			// l'agent Loi
+			// l'agent Loi ou de l'agent Rumeur
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
-					MessageTemplate.MatchSender(ALoi));
+					MessageTemplate.or(MessageTemplate.MatchSender(ALoi),MessageTemplate.MatchSender(ARumeur)));
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null) {
 				// A la reception, on met à jour les caract de l'agent
@@ -794,4 +810,118 @@ public class UtilisateurAgent extends Agent {
 		if (Credibilite < 0)
 			Credibilite = 0;
 	}
+	
+	/**
+	 * <b>AnswerRequestCharacteristicsFromRumourAgent est le huitième Behaviour de l'agent
+	 * Utilisateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent utilisateur est en constante attente
+	 * d'une requête REQUEST de l'agent Rumeur lui demandant ses caractéristiques.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Renvoie l'influence, la popularité et la crédibilité de l'utilisateur à l'agent Rumeur
+	 * pour que celui-ci fasse le calcul.
+	 * <p>
+	 *
+	 * @author Cristian
+	 * @version 1.0
+	 */
+	class AnswerRequestCharacteristicsFromRumourAgent extends CyclicBehaviour {
+
+		@Override
+		public void action() {
+
+			// On attend la reception d'un message de type REQUEST venant de
+			// l'agent Rumeur
+			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST),
+					MessageTemplate.MatchSender(ARumeur));
+			ACLMessage message = myAgent.receive(mt);
+			if (message != null) {
+				// A la reception, l'agent député renvoie son influence, sa popularité et sa crédibilité
+				// a l'agent Rumeur.
+				ACLMessage answer = message.createReply();
+				answer.setPerformative(ACLMessage.INFORM);
+				
+				ObjectMapper mapper1 = new ObjectMapper();
+				StringWriter sw = new StringWriter();
+				DeputeAttRumeur depAt = new DeputeAttRumeur(Influence, Popularite, Credibilite);
+				
+				try {
+					mapper1.writeValue(sw, depAt);
+					String s1 = sw.toString();
+					answer.setContent(s1);
+					myAgent.send(answer);
+				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+				
+			} else {
+				block();
+			}
+		}
+	}
+	
+	/**
+	 * <b>ReceiveDeputiesChoiceForRumours est le neuvième Behaviour de l'agent
+	 * Utilisateur</b>
+	 * <p>
+	 * Il est de type Cyclic. Notre agent utilisateur est en constante attente
+	 * d'une requête PROPOSE de l'agent Rumeur lui proposant des caractéristiques de députés pour répandre des rumeurs.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Reçoit la liste des caractéristiques de députés pour répandre des rumeurs.
+	 * <p>
+	 *
+	 * @author Cristian
+	 * @version 1.0
+	 */
+	class ReceiveDeputiesChoiceForRumours extends CyclicBehaviour {
+
+		@Override
+		public void action() {
+
+			// On attend la reception d'un message de type QUERY_I venant de
+			// l'agent médiateur pour afficher les lois possibles
+			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
+					MessageTemplate.MatchSender(ARumeur));
+
+			ACLMessage message = myAgent.receive(mt);
+			if (message != null) {
+
+				// On deserialize la liste de loi contenue dans le message
+				String content = message.getContent();
+
+				// Stocke les caractéristiques envoyées par Mediateur dans liste de caractéristiques
+				// locale
+				List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<DeputeAttRumeur>();
+
+				try {
+					List_DeputeAttRumeur = new ObjectMapper().readValue(content, new TypeReference<List<DeputeAttRumeur>>() {
+					});
+					// On les affiche
+					System.out.println("-------------------------------------------------------");
+					System.out.println("--------------------DEPUTES-------------------------------");
+					for (int y = 0; y < List_DeputeAttRumeur.size(); y++) {
+						List_DeputeAttRumeur.get(y).affiche_a_utilisateur();
+
+					}
+					System.out.println("------------------FIN DEPUTES-----------------------------");
+
+					// On donne le protocole de réponse à l'utilisateur
+					System.out.println("------------------RÉPONSE-----------------------------");
+					System.out.println(
+								"Envoyer un message de type ACCEPT_PROPOSAL à l'agent rumeur avec seulement l'ID du député choisi");
+					System.out.println("------------------FIN RÉPONSE-------------------------");
+					System.out.println("-------------------------------------------------------");
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else
+				block();
+
+		}
+	}
+	
 }
