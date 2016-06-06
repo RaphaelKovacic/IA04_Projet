@@ -2,5 +2,5 @@
 
 TODO
 
-Tester les variables
-Faire l'affichage debug en mode console
+- Tester les variables
+- Faire l'affichage debug en mode console
