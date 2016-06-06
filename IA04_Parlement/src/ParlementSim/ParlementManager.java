@@ -10,25 +10,42 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParlementManager{
-//	AID AEnvironnement;
-//	AID AMediateur;
-//	AID ASimulation;
-//	AID ALoi;
-//	AID ASondage;
-//	AID AUtilisateur;
-//	List<AID> L_ADepute;
-//
-//	public ParlementManager() {
-//		AEnvironnement = getReceiver;
-//		AMediateur = aMediateur;
-//		ASimulation = aSimulation;
-//		ALoi = aLoi;
-//		ASondage = aSondage;
-//		AUtilisateur = aUtilisateur;
-//		L_ADepute = l_ADepute;
-//	}
 
+/**
+ * <b>ParlementManager est la classe permettant de requêter le DF.</b>
+ * <p>
+ *
+ * <p>
+ * ParlementManager est utilisé par toutes les classe lorsqu'elles
+ * veulent être mise en relation avec d'autres agents. Pour ce faire
+ * elles ont besoin de connaitre l'AID  de l'agent à qui parler.
+ * Or la plupart du temps elles ne connaissent que le nom (en dur)
+ * de l'agent avec qui elles veulent communiquer.
+ * Ainsi cette classe permet le matching entre les deux.
+ * </p>
+ *
+ * @author Benoit
+ * @version 1.0
+ */
+
+public class ParlementManager{
+
+	//TODO Compléter la JAVADOC
+	/**
+	 * Retourne l'AID de l'agent à partir de son nom et son type.
+	 *
+	 * @param
+	 * 			a
+	 * 		L'agent
+	 * @param
+	 * 			S1
+	 * 		Le nom du Type d'agent que vous cherchez.
+	 * @param
+	 * 			S2
+	 * 		Le nom de l'agent que vous cherchez.
+	 *
+	 * @return Un AID
+	 */
 	public AID getReceiver(Agent a,String S1, String S2) {
 		AID rec = null;
 		DFAgentDescription template = new DFAgentDescription();
@@ -48,7 +65,24 @@ public class ParlementManager{
 		}
 		return rec;
 	}
-	
+
+	/**
+	 * Retourne tous les AID de l'agent à partir de son nom et son type.
+	 *
+	 * Utilisé pour récupérer les AID de tous les députés de notre SMA.
+	 *
+	 * @param
+	 * 			a
+	 * 		L'agent
+	 * @param
+	 * 			S1
+	 * 		Le nom du Type d'agent que vous cherchez.
+	 * @param
+	 * 			S2
+	 * 		Le nom de l'agent que vous cherchez.
+	 *
+	 * @return Une liste d'AID
+	 */
 	public List<AID> getAllAidOf(Agent a,String S1, String S2) {
 		List<AID> L_AID = new ArrayList<AID>();
 		DFAgentDescription template = new DFAgentDescription();

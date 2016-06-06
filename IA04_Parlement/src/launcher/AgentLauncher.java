@@ -1,12 +1,45 @@
 package launcher;
 
 import jade.core.ProfileImpl;
+
 import jade.core.Runtime;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
+
+/**
+ * <b>AgentLauncher est la classe représentant servant à initialiser notre
+ * conteneur spécifique Parlement .</b>
+ * <p>
+ * La classe AgentLauncher possède l'attribut suivant :
+ * <ul>
+ * <li>Le nombre de député à intialiser dans notre parlement</li>
+ * </ul>
+ * </p>
+ * 
+ * 
+ * @author Benoit
+ * @version 1.0
+ */
+
 public class AgentLauncher {
+
+	/**
+	 * Le nombre d'agent Depute à instancier dans notre conteneur Parlement.
+	 * 
+	 * @see main()
+	 */
 	public static int NB_DEPUTE = 5;
 
+	/**
+	 * Méthode de création de notre conteneur secondaire Parlement.
+	 * <p>
+	 * On crée notre conteneur secondaire à l'aide du fichier de propriétés
+	 * SecondaryProperties.txr du dossier Proprietes On crée tous les agents
+	 * nécessaires en définissant leur nom qui nous servira pour communiquer,
+	 * plus tard, avec eux. Chaque nom est préfixé par un "A" signifiant
+	 * "Agent".
+	 * </p>
+	 */
 	public static void main(String[] args) {
 
 		Runtime rt = Runtime.instance();
@@ -15,42 +48,43 @@ public class AgentLauncher {
 			p = new ProfileImpl("./Properties/SecondaryProperties.txt");
 			ContainerController cc = rt.createAgentContainer(p);
 
-			//Agent d'environnement
+			// Agent d'environnement
 			AgentController ac1 = cc.createNewAgent("AEnvironnement", "agents.EnvironmentalAgent", null);
 			ac1.start();
-			
-			//Agent Loi
-			(cc.createNewAgent("ALoi","agents.LoiAgent", null)).start();
-			
-			//Agent KB
-			(cc.createNewAgent("AKB","agents.KB", null)).start();
-			
-			//Agent Sondage
-			(cc.createNewAgent("ASondage","agents.SondageAgent", null)).start();
-			
-			//Agent Mediateur
-			(cc.createNewAgent("AMediateur","agents.MediateurAgent", null)).start();
-			
-			//Agent Utilisateur
-			(cc.createNewAgent("AUtilisateur","agents.UtilisateurAgent", null)).start();
 
-			//Agents D�put�s
+			// Agent Loi
+			(cc.createNewAgent("ALoi", "agents.LoiAgent", null)).start();
+
+			// Agent KB
+			(cc.createNewAgent("AKB", "agents.KB", null)).start();
+
+			// Agent Sondage
+			(cc.createNewAgent("ASondage", "agents.SondageAgent", null)).start();
+
+			// Agent Mediateur
+			(cc.createNewAgent("AMediateur", "agents.MediateurAgent", null)).start();
+
+			// Agent Utilisateur
+			(cc.createNewAgent("AUtilisateur", "agents.UtilisateurAgent", null)).start();
+
+			// Agents Députés
 			int i = 0;
-			while(i<NB_DEPUTE){
-				(cc.createNewAgent("ADepute"+i,"agents.DeputeAgent", null)).start();
-				i+=1;
+			while (i < NB_DEPUTE) {
+				(cc.createNewAgent("ADepute" + i, "agents.DeputeAgent", null)).start();
+				i += 1;
 			}
-			
-			//Agent Simulation
-			AgentController ac = cc.createNewAgent("ASimulation","agents.SimulationAgent", null);
+
+			// Agent Rumeur
+			(cc.createNewAgent("ARumeur", "agents.RumeurAgent", null)).start();
+						
+			// Agent Simulation
+			AgentController ac = cc.createNewAgent("ASimulation", "agents.SimulationAgent", null);
 			ac.start();
-			
-		}
-		catch (Exception ex) {
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
 	}
 
 }
-
