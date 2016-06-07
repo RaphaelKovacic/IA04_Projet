@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <p>
  * Un MajDepute possède les attributs suivants :
  * <ul>
- * <li>Un float correspondant à l'effet sur l'influence du député</li>
- * <li>Un float correspondant à l'effet sur la popularité du député</li>
- * <li>Un float correspondant à l'effet sur la notoriété du député</li>
- * <li>Un float correspondant à l'effet sur la crédibilité du député</li>
+ * <li>Un float correspondant à l'effet sur l'influence du député.</li>
+ * <li>Un float correspondant à l'effet sur la popularité du député.</li>
+ * <li>Un float correspondant à l'effet sur la notoriété du député.</li>
+ * <li>Un float correspondant à l'effet sur la crédibilité du député.</li>
  * </ul>
  * </p>
  * 
