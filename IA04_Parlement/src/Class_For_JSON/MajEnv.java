@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <p>
  * Un MajEnv possède les attributs suivants :
  * <ul>
- * <li>Un float correspondant à la santé économique du pays</li>
- * <li>Un float correspondant à la qualité de vie des habitants du pays</li>
+ * <li>Un float correspondant à la santé économique du pays.</li>
+ * <li>Un float correspondant à la qualité de vie des habitants du pays.</li>
  * </ul>
  * </p>
  * 
