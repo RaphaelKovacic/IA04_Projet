@@ -33,7 +33,7 @@ import jade.lang.acl.MessageTemplate;
  * <b>UtilisateurAgent est la classe représentant l'agent utilisateur dans notre
  * SMA Parlement.</b>
  * <p>
- * L'agent Utilisateur possède les attributs suivants
+ * L'agent Utilisateur possède les attributs suivants :
  * <ul>
  * <li>Un attribut Influence qui représente l'influence de l'utilisateur</li>
  * <li>Un attribut Popularite qui représente la popularité de l'utilisateur</li>
@@ -44,7 +44,7 @@ import jade.lang.acl.MessageTemplate;
  * l'utilisateur</li>
  * 
  * <li>Un attribut L_Parti qui est une liste de tous les partis politiques
- * possibles du jeu.</li>
+ * possibles du jeu</li>
  * 
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent médiateur pour les mêmes raisons qu'au dessus</li>
@@ -55,9 +55,9 @@ import jade.lang.acl.MessageTemplate;
  * </ul>
  * </p>
  * <p>
- * La première classe sert à l'instanciation de l'agent Les comportements de
- * l'agent KB sont spécifiés dans les huit classes suivantes La fonction
- * utilisée se situe à la fin de ce fichier
+ * La première classe sert à l'instanciation de l'agent. Les comportements de
+ * l'agent KB sont spécifiés dans les huit classes suivantes.
+ * La fonction utilisée se situe à la fin de ce fichier.
  * </p>
  * 
  * 
@@ -69,7 +69,7 @@ import jade.lang.acl.MessageTemplate;
 public class UtilisateurAgent extends Agent {
 
 	/**
-	 * L'influence de l'utilisateur. Variable.
+	 * L'influence de l'utilisateur. Variable
 	 * 
 	 * @see #setup()
 	 */
@@ -77,7 +77,7 @@ public class UtilisateurAgent extends Agent {
 
 	/**
 	 * La popularité de l'utilisateur. Variable. Sa cote d'amour auprès du
-	 * peuple
+	 * peuple. Variable
 	 * 
 	 * @see #setup()
 	 */
@@ -85,7 +85,7 @@ public class UtilisateurAgent extends Agent {
 
 	/**
 	 * La notoriété de l'utilisateur. Variable. Sa cote d'amour auprès des
-	 * entreprises
+	 * entreprises. Variable
 	 * 
 	 * @see #setup()
 	 */
@@ -113,7 +113,7 @@ public class UtilisateurAgent extends Agent {
 	float Charisme;
 
 	/**
-	 * La liste de tous les partis possibles de l'utilisateur. Constante.
+	 * La liste de tous les partis possibles de l'utilisateur. Constante
 	 * 
 	 * @see #setup()
 	 */
@@ -155,10 +155,7 @@ public class UtilisateurAgent extends Agent {
 	ParlementManager parl_mana = new ParlementManager();
 
 	/**
-	 * Le niveau actuel de l'utilisateur. Variable. 0 : simple député
-	 * fraichement élu 1 : quand attributs statiques sont >50 2 : quand
-	 * attributs statiques sont >65 3 : quand attributs statiques sont >80 4 :
-	 * quand attributs statiques sont >90
+	 * Le niveau actuel de l'utilisateur. Variable
 	 * 
 	 * @see #setup()
 	 */
@@ -169,7 +166,7 @@ public class UtilisateurAgent extends Agent {
 	 * Utilisateur
 	 * <p>
 	 * Lors du lancement de notre plateforme JADE, l'agent Utilisateur est créé
-	 * grâce à cette méthode setup()
+	 * grâce à cette méthode setup().
 	 * </p>
 	 */
 	protected void setup() {
@@ -267,7 +264,7 @@ public class UtilisateurAgent extends Agent {
 
 	/**
 	 * <b>LActionsFromMediateur est le premier Behaviour de l'agent
-	 * Utilisateur</b>
+	 * Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête PROPOSE de l'agent Médiateur avec les actions possibles de
@@ -275,7 +272,7 @@ public class UtilisateurAgent extends Agent {
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Affiche les actions possibles
-	 * lors du tour de jeu en cours et la procédure pour les réaliser
+	 * lors du tour de jeu en cours et la procédure pour les réaliser.
 	 * <p>
 	 * 
 	 * @author Benoit
@@ -322,7 +319,7 @@ public class UtilisateurAgent extends Agent {
 
 	/**
 	 * <b>PrecisonActionFromMediateur est le second Behaviour de l'agent
-	 * Utilisateur</b>
+	 * Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête REQUEST de l'agent Médiateur avec un complément
@@ -383,7 +380,7 @@ public class UtilisateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>ChangeParty est le troisième Behaviour de l'agent Utilisateur</b>
+	 * <b>ChangeParty est le troisième Behaviour de l'agent Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête CONFIRM de du joueur avec le parti qu'il a choisi lors de
@@ -393,7 +390,7 @@ public class UtilisateurAgent extends Agent {
 	 * Il implémente le comportement suivant : Récupère et modifie le parti de
 	 * l'agent Utilisateur suite à l'action de changement de parti puis l'envoi
 	 * du parti choisi par le joueur. C'est en quelque sorte la fin de l'action
-	 * "changer de parti"
+	 * "changer de parti".
 	 * <p>
 	 * 
 	 * @author Etienne
@@ -439,7 +436,7 @@ public class UtilisateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>RequestToVote est le quatirème Behaviour de l'agent Utilisateur</b>
+	 * <b>RequestToVote est le quatirème Behaviour de l'agent Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête PROPOSE venant de l'agent médiateur et demandant au joueur
@@ -526,7 +523,7 @@ public class UtilisateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>GiveYourInfo est le cinquième Behaviour de l'agent Utilisateur</b>
+	 * <b>GiveYourInfo est le cinquième Behaviour de l'agent Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête QUERY_REF venant de l'agent médiateur et demandant à cette
@@ -595,7 +592,7 @@ public class UtilisateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>ChooseAlaw est le sixième Behaviour de l'agent Utilisateur</b>
+	 * <b>ChooseAlaw est le sixième Behaviour de l'agent Utilisateur<./b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête QUERY_IF venant de l'agent médiateur et demandant à l'agent
@@ -674,7 +671,7 @@ public class UtilisateurAgent extends Agent {
 
 	/**
 	 * <b>RequestToModifCara est le septième Behaviour de l'agent
-	 * Utilisateur</b>
+	 * Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête INFORM venant de l'agent loi ou rumeur et demandant à l'agent
@@ -746,8 +743,8 @@ public class UtilisateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>ActualLevelOfUser est le huitième et dernier Behaviour de l'agent
-	 * Utilisateur</b>
+	 * <b>ActualLevelOfUser est le huitième Behaviour de l'agent
+	 * Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante
 	 * observation de l'agent utilisateur afin de modifier son niveau losque ses
@@ -868,8 +865,8 @@ public class UtilisateurAgent extends Agent {
 	}
 	
 	/**
-	 * <b>AnswerRequestCharacteristicsFromRumourAgent est le huitième Behaviour de l'agent
-	 * Utilisateur</b>
+	 * <b>AnswerRequestCharacteristicsFromRumourAgent est le neuvième Behaviour de l'agent
+	 * Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent utilisateur est en constante attente
 	 * d'une requête REQUEST de l'agent Rumeur lui demandant ses caractéristiques.
@@ -918,8 +915,8 @@ public class UtilisateurAgent extends Agent {
 	}
 	
 	/**
-	 * <b>ReceiveDeputiesChoiceForRumours est le neuvième Behaviour de l'agent
-	 * Utilisateur</b>
+	 * <b>ReceiveDeputiesChoiceForRumours est le dixième Behaviour de l'agent
+	 * Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent utilisateur est en constante attente
 	 * d'une requête PROPOSE de l'agent Rumeur lui proposant des caractéristiques de députés pour répandre des rumeurs.
