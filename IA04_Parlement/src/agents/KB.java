@@ -35,7 +35,7 @@ import jade.lang.acl.MessageTemplate;
 /**
  * <b>KB est la classe représentant l'agent JADE Knowledge Base.</b>
  * <p>
- * L'agent KB possède les attributs suivants
+ * L'agent KB possède les attributs suivants :
  * <ul>
  * <li>Un attribut model, classe de JENA stockant le modèle RDF</li>
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
@@ -45,8 +45,8 @@ import jade.lang.acl.MessageTemplate;
  * </p>
  * <p>
  * La première classe sert à l'instanciation de l'agent Les comportements de
- * l'agent KB sont spécifiés dans les deux classes suivantes Les fonctions
- * utilisées sont répertoriées à la fin de ce fichier
+ * l'agent KB sont spécifiés dans les deux classes suivantes.
+ * Les fonctions utilisées sont répertoriées à la fin de ce fichier.
  * </p>
  * 
  * 
@@ -58,7 +58,8 @@ import jade.lang.acl.MessageTemplate;
 public class KB extends Agent {
 
 	/**
-	 * Le model à charger depuis notre fichier turle. Non modifiable
+	 * Le model à charger depuis notre fichier dans le formalisme turle.
+	 * Non modifiable
 	 * 
 	 * @see #setup()
 	 */
@@ -136,7 +137,7 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * <b>RequestLaw est le premier Behaviour de l'agent KB</b>
+	 * <b>RequestLaw est le premier Behaviour de l'agent KB.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent KB est en constante attente d'une
 	 * requête d'un agent extérieur pouvant le soliciter.
@@ -174,7 +175,7 @@ public class KB extends Agent {
 			ACLMessage message;
 
 			// Soit il vient du médiateur et on doit renvoyer toutes les lois
-			// correspondants à ce party (qui a forwarder le choix de
+			// correspondants à ce parti (qui a forwarder le choix de
 			// l'utilisateur)
 			MessageTemplate mt_mediateur = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST),
 					MessageTemplate.MatchSender(AMediateur));
@@ -251,7 +252,7 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * <b>VotedAckLaw est le second Behaviour de l'agent KB</b>
+	 * <b>VotedAckLaw est le second Behaviour de l'agent KB.</b>
 	 * <p>
 	 * Ce second behaviour est de type Cyclic. Notre agent KB est en constante
 	 * attente d'un acquittement concernant une loi qui viendrait d'être votée.
@@ -462,7 +463,7 @@ public class KB extends Agent {
 	 * @param _st
 	 *            Un statement JENA ou triple RDF
 	 * 
-	 * Retourne un booléen pour connaitre si le loi n'a pas été votée
+	 * Retourne un booléen pour savoir si la loi n'a pas été votée
 	 *            (true) ou votée (false)
 	 * 
 	 * @return Un booléen.
@@ -480,7 +481,8 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * Renvoie la chaine de caractère correspondant à la propriété law:id pour
+	 * Renvoie la chaine de caractère correspondant à la valeur de
+	 * la propriété law:id pour
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
 	 * 
@@ -509,7 +511,7 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * Renvoie la chaine de caractère correspondant à la propriété law:name pour
+	 * Renvoie la chaine de caractère correspondant à la valeur de la propriété law:name pour
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
 	 * 
@@ -538,7 +540,7 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * Renvoie la chaine de caractère correspondant à la propriété law:id pour
+	 * Renvoie la chaine de caractère correspondant à la valeur de la propriété law:id pour
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
 	 * 
@@ -567,7 +569,7 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * Renvoie le float correspondant à la propriété law:eco_effect pour un
+	 * Renvoie le float correspondant à la valeur de la propriété law:eco_effect pour un
 	 * sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
 	 * 
@@ -601,7 +603,7 @@ public class KB extends Agent {
 	}
 
 	/**
-	 * Renvoie le float correspondant à la propriété law:life_effect pour un
+	 * Renvoie le float correspondant à la valeur de la propriété law:life_effect pour un
 	 * sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
 	 * 
