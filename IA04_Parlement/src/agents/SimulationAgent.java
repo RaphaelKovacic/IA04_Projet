@@ -20,11 +20,11 @@ import jade.core.Agent;
  * <b>SimulationAgent est la classe représentant l'agent simulation dans notre
  * SMA Parlement.</b>
  * <p>
- * L'agent simulation possède les attributs suivants
+ * L'agent simulation possède les attributs suivants :
  * <ul>
  * <li>Le numéro du tour en cours de jeu.</li>
- * <li>Le nombre de tour max d'une partie de notre jeu.</li>
- * <li>Un booléen représentant l'état de la partie : finie ou en cours.</li>
+ * <li>Le nombre de tour max d'une partie de notre jeu</li>
+ * <li>Un booléen représentant l'état de la partie : finie ou en cours</li>
  * <li>L'AID de l'agent environnement pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent médiateur pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent utilisateur pour les mêmes raisons qu'au dessus</li>
@@ -34,7 +34,7 @@ import jade.core.Agent;
  * <p>
  * La première classe sert à l'instanciation de l'agent de simulation. Les
  * comportements de l'agent simulation sont spécifiés dans les cinq classes
- * suivantes
+ * suivantes.
  * </p>
  * 
  * 
@@ -45,21 +45,21 @@ import jade.core.Agent;
 public class SimulationAgent extends Agent {
 
 	/**
-	 * Le numéro du tour actuel. Variable.
+	 * Le numéro du tour actuel. Variable
 	 * 
 	 * @see #setup()
 	 */
 	int tour;
 
 	/**
-	 * Le nombre tour maximum dans une partie. Constant.
+	 * Le nombre tour maximum dans une partie. Constant
 	 * 
 	 * @see #setup()
 	 */
 	int FinJeu_tour;
 
 	/**
-	 * L'état actuel de la partie. Variable.
+	 * L'état actuel de la partie. Variable
 	 * 
 	 * @see #setup()
 	 */
@@ -99,7 +99,7 @@ public class SimulationAgent extends Agent {
 	 * Méthode d'instanciation (appelée à la création) de notre agent Simulation
 	 * <p>
 	 * Lors du lancement de notre plateforme JADE, l'agent Simulation est créé
-	 * grâce à cette méthode setup()
+	 * grâce à cette méthode setup().
 	 * </p>
 	 */
 	protected void setup() {
@@ -154,7 +154,7 @@ public class SimulationAgent extends Agent {
 	} // fin Setup
 
 	/**
-	 * <b>NouvTourMediateur est le premier Behaviour de l'agent Simulation</b>
+	 * <b>NouvTourMediateur est le premier Behaviour de l'agent Simulation.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent Simulation va utiliser ce Behaviour
 	 * pour créer un nouveau tour. Il est instancier lorsque l'agent simulation
@@ -162,10 +162,10 @@ public class SimulationAgent extends Agent {
 	 * joueur.
 	 * </p>
 	 * <p>
-	 * Il implémente le comportement suivant : Crée un nouveau tour de jeu.
+	 * Il implémente le comportement suivant : crée un nouveau tour de jeu.
 	 * <p>
 	 * 
-	 * Cette action faite suite à la fin d'un tour.
+	 * Cette action fait suite à la fin d'un tour.
 	 * 
 	 * @see WaitMessMediateur
 	 * 
@@ -211,7 +211,7 @@ public class SimulationAgent extends Agent {
 	}
 
 	/**
-	 * <b>WaitMessMediateur est le second Behaviour de l'agent Simulation</b>
+	 * <b>WaitMessMediateur est le second Behaviour de l'agent Simulation.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Simulation est constamment dans
 	 * l'attente de recevoir un message de la part du médiateur. Il va ensuite
@@ -248,11 +248,11 @@ public class SimulationAgent extends Agent {
 	}
 
 	/**
-	 * <b>WaitMessMediateur est le troisième Behaviour de l'agent Simulation</b>
+	 * <b>WaitMessEnvironnement est le troisième Behaviour de l'agent Simulation.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Simulation est constamment dans
 	 * l'attente de recevoir un message INFORM de la part de l'environnement.
-	 * Lors de la réception de ce message c'est que la parti est terminée.
+	 * Lors de la réception de ce message c'est que la partie est terminée.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Réceptionne un message de fin de
@@ -286,8 +286,8 @@ public class SimulationAgent extends Agent {
 	}
 
 	/**
-	 * <b>WaitMessMediateur est le quatrième et dernier Behaviour de l'agent
-	 * Simulation</b>
+	 * <b>WaitMessJoueur est le quatrième et dernier Behaviour de l'agent
+	 * Simulation.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Simulation est constamment dans
 	 * l'attente de recevoir un message de type REQUEST de la part du joueur. Il
@@ -324,7 +324,7 @@ public class SimulationAgent extends Agent {
 
 	/**
 	 * <b>WaitMessUtilisateur est le cinquième et dernier Behaviour de l'agent
-	 * Simulation</b>
+	 * Simulation.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Simulation est constamment dans
 	 * l'attente de recevoir un message de type INFORM de la part de l'agent utilisateur.
