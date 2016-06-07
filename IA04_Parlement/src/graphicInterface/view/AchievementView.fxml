@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="proposeLoiclass" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphicInterface.view.AchievementViewController">
+   <children>
+      <VBox alignment="CENTER" layoutX="16.0" layoutY="7.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: #E4E4E4; -fx-border-width: 5px;" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="7.0">
+         <children>
+            <ImageView fx:id="Achiev1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@achiev3/achievment1.png" />
+               </image></ImageView>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="31.0" layoutY="146.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-width: 5px; -fx-border-color: #E4E4E4;" AnchorPane.leftAnchor="30.0">
+         <children>
+            <ImageView fx:id="Achiev2" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@achiev3/achiev2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="30.0" layoutY="272.0" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: #E4E4E4; -fx-border-width: 5px;" AnchorPane.leftAnchor="30.0">
+         <children>
+            <ImageView fx:id="Achiev3" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@achiev3/achiev3.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Line endX="300.0" layoutX="231.0" layoutY="122.0" startX="-150.0" />
+      <Line endX="300.0" layoutX="232.0" layoutY="258.0" startX="-150.0" />
+      <TextFlow fx:id="Achiev1T" layoutX="130.0" layoutY="6.0" prefHeight="100.0" prefWidth="451.0" />
+      <TextFlow fx:id="Achiev2T" layoutX="129.0" layoutY="146.0" prefHeight="100.0" prefWidth="451.0" />
+      <TextFlow fx:id="Achiev3T" layoutX="127.0" layoutY="272.0" prefHeight="100.0" prefWidth="451.0" />
+   </children>
+</AnchorPane>

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import agents.DeputeAgent.AnswerRequestCharacteristicsFromRumourAgent;
+import graphicInterface.MainApp;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -242,6 +243,25 @@ public class UtilisateurAgent extends Agent {
 				addBehaviour(new ReceiveDeputiesChoiceForRumours()); // reçoit les caractéristiques des députés pour répandre des rumeurs
 			}
 		});
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		MainApp.addDepute("Michel","Drucker",this.Parti_Politique,this.Popularite,this.Credibilite,this.Notoriete,this.Charisme,this.getAID().getLocalName());
+		int choix = -1;
+
+		choix = MainApp.showLaunch();
+		while (choix == -1){
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		addBehaviour(new LaunchGame()); // Envoi un message à Simulation pour lancer la partie.
 
 	}
 
@@ -284,6 +304,8 @@ public class UtilisateurAgent extends Agent {
 					System.out.println();
 					System.out.println("-------------------- ACTIONS POSSIBLES ---------------");
 					System.out.println("Voici la liste des actions possibles ce tour-ci");
+					MainApp.addHistorique("Demande de choix à l'utilisateur", -1);
+					MainApp.showChoicePopUp(0,"");
 					System.out.println(L_Actions.toString());
 					System.out.println(
 							"Renvoyer un message (ACCEPT_PROPOSAL) à l'agent Mediateur avec pour contenu une de ces actions");
@@ -461,6 +483,39 @@ public class UtilisateurAgent extends Agent {
 				// //Ecrit sur la console
 				System.out.println();
 				System.out.println("Vous devez voter pour la loi ci-desous");
+				MainApp.addHistorique("Demande de vote", -1);
+				
+				int choix = -1;
+				choix = MainApp.showChoicePopUp(1,loi_en_cours.afficheString());
+				while (choix == -1){
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				switch(choix){
+				case 1 :{
+					System.out.println("Vous avez accepté la loi");
+					if(message != null)
+						
+					myAgent.addBehaviour(new VoteLoi(message,true));
+
+					
+					break;
+				}
+				case 2 :{
+					
+					System.out.println("Vous avez refusé la loi");
+					if(message != null)
+					myAgent.addBehaviour(new VoteLoi(message,false));
+
+					break;
+				}
+				}
+				MainApp.addHistorique("Vote donné", choix);
 				loi_en_cours.affiche();
 				System.out.println("Merci de répondre à l'Agent Loi (ACCEPT_PROPOSAL ou REJECT_PROPOSAL)");
 
@@ -668,6 +723,7 @@ public class UtilisateurAgent extends Agent {
 						Notoriete = 0;
 					if (Credibilite < 0)
 						Credibilite = 0;
+					MainApp.setDeputeData(this.getAgent().getAID().getLocalName(),Parti_Politique,Popularite, Influence, Notoriete,Credibilite);
 
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -923,5 +979,51 @@ public class UtilisateurAgent extends Agent {
 
 		}
 	}
+	class VoteLoi extends OneShotBehaviour{
+		private ACLMessage message;
+		private boolean test;
+		// Constructor
+		public VoteLoi(ACLMessage message2,boolean test) {
+			this.message = message2;
+			this.test = test;
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent r�pond en pr�cisant son vote
+			ACLMessage reply = message.createReply();
+			
+			//R�cup�ration de loi (On deserialise le message)
+
+			if (test){
+				reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+				reply.setContent("Je vote pour");				
+			}else{
+				reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
+				reply.setContent("Je vote contre");	
+			}
+			// Envoie du vote
+			myAgent.send(reply);
+		}
+	}
 	
+	class LaunchGame extends OneShotBehaviour{
+		// Constructor
+		public LaunchGame() {
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent r�pond en pr�cisant son vote
+			ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
+			message2.addReceiver(ASimulation);
+			
+
+			message2.setContent("Lancement");	
+			myAgent.send(message2);
+		}
+	}
+
 }

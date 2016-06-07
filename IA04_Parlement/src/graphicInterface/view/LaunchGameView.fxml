@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="proposeLoiclass" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphicInterface.view.LaunchGameController">
+   <children>
+      <Button fx:id="Launch" layoutX="99.0" layoutY="134.0" mnemonicParsing="false" text="Launch" />
+   </children>
+</AnchorPane>

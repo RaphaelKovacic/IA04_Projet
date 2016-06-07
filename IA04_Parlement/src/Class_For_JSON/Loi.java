@@ -240,7 +240,28 @@ public class Loi implements Comparable<Loi> {
 		System.out.println("popularite : " + this.popularite);
 		System.out.println("notoriete : " + this.notoriete);
 	}
-
+	/**
+	 * Méthode d'affichage des caractéristiques d'une loi
+	 * <p>
+	 * Affiche toutes les caractéristiques.
+	 * </p>
+	 * @return La String de retour pour accéder aux infos de la loi.
+	 */
+	public String afficheString(){
+		String str = ("id : "+ this.id + "\n" +
+		"description : "+ this.description + "\n" +
+		"effet_qualite_vie : "+ this.effet_qualite_vie +"\n" +
+		"effet_context_eco : "+ this.effet_context_eco + "\n" +
+		"L_PartiPolitique : "+ this.l_PartiPolitique.toString()+ "\n" +
+		"proposant : "+ this.proposant+ "\n" +
+		"influence : "+ this.influence+ "\n" +
+		"charisme : "+ this.charisme+ "\n" +
+		"popularite : "+ this.popularite+ "\n" +
+		"notoriete : "+ this.notoriete);
+		return str;
+	}
+	
+	
 	/**
 	 * Affichage des informations d'une loi pour l'utilisateur.
 	 * <p>

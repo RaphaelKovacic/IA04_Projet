@@ -1,5 +1,6 @@
 package launcher;
 
+import graphicInterface.MainApp;
 import jade.core.ProfileImpl;
 
 import jade.core.Runtime;
@@ -80,6 +81,7 @@ public class AgentLauncher {
 			// Agent Simulation
 			AgentController ac = cc.createNewAgent("ASimulation", "agents.SimulationAgent", null);
 			ac.start();
+			MainApp.main(args);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

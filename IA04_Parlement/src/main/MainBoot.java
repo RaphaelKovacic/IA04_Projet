@@ -1,5 +1,6 @@
 package main;
 
+import graphicInterface.IPChanger;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -33,6 +34,8 @@ public class MainBoot {
 		try {
 			p = new ProfileImpl(MAIN_PROPERTIES_FILE);
 			AgentContainer mc = rt.createMainContainer(p);
+			IPChanger.main(args);
+
 		} catch (Exception ex) {
 
 			System.out.println("ExceptionMainController");

@@ -12,6 +12,7 @@ import Class_For_JSON.Loi;
 import Class_For_JSON.MajDepute;
 
 import ParlementSim.ParlementManager;
+import graphicInterface.MainApp;
 import ParlementSim.Aid_vote;
 
 import jade.core.AID;
@@ -319,6 +320,13 @@ public class DeputeAgent extends Agent {
 				addBehaviour(new AnswerRequestCharacteristicsFromRumourAgent()); // envoie les caractéristiques (influence, ...) à la demande de l'agent Rumeur
 			}
 		});
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		MainApp.addDepute("Depute", "Classique", this.Parti_Politique, this.Popularite, this.Credibilite, this.Notoriete, this.Charisme, this.getAID().getLocalName());// ajout dans le modele grpahique
 
 	}
 
