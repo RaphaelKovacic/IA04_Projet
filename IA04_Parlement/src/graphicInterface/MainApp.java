@@ -2,6 +2,7 @@ package graphicInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.FutureTask;
 
@@ -106,7 +107,7 @@ public class MainApp extends Application {
 		        e.printStackTrace();
 		    }
   }
-	public static int showChoicePopUp(int value, String loiEnCours) {
+	public static int showChoicePopUp(int value, String loiEnCours, List<String> l_Actions) {
 		final SimpleIntegerProperty choix = new SimpleIntegerProperty(-1);
 	    final CountDownLatch latch = new CountDownLatch(1);
 		
@@ -130,7 +131,7 @@ public class MainApp extends Application {
 	     	        // Set the person into the controller.
 	     	        ChoiceOverviewController controller = loader.getController();
 	     	        controller.setDialogStage(dialogStage);
-	     	        controller.setChoice(value);
+	     	        controller.setChoice(value,l_Actions);
 	     	        controller.setLoiEnCours(loiEnCours);
 	     	        // Show the dialog and wait until the user closes it
 	     	        dialogStage.showAndWait();
@@ -174,7 +175,6 @@ public class MainApp extends Application {
 	     	        Scene scene = new Scene(page);
 	     	        dialogStage.setScene(scene);
 
-	     	        // Set the person into the controller.
 	     	       LaunchGameController controller = loader.getController();
 	     	        controller.setDialogStage(dialogStage);
 	     	        // Show the dialog and wait until the user closes it
@@ -197,9 +197,8 @@ public class MainApp extends Application {
 	}
 
 	
-	public static void showLois() {
+	public static void showLois(List<Class_For_JSON.Loi> loi_a_choisir) {
 	    final CountDownLatch latch = new CountDownLatch(1);
-		
 	    Platform.runLater(new Runnable() {
 	        @Override public void run() {
 	        	 try {
@@ -220,8 +219,13 @@ public class MainApp extends Application {
 	     	        ProposeLoiViewController controller = loader.getController();
 	     	        controller.setDialogStage(dialogStage);
 	     	        // Show the dialog and wait until the user closes it
+					for (int y = 0; y < loi_a_choisir.size(); y++) {
+						addLoi(loi_a_choisir.get(y).getId(),loi_a_choisir.get(y).getNom(), loi_a_choisir.get(y).getDescription());;
+					}
+					controller.setLois(listeLoi);
 	     	        dialogStage.showAndWait();
 	     	        Loi choix = controller.getLoi();
+	     	       removeLoiData();
 	     	        System.out.println(" choix :"+choix.getName());
 	     	        latch.countDown();
 	     	    } catch (IOException e) {
@@ -297,9 +301,9 @@ public class MainApp extends Application {
     	DeputeData.add(new Depute(a,b));
     	
     }
-    public static void addLoi(String a,String b){
+    public static void addLoi(int i, String a,String b){
     	
-    	listeLoi.add(new Loi(0,a,b));
+    	listeLoi.add(new Loi(i,a,b));
     }
     public static void addDepute(String a, String b, String c, float popularite, float credibilite, float notoriete, float charisme, String idDepute){
 
@@ -317,8 +321,8 @@ public class MainApp extends Application {
     public ObservableList<Loi> getLoiData() {
         return this.listeLoi;
     }
-    public void removeLoiData() {
-         this.listeLoi.clear();
+    public static void removeLoiData() {
+         listeLoi.clear();
     }
     private static Depute parcoursDeputeData(String idDepute_){
     	Depute dep_;
@@ -349,6 +353,9 @@ public class MainApp extends Application {
     }
     public ObservableList<HistoryData> getHistoryData() {
         return this.listeHistorique;
+    }
+    public MainApp getMainAppClass(){
+    	return this;
     }
 }
 

@@ -1,5 +1,7 @@
 package graphicInterface.view;
 
+import java.util.List;
+
 import graphicInterface.MainApp;
 import graphicInterface.model.Depute;
 import javafx.event.ActionEvent;
@@ -15,6 +17,8 @@ import javafx.stage.Stage;
 public class ChoiceOverviewController {
 
     @FXML
+    private Button aucuneButton;
+    @FXML
     private Button proposeLoi;
     @FXML
     private Button accepteLoi;
@@ -27,6 +31,9 @@ public class ChoiceOverviewController {
     @FXML
     private Button butt;
     @FXML
+    private Button changerParti;
+
+    @FXML
     private TextArea caseTexte;
 
     private String loiEnCours = "" ;
@@ -34,7 +41,7 @@ public class ChoiceOverviewController {
     private MainApp mainApp;
 	private Stage dialogStage;
     
-    private int choix=0;
+    private int choix=-1;
     public ChoiceOverviewController() {
     }
 
@@ -146,8 +153,72 @@ public class ChoiceOverviewController {
             }
         });
          
+        butt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("AvisButton!");
+                choix = 5;
+                dialogStage.close();
+            }
+            
+            
+            
+            
+        }); 
+        butt.hoverProperty().addListener((observable)-> {
+            final String idButton = butt.getText();
 
-    	
+            if (butt.isHover()) {
+            	caseTexte.setText( " Avis à récuperer : " + idButton
+            		);
+            } else {
+            	caseTexte.setText(" ------------ ");
+            }
+        });
+        changerParti.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("AvisButton!");
+                choix = 6;
+                dialogStage.close();
+            }
+            
+            
+            
+            
+        }); 
+        changerParti.hoverProperty().addListener((observable)-> {
+            final String idButton = changerParti.getText();
+
+            if (changerParti.isHover()) {
+            	caseTexte.setText( " Changer de Parti : " + idButton
+            		);
+            } else {
+            	caseTexte.setText(" ------------ ");
+            }
+        });
+        aucuneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("aucuneButton!");
+                choix = 7;
+                dialogStage.close();
+            }
+            
+            
+            
+            
+        }); 
+        aucuneButton.hoverProperty().addListener((observable)-> {
+            final String idButton = aucuneButton.getText();
+
+            if (aucuneButton.isHover()) {
+            	caseTexte.setText( " Aucune Action : " + idButton
+            		);
+            } else {
+            	caseTexte.setText(" ------------ ");
+            }
+        });
     }
     
     public void setMainApp(MainApp mainApp) {
@@ -193,13 +264,36 @@ public class ChoiceOverviewController {
                 choix = 4;
                 dialogStage.close();
             }
+        });
+        butt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("aviButton!");
+                choix = 5;
+                dialogStage.close();
+            }
+        }); 
+        changerParti.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("PartiButton!");
+                choix = 6;
+                dialogStage.close();
+            }
+        }); 
+        aucuneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("aucuneButton!");
+                choix = 7;
+                dialogStage.close();
+            }
         }); 
     }
-    public void setChoice(int value) {
+    public void setChoice(int value, List<String> l_Actions) {
     	switch(value){
     	case 0 : {
-    		
-    		enableButtons();
+    		enableButtons(l_Actions);
     		break;
     	}
     	case 1 : {
@@ -209,13 +303,37 @@ public class ChoiceOverviewController {
     	}
     	
     }
-    public void enableButtons(){
+    public void enableButtons(List<String> l_Actions){
     	
-    	
+    	//"Aucune"
+    	//"Proposer une loi"
+    	//"Faire un sondage"
+    	//"Changer de parti"
+    	//"Avis du parlement"
+    	//"Repandre une rumeur"
+       	if(l_Actions.indexOf("Aucune") != -1){
+        	aucuneButton.setDisable(false);
+        	}
+
+    	if(l_Actions.indexOf("Proposer une loi") != -1){
     	proposeLoi.setDisable(false);
+    	}
+    	if(l_Actions.indexOf("Repandre une rumeur") != -1){
+
     	rumeur.setDisable(false);
+    	}
+    	if(l_Actions.indexOf("Faire un sondage") != -1){
+
     	sondage.setDisable(false);
+    	}
+    	if(l_Actions.indexOf("Avis du parlement") != -1){
+
     	butt.setDisable(false);
+    	}
+    	if(l_Actions.indexOf("Changer de parti") != -1){
+
+    	changerParti.setDisable(false);
+    	}
     	caseTexte.setText("C'est à vous de jouer");
     }
     
@@ -229,13 +347,14 @@ public class ChoiceOverviewController {
     }
     public void disableButtons(){
     	
-    	
+    	aucuneButton.setDisable(true);
     	proposeLoi.setDisable(true);
     	rumeur.setDisable(true);
     	sondage.setDisable(true);
     	butt.setDisable(true);
     	accepteLoi.setDisable(true);
     	refuseLoi.setDisable(true);
+    	changerParti.setDisable(true);
 
     }
     public int getChoix(){

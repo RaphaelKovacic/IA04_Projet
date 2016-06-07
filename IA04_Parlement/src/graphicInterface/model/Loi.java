@@ -21,8 +21,6 @@ public class Loi {
 
     private final StringProperty Description;
 
-
-    
     public Loi(int x, String a,String b){
     	this.id = x;
     	this.Name = new SimpleStringProperty(a);

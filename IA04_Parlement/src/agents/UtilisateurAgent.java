@@ -302,12 +302,51 @@ public class UtilisateurAgent extends Agent {
 					System.out.println("-------------------- ACTIONS POSSIBLES ---------------");
 					System.out.println("Voici la liste des actions possibles ce tour-ci");
 					MainApp.addHistorique("Demande de choix à l'utilisateur", -1);
-					MainApp.showChoicePopUp(0,"");
+					int choix = MainApp.showChoicePopUp(0,"",L_Actions);
 					System.out.println(L_Actions.toString());
 					System.out.println(
 							"Renvoyer un message (ACCEPT_PROPOSAL) à l'agent Mediateur avec pour contenu une de ces actions");
 					System.out.println("------------------FIN ACTIONS POSSIBLES ---------------");
 					System.out.println();
+					switch(choix){
+			    	
+			    	//"Aucune"
+			    	//"Proposer une loi"
+			    	//"Faire un sondage"
+			    	//"Changer de parti"
+			    	//"Avis du parlement"
+			    	//"Repandre une rumeur"
+
+					case 0:{
+						addBehaviour(new SendMyAction("Proposer une loi")); // Envoi un message à Mediateur pour donner son choix.
+						break;
+					}
+					case 3:{
+						addBehaviour(new SendMyAction("Repandre une rumeur")); // Envoi un message à Mediateur pour donner son choix.
+
+						break;
+					}
+					case 4:{
+						addBehaviour(new SendMyAction("Faire un sondage")); // Envoi un message à Mediateur pour donner son choix.
+
+						break;
+					}
+					case 5:{
+						addBehaviour(new SendMyAction("Avis du parlement")); // Envoi un message à Mediateur pour donner son choix.
+
+						break;
+					}
+					case 6:{
+						addBehaviour(new SendMyAction("Changer de parti")); // Envoi un message à Mediateur pour donner son choix.
+
+						break;
+					}
+					case 7:{
+						addBehaviour(new SendMyAction("Aucune")); // Envoi un message à Mediateur pour donner son choix.
+
+						break;
+					}
+					}
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
@@ -483,7 +522,7 @@ public class UtilisateurAgent extends Agent {
 				MainApp.addHistorique("Demande de vote", -1);
 				
 				int choix = -1;
-				choix = MainApp.showChoicePopUp(1,loi_en_cours.afficheString());
+				choix = MainApp.showChoicePopUp(1,loi_en_cours.afficheString(),null);
 				while (choix == -1){
 					try {
 						Thread.sleep(10000);
@@ -640,6 +679,7 @@ public class UtilisateurAgent extends Agent {
 					// On les affiche
 					System.out.println("-------------------------------------------------------");
 					System.out.println("--------------------LOIS-------------------------------");
+					MainApp.showLois(Loi_a_choisir);
 					for (int y = 0; y < Loi_a_choisir.size(); y++) {
 						Loi_a_choisir.get(y).affiche_a_utilisateur();
 
@@ -1019,6 +1059,25 @@ public class UtilisateurAgent extends Agent {
 			
 
 			message2.setContent("Lancement");	
+			myAgent.send(message2);
+		}
+	}
+	class SendMyAction extends OneShotBehaviour{
+		// Constructor
+		String message;
+		public SendMyAction(String message) {
+			this.message = message;
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent r�pond en pr�cisant son vote
+			ACLMessage message2 = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+			message2.addReceiver(AMediateur);
+			
+
+			message2.setContent(message);	
 			myAgent.send(message2);
 		}
 	}

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="300.0" prefHeight="300.0" prefWidth="300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphicInterface.view.ChoiceOverviewController">
+<AnchorPane maxWidth="300.0" prefHeight="361.0" prefWidth="300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphicInterface.view.ChoiceOverviewController">
    <children>
       <SplitPane dividerPositions="0.6471571906354515" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -17,20 +17,24 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="sondage" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Sondage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Button fx:id="accepteLoi" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="AccepterLoi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="proposeLoi" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Proposer Loi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                        <Button fx:id="rumeur" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Répendre Rumeur" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                        <Button fx:id="butt" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <Button fx:id="refuseLoi" alignment="CENTER" disable="true" mnemonicParsing="false" text="RefuserLoi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="sondage" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Sondage" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="accepteLoi" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="AccepterLoi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="proposeLoi" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Proposer Loi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Button fx:id="rumeur" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Répendre Rumeur" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <Button fx:id="butt" alignment="CENTER" disable="true" minWidth="100.0" mnemonicParsing="false" text="Avis" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Button fx:id="refuseLoi" alignment="CENTER" disable="true" mnemonicParsing="false" text="RefuserLoi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <Button fx:id="changerParti" disable="true" mnemonicParsing="false" text="Parti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Button fx:id="aucuneButton" mnemonicParsing="false" text="Aucune" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </children>

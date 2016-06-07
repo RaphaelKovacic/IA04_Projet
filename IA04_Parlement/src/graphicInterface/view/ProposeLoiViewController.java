@@ -3,6 +3,7 @@ package graphicInterface.view;
 import graphicInterface.MainApp;
 import graphicInterface.model.Depute;
 import graphicInterface.model.Loi;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,9 +31,7 @@ public class ProposeLoiViewController {
     
     
     public ProposeLoiViewController() {
-        choiceList.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> setTextArea(((Loi) newValue).getDescription()));
-
+ 
     }
 
     @FXML
@@ -46,7 +45,7 @@ public class ProposeLoiViewController {
                 dialogStage.close();
             }
         }); 
-    	
+
     }
     
     public void setMainApp(MainApp mainApp) {
@@ -54,7 +53,7 @@ public class ProposeLoiViewController {
 
         // Add observable list data to the table
         choiceList.setItems(mainApp.getLoiData());
-        
+
     }
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -67,5 +66,13 @@ public class ProposeLoiViewController {
     	this.textZone.setText(text);
     	
     }
+
+	public void setLois(ObservableList<Loi> listeLoi) {
+		// TODO Auto-generated method stub
+        choiceList.setItems(listeLoi);
+        choiceList.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> setTextArea(((Loi) newValue).getDescription()));
+
+	}
     
 }
