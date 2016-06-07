@@ -30,7 +30,7 @@ import jade.lang.acl.MessageTemplate;
  * <b>DeputeAgent est la classe représentant l'agent député dans
  * notre SMA Parlement.</b>
  * <p>
- * L'agent député possède les attributs suivants
+ * L'agent député possède les attributs suivants :
  * <ul>
  * <li>Un attribut Influence qui représente l'influence du député</li>
  * <li>Un attribut Popularite qui représente la popularité du député</li>
@@ -63,7 +63,7 @@ import jade.lang.acl.MessageTemplate;
  * </ul>
  * </p>
  * <p>
- * La première classe sert à l'instanciation de l'agent Les comportements de
+ * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent député sont spécifiés dans les classes suivantes
  * </p>
  * 
@@ -125,7 +125,6 @@ public class DeputeAgent extends Agent {
 	 */
 	float Hesitation;
 
-	// Coefficient (calcul du score pour faire passer une loi)
 	/**
 	 * Importance du député dans le calcul du score d'une loi. Statique.
 	 * 
@@ -156,7 +155,7 @@ public class DeputeAgent extends Agent {
 	float G; 
 	
 	/**
-	 * Importancedu parti politique (bonus si même parti que le député) dans le calcul du score d'une loi. Statique.
+	 * Importance du parti politique (bonus si même parti que le député) dans le calcul du score d'une loi. Statique.
 	 * 
 	 * @see #setup()
 	 *
@@ -188,7 +187,7 @@ public class DeputeAgent extends Agent {
 	float AEntreprise;
 	
 	/**
-	 * Importance du contexte économique actuel d pays dans le calcul du score d'une loi. Statique.
+	 * Importance du contexte économique actuel du pays dans le calcul du score d'une loi. Statique.
 	 * 
 	 * @see #setup()
 	 *
@@ -233,7 +232,7 @@ public class DeputeAgent extends Agent {
 	
 	/**
 	 * Méthode d'instanciation (appelée à la création) de notre agent
-	 * Deputé
+	 * Deputé.
 	 * <p>
 	 * Lors du lancement de notre plateforme JADE, chaque agent député est créé
 	 * grâce à cette méthode setup()
@@ -253,7 +252,7 @@ public class DeputeAgent extends Agent {
 			fe.printStackTrace();
 		}
 
-		// Initialisation de la liste des partis #Divergente
+		// Initialisation de la liste des partis (issue de l'univers Divergente)
 		L_Parti = new ArrayList<String>();
 		L_Parti.add("Altruistes");
 		L_Parti.add("Erudits");
@@ -333,7 +332,7 @@ public class DeputeAgent extends Agent {
 	
 	/**
 	 * <b>RequestToProposeLaw est le premier Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent député est en constante attente
 	 * d'une requête REQUEST de l'agent Loi lui demandant de proposer une 
@@ -369,13 +368,13 @@ public class DeputeAgent extends Agent {
 	}
 
 	/**
-	 * <b>RequestToProposeLaw est le second Behaviour de l'agent
-	 * Député</b>
+	 * <b>GetLawToProposeFromKB est le second Behaviour de l'agent
+	 * Député.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent député ne va requêter l'agent KB
 	 * pour connaitre la loi qu'il va proposer seulement lorsqu'il
-	 * a été lui même averti par message par l'agent loi qu'il doit proposer une 
-	 * loi lors de ce tour
+	 * a été lui même été averti par message par l'agent loi qu'il doit proposer une
+	 * loi lors de ce tour.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Réalise la demande à l'agent KB
@@ -388,7 +387,6 @@ public class DeputeAgent extends Agent {
 	 */
 	class GetLawToProposeFromKB extends OneShotBehaviour {
 
-		// Task to do
 		public void action() {
 
 			// On envoie un message à l'agent KB pour récupérer une loi non
@@ -398,22 +396,20 @@ public class DeputeAgent extends Agent {
 			message1.setContent(Parti_Politique);
 			myAgent.send(message1);
 
-			// On crée le behaviour pour récupérer la loi proposée par KB et
-			// répondre à loi
-			// myAgent.addBehaviour(new ProposeLaw(message));
 		}
 	}
 
 	/**
 	 * <b>ProposeLaw est le troisième Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent KB
 	 * pour récupérer la loi qu'il va proposer lorsque KB envoie effectivement 
 	 * le message contenant cette loi.
 	 * </p>
 	 * <p>
-	 * Il implémente le comportement suivant : Récupère la loi envoyée par KB.
+	 * Il implémente le comportement suivant : Récupère la loi formalisée en JSON
+	 * envoyée par KB.
 	 * Loi qu'il doit proposer.
 	 * <p>
 	 * 
@@ -422,7 +418,6 @@ public class DeputeAgent extends Agent {
 	 */
 	class ProposeLaw extends CyclicBehaviour {
 
-		// Task to do
 		public void action() {
 
 			// On attend la reception d'un message de type REQUEST venant de
@@ -456,14 +451,7 @@ public class DeputeAgent extends Agent {
 
 						mapper1.writeValue(sw1, loi_de_kb);
 						String s = sw1.toString();
-						System.out.println();
-						System.out.println(
-								"-----------------------LOI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
-						System.out.println("Loi choisie pour député dans député: " + s);
-						System.out.println(
-								"-----------------------FIN LOI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
-						System.out.println();
-						// Répons à l'agent loi avec notre loi formatée en JSON
+						// Répondre à l'agent loi avec notre loi formatée en JSON
 						// avec les infos du député en plus.
 						ACLMessage message2 = new ACLMessage(ACLMessage.PROPOSE);
 						message2.addReceiver(ALoi);
@@ -484,11 +472,11 @@ public class DeputeAgent extends Agent {
 	}
 
 	/**
-	 * <b>RequestToVote est le quatirème Behaviour de l'agent
-	 * Député</b>
+	 * <b>RequestToVote est le quatrième Behaviour de l'agent
+	 * Député.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi
-	 * pour intercepter le message lui demander de voter une loi.
+	 * pour récupérer le message lui demander de voter une loi.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère le message de type PROPOSE
@@ -523,7 +511,7 @@ public class DeputeAgent extends Agent {
 
 	/**
 	 * <b>RequestToSondage est le cinquième Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi
 	 * pour intercepter le message lui demandant son avis sur une loi proposée
@@ -562,7 +550,7 @@ public class DeputeAgent extends Agent {
 	
 	/**
 	 * <b>RequestToModifCara est le sixième Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante "écoute" de l'agent loi et de l'agent rumeur
 	 * pour intercepter le message lui demandant de mettre à jour ses caractéristiques
@@ -628,10 +616,10 @@ public class DeputeAgent extends Agent {
 	
 	/**
 	 * <b>VoteLoi est le septième Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
-	 * Il est de type OneSHot. Notre agent ne doit rendre son vote sur une loi
-	 * seulement lorsqu'il a préalablement intercepter le message de vote d'une loi
+	 * Il est de type OneShot. Notre agent ne doit rendre son vote sur une loi
+	 * seulement lorsqu'il a préalablement intercepté le message de vote d'une loi
 	 * venant de l'agent loi.
 	 * </p>
 	 * <p>
@@ -719,14 +707,14 @@ public class DeputeAgent extends Agent {
 
 	/**
 	 * <b>SondageLoi est le septième Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
-	 * Il est de type OneSHot. Notre agent ne doit rendre son avis sur une loi
-	 * seulement lorsqu'il a préalablement intercepter le message d'avis d'une loi
+	 * Il est de type OneShot. Notre agent ne doit rendre son avis sur une loi
+	 * seulement lorsqu'il a préalablement intercepté le message d'avis d'une loi
 	 * venant de l'agent loi.
 	 * </p>
 	 * <p>
-	 * Il implémente le comportement suivant :Donne son avis sur
+	 * Il implémente le comportement suivant : Donne son avis sur
 	 * la loi récupérée dans le message demandant 
 	 * de donner son avis sur choisie par l'utilisateur
 	 *  une loi par envoyée par l'agent loi.
@@ -830,14 +818,14 @@ public class DeputeAgent extends Agent {
 
 	/**
 	 * <b>AnswerRequestCharacteristicsFromRumourAgent est le huitième Behaviour de l'agent
-	 * Député</b>
+	 * Député.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent député est en constante attente
 	 * d'une requête REQUEST de l'agent Rumeur lui demandant ses caractéristiques.
 	 * </p>
 	 * <p>
-	 * Il implémente le comportement suivant : Renvoie l'influence, la popularité et la crédibilité du député à l'agent Rumeur
-	 * pour que celui-ci fasse le calcul.
+	 * Il implémente le comportement suivant : Renvoie l'influence, la popularité et la crédibilité
+	 * du député à l'agent Rumeur pour que celui-ci fasse le calcul.
 	 * <p>
 	 *
 	 * @author Cristian

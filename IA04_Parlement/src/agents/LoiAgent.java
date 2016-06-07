@@ -29,14 +29,14 @@ import launcher.AgentLauncher;
  * <b>LoiAgent est la classe représentant l'agent loi dans
  * notre SMA Parlement.</b>
  * <p>
- * L'agent loi possède les attributs suivants
+ * L'agent loi possède les attributs suivants :
  * <ul>
- * <li>Un attribut L_AID_Vote qui représente la liste des AID des députés ayant votés ou donnés leur avis.</li>
- * <li>Un attribut loi_en_cours qui représente la loi en cours de vote ou de sondage.</li>
- * <li>Un attribut proposant qui représente l'AID de l'agent proposant la loi à voter.</li>
- * <li>Un attribut nb_votant qui représente le nombre de votant lors du tour de vote ou de sondage.</li>
- * <li>Un attribut nb_vote_pour qui représente le nombre de députés POUR lors du tour de vote ou de sondage.</li>
- * <li>Un attribut nb_vote_contre qui représente le nombre de député CONTRE lors du tour de vote ou de sondage.</li>
+ * <li>Un attribut L_AID_Vote qui représente la liste des AID des députés ayant voté ou donné leur avis</li>
+ * <li>Un attribut loi_en_cours qui représente la loi en cours de vote ou de sondage</li>
+ * <li>Un attribut proposant qui représente l'AID de l'agent proposant la loi à voter</li>
+ * <li>Un attribut nb_votant qui représente le nombre de votant lors du tour de vote ou de sondage</li>
+ * <li>Un attribut nb_vote_pour qui représente le nombre de députés POUR lors du tour de vote ou de sondage</li>
+ * <li>Un attribut nb_vote_contre qui représente le nombre de député CONTRE lors du tour de vote ou de sondage</li>
 
  * <li>L'AID de l'agent mediateur pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent utilisateur pour pouvoir rapidement communiquer avec lui</li>
@@ -49,7 +49,7 @@ import launcher.AgentLauncher;
  * </ul>
  * </p>
  * <p>
- * La première classe sert à l'instanciation de l'agent Les comportements de
+ * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent loi sont spécifiés dans les classes suivantes.
  * </p>
  * 
@@ -61,7 +61,7 @@ import launcher.AgentLauncher;
 public class LoiAgent extends Agent {
 
 	/**
-	 * La liste des AID des agents ayant votés. Variable.
+	 * La liste des AID des agents ayant voté. Variable.
 	 * 
 	 * @see #setup()
 	 */
@@ -150,8 +150,8 @@ public class LoiAgent extends Agent {
 	 * Méthode d'instanciation (appelée à la création) de notre agent
 	 * loi.
 	 * <p>
-	 * Lors du lancement de notre plateforme JADE, l'agent loi est crée
-	 * grâce à cette méthode setup()
+	 * Lors du lancement de notre plateforme JADE, l'agent loi est créé
+	 * grâce à cette méthode setup().
 	 * </p>
 	 */
 	protected void setup() {
@@ -210,13 +210,13 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>RequestOfMediator est le premier Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent loi est en constante attente
 	 * d'une requête REQUEST de l'agent mediateur l'informant que l'action
 	 * en cours lors de ce tour est soit une proposition ou un avis demandé
 	 * par l'utilisateur soit tout autre tour et dans ce cas il doit
-	 * demander au députés de lui soumettre une loi au vote.
+	 * demander aux députés de lui soumettre une loi au vote.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère le message de la part
@@ -294,7 +294,7 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>DemandeLoi est le second Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent ne va engager le processus
 	 * de demander une loi à soumettre au vote que lorsque le bon
@@ -336,7 +336,7 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>VoteLoi est le troisième Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent ne va engager le processus
 	 * de faire voter une loi que lorsque le bon message est reçu de la part
@@ -363,7 +363,7 @@ public class LoiAgent extends Agent {
 		// Task to do
 		public void action() {
 
-			// Envoie d'un message a tous les députés (et utilisateur si besoin)
+			// Envoi d'un message a tous les députés (et utilisateur si besoin)
 			// pour qu'ils votent pour la loi contenu dans le message
 			ACLMessage forward = message.createReply();
 			forward.removeReceiver(message.getSender());
@@ -390,7 +390,7 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>SondageLoi est le troisième Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent ne va engager le processus
 	 * de demander l'avis aux députés sur une loi que lorsque le bon message est reçu de la part
@@ -426,13 +426,11 @@ public class LoiAgent extends Agent {
 			for (int i = 0; i < List_Depute.size(); i++)
 				forward.addReceiver(List_Depute.get(i));
 
-			// TODO DELETE
 			// Si la proposition de loi vient d'un député il faut rajouter
 			// l'utilisateur pour qu'il puisse voter...
 			if (List_Depute.contains(message.getSender()))
 				forward.addReceiver(AUtilisateur);
 
-			// TODO DELETE
 			// Pas besoin de faire voter celui qui propose la loi...
 			forward.removeReceiver(proposant);
 
@@ -446,7 +444,7 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>ProposalLawOfDepute est le cinquième Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante attente d'une proposition
 	 * de loi faite par un député qu'il faut soumettre au vote de l'assemblée dans son ensemble.
@@ -492,14 +490,14 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>AcceptLawOfDepute est le sixième Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
-	 * Il est de type Cyclic. Notre agent est en constante attente de la réponse positive (POUR)
+	 * Il est de type Cyclic. Notre agent est en constante attente d'une réponse positive (POUR)
 	 * concernant la loi en cours.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère la réponse positive, met à jour sa liste locale 
-	 * qji tient à jour le vote de chaque député.
+	 * qui tient à jour le vote de chaque député.
 	 * Teste si on a reçu tous les votes pour la loi en cours d'étude.
 	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
 	 * <p>
@@ -565,14 +563,14 @@ public class LoiAgent extends Agent {
 	
 	/**
 	 * <b>RefuseLawOfDepute est le septième Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
-	 * Il est de type Cyclic. Notre agent est en constante attente de la réponse négative (CONTRE)
+	 * Il est de type Cyclic. Notre agent est en constante attente d'une réponse négative (CONTRE)
 	 * concernant la loi en cours.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère la réponse positive, met à jour sa liste locale 
-	 * qji tient à jour le vote de chaque député.
+	 * qui tient à jour le vote de chaque député.
 	 * Teste si on a reçu tous les votes pour la loi en cours d'étude.
 	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
 	 * <p>
@@ -611,7 +609,6 @@ public class LoiAgent extends Agent {
 
 				} else {
 
-					//TODO Récupérer parti de l'utilisateur pour la liste sur l'historique du vote de chaque député au tour courant
 					Aid_vote e = new Aid_vote(AUtilisateur.getLocalName(), "contre", null);
 					L_AID_Vote.add(e);
 				}
@@ -637,7 +634,7 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>ConsequenceVote est le huitième Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent va s'occuper de faire le récapitulatif du vote de la loi
 	 * en cours.
@@ -676,7 +673,7 @@ public class LoiAgent extends Agent {
 					"La Loi a été votée avec : " + nb_vote_pour + " vote Pour et " + nb_vote_contre + " vote Contre.");
 			System.out.println("-----------------------FIN RÉSULTAT VOTE ------------------------------");
 
-			// Pour chaque personne ayant voté
+			// Pour chaque député ayant voté
 			for (int i = 0; i < L_AID_Vote.size(); i++) {
 
 				ObjectMapper mapper1 = new ObjectMapper();
@@ -874,7 +871,7 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * <b>ConsequenceSondage est le neuvième et dernier Behaviour de l'agent
-	 * loi</b>
+	 * loi.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent va s'occuper de faire le récapitulatif de la demande de sondage
 	 * dans le parlement pour la loi soumise au sondage.

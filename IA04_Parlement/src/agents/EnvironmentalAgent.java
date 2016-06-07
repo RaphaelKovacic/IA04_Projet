@@ -22,7 +22,7 @@ import jade.core.Agent;
  * <b>EnvironnementalAgent est la classe représentant l'agent environnement dans
  * notre SMA Parlement.</b>
  * <p>
- * L'agent environnement possède les attributs suivants
+ * L'agent environnement possède les attributs suivants :
  * <ul>
  * <li>La valeur du contexte économique actuel du pays.</li>
  * <li>La valeur du contexte social (qualité de vie) actuel du pays.</li>
@@ -33,8 +33,8 @@ import jade.core.Agent;
  * </ul>
  * </p>
  * <p>
- * La première classe sert à l'instanciation de l'agent Les comportements de
- * l'agent Environnement sont spécifiés dans les quatre classes suivantes
+ * La première classe sert à l'instanciation de l'agent. Les comportements de
+ * l'agent Environnement sont spécifiés dans les quatre classes suivantes.
  * </p>
  * 
  * 
@@ -136,14 +136,14 @@ public class EnvironmentalAgent extends Agent {
 	}
 
 	/**
-	 * <b>WaitLoiRequest est le premier Behaviour de l'agent Environnement</b>
+	 * <b>WaitLoiRequest est le premier Behaviour de l'agent Environnement.</b>
 	 * <p>
-	 * Il est de type Cyclic. Notre agent ENvironnement est en constante attente
+	 * Il est de type Cyclic. Notre agent Environnement est en constante attente
 	 * d'une requête REQUEST de l'agent loi qui lui demande de mettre à jour ses
 	 * variables.
 	 * </p>
 	 * <p>
-	 * Il implémente le comportement suivant : Récupèrer le message demandant
+	 * Il implémente le comportement suivant : Récupérer le message demandant
 	 * une mise à jour de ses variables.
 	 * <p>
 	 * 
@@ -180,7 +180,7 @@ public class EnvironmentalAgent extends Agent {
 
 	/**
 	 * <b>WaitSondageRequest est le second Behaviour de l'agent
-	 * Environnement</b>
+	 * Environnement.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Environnement est en constante attente
 	 * d'une requête REQUEST de l'agent sondage qui lui demande la valeur de ses
@@ -225,14 +225,14 @@ public class EnvironmentalAgent extends Agent {
 	}
 
 	/**
-	 * <b>MajBehaviour est le troisième Behaviour de l'agent Environnement</b>
+	 * <b>MajBehaviour est le troisième Behaviour de l'agent Environnement.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent Environnement va seulement modifier
 	 * ses variables d'environnement lorsque le message lui est parvenu.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Modifier ses variables
-	 * d'environnements
+	 * d'environnements.
 	 * <p>
 	 * 
 	 * Cette action faite suite au vote d'une loi.
@@ -299,7 +299,7 @@ public class EnvironmentalAgent extends Agent {
 
 	/**
 	 * <b>MajBehaviour est le quatrième et dernier Behaviour de l'agent
-	 * Environnement</b>
+	 * Environnement.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent Environnement va seulement renvoyer
 	 * les valeurs de ses variables d'environnement lorsqu'on lui demande et

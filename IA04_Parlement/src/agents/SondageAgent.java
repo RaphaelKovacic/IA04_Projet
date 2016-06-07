@@ -21,7 +21,7 @@ import jade.lang.acl.MessageTemplate;
  * <b>SondageAgent est la classe représentant l'agent sondage dans notre SMA
  * Parlement.</b>
  * <p>
- * L'agent sondage possède les attributs suivants
+ * L'agent sondage possède les attributs suivants :
  * <ul>
  * <li>L'AID de l'agent environnement pour pouvoir rapidement communiquer avec
  * lui</li>
@@ -30,8 +30,8 @@ import jade.lang.acl.MessageTemplate;
  * </ul>
  * </p>
  * <p>
- * La première classe sert à l'instanciation de l'agent Les comportements de
- * l'agent Sondage sont spécifiés dans les quatre classes suivantes
+ * La première classe sert à l'instanciation de l'agent. Les comportements de
+ * l'agent Sondage sont spécifiés dans les quatre classes suivantes.
  * </p>
  * 
  * 
@@ -66,7 +66,7 @@ public class SondageAgent extends Agent {
 	 * Méthode d'instanciation (appelée à la création) de notre agent Sondage
 	 * <p>
 	 * Lors du lancement de notre plateforme JADE, l'agent Sondage est créé
-	 * grâce à cette méthode setup()
+	 * grâce à cette méthode setup().
 	 * </p>
 	 */
 	protected void setup() {
@@ -106,18 +106,18 @@ public class SondageAgent extends Agent {
 	}
 
 	/**
-	 * <b>RequestOfMediator est le premier Behaviour de l'agent Sondage</b>
+	 * <b>RequestOfMediator est le premier Behaviour de l'agent Sondage.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Sondage est en constante attente d'une
 	 * requête PROPOSE de l'agent Médiateur qui lui demande les valeurs
-	 * actuelles des variables d'environnement
+	 * actuelles des variables d'environnement.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupèrer le message demandant
 	 * les valeurs des variables d'environnement actuelles.
 	 * <p>
 	 * 
-	 * Cette action faite suite à une demande de sondage de la part de
+	 * Cette action fait suite à une demande de sondage de la part de
 	 * l'utilisateur.
 	 * 
 	 * <p>
@@ -149,7 +149,7 @@ public class SondageAgent extends Agent {
 	}
 
 	/**
-	 * <b>AskVariableEnv est le second Behaviour de l'agent Sondage</b>
+	 * <b>AskVariableEnv est le second Behaviour de l'agent Sondage.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent Sondage ne fait ce comportement
 	 * qu'une seule fois. Lorsque le médiateur lui a déjà demandé de lui fournir
@@ -157,10 +157,10 @@ public class SondageAgent extends Agent {
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Envoyer un message à l'agent
-	 * environnement pour connaitre l'état de ses variables
+	 * environnement pour connaitre l'état de ses variables.
 	 * <p>
 	 * 
-	 * Cette action faite suite à une demande des valeurs des variables par
+	 * Cette action fait suite à une demande des valeurs des variables par
 	 * l'agent médiateur à notre agent Sondage. Voir Behaviour ci-dessus.
 	 * 
 	 * @author Benoit
@@ -193,17 +193,13 @@ public class SondageAgent extends Agent {
 
 	/**
 	 * <b>ReponseOfEnvironnement est le troisième Behaviour de l'agent
-	 * Sondage</b>
+	 * Sondage.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Sondage est en constante attente d'une
 	 * requête INFORM de l'agent Environnement qui répond au message envoyé par
 	 * notre agent Sondage lui demandant les valeurs de ses variables
 	 * d'environnements.
 	 * </p>
-	 * <p>
-	 * Il implémente le comportement suivant : RRecupérer le message de l'agent
-	 * environnement avec les valeurs de
-	 * <p>
 	 * 
 	 * Cette action faite suite à une demande de sondage de la part de
 	 * l'utilisateur.
@@ -237,8 +233,8 @@ public class SondageAgent extends Agent {
 	}
 
 	/**
-	 * <b>GiveVarToMediat est le quatirème et dernier Behaviour de l'agent
-	 * Sondage</b>
+	 * <b>GiveVarToMediat est le quatrième et dernier Behaviour de l'agent
+	 * Sondage.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent Sondage va afficher les variables
 	 * d'environnements envoyées par l'agent environnement seulement lorsqu'il a
@@ -267,7 +263,6 @@ public class SondageAgent extends Agent {
 			this.mess = message.getContent();
 		}
 
-		// TODO Vraiment ? Qu'y a -t -il à faire ?
 		public void action() {
 			/*
 			 * //Envoie d'un message a l'agent Environnement pour connaitre ses

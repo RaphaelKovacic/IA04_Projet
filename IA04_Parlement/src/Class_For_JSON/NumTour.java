@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <p>
  * Un NumTour possède l'attribut suivant :
  * <ul>
- * <li>Un entier correspondant au numéro du tour en cours</li>
+ * <li>Un entier correspondant au numéro du tour en cours.</li>
  * </ul>
  * </p>
  * 

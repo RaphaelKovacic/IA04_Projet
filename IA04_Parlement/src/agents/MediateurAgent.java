@@ -30,7 +30,7 @@ import jade.lang.acl.MessageTemplate;
  * <b>DeputeAgent est la classe représentant l'agent député dans
  * notre SMA Parlement.</b>
  * <p>
- * L'agent député possède les attributs suivants
+ * L'agent député possède les attributs suivants :
  * <ul>
  * <li>Un attribut L_Actions qui représente la liste des actions possibles par l'utilisateur à chaque tour</li>
  * <li>Un attribut action_choisit qui représente l'action sélectionnée par l'utilisateur à chaque tour</li>
@@ -58,8 +58,8 @@ import jade.lang.acl.MessageTemplate;
  * </ul>
  * </p>
  * <p>
- * La première classe sert à l'instanciation de l'agent Les comportements de
- * l'agent médiateur sont spécifiés dans les classes suivantes
+ * La première classe sert à l'instanciation de l'agent. Les comportements de
+ * l'agent médiateur sont spécifiés dans les classes suivantes.
  * </p>
  * 
  * 
@@ -70,84 +70,84 @@ import jade.lang.acl.MessageTemplate;
 public class MediateurAgent extends Agent {
 	
 	/**
-	 * La liste des actions possibles par l'utilisateur à ce tour. Variable.
+	 * La liste des actions possibles par l'utilisateur à ce tour. Variable
 	 * 
 	 * @see #setup()
 	 */
 	List<String> L_Actions = new ArrayList<String>();
 	
 	/**
-	 * L'action choisi par l'utilisateur à ce tour. Variable.
+	 * L'action choisie par l'utilisateur à ce tour. Variable
 	 * 
 	 * @see #setup()
 	 */
 	String action_choisit;
 	
 	/**
-	 * Le numéro du tour actuel. Variable.
+	 * Le numéro du tour actuel. Variable
 	 * 
 	 * @see #setup()
 	 */
 	int num_tour_actuel;
 	
 	/**
-	 * La fréquence à laquelle l'action de proposer une loi est valable pour l'utilisateur. Statique.
+	 * La fréquence à laquelle l'action de proposer une loi est valable pour l'utilisateur. Statique
 	 * 
 	 * @see #setup()
 	 */
 	int nb_tour_proposeloi = 2;
 	
 	/**
-	 * La fréquence à laquelle l'action de faire un sondage dans le pays est valable pour l'utilisateur. Statique.
+	 * La fréquence à laquelle l'action de faire un sondage dans le pays est valable pour l'utilisateur. Statique
 	 * 
 	 * @see #setup()
 	 */
 	int nb_tour_sondage = 1;
 	
 	/**
-	 * La fréquence à laquelle l'action de changer de parti est valable pour l'utilisateur. Statique.
+	 * La fréquence à laquelle l'action de changer de parti est valable pour l'utilisateur. Statique
 	 * 
 	 * @see #setup()
 	 */
 	int nb_tour_changerparti = 3;
 	
 	/**
-	 * La fréquence à laquelle l'action de demander l'avis au parlement pour une loi est valable pour l'utilisateur. Statique.
+	 * La fréquence à laquelle l'action de demander l'avis au parlement pour une loi est valable pour l'utilisateur. Statique
 	 * 
 	 * @see #setup()
 	 */
 	int nb_tour_sondage_loi = 1;
 	
 	/**
-	 * La fréquence à laquelle l'action de répandre une rumeur est valable pour l'utilisateur. Statique.
-	 * 
+	 * La fréquence à laquelle l'action de répandre une rumeur est valable pour l'utilisateur. Statique
+	 *
 	 * @see #setup()
 	 */
 	int nb_tour_rumeur = 1;
 	
 	/**
-	 * Oui ou non y-a-t-il un vote en cours dans le parlement. Variable
+	 * Y-a-t-il un vote en cours dans le parlement ? Variable
 	 * 
 	 * @see #setup()
 	 */
 	boolean vote_en_cours;
 
 	/**
-	 * La liste des lois proposables par l'utilisateur. Variable.
+	 * La liste des lois proposables par l'utilisateur. Variable
 	 * 
 	 * @see #setup()
 	 */
 	List<Loi> Loi_possibles_user = new ArrayList<Loi>();
 	
 	/**
-	 * La loi soumise au vote par l'utilisateur. Variable.
+	 * La loi soumise au vote par l'utilisateur. Variable
 	 * 
 	 * @see #setup()
 	 */
 	Loi loi_choisie = new Loi();
 	
 	/**
-	 * Les informations de l'utilisateur à incorporer à la loi qu'il va proposer. Variables.
+	 * Les informations de l'utilisateur à incorporer à la loi qu'il va proposer. Variables
 	 * 
 	 * @see #setup()
 	 */
@@ -211,7 +211,7 @@ public class MediateurAgent extends Agent {
 	 * mediateur.
 	 * <p>
 	 * Lors du lancement de notre plateforme JADE, l'agent médiateur est crée
-	 * grâce à cette méthode setup()
+	 * grâce à cette méthode setup().
 	 * </p>
 	 */
 	protected void setup() {
@@ -278,7 +278,7 @@ public class MediateurAgent extends Agent {
 
 	/**
 	 * <b>TourFromSimulation est le premier Behaviour de l'agent
-	 * mediateur</b>
+	 * mediateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent mediateur est en constante attente
 	 * d'une requête REQUEST de l'agent simulation l'informant du début
@@ -361,7 +361,7 @@ public class MediateurAgent extends Agent {
 
 	/**
 	 * <b>ProposeActionsToUser est le second Behaviour de l'agent
-	 * mediateur</b>
+	 * mediateur.</b>
 	 * <p>
 	 * Il est de type OneShot. Notre agent mediateur va envoyer
 	 * dans un messgae à l'agent utilisateur la liste des actions
@@ -371,7 +371,7 @@ public class MediateurAgent extends Agent {
 	 * <p>
 	 * Il implémente le comportement suivant : Envoie un message
 	 * avec la liste des actions possibles à ce tour à l'agent 
-	 * utilisateur
+	 * utilisateur.
 	 * <p>
 	 * 
 	 * @see TourFromSimulation
@@ -405,7 +405,7 @@ public class MediateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>ProposeActionsToUser est le troisième Behaviour de l'agent
+	 * <b>ActionFromUtilisateur est le troisième Behaviour de l'agent
 	 * mediateur</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante attente
@@ -414,7 +414,7 @@ public class MediateurAgent extends Agent {
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère le message
-	 * contenant l'action choisi par l'utilisateur et envoi les messages 
+	 * contenant l'action choisi par l'utilisateur et envoie les messages
 	 * correspondants à chaque action.
 	 * C'est le behaviour de décision et routing des messages après le choix
 	 * d'une action par le joueur.
@@ -528,7 +528,7 @@ public class MediateurAgent extends Agent {
 	
 	/**
 	 * <b>LawProposalFromUser est le quatrième Behaviour de l'agent
-	 * mediateur</b>
+	 * mediateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante attente
 	 * d'un message de la part du joueur avec la loi qu'il a choisi
@@ -610,7 +610,7 @@ public class MediateurAgent extends Agent {
 
 	/**
 	 * <b>FinVoteFromLoi est le cinquième Behaviour de l'agent
-	 * mediateur</b>
+	 * mediateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante attente
 	 * d'un message de la part de l'agent loi lui signifiant la fin de ses activités.
@@ -753,7 +753,7 @@ public class MediateurAgent extends Agent {
 
 	/**
 	 * <b>ReceiveLawsFromKB est le septième et dernier Behaviour de l'agent
-	 * mediateur</b>
+	 * mediateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent est en constante attente
 	 * d'un message de la part de l'agent KB contenant la liste des lois

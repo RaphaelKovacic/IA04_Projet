@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * </p>
  * <p>
  * La classe Loi implémente l'interface Comparable pour permettre la comparaison
- * automatiquede lois grâce à la methode sort()
+ * automatique de lois grâce à la methode sort()
  * </p>
  * 
  * @author Benoit & Etienne
