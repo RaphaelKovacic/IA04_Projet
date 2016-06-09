@@ -54,7 +54,7 @@ import launcher.AgentLauncher;
  * </p>
  * 
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 2.3
  */
 @SuppressWarnings("serial")
@@ -228,7 +228,7 @@ public class LoiAgent extends Agent {
 	 * @see SondageLoi
 	 * @see DemandeLoi
 	 * 
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 3.6
 	 */
 	class RequestOfMediator extends CyclicBehaviour {
@@ -349,7 +349,7 @@ public class LoiAgent extends Agent {
 	 * 
 	 * @see RequestOfMediator
 	 * 
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.3
 	 */
 	class VoteLoi extends OneShotBehaviour {
@@ -454,7 +454,7 @@ public class LoiAgent extends Agent {
 	 * Envoie un message à tous les autres députés ainsi qu'à l'utilisateur leur demandant de voter pour cette loi.
 	 * <p>
 	 * 
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
 	class ProposalLawOfDepute extends CyclicBehaviour {
@@ -505,7 +505,7 @@ public class LoiAgent extends Agent {
 	 * @see ConsequenceVote
 	 * @see ConsequenceSondage
 	 * 
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
 	class AcceptLawOfDepute extends CyclicBehaviour {
@@ -578,7 +578,7 @@ public class LoiAgent extends Agent {
 	 * @see ConsequenceVote
 	 * @see ConsequenceSondage
 	 * 
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
 	class RefuseLawOfDepute extends CyclicBehaviour {
@@ -650,7 +650,7 @@ public class LoiAgent extends Agent {
 	 * @see AcceptLawOfDepute
 	 * @see RefuseLawOfDepute
 	 * 
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
 	class ConsequenceVote extends OneShotBehaviour {

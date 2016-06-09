@@ -68,7 +68,7 @@ import jade.lang.acl.MessageTemplate;
  * </p>
  * 
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 4.3
  */
 
@@ -563,7 +563,7 @@ public class DeputeAgent extends Agent {
 	 * internes.
 	 * <p>
 	 * 
-	 * @author Benoit & Cristian
+	 * @author Benoit  Cristian
 	 * @version 1.4
 	 */
 	class RequestToModifCara extends CyclicBehaviour {

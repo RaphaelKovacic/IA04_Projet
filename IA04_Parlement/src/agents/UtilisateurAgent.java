@@ -61,7 +61,7 @@ import jade.lang.acl.MessageTemplate;
  * </p>
  * 
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 3.1
  */
 
@@ -370,7 +370,7 @@ public class UtilisateurAgent extends Agent {
 	 * changer de parti.
 	 * <p>
 	 * 
-	 * @author Etienne & Benoit
+	 * @author Etienne  Benoit
 	 * @version 2.1
 	 */
 	class PrecisonActionFromMediateur extends CyclicBehaviour {
@@ -740,7 +740,7 @@ public class UtilisateurAgent extends Agent {
 	 * C'est la fin de l'action : Proposer une loi ou lorsque l'on vote une loi, ou bien lorsqu'on répand une rumeur.
 	 * <p>
 	 * 
-	 * @author Benoit & Cristian
+	 * @author Benoit  Cristian
 	 * @version 1.7
 	 */
 	class RequestToModifCara extends CyclicBehaviour {

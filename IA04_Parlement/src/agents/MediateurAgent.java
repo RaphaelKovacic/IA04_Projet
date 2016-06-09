@@ -63,145 +63,145 @@ import jade.lang.acl.MessageTemplate;
  * </p>
  * 
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 5.2
  */
 @SuppressWarnings("serial")
 public class MediateurAgent extends Agent {
-	
+
 	/**
 	 * La liste des actions possibles par l'utilisateur à ce tour. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	List<String> L_Actions = new ArrayList<String>();
-	
+
 	/**
 	 * L'action choisie par l'utilisateur à ce tour. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	String action_choisit;
-	
+
 	/**
 	 * Le numéro du tour actuel. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int num_tour_actuel;
-	
+
 	/**
 	 * La fréquence à laquelle l'action de proposer une loi est valable pour l'utilisateur. Statique
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_tour_proposeloi = 2;
-	
+
 	/**
 	 * La fréquence à laquelle l'action de faire un sondage dans le pays est valable pour l'utilisateur. Statique
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_tour_sondage = 1;
-	
+
 	/**
 	 * La fréquence à laquelle l'action de changer de parti est valable pour l'utilisateur. Statique
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_tour_changerparti = 3;
-	
+
 	/**
 	 * La fréquence à laquelle l'action de demander l'avis au parlement pour une loi est valable pour l'utilisateur. Statique
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_tour_sondage_loi = 1;
-	
+
 	/**
 	 * La fréquence à laquelle l'action de répandre une rumeur est valable pour l'utilisateur. Statique
 	 *
 	 * @see #setup()
 	 */
 	int nb_tour_rumeur = 1;
-	
+
 	/**
 	 * Y-a-t-il un vote en cours dans le parlement ? Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	boolean vote_en_cours;
 
 	/**
 	 * La liste des lois proposables par l'utilisateur. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	List<Loi> Loi_possibles_user = new ArrayList<Loi>();
-	
+
 	/**
 	 * La loi soumise au vote par l'utilisateur. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	Loi loi_choisie = new Loi();
-	
+
 	/**
 	 * Les informations de l'utilisateur à incorporer à la loi qu'il va proposer. Variables
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	Loi utilisateur_information = new Loi();
 
 	/**
 	 * L'AID de l'agent Loi. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ALoi;
-	
+
 
 	/**
 	 * L'AID de l'agent Utilisateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AUtilisateur;
-	
+
 
 	/**
 	 * L'AID de l'agent Sondage. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ASondage;
-	
+
 
 	/**
 	 * L'AID de l'agent SImulation. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ASimulation;
-	
+
 
 	/**
 	 * L'AID de l'agent KB. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AKB;
-	
+
 	/**
 	 * L'AID de l'agent Rumeur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ARumeur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
@@ -286,12 +286,12 @@ public class MediateurAgent extends Agent {
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Affiche le numéro du tour,
-	 * et construit la liste des actions possibles en fonction du tour 
+	 * et construit la liste des actions possibles en fonction du tour
 	 * actuel.
 	 * <p>
-	 * 
+	 *
 	 * @see ProposeActionsToUser
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.5
 	 */
 	class TourFromSimulation extends CyclicBehaviour {
@@ -344,7 +344,7 @@ public class MediateurAgent extends Agent {
 				if (num_tour_actuel % nb_tour_sondage_loi == 0) {
 					L_Actions.add("Avis du parlement");
 				}
-				
+
 				if (num_tour_actuel % nb_tour_rumeur == 0) {
 					L_Actions.add("Repandre une rumeur");
 				}
@@ -365,17 +365,17 @@ public class MediateurAgent extends Agent {
 	 * <p>
 	 * Il est de type OneShot. Notre agent mediateur va envoyer
 	 * dans un messgae à l'agent utilisateur la liste des actions
-	 * possibles. On ne fait cette action qu'au début de chaque 
+	 * possibles. On ne fait cette action qu'au début de chaque
 	 * nouveau tour.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Envoie un message
-	 * avec la liste des actions possibles à ce tour à l'agent 
+	 * avec la liste des actions possibles à ce tour à l'agent
 	 * utilisateur.
 	 * <p>
-	 * 
+	 *
 	 * @see TourFromSimulation
-	 * @author Benoit & Etienne
+	 * @author Benoit  Etienne
 	 * @version 2.5
 	 */
 	class ProposeActionsToUser extends OneShotBehaviour {
@@ -419,8 +419,8 @@ public class MediateurAgent extends Agent {
 	 * C'est le behaviour de décision et routing des messages après le choix
 	 * d'une action par le joueur.
 	 * <p>
-	 * 
-	 * @author Benoit & Etienne
+	 *
+	 * @author Benoit  Etienne
 	 * @version 3.5
 	 */
 	class ActionFromUtilisateur extends CyclicBehaviour {
@@ -496,7 +496,7 @@ public class MediateurAgent extends Agent {
 					message3.setContent("Change de parti");
 					myAgent.send(message3);
 					break;
-					
+
 				case "Repandre une rumeur":
 					// Il faut demander à l'agent Rumeur quels sont les caractéristiques des députés
 					ACLMessage message10 = new ACLMessage(ACLMessage.REQUEST);
@@ -525,7 +525,7 @@ public class MediateurAgent extends Agent {
 			}
 		}
 	}
-	
+
 	/**
 	 * <b>LawProposalFromUser est le quatrième Behaviour de l'agent
 	 * mediateur.</b>
@@ -540,7 +540,7 @@ public class MediateurAgent extends Agent {
 	 * Il la serialise et l'envoi à l'agent loi qui s'occupera de la suite
 	 * du processus.
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.2
 	 */
@@ -621,8 +621,8 @@ public class MediateurAgent extends Agent {
 	 * du parlement alors il faut proposer une loi au vote.
 	 * Sinon c'est qu'on vient de voter une loi. Le tour est fini.
 	 * <p>
-	 * 
-	 * @author Benoit & Etienne
+	 *
+	 * @author Benoit  Etienne
 	 * @version 3.2
 	 */
 	class FinVoteFromLoi extends CyclicBehaviour {

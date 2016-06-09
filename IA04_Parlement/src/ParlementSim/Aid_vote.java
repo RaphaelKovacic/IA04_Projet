@@ -19,7 +19,7 @@ import jade.core.AID;
  * chaque tour de vote (ou de demande d'avis)
  * </p>
  *
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 2.1
  */
 

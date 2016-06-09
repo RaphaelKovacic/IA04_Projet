@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * automatique de lois grâce à la methode sort()
  * </p>
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 2.0.1
  */
 

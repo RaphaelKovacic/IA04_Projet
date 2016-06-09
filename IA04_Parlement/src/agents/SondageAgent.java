@@ -35,7 +35,7 @@ import jade.lang.acl.MessageTemplate;
  * </p>
  * 
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 3.1
  */
 @SuppressWarnings("serial")

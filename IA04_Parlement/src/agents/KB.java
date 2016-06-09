@@ -50,7 +50,7 @@ import jade.lang.acl.MessageTemplate;
  * </p>
  * 
  * 
- * @author Benoit & Etienne
+ * @author Benoit  Etienne
  * @version 2.2
  */
 
