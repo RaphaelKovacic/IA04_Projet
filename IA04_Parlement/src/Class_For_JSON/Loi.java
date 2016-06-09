@@ -191,8 +191,8 @@ public class Loi implements Comparable<Loi> {
 	 *
 	 */
 	public Loi(int id, String nom, String description, float effet_qualite_vie, float effet_context_eco,
-			List<String> l_PartiPolitique, String proposant, float influence, float charisme, float popularite,
-			float notoriete) {
+			   List<String> l_PartiPolitique, String proposant, float influence, float charisme, float popularite,
+			   float notoriete) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -249,15 +249,15 @@ public class Loi implements Comparable<Loi> {
 	 */
 	public String afficheString(){
 		String str = ("id : "+ this.id + "\n" +
-		"description : "+ this.description + "\n" +
-		"effet_qualite_vie : "+ this.effet_qualite_vie +"\n" +
-		"effet_context_eco : "+ this.effet_context_eco + "\n" +
-		"L_PartiPolitique : "+ this.l_PartiPolitique.toString()+ "\n" +
-		"proposant : "+ this.proposant+ "\n" +
-		"influence : "+ this.influence+ "\n" +
-		"charisme : "+ this.charisme+ "\n" +
-		"popularite : "+ this.popularite+ "\n" +
-		"notoriete : "+ this.notoriete);
+				"description : "+ this.description + "\n" +
+				"effet_qualite_vie : "+ this.effet_qualite_vie +"\n" +
+				"effet_context_eco : "+ this.effet_context_eco + "\n" +
+				"L_PartiPolitique : "+ this.l_PartiPolitique.toString()+ "\n" +
+				"proposant : "+ this.proposant+ "\n" +
+				"influence : "+ this.influence+ "\n" +
+				"charisme : "+ this.charisme+ "\n" +
+				"popularite : "+ this.popularite+ "\n" +
+				"notoriete : "+ this.notoriete);
 		return str;
 	}
 
@@ -271,11 +271,9 @@ public class Loi implements Comparable<Loi> {
 	 *
 	 */
 	public void affiche_a_utilisateur() {
-		System.out.println("------------------------------------------------------");
 		System.out.println("id : " + this.id);
 		System.out.println("nom : " + this.nom);
 		System.out.println("description : " + this.description);
-		System.out.println("------------------------------------------------------");
 	}
 
 	/**

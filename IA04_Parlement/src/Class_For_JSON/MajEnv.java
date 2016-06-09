@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <li>Un float correspondant à la qualité de vie des habitants du pays.</li>
  * </ul>
  * </p>
- * 
+ *
  * <p>
  * MajEnv est une classe servant à serializer en JSON l'état actuel d'un pays.
  * Elle est utilisée dans l'échange de messages entre agents.
  * </p>
- * 
+ *
  * @author Benoit
  * @version 1.0
  */
@@ -24,7 +24,7 @@ public class MajEnv {
 
 	/**
 	 * La valeur correspondant au contexte économique du pays.
-	 * 
+	 *
 	 * @see MajEnv#getContext_eco()
 	 * @see MajEnv#setContext_eco(int)
 	 */
@@ -32,7 +32,7 @@ public class MajEnv {
 
 	/**
 	 * La valeur correspondant à la qualité de vie des habitants du pays.
-	 * 
+	 *
 	 * @see MajEnv#getQualite_vie()
 	 * @see MajEnv#setQualite_vie(int)
 	 */
@@ -44,13 +44,13 @@ public class MajEnv {
 	 * À la contruction d'un MajEnv on fixe les deux attributs de la classe :
 	 * valeur du contexte économique et de la qualité de vie du pays.
 	 * </p>
-	 * 
+	 *
 	 * @param context_eco
 	 *            La valeur du context économique.
-	 * 
+	 *
 	 * @param qualite_vie
 	 *            La valeur de la qualité de vie
-	 * 
+	 *
 	 * @see MajEnv#context_eco
 	 * @see MajEnv#qualite_vie
 	 */
@@ -70,7 +70,7 @@ public class MajEnv {
 
 	/**
 	 * Retourne la valeur traduisant l'état de l'économie du pays.
-	 * 
+	 *
 	 * @return La valeur du contexte économique
 	 */
 	public float getContext_eco() {
@@ -79,7 +79,7 @@ public class MajEnv {
 
 	/**
 	 * Met à jour le contexte économique
-	 * 
+	 *
 	 * @param _context_eco
 	 *            Le nouveau contexte économique
 	 */
@@ -90,7 +90,7 @@ public class MajEnv {
 
 	/**
 	 * Retourne la valeur traduisant la qualité de vie dans le pays.
-	 * 
+	 *
 	 * @return La valeur de la qualité de vie du pays.
 	 */
 	public float getQualite_vie() {
@@ -99,7 +99,7 @@ public class MajEnv {
 
 	/**
 	 * Met à jour la qualité du pays.
-	 * 
+	 *
 	 * @param _qualite_vie
 	 *            La nouvelle qualité de vie dans le pays.
 	 */

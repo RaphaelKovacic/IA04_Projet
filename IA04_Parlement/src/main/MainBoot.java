@@ -13,8 +13,8 @@ import jade.wrapper.AgentContainer;
  * La classe MainBoot possède ne possède aucun attribut. La classe MainBoot
  * possède une seule méthode.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit
  * @version 1.0
  */

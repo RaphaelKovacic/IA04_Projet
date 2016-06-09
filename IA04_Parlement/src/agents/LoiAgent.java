@@ -43,17 +43,17 @@ import launcher.AgentLauncher;
  * <li>L'AID de l'agent environnement pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
  * <li>Une liste avec tous les AID des députés dans notre SMA</li>
- * 
+ *
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
- * 
+ *
  * </ul>
  * </p>
  * <p>
  * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent loi sont spécifiés dans les classes suivantes.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit  Etienne
  * @version 2.3
  */
@@ -62,77 +62,77 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * La liste des AID des agents ayant voté. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	List<Aid_vote> L_AID_Vote = new ArrayList<Aid_vote>();
-	
+
 	/**
 	 * La loi en cours d'étude (vote ou sondage) à ce tour. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	Loi loi_en_cours = new Loi();
-	
+
 	/**
 	 * L'AID du proposant à ce tour. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID proposant;
-	
+
 	/**
 	 * Le nombre total de votant attendu lors du tour. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_votant;
-	
+
 	/**
 	 * Le nombre de députés POUR lors de ce tour de vote ou sondage d'une loi. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_vote_pour;
-	
+
 	/**
 	 * Le nombre de députés CONTRE lors de ce tour de vote ou sondage d'une loi. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int nb_vote_contre;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AMediateur;
-	
+
 	/**
 	 * L'AID de l'agent utilisateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AUtilisateur;
-	
+
 	/**
 	 * L'AID de l'agent environnement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AEnvironnement;
-	
+
 	/**
 	 * L'AID de l'agent KB. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AKB;
-	
+
 	/**
 	 * La liste des AID des agents députés du SMA. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	List<AID> List_Depute = new ArrayList<AID>();
@@ -140,12 +140,12 @@ public class LoiAgent extends Agent {
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
-	
+
 	/**
 	 * Méthode d'instanciation (appelée à la création) de notre agent
 	 * loi.
@@ -191,17 +191,17 @@ public class LoiAgent extends Agent {
 				nb_votant = List_Depute.size(); // Tous les députés + l'utilisateur - proposant = tous les députés
 
 				addBehaviour(new RequestOfMediator()); // recéption d'un message demandant de faire
-														// proposer une loi ou de faire voter une
-														// loi
-				
+				// proposer une loi ou de faire voter une
+				// loi
+
 				addBehaviour(new ProposalLawOfDepute()); // réception d'une proposition de
-												 	   	 // loi d'un député
-				
+				// loi d'un député
+
 				addBehaviour(new AcceptLawOfDepute()); // réception d'un vote favorable d'un député
-														// ou utilisateur.
-				
+				// ou utilisateur.
+
 				addBehaviour(new RefuseLawOfDepute());// réception d'un vote défavorable d'un
-														// député ou utilisateur.
+				// député ou utilisateur.
 
 			}
 		});
@@ -223,11 +223,11 @@ public class LoiAgent extends Agent {
 	 * de l'agent mediateur. Analyse ce message et fait suivre le bon processus
 	 * en fonction du message.
 	 * <p>
-	 * 
+	 *
 	 * @see VoteLoi
 	 * @see SondageLoi
 	 * @see DemandeLoi
-	 * 
+	 *
 	 * @author Benoit  Etienne
 	 * @version 3.6
 	 */
@@ -304,10 +304,10 @@ public class LoiAgent extends Agent {
 	 * Il implémente le comportement suivant : Selectionne un député au hasard et lui demande 
 	 * de proposer une loi.
 	 * <p>
-	 * 
+	 *
 	 * @see RequestOfMediator
-	 * 
-	 * @author Benoit 
+	 *
+	 * @author Benoit
 	 * @version 2.1
 	 */
 	class DemandeLoi extends OneShotBehaviour {
@@ -346,9 +346,9 @@ public class LoiAgent extends Agent {
 	 * Il implémente le comportement suivant : Envoie un message à tous les députés
 	 * leur demandant de voter la loi contenue dans le message.
 	 * <p>
-	 * 
+	 *
 	 * @see RequestOfMediator
-	 * 
+	 *
 	 * @author Benoit  Etienne
 	 * @version 2.3
 	 */
@@ -400,9 +400,9 @@ public class LoiAgent extends Agent {
 	 * Il implémente le comportement suivant : Envoie un message à tous les députés
 	 * leur demandant leur avis sur la loi contenue dans le message.
 	 * <p>
-	 * 
+	 *
 	 * @see RequestOfMediator
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.2
 	 */
@@ -453,7 +453,7 @@ public class LoiAgent extends Agent {
 	 * Il implémente le comportement suivant : Récupère la loi à faire voter envoyée par un député.
 	 * Envoie un message à tous les autres députés ainsi qu'à l'utilisateur leur demandant de voter pour cette loi.
 	 * <p>
-	 * 
+	 *
 	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
@@ -466,7 +466,7 @@ public class LoiAgent extends Agent {
 			// l'agent proposant la loi
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
 					MessageTemplate.MatchSender(proposant) // (peut etre pas
-															// obligatoire)
+					// obligatoire)
 			);
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null) {
@@ -501,10 +501,10 @@ public class LoiAgent extends Agent {
 	 * Teste si on a reçu tous les votes pour la loi en cours d'étude.
 	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
 	 * <p>
-	 * 
+	 *
 	 * @see ConsequenceVote
 	 * @see ConsequenceSondage
-	 * 
+	 *
 	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
@@ -546,7 +546,7 @@ public class LoiAgent extends Agent {
 					if (message.getConversationId() == null
 							|| message.getConversationId().equalsIgnoreCase("Proposition de loi"))
 						myAgent.addBehaviour(new ConsequenceVote());
-					// Traitement des conséquences de la demande de sondage
+						// Traitement des conséquences de la demande de sondage
 					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage"))
 						myAgent.addBehaviour(new ConsequenceSondage());
 					else
@@ -560,7 +560,7 @@ public class LoiAgent extends Agent {
 		}
 	}
 
-	
+
 	/**
 	 * <b>RefuseLawOfDepute est le septième Behaviour de l'agent
 	 * loi.</b>
@@ -574,10 +574,10 @@ public class LoiAgent extends Agent {
 	 * Teste si on a reçu tous les votes pour la loi en cours d'étude.
 	 * Si tel est le cas il faut instancier le behaviour de fin de vote ou de fin de sondage.
 	 * <p>
-	 * 
+	 *
 	 * @see ConsequenceVote
 	 * @see ConsequenceSondage
-	 * 
+	 *
 	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
@@ -620,7 +620,7 @@ public class LoiAgent extends Agent {
 					if (message.getConversationId() == null
 							|| message.getConversationId().equalsIgnoreCase("Proposition de loi"))
 						myAgent.addBehaviour(new ConsequenceVote());
-					// Traitement des conséquences de la demande de sondage
+						// Traitement des conséquences de la demande de sondage
 					else if (message.getConversationId().equalsIgnoreCase("Demande de sondage"))
 						myAgent.addBehaviour(new ConsequenceSondage());
 					else
@@ -646,10 +646,10 @@ public class LoiAgent extends Agent {
 	 * à jour leur caractéristiques selon le résultat du vote.
 	 * Enfin il envoie un message au médiateur pour lui signifier la fin du vote.
 	 * <p>
-	 * 
+	 *
 	 * @see AcceptLawOfDepute
 	 * @see RefuseLawOfDepute
-	 * 
+	 *
 	 * @author Benoit  Etienne
 	 * @version 2.1
 	 */
@@ -659,19 +659,20 @@ public class LoiAgent extends Agent {
 		public void action() {
 
 			// Affichage récap vote
-			System.out.println("-----------------------QUI A VOTÉ QUOI ?-------------------------------");
+			System.out.println();
+			System.out.println("---------------------------QUI A VOTÉ QUOI ?---------------------------");
 			for (int z = 0; z < L_AID_Vote.size(); z++){
 				Aid_vote current_AID_Vote = L_AID_Vote.get(z);
 				current_AID_Vote.affiche();
 			}
 			System.out.println("-----------------------------------------------------------------------");
 
-
+			System.out.println();
 			// Le vote est terminé...
-			System.out.println("-----------------------RÉSULTAT VOTE ------------------------------");
+			System.out.println("---------------------------RÉSULTAT VOTE--------------------------------");
 			System.out.println(
 					"La Loi a été votée avec : " + nb_vote_pour + " vote Pour et " + nb_vote_contre + " vote Contre.");
-			System.out.println("-----------------------FIN RÉSULTAT VOTE ------------------------------");
+			System.out.println("---------------------------FIN RÉSULTAT VOTE---------------------------");
 
 			// Pour chaque député ayant voté
 			for (int i = 0; i < L_AID_Vote.size(); i++) {
@@ -875,17 +876,17 @@ public class LoiAgent extends Agent {
 	 * <p>
 	 * Il est de type OneShot. Notre agent va s'occuper de faire le récapitulatif de la demande de sondage
 	 * dans le parlement pour la loi soumise au sondage.
-	 * 
+	 *
 	 * en cours.
 	 * </p>
 	 * <p>
 	 * Il implémente le comportement suivant : Afficher le résultat de l'estimation.
 	 * Envoie un message au médiateur pour lui signifier la fin du sondage dans le parlement
 	 * <p>
-	 * 
+	 *
 	 * @see AcceptLawOfDepute
 	 * @see RefuseLawOfDepute
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.2
 	 */
@@ -894,7 +895,7 @@ public class LoiAgent extends Agent {
 		public void action() {
 
 			// Affichage récap sondage
-			System.out.println("-----------------------QUI PENSE QUOI ?-------------------------------");
+			System.out.println("---------------------------QUI PENSE QUOI ?----------------------------");
 			for (int z = 0; z < L_AID_Vote.size(); z++){
 				Aid_vote current_AID_Vote = L_AID_Vote.get(z);
 				current_AID_Vote.affiche();
@@ -903,7 +904,7 @@ public class LoiAgent extends Agent {
 
 
 			// Le sondage est terminé...
-			System.out.println("--------------------------ESTIMATION-------------------");
+			System.out.println("---------------------------ESTIMATION----------------------------------");
 
 			if (nb_vote_pour > nb_vote_contre)
 				System.out.println("La loi semblerait pouvoir passer ... avec " + nb_vote_pour + " vote 'Pour' et "
@@ -915,7 +916,7 @@ public class LoiAgent extends Agent {
 				System.out.println("La loi en balance total ... avec " + nb_vote_pour + " vote 'Pour' et "
 						+ nb_vote_contre + " vote 'Contre'.");
 
-			System.out.println("--------------------------FIN ESTIMATION-------------------");
+			System.out.println("---------------------------FIN ESTIMATION-------------------------------");
 
 			// Dans tous les cas on envoie un message à l'agent Mediateur pour
 			// le prévenir que le vote est terminé (fin du tour).

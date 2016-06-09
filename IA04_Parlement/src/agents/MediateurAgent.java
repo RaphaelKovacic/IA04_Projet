@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -35,7 +36,7 @@ import jade.lang.acl.MessageTemplate;
  * <li>Un attribut L_Actions qui représente la liste des actions possibles par l'utilisateur à chaque tour</li>
  * <li>Un attribut action_choisit qui représente l'action sélectionnée par l'utilisateur à chaque tour</li>
  * <li>Un attribut num_tour_actuel qui représente le numéro du tour actuel</li>
- * 
+ *
  * <li>Un attribut nb_tour_proposeloi qui représente la fréquence à laquelle l'action proposer une loi est possible </li>
  * <li>Un attribut nb_tour_sondage qui représente la fréquence à laquelle l'action de faire un sondage dans le pays est possible </li>
  * <li>Un attribut nb_tour_changerparti qui représente la fréquence à laquelle l'action changer de parti est possible </li>
@@ -45,24 +46,24 @@ import jade.lang.acl.MessageTemplate;
  * <li>Un attribut Loi_possibles_user qui représente la liste des lois possiblement sélectionnables pour un vote de la part de l'utilisateur </li>
  * <li>Un attribut loi_choisie qui représente la loi choisi pour un vote de la part de l'utilisateur </li>
  * <li>Un attribut utilisateur_information qui représente les informations de l'utilisateur (son parti, et ses attributs statiques et dynamiques à incorporer à une loi quand on la propose au vote </li>
- * 
+ *
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent utilisateur pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent sondage pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent simulation pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent rumeur pour les mêmes raisons qu'au dessus</li>
- * 
+ *
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
- * 
+ *
  * </ul>
  * </p>
  * <p>
  * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent médiateur sont spécifiés dans les classes suivantes.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit  Etienne
  * @version 5.2
  */
@@ -247,18 +248,18 @@ public class MediateurAgent extends Agent {
 				}
 
 				addBehaviour(new TourFromSimulation()); // recéption d'un message marquant le
-														// début d'un nouveau tour de jeu de
-														// l'agent simulation (REQUEST)
+				// début d'un nouveau tour de jeu de
+				// l'agent simulation (REQUEST)
 				// --> Envoie d'un message a AUtilisateur avec la liste des
 				// actions possibles
 
 				addBehaviour(new ActionFromUtilisateur()); // réception de l'action choisit
-														   // par l'utilisateur (ACCEPT_PROPOSAL)
+				// par l'utilisateur (ACCEPT_PROPOSAL)
 				// --> Suivant l'action possibilité de lui renvoyer un message
 				// pour lui demander (loi,personne visée, etc...)
 
 				addBehaviour(new LawProposalFromUser()); // réception de l'informatio nécessaire pour
-														 // faire l'action. (INFORM)
+				// faire l'action. (INFORM)
 				// --> Suivant l'action traitement différents.
 
 				addBehaviour(new FinVoteFromLoi()); // réception de la fin d'un vote de loi (REQUEST)
@@ -266,7 +267,7 @@ public class MediateurAgent extends Agent {
 
 
 				addBehaviour(new ReceiveUserInfo()); // Réception du INFORM_REF avec le nom du parti
-													  // de l'user avant de requêter KB
+				// de l'user avant de requêter KB
 
 				addBehaviour(new ReceiveLawsFromKB()); // Recevoir loi envoyées par KB pour l'user
 
@@ -314,9 +315,9 @@ public class MediateurAgent extends Agent {
 					NumTour = mapper.readValue(message.getContent(), NumTour.class);
 					num_tour_actuel = NumTour.getNum();
 					System.out.println();
-					System.out.println("-----------------------TOUR ------------------------------");
+					System.out.println("---------------------------TOUR ------------------------------");
 					System.out.println("Tour: " + num_tour_actuel);
-					System.out.println("----------------------------------------------------------");
+					System.out.println("---------------------------------------------------------------");
 					System.out.println();
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -456,69 +457,68 @@ public class MediateurAgent extends Agent {
 
 				switch (action_choisit) {
 
-				case "Proposer une loi":
-					// Il faut tout d'abord les informations de l"utilisateur et
-					// notamment son parti pour ensuite requête KB.
+					case "Proposer une loi":
+						// Il faut tout d'abord les informations de l"utilisateur et
+						// notamment son parti pour ensuite requête KB.
 
-					ACLMessage message1 = new ACLMessage(ACLMessage.QUERY_REF);
-					message1.addReceiver(AUtilisateur);
-					message1.setContent("Vos informations sur vous je vous prie");
-					message1.setConversationId("Proposition de loi");
-					myAgent.send(message1);
-					break;
+						ACLMessage message1 = new ACLMessage(ACLMessage.QUERY_REF);
+						message1.addReceiver(AUtilisateur);
+						message1.setContent("Vos informations sur vous je vous prie");
+						message1.setConversationId("Proposition de loi");
+						myAgent.send(message1);
+						break;
 
-				case "Avis du parlement":
-					// Il faut tout d'abord les informations de l"utilisateur et
-					// notamment son parti pour ensuite requête KB.
+					case "Avis du parlement":
+						// Il faut tout d'abord les informations de l"utilisateur et
+						// notamment son parti pour ensuite requête KB.
 
-					ACLMessage message4 = new ACLMessage(ACLMessage.QUERY_REF);
-					message4.addReceiver(AUtilisateur);
-					message4.setContent("Vos informations sur vous je vous prie");
-					message4.setConversationId("Demande de sondage");
-					myAgent.send(message4);
-					break;
+						ACLMessage message4 = new ACLMessage(ACLMessage.QUERY_REF);
+						message4.addReceiver(AUtilisateur);
+						message4.setContent("Vos informations sur vous je vous prie");
+						message4.setConversationId("Demande de sondage");
+						myAgent.send(message4);
+						break;
 
-				case "Faire un sondage":
-					// Envoyer une demande à l'agent Sondage.
-					if (ASondage != null) {
-						ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
-						message2.addReceiver(ASondage);
-						message2.setContent("Peux-tu me dire quelles-sont les variables d'environnement?");
-						myAgent.send(message2);
-					}
-					break;
-
-				case "Changer de parti":
-					// Il faut demander à l'utilisateur de changer de parti et
-					// d'adapter ainsi ses variables d'environnement
-					ACLMessage message3 = new ACLMessage(ACLMessage.REQUEST);
-					message3.addReceiver(AUtilisateur);
-					message3.setContent("Change de parti");
-					myAgent.send(message3);
-					break;
-
-				case "Repandre une rumeur":
-					// Il faut demander à l'agent Rumeur quels sont les caractéristiques des députés
-					ACLMessage message10 = new ACLMessage(ACLMessage.REQUEST);
-					message10.addReceiver(ARumeur);
-					message10.setContent("Dis à l'agent utilisateur quels sont les 10 députés les plus influents (en envoyant leurs AID)");
-					myAgent.send(message10);
-					break;
-
-				case "Aucune":
-					if (vote_en_cours == false) {
-						// Terminer le tour en informant l'agent de simulation
+					case "Faire un sondage":
+						// Envoyer une demande à l'agent Sondage.
 						if (ASondage != null) {
-							ACLMessage message2 = new ACLMessage(ACLMessage.INFORM);
-							message2.addReceiver(ASimulation);
-							message2.setContent("Fin du tour");
+							ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
+							message2.addReceiver(ASondage);
+							message2.setContent("Peux-tu me dire quelles-sont les variables d'environnement?");
 							myAgent.send(message2);
 						}
-					} else
-						System.out.println(
-								"N'oubliez pas de voter pour la loi proposée pour finir le tour. Envoyer un message à l'agent LOI avec ACCEPT OU REJECT PROPOSAL.");
+						break;
 
-					break;
+					case "Changer de parti":
+						// Il faut demander à l'utilisateur de changer de parti et
+						// d'adapter ainsi ses variables d'environnement
+						ACLMessage message3 = new ACLMessage(ACLMessage.REQUEST);
+						message3.addReceiver(AUtilisateur);
+						message3.setContent("Change de parti");
+						myAgent.send(message3);
+						break;
+
+					case "Repandre une rumeur":
+						// Il faut demander à l'agent Rumeur quels sont les caractéristiques des députés
+						ACLMessage message10 = new ACLMessage(ACLMessage.REQUEST);
+						message10.addReceiver(ARumeur);
+						message10.setContent("Dis à l'agent utilisateur quels sont les 10 députés les plus influents (en envoyant leurs AID)");
+						myAgent.send(message10);
+						break;
+
+					case "Aucune":
+						if (vote_en_cours == false) {
+							// Terminer le tour en informant l'agent de simulation
+							if (ASondage != null) {
+								ACLMessage message2 = new ACLMessage(ACLMessage.INFORM);
+								message2.addReceiver(ASimulation);
+								message2.setContent("Fin du tour");
+								myAgent.send(message2);
+							}
+						} else
+
+
+						break;
 				}
 			} else {
 				block();
@@ -556,7 +556,7 @@ public class MediateurAgent extends Agent {
 
 			if (message != null && message.getConversationId() != null
 					&& (message.getConversationId().equalsIgnoreCase("Proposition de loi")
-							|| message.getConversationId().equalsIgnoreCase("Demande de sondage"))) {
+					|| message.getConversationId().equalsIgnoreCase("Demande de sondage"))) {
 
 				// Récupère l'id contenu dans le message de l'utilisateur
 				String id_choisi_string = message.getContent();
@@ -575,11 +575,12 @@ public class MediateurAgent extends Agent {
 
 				// On affiche la loi choisit par l'utilisateur
 				System.out.println();
-				System.out.println("-------------------- DEBUG LOI QUE VOUS AVEZ PROPOSÉ ---------------");
+				System.out.println("--------------------------- DEBUG LOI QUE VOUS AVEZ PROPOSÉ ---------------");
 				System.out.println("Vous avez proposé cette loi : ");
-				System.out.println("--------------------------------FIN DEBUG----------------------------");
-				System.out.println();
 				loi_choisie.affiche_a_utilisateur();
+				System.out.println("---------------------------FIN DEBUG---------------------------------------");
+				System.out.println();
+
 
 				// On seriaalize la loi choisie puis on l'envoie à l'agent loi
 				ObjectMapper mapper = new ObjectMapper();
@@ -686,7 +687,7 @@ public class MediateurAgent extends Agent {
 	 * contenant les informations sur ses variables (parti politique et autres
 	 * caractéristiques statiques.).
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 2.2
 	 */
@@ -710,14 +711,6 @@ public class MediateurAgent extends Agent {
 				try {
 					// On la stocke localement (elle nous servira plus tard)
 					utilisateur_information = mapper.readValue(message.getContent(), Loi.class);
-
-					// TODO Delete
-					System.out.println();
-					System.out.println("-------------------- DEBUG INFO UTILISATEUR ---------------");
-					System.out.println("Loi utilisateur (ses infos): ");
-					utilisateur_information.affiche();
-					System.out.println("------------------------- FIN DEBUG ------------------------");
-					System.out.println();
 
 					// Petit test pour voir si on est toujours dans l'action de
 					// proposition d'une loi
@@ -766,7 +759,7 @@ public class MediateurAgent extends Agent {
 	 * lors du choix de l'utilisateur. Il forward ce message à l'agent Utilisateur
 	 * pour affichage des choix au joueur.
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 2.2
 	 */
@@ -791,10 +784,9 @@ public class MediateurAgent extends Agent {
 					// On déserialize la list de lois renvoyée et on la stocke
 					// dans KB
 
-					System.out.println("---------------------------------------------------");
-					System.out.println("--------------------DEBUG--------------------------");
-					System.out.println("----CONTROLE DE LA LISTE DE LOI ENVOYÉE PAR KB-----");
-					System.out.println("---------------------------------------------------");
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
+					System.out.println("---------------------------DEBUG CONTROLE DE LA LISTE DE LOI ENVOYÉE PAR KB--------------------------------");
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
 
 					try {
 
@@ -805,7 +797,7 @@ public class MediateurAgent extends Agent {
 						// Stocke les lois envoyées par KB dans variable locale
 						Loi_possibles_user = new ObjectMapper().readValue(content, new TypeReference<List<Loi>>() {
 						});
-
+						Collections.sort(Loi_possibles_user);
 						for (int y = 0; y < Loi_possibles_user.size(); y++) {
 							// On incorpore les informations de l'utilisateur
 							// dans chaque loi grâce à la variable locale prévue
@@ -819,7 +811,9 @@ public class MediateurAgent extends Agent {
 							Loi_possibles_user.get(y).setNotoriete(utilisateur_information.getNotoriete());
 
 							// TODO Delete : Affichage pour vérification
+							System.out.println();
 							Loi_possibles_user.get(y).affiche();
+							System.out.println("------------------------------------------------");
 						}
 
 						// Les serializer et les envoyer avec le bon

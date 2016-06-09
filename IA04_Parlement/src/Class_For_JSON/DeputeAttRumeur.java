@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <li>Un float correspondant à la crédibilité du député</li>
  * </ul>
  * </p>
- * 
+ *
  * <p>
  * DeputeAttRumeur est une classe servant à serializer en JSON les paramètres susmentionnés. Elle est utilisée
  * dans l'échange de messages avec l'agent Rumeur.
  * </p>
- * 
+ *
  * @author Cristian
  * @version 1.0
  */
@@ -26,25 +26,25 @@ public class DeputeAttRumeur {
 
 	/**
 	 * La valeur correspondant à l'id du député, local à l'agent Rumeur.
-	 * 
+	 *
 	 */
 	int id;
-	
+
 	/**
 	 * La valeur correspondant à l'influence du député.
-	 * 
+	 *
 	 */
 	float influence;
 
 	/**
 	 * La valeur correspondant à la popularité du député.
-	 * 
+	 *
 	 */
 	float popularite;
 
 	/**
 	 * La valeur correspondant à la crédibilité du député
-	 * 
+	 *
 	 */
 	float credibilite;
 
@@ -54,16 +54,16 @@ public class DeputeAttRumeur {
 	 * À la contruction d'un DeputeAttRumeur on fixe tous les attributs de la classe :
 	 * l'influence, la popularité et la crédibilité du député (ou de l'utilisateur).
 	 * </p>
-	 * 
+	 *
 	 * @param influence
 	 *            La valeur de l'influence.
-	 * 
+	 *
 	 * @param popularite
 	 *            La valeur de la popularité.
-	 * 
+	 *
 	 * @param credibilite
 	 *            La valeur de la crédibilité.
-	 * 
+	 *
 	 */
 	public DeputeAttRumeur(float influence, float popularite, float credibilite) {
 		super();
@@ -72,7 +72,7 @@ public class DeputeAttRumeur {
 		this.credibilite = credibilite;
 		this.id = -1;
 	}
-	
+
 	/**
 	 * Constructeur de DeputeAttRumeur vide.
 	 * <p>
@@ -84,7 +84,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Retourne la valeur de l'influence.
-	 * 
+	 *
 	 * @return La valeur de l'influence.
 	 */
 	public float get_Influence() {
@@ -93,7 +93,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Met à jour l'influence.
-	 * 
+	 *
 	 * @param _influence
 	 *            La nouvelle valeur de l'influence.
 	 */
@@ -104,7 +104,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Retourne la valeur de la popularité.
-	 * 
+	 *
 	 * @return La valeur de la popularité.
 	 */
 	public float get_Popularite() {
@@ -113,7 +113,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Met à jour la popularité.
-	 * 
+	 *
 	 * @param popularite
 	 *            La nouvelle valeur de la popularité.
 	 */
@@ -124,7 +124,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Retourne la valeur de la crédibilité.
-	 * 
+	 *
 	 * @return La valeur de la crédibilité.
 	 */
 	public float get_Credibilite() {
@@ -133,7 +133,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Met à jour la crédibilité.
-	 * 
+	 *
 	 * @param credibilite
 	 *            La nouvelle valeur de la crédibilité.
 	 */
@@ -141,10 +141,10 @@ public class DeputeAttRumeur {
 	public void set_Credibilite(float credibilite) {
 		this.credibilite = credibilite;
 	}
-	
+
 	/**
 	 * Retourne la valeur de l'id local à l'agent Rumeur.
-	 * 
+	 *
 	 * @return La valeur de l'id local à l'agent Rumeur.
 	 */
 	public int get_Id() {
@@ -153,7 +153,7 @@ public class DeputeAttRumeur {
 
 	/**
 	 * Met à jour l'id local à l'agent Rumeur.
-	 * 
+	 *
 	 * @param id
 	 *            La nouvelle valeur de l'id local à l'agent Rumeur.
 	 */

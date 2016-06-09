@@ -36,8 +36,8 @@ import jade.core.Agent;
  * comportements de l'agent simulation sont spécifiés dans les cinq classes
  * suivantes.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit
  * @version 2.1
  */
@@ -46,42 +46,42 @@ public class SimulationAgent extends Agent {
 
 	/**
 	 * Le numéro du tour actuel. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int tour;
 
 	/**
 	 * Le nombre tour maximum dans une partie. Constant
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int FinJeu_tour;
 
 	/**
 	 * L'état actuel de la partie. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	public boolean partie_finie;
 
 	/**
 	 * L'AID de l'agent environnement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AEnvironnement = null;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AMediateur = null;
 
 	/**
 	 * L'AID de l'agent utilisateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 
@@ -134,23 +134,22 @@ public class SimulationAgent extends Agent {
 					AUtilisateur = parl_mana.getReceiver(myAgent, "Parlement", "AUtilisateur");
 				}
 				addBehaviour(new WaitMessJoueur()); // Lancer le jeu (REQUEST)
-				
+
 				addBehaviour(new WaitMessMediateur()); // reception des fins de tour venant de
-													   // l'agent Mediateur (INFORM)
-				
+				// l'agent Mediateur (INFORM)
+
 				addBehaviour(new WaitMessEnvironnement()); // reception possible d'un message
-														  // d'environnement (fin de jeu
-														  // partie perdue) (INFORM)
+				// d'environnement (fin de jeu
+				// partie perdue) (INFORM)
 
 				addBehaviour(new WaitMessUtilisateur()); // Récéption d'un message de type INFORM
-														 // de l'utilisateur pour lui signifier la fin
-														 // de la partie.
+				// de l'utilisateur pour lui signifier la fin
+				// de la partie.
 			}
 		});
 
 		System.out.println("Agent Simulation créé: " + this.getLocalName());
 
-		System.out.println("Pour lancer le jeu, envoyez une REQUEST à l'agent " + this.getLocalName());
 	} // fin Setup
 
 	/**
@@ -164,11 +163,11 @@ public class SimulationAgent extends Agent {
 	 * <p>
 	 * Il implémente le comportement suivant : crée un nouveau tour de jeu.
 	 * <p>
-	 * 
+	 *
 	 * Cette action fait suite à la fin d'un tour.
-	 * 
+	 *
 	 * @see WaitMessMediateur
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -221,10 +220,10 @@ public class SimulationAgent extends Agent {
 	 * Il implémente le comportement suivant : Réceptionne une communication par
 	 * message de la part du médiateur.
 	 * <p>
-	 * 
-	 * 
+	 *
+	 *
 	 * @see NouvTourMediateur
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -258,9 +257,9 @@ public class SimulationAgent extends Agent {
 	 * Il implémente le comportement suivant : Réceptionne un message de fin de
 	 * la partie de la part de l'environnement.
 	 * <p>
-	 * 
+	 *
 	 * Il s'occupe de se tuer lui même.
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -277,7 +276,7 @@ public class SimulationAgent extends Agent {
 			// Si on recoit un message de ce type alors on met fin au jeu...
 			// (partie perdue)
 			if (message != null) {
-				System.out.println("Mort de l'agent Simulation (partie terminée)");
+				System.out.println("Mort de l'agent Simulation (partie terminée) à cause de l'environnement");
 				doDelete();
 			} else {
 				block();
@@ -298,10 +297,10 @@ public class SimulationAgent extends Agent {
 	 * Il implémente le comportement suivant : Réceptionne une communication par
 	 * message de la part du joueur.
 	 * <p>
-	 * 
-	 * 
+	 *
+	 *
 	 * @see NouvTourMediateur
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -359,7 +358,7 @@ public class SimulationAgent extends Agent {
 				}
 
 				else if (contenu.equalsIgnoreCase("perdu")){
-					System.out.println("Mort de l'agent Simulation (partie terminée et PERDUE)");
+					System.out.println("Mort de l'agent Simulation à cause de vos caractéristiques (partie terminée et PERDUE)");
 					doDelete();
 				}
 

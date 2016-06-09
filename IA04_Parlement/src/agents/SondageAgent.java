@@ -33,8 +33,8 @@ import jade.lang.acl.MessageTemplate;
  * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent Sondage sont spécifiés dans les quatre classes suivantes.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit  Etienne
  * @version 3.1
  */
@@ -43,21 +43,21 @@ public class SondageAgent extends Agent {
 
 	/**
 	 * L'AID de l'agent environnement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AEnvironnement;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AMediateur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
@@ -95,10 +95,10 @@ public class SondageAgent extends Agent {
 					AEnvironnement = parl_mana.getReceiver(myAgent, "Monde", "AEnvironnement");
 				}
 				addBehaviour(new RequestOfMediator()); // recéption d'un message demandant de faire un
-														// sondage sur l'environnement
-				
+				// sondage sur l'environnement
+
 				addBehaviour(new ReponseOfEnvironnement()); // réception de la réponse contenant
-															// les variables de l'environnement.
+				// les variables de l'environnement.
 
 			}
 		});
@@ -116,15 +116,15 @@ public class SondageAgent extends Agent {
 	 * Il implémente le comportement suivant : Récupèrer le message demandant
 	 * les valeurs des variables d'environnement actuelles.
 	 * <p>
-	 * 
+	 *
 	 * Cette action fait suite à une demande de sondage de la part de
 	 * l'utilisateur.
-	 * 
+	 *
 	 * <p>
 	 * Ce Behaviour va instancier un OneShotBehaviour qui sera en charge de la
 	 * suite du processus.
 	 * </p>
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -159,10 +159,10 @@ public class SondageAgent extends Agent {
 	 * Il implémente le comportement suivant : Envoyer un message à l'agent
 	 * environnement pour connaitre l'état de ses variables.
 	 * <p>
-	 * 
+	 *
 	 * Cette action fait suite à une demande des valeurs des variables par
 	 * l'agent médiateur à notre agent Sondage. Voir Behaviour ci-dessus.
-	 * 
+	 *
 	 * @author Benoit
 	 * @version 1.1
 	 */
@@ -200,15 +200,15 @@ public class SondageAgent extends Agent {
 	 * notre agent Sondage lui demandant les valeurs de ses variables
 	 * d'environnements.
 	 * </p>
-	 * 
+	 *
 	 * Cette action faite suite à une demande de sondage de la part de
 	 * l'utilisateur.
-	 * 
+	 *
 	 * <p>
 	 * Ce Behaviour va instancier un OneShotBehaviour qui sera en charge de la
 	 * suite du processus.
 	 * </p>
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.1
 	 */
@@ -244,12 +244,12 @@ public class SondageAgent extends Agent {
 	 * Il implémente le comportement suivant : Affiche les variables
 	 * d'environnement actuelles.
 	 * <p>
-	 * 
+	 *
 	 * Cette action faite suite et finie l'action de demande de sondage de la
 	 * part de l'utilisateur.
-	 * 
+	 *
 	 * </p>
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.1
 	 */
@@ -281,11 +281,12 @@ public class SondageAgent extends Agent {
 			try {
 				MajEnv ort = mapper.readValue(mess, MajEnv.class);
 				// Mise a jour des deux variables avec les valeurs du message
-				System.out.println("");
-				System.out.println("-----------------------RÉSULTAT SONDAGE ------------------------------");
+				System.out.println();
+				System.out.println("---------------------------RÉSULTAT SONDAGE ------------------------------");
 				System.out.println(ort.getContext_eco());
 				System.out.println(ort.getQualite_vie());
-				System.out.println("-----------------------RÉSULTAT SONDAGE ------------------------------");
+				System.out.println("---------------------------RÉSULTAT SONDAGE ------------------------------");
+				System.out.println();
 			} catch (Exception ex) {
 				System.out.println("EXCEPTION" + ex.getMessage());
 			}
