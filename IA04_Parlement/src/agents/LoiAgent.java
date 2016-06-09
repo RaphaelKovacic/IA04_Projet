@@ -659,19 +659,20 @@ public class LoiAgent extends Agent {
 		public void action() {
 
 			// Affichage récap vote
-			System.out.println("-----------------------QUI A VOTÉ QUOI ?-------------------------------");
+			System.out.println();
+			System.out.println("---------------------------QUI A VOTÉ QUOI ?---------------------------");
 			for (int z = 0; z < L_AID_Vote.size(); z++){
 				Aid_vote current_AID_Vote = L_AID_Vote.get(z);
 				current_AID_Vote.affiche();
 			}
 			System.out.println("-----------------------------------------------------------------------");
 
-
+			System.out.println();
 			// Le vote est terminé...
-			System.out.println("-----------------------RÉSULTAT VOTE ------------------------------");
+			System.out.println("---------------------------RÉSULTAT VOTE--------------------------------");
 			System.out.println(
 					"La Loi a été votée avec : " + nb_vote_pour + " vote Pour et " + nb_vote_contre + " vote Contre.");
-			System.out.println("-----------------------FIN RÉSULTAT VOTE ------------------------------");
+			System.out.println("---------------------------FIN RÉSULTAT VOTE---------------------------");
 
 			// Pour chaque député ayant voté
 			for (int i = 0; i < L_AID_Vote.size(); i++) {
@@ -894,7 +895,7 @@ public class LoiAgent extends Agent {
 		public void action() {
 
 			// Affichage récap sondage
-			System.out.println("-----------------------QUI PENSE QUOI ?-------------------------------");
+			System.out.println("---------------------------QUI PENSE QUOI ?----------------------------");
 			for (int z = 0; z < L_AID_Vote.size(); z++){
 				Aid_vote current_AID_Vote = L_AID_Vote.get(z);
 				current_AID_Vote.affiche();
@@ -903,7 +904,7 @@ public class LoiAgent extends Agent {
 
 
 			// Le sondage est terminé...
-			System.out.println("--------------------------ESTIMATION-------------------");
+			System.out.println("---------------------------ESTIMATION----------------------------------");
 
 			if (nb_vote_pour > nb_vote_contre)
 				System.out.println("La loi semblerait pouvoir passer ... avec " + nb_vote_pour + " vote 'Pour' et "
@@ -915,7 +916,7 @@ public class LoiAgent extends Agent {
 				System.out.println("La loi en balance total ... avec " + nb_vote_pour + " vote 'Pour' et "
 						+ nb_vote_contre + " vote 'Contre'.");
 
-			System.out.println("--------------------------FIN ESTIMATION-------------------");
+			System.out.println("---------------------------FIN ESTIMATION-------------------------------");
 
 			// Dans tous les cas on envoie un message à l'agent Mediateur pour
 			// le prévenir que le vote est terminé (fin du tour).

@@ -150,7 +150,6 @@ public class SimulationAgent extends Agent {
 
 		System.out.println("Agent Simulation créé: " + this.getLocalName());
 
-		System.out.println("Pour lancer le jeu, envoyez une REQUEST à l'agent " + this.getLocalName());
 	} // fin Setup
 
 	/**
@@ -277,7 +276,7 @@ public class SimulationAgent extends Agent {
 			// Si on recoit un message de ce type alors on met fin au jeu...
 			// (partie perdue)
 			if (message != null) {
-				System.out.println("Mort de l'agent Simulation (partie terminée)");
+				System.out.println("Mort de l'agent Simulation (partie terminée) à cause de l'environnement");
 				doDelete();
 			} else {
 				block();
@@ -359,7 +358,7 @@ public class SimulationAgent extends Agent {
 				}
 
 				else if (contenu.equalsIgnoreCase("perdu")){
-					System.out.println("Mort de l'agent Simulation (partie terminée et PERDUE)");
+					System.out.println("Mort de l'agent Simulation à cause de vos caractéristiques (partie terminée et PERDUE)");
 					doDelete();
 				}
 

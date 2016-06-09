@@ -351,8 +351,7 @@ public class KB extends Agent {
 		statement_lois_du_parti = getLoiFromParti(_s);
 
 		List<Loi> liste_d_objet_loi_du_parti = new ArrayList<Loi>();
-		System.out.println();
-		System.out.println("-----------------------DEBUG KB LOIS POSSIBLES ------------------------------");
+
 		for (int w = 0; w < statement_lois_du_parti.size(); w++) {
 			// Gestion selon le formalisme JENA pour chaque statement de la
 			// Arraylist on doit récupèrer le Sujet pour ainsi ensuite récupérer
@@ -360,7 +359,6 @@ public class KB extends Agent {
 			Statement current_statement = statement_lois_du_parti.get(w);
 			Resource subject_law_current = current_statement.getSubject();
 
-			System.out.println("Loi pour les " + _s + " intitulé : " + subject_law_current.toString());
 
 			// Récupère l'id, le nom, la desc, l'effet éco, l'effect lifestyle
 			// de chaque loi
@@ -381,8 +379,6 @@ public class KB extends Agent {
 			// Ajoute à la liste
 			liste_d_objet_loi_du_parti.add(loi_temp);
 		}
-		System.out.println("-----------------------FIN DEBUG KB LOIS POSSIBLES ------------------------------");
-		System.out.println();
 
 		return liste_d_objet_loi_du_parti;
 	}

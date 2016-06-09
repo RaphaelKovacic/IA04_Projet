@@ -203,6 +203,19 @@ public class UtilisateurAgent extends Agent {
 
 		System.out.println("Agent Utilisateur crée : " + this.getLocalName());
 
+		System.out.println();
+		System.out.println("---------------------------DEBUT PARAMÈTRE UTILISATEUR---------------------------");
+		System.out.println("Votre parti :" + Parti_Politique);
+		System.out.println("Influence :" + Influence);
+		System.out.println("Charisme :" + Charisme);
+		System.out.println("Popularite :" + Popularite);
+		System.out.println("Notoriete :" + Notoriete);
+		System.out.println("Credibilite :" + Credibilite);
+		System.out.println("Moyenne :" + (Influence + Popularite + Notoriete + Credibilite)/4);
+		System.out.println("Grade :" + grade_utilisateur);
+		System.out.println("---------------------------------------------------------------------------------");
+		System.out.println();
+
 		addBehaviour(new OneShotBehaviour() {
 
 			@Override
@@ -298,16 +311,8 @@ public class UtilisateurAgent extends Agent {
 					L_Actions = mapper.readValue(message.getContent(), L_Actions.getClass());
 
 					// Ecrit sur la console
-					System.out.println();
-					System.out.println("-------------------- ACTIONS POSSIBLES ---------------");
-					System.out.println("Voici la liste des actions possibles ce tour-ci");
 					MainApp.addHistorique("Demande de choix à l'utilisateur", -1);
 					int choix = MainApp.showChoicePopUp(0,"",L_Actions);
-					System.out.println(L_Actions.toString());
-					System.out.println(
-							"Renvoyer un message (ACCEPT_PROPOSAL) à l'agent Mediateur avec pour contenu une de ces actions");
-					System.out.println("------------------FIN ACTIONS POSSIBLES ---------------");
-					System.out.println();
 					switch(choix){
 
 						//"Aucune"
@@ -396,7 +401,7 @@ public class UtilisateurAgent extends Agent {
 						liste_partis_possibles.remove(Parti_Politique);
 
 						// Ecrit sur la console
-						System.out.println("-------------------------CHANGEMENT DE PARTI----------------------");
+						System.out.println("---------------------------CHANGEMENT DE PARTI---------------------------");
 						System.out.println("Vous êtes actuellement membre des " + Parti_Politique);
 						System.out.println();
 						System.out.println(
@@ -405,7 +410,7 @@ public class UtilisateurAgent extends Agent {
 						System.out.println("Vous allez perdre influence, popularité, notorieté et credibilité;");
 						System.out.println(
 								"Merci de répondre à l'Agent Utilisateur (CONFIRM) avec le nom du parti voulu pour le changement");
-						System.out.println("-------------------------FIN CHANGEMENT DE PARTI----------------------");
+						System.out.println("---------------------------FIN CHANGEMENT DE PARTI------------------------");
 
 						// Recrée la liste pour anticiper et gérer un éventuel
 						// prochain changement de parti
@@ -460,10 +465,10 @@ public class UtilisateurAgent extends Agent {
 
 					// Rendre effectif le changement de parti
 					Parti_Politique = parti_a_rejoindre;
-					System.out.println("------------------------- NOUVEAU PARTI----------------------");
+					System.out.println("---------------------------NOUVEAU PARTI---------------------------");
 					System.out.println("Vous venez de rejoindre les " + Parti_Politique + " ! Bienvenue !");
 					System.out.println("Voter pour la loi proposée ci-dessus pour finir le tour.");
-					System.out.println("-------------------------FIN NOUVEAU PARTI----------------------");
+					System.out.println("---------------------------FIN NOUVEAU PARTI------------------------");
 				} else
 					System.out.println(
 							"Nom de parti non valide, veuillez recommencer votre changement de parti en renvoyant un message de type INFORM à l'agent Utilisateur");
@@ -516,9 +521,7 @@ public class UtilisateurAgent extends Agent {
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
-				// //Ecrit sur la console
-				System.out.println();
-				System.out.println("Vous devez voter pour la loi ci-desous");
+
 				MainApp.addHistorique("Demande de vote", -1);
 
 				int choix = -1;
@@ -553,7 +556,7 @@ public class UtilisateurAgent extends Agent {
 				}
 				MainApp.addHistorique("Vote donné", choix);
 				loi_en_cours.affiche();
-				System.out.println("Merci de répondre à l'Agent Loi (ACCEPT_PROPOSAL ou REJECT_PROPOSAL)");
+
 
 			} else {
 				block();
@@ -677,8 +680,6 @@ public class UtilisateurAgent extends Agent {
 					// plus petit ID en premier
 					Collections.sort(Loi_a_choisir);
 					// On les affiche
-					System.out.println("-------------------------------------------------------");
-					System.out.println("--------------------LOIS-------------------------------");
 					int choix = -1;
 					choix = MainApp.showLois(Loi_a_choisir);
 					while (choix == -1){
@@ -689,14 +690,11 @@ public class UtilisateurAgent extends Agent {
 							e.printStackTrace();
 						}
 					}
-					for (int y = 0; y < Loi_a_choisir.size(); y++) {
-						Loi_a_choisir.get(y).affiche_a_utilisateur();
-
-					}
-					System.out.println("------------------FIN LOIS-----------------------------");
-
+					System.out.println();
+					System.out.println("---------------------------FIN LOIS-----------------------------");
+					System.out.println();
 					// On donne le protocole de réponse à l'utilisateur
-					System.out.println("------------------RÉPONSE-----------------------------");
+					System.out.println("---------------------------RÉPONSE------------------------------");
 
 					// Affichage selon vote ou demande de sondage :
 					if (message.getConversationId().equalsIgnoreCase("Proposition de loi")){
@@ -711,8 +709,9 @@ public class UtilisateurAgent extends Agent {
 						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Demande de Sondage")); // Envoi un message à Mediateur pour donner son choix.
 
 					}
-					System.out.println("------------------FIN RÉPONSE-------------------------");
-					System.out.println("-------------------------------------------------------");
+					System.out.println("---------------------------FIN RÉPONSE---------------------------");
+					System.out.println("-----------------------------------------------------------------");
+					System.out.println();
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -754,6 +753,19 @@ public class UtilisateurAgent extends Agent {
 					MessageTemplate.or(MessageTemplate.MatchSender(ALoi),MessageTemplate.MatchSender(ARumeur)));
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null) {
+
+				System.out.println();
+				System.out.println("---------------------------ANCIENS PARAMÈTRES UTILISATEUR---------------------------");
+				System.out.println("Votre parti :" + Parti_Politique);
+				System.out.println("Influence :" + Influence);
+				System.out.println("Charisme :" + Charisme);
+				System.out.println("Popularite :" + Popularite);
+				System.out.println("Notoriete :" + Notoriete);
+				System.out.println("Credibilite :" + Credibilite);
+				System.out.println("Moyenne :" + (Influence + Popularite + Notoriete + Credibilite)/4);
+				System.out.println("Grade :" + grade_utilisateur);
+				System.out.println("---------------------------FIN ANCIENS PARAMÈTRES UTILISATEUR------------------------");
+				System.out.println();
 				// A la reception, on met à jour les caract de l'agent
 				// On deserialise le message contenant les valeurs de variables
 				// à modifer.
@@ -781,16 +793,19 @@ public class UtilisateurAgent extends Agent {
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
 
-				// Juste pour debug
-				System.out.println("");
-				System.out.println(".....Debug....");
-				System.out.println(myAgent.getLocalName());
+				// Debug paramètres utilisateur
+				System.out.println();
+				System.out.println("---------------------------NOUVEAUX PARAMÈTRES UTILISATEUR---------------------------");
+				System.out.println("Votre parti :" + Parti_Politique);
 				System.out.println("Influence :" + Influence);
+				System.out.println("Charisme :" + Charisme);
 				System.out.println("Popularite :" + Popularite);
 				System.out.println("Notoriete :" + Notoriete);
 				System.out.println("Credibilite :" + Credibilite);
 				System.out.println("Moyenne :" + (Influence + Popularite + Notoriete + Credibilite)/4);
 				System.out.println("Grade :" + grade_utilisateur);
+				System.out.println("---------------------------FIN NOUVEAUX  PARAMÈTRES UTILISATEUR-----------------------");
+				System.out.println();
 			} else
 				block();
 
@@ -824,59 +839,88 @@ public class UtilisateurAgent extends Agent {
 
 			//Fin de la partie
 			if (moyenne <= 20){
-				System.out.println("---------------GAME OVER-----------------");
+				System.out.println();
+				System.out.println("---------------------------GAME OVER-----------------------------");
 				System.out.println("Partie terminée. Vos caractéristiques sont trop basses ..");
-				System.out.println("------------------------------------------");
+				System.out.println("Avec une moyenne de : "+moyenne);
+				System.out.println("-----------------------------------------------------------------");
+				System.out.println();
+				doDelete();
+				grade_utilisateur = -1;
+			}
+
+			//Avertissement
+			if (moyenne <= 30){
+				System.out.println();
+				System.out.println("---------------------------ÉTAT CRITIQUE--------------------------");
+				System.out.println("Vos caractéristiques commencent à être basses ..réctifiez le tir !");
+				System.out.println("-----------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = -1;
 			}
 
 			//Achievements
 			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur <= 1) {
-				System.out.println("---------------ACHIEVEMENT-----------------");
+				System.out.println();
+				System.out.println("---------------------------ACHIEVEMENT---------------------------");
 				System.out.println("FÉLICITATION on vous écoute enfin un minimum dans cette assemblée ! ");
-				System.out.println("------------------------------------------");
+				System.out.println("-----------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 2;
 			}
 
 			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur <= 2) {
-				System.out.println("---------------ACHIEVEMENT-----------------");
+				System.out.println();
+				System.out.println("---------------------------ACHIEVEMENT---------------------------");
 				System.out.println("FÉLICITATION vous devenez rapporteur au budget de l'assemblée ! ");
-				System.out.println("------------------------------------------");
+				System.out.println("-----------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 3;
 			}
 
 			else if (moyenne >= 70 && moyenne < 80 && grade_utilisateur <= 3) {
-				System.out.println("---------------ACHIEVEMENT-----------------");
+				System.out.println();
+				System.out.println("---------------------------ACHIEVEMENT---------------------------");
 				System.out.println("FÉLICITATION vous devenez président des " + Parti_Politique + " au parlement ..");
-				System.out.println("------------------------------------------");
+				System.out.println("-----------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 4;
 			}
 
 			else if (moyenne >= 80 && grade_utilisateur <= 4) {
-				System.out.println("---------------GAGNÉ-----------------");
+				System.out.println();
+				System.out.println("---------------------------GAGNÉ---------------------------");
 				System.out.println("FÉLICITATION vous devenez président de l'assemblée");
-				System.out.println("------------------------------------------");
+				System.out.println("Avec une moyenne de : "+moyenne);
+				System.out.println("------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 5;
 			}
 
 			//Rétrogradations
 			else if (moyenne < 50 && moyenne > 20 && grade_utilisateur >= 2) {
-				System.out.println("-----------RÉTROGRADATION-----------");
+				System.out.println();
+				System.out.println("---------------------------RÉTROGRADATION---------------------------");
 				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député.");
-				System.out.println("------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 1;
 			}
 			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur >= 3) {
-				System.out.println("-----------RÉTROGRADATION-----------");
+				System.out.println();
+				System.out.println("---------------------------RÉTROGRADATION---------------------------");
 				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député écouté.");
-				System.out.println("------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 2;
 			}
 
 			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur >= 4) {
-				System.out.println("-----------RÉTROGRADATION-----------");
+				System.out.println();
+				System.out.println("---------------------------RÉTROGRADATION---------------------------");
 				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député rapporteur.");
-				System.out.println("------------------------------------------");
+				System.out.println("--------------------------------------------------------------------");
+				System.out.println();
 				grade_utilisateur = 3;
 			}
 
@@ -1007,20 +1051,23 @@ public class UtilisateurAgent extends Agent {
 					List_DeputeAttRumeur = new ObjectMapper().readValue(content, new TypeReference<List<DeputeAttRumeur>>() {
 					});
 					// On les affiche
-					System.out.println("-------------------------------------------------------");
-					System.out.println("--------------------DEPUTES-------------------------------");
+					System.out.println();
+					System.out.println("----------------------------------------------------------------");
+					System.out.println("----------------------------DEPUTES-----------------------------");
 					for (int y = 0; y < List_DeputeAttRumeur.size(); y++) {
 						List_DeputeAttRumeur.get(y).affiche_a_utilisateur();
 
 					}
-					System.out.println("------------------FIN DEPUTES-----------------------------");
-
+					System.out.println("---------------------------FIN DEPUTES---------------------------");
+					System.out.println();
 					// On donne le protocole de réponse à l'utilisateur
-					System.out.println("------------------RÉPONSE-----------------------------");
+					System.out.println();
+					System.out.println("---------------------------RÉPONSE-------------------------------");
 					System.out.println(
 							"Envoyer un message de type ACCEPT_PROPOSAL à l'agent rumeur avec seulement l'ID du député choisi");
-					System.out.println("------------------FIN RÉPONSE-------------------------");
-					System.out.println("-------------------------------------------------------");
+					System.out.println("---------------------------FIN RÉPONSE---------------------------");
+					System.out.println("------------------------------------------------------------------");
+					System.out.println();
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

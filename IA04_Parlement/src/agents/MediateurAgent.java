@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -314,9 +315,9 @@ public class MediateurAgent extends Agent {
 					NumTour = mapper.readValue(message.getContent(), NumTour.class);
 					num_tour_actuel = NumTour.getNum();
 					System.out.println();
-					System.out.println("-----------------------TOUR ------------------------------");
+					System.out.println("---------------------------TOUR ------------------------------");
 					System.out.println("Tour: " + num_tour_actuel);
-					System.out.println("----------------------------------------------------------");
+					System.out.println("---------------------------------------------------------------");
 					System.out.println();
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -515,8 +516,7 @@ public class MediateurAgent extends Agent {
 								myAgent.send(message2);
 							}
 						} else
-							System.out.println(
-									"N'oubliez pas de voter pour la loi proposée pour finir le tour. Envoyer un message à l'agent LOI avec ACCEPT OU REJECT PROPOSAL.");
+
 
 						break;
 				}
@@ -575,11 +575,12 @@ public class MediateurAgent extends Agent {
 
 				// On affiche la loi choisit par l'utilisateur
 				System.out.println();
-				System.out.println("-------------------- DEBUG LOI QUE VOUS AVEZ PROPOSÉ ---------------");
+				System.out.println("--------------------------- DEBUG LOI QUE VOUS AVEZ PROPOSÉ ---------------");
 				System.out.println("Vous avez proposé cette loi : ");
-				System.out.println("--------------------------------FIN DEBUG----------------------------");
-				System.out.println();
 				loi_choisie.affiche_a_utilisateur();
+				System.out.println("---------------------------FIN DEBUG---------------------------------------");
+				System.out.println();
+
 
 				// On seriaalize la loi choisie puis on l'envoie à l'agent loi
 				ObjectMapper mapper = new ObjectMapper();
@@ -711,14 +712,6 @@ public class MediateurAgent extends Agent {
 					// On la stocke localement (elle nous servira plus tard)
 					utilisateur_information = mapper.readValue(message.getContent(), Loi.class);
 
-					// TODO Delete
-					System.out.println();
-					System.out.println("-------------------- DEBUG INFO UTILISATEUR ---------------");
-					System.out.println("Loi utilisateur (ses infos): ");
-					utilisateur_information.affiche();
-					System.out.println("------------------------- FIN DEBUG ------------------------");
-					System.out.println();
-
 					// Petit test pour voir si on est toujours dans l'action de
 					// proposition d'une loi
 					if (action_choisit.equalsIgnoreCase("Proposer une loi")
@@ -791,10 +784,9 @@ public class MediateurAgent extends Agent {
 					// On déserialize la list de lois renvoyée et on la stocke
 					// dans KB
 
-					System.out.println("---------------------------------------------------");
-					System.out.println("--------------------DEBUG--------------------------");
-					System.out.println("----CONTROLE DE LA LISTE DE LOI ENVOYÉE PAR KB-----");
-					System.out.println("---------------------------------------------------");
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
+					System.out.println("---------------------------DEBUG CONTROLE DE LA LISTE DE LOI ENVOYÉE PAR KB--------------------------------");
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
 
 					try {
 
@@ -805,7 +797,7 @@ public class MediateurAgent extends Agent {
 						// Stocke les lois envoyées par KB dans variable locale
 						Loi_possibles_user = new ObjectMapper().readValue(content, new TypeReference<List<Loi>>() {
 						});
-
+						Collections.sort(Loi_possibles_user);
 						for (int y = 0; y < Loi_possibles_user.size(); y++) {
 							// On incorpore les informations de l'utilisateur
 							// dans chaque loi grâce à la variable locale prévue
@@ -819,7 +811,9 @@ public class MediateurAgent extends Agent {
 							Loi_possibles_user.get(y).setNotoriete(utilisateur_information.getNotoriete());
 
 							// TODO Delete : Affichage pour vérification
+							System.out.println();
 							Loi_possibles_user.get(y).affiche();
+							System.out.println("------------------------------------------------");
 						}
 
 						// Les serializer et les envoyer avec le bon

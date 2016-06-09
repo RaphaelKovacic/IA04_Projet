@@ -437,13 +437,6 @@ public class DeputeAgent extends Agent {
 					loi_de_kb.setPopularite(Popularite);
 					loi_de_kb.setNotoriete(Notoriete);
 					loi_de_kb.setCharisme(Charisme);
-					System.out.println();
-					System.out.println(
-							"-----------------------DEBUG PARTI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
-					System.out.println("PARTI DU DÉPUTÉ PROPOSANT : " + Parti_Politique);
-					System.out.println(
-							"-----------------------FIN PARTI DU DEPUTE PROPOSANT (AGENTDEPUTE) ------------------------------");
-					System.out.println();
 					ObjectMapper mapper1 = new ObjectMapper();
 					StringWriter sw1 = new StringWriter();
 

@@ -271,11 +271,9 @@ public class Loi implements Comparable<Loi> {
 	 *
 	 */
 	public void affiche_a_utilisateur() {
-		System.out.println("------------------------------------------------------");
 		System.out.println("id : " + this.id);
 		System.out.println("nom : " + this.nom);
 		System.out.println("description : " + this.description);
-		System.out.println("------------------------------------------------------");
 	}
 
 	/**

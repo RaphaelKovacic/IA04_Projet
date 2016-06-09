@@ -281,11 +281,12 @@ public class SondageAgent extends Agent {
 			try {
 				MajEnv ort = mapper.readValue(mess, MajEnv.class);
 				// Mise a jour des deux variables avec les valeurs du message
-				System.out.println("");
-				System.out.println("-----------------------RÉSULTAT SONDAGE ------------------------------");
+				System.out.println();
+				System.out.println("---------------------------RÉSULTAT SONDAGE ------------------------------");
 				System.out.println(ort.getContext_eco());
 				System.out.println(ort.getQualite_vie());
-				System.out.println("-----------------------RÉSULTAT SONDAGE ------------------------------");
+				System.out.println("---------------------------RÉSULTAT SONDAGE ------------------------------");
+				System.out.println();
 			} catch (Exception ex) {
 				System.out.println("EXCEPTION" + ex.getMessage());
 			}
