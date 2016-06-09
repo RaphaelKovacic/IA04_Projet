@@ -27,7 +27,7 @@ public class AgentLauncher {
 	/**
 	 * Le nombre d'agent Depute à instancier dans notre conteneur Parlement.
 	 * 
-	 * @see main()
+	 * @see #main(String[])
 	 */
 	public static int NB_DEPUTE = 5;
 
@@ -40,6 +40,10 @@ public class AgentLauncher {
 	 * plus tard, avec eux. Chaque nom est préfixé par un "A" signifiant
 	 * "Agent".
 	 * </p>
+	 *
+	 * @param args
+	 * 			arguments de base de la fonction main
+	 *
 	 */
 	public static void main(String[] args) {
 

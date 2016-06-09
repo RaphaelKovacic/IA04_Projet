@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <li>La valeur de la notoriété du proposant de la loi.</li>
  * </ul>
  * </p>
- * 
+ *
  * <p>
  * Loi est une classe servant notamment à serializer en JSON une loi. Elle est
  * utilisée dans l'échange de messages entre agents.
@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * La classe Loi implémente l'interface Comparable pour permettre la comparaison
  * automatique de lois grâce à la methode sort()
  * </p>
- * 
+ *
  * @author Benoit  Etienne
  * @version 2.0.1
  */
@@ -41,7 +41,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * L'ID de la loi. Cet ID n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getId()
 	 * @see Loi#setId(int)
 	 */
@@ -59,7 +59,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * La description de la loi. Cette description n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getDescription()
 	 * @see Loi#setDescription(String)
 	 */
@@ -69,7 +69,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * La valeur l'influence sur le paramètre qualité de vie qui décrit le bien
 	 * être de la population du pays. Cette valeur n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getEffet_qualite_vie()
 	 * @see Loi#setEffet_qualite_vie(float)
 	 */
@@ -79,7 +79,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * La valeur l'influence sur le paramètre santé économique qui décrit la
 	 * santé économique du pays. Cette valeur n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getEffet_context_eco()
 	 * @see Loi#setEffet_context_eco(float)
 	 */
@@ -89,7 +89,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * La liste des partis politiques susceptibles de proposer cette loi. Cette
 	 * liste n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getL_PartiPolitique()
 	 * @see Loi#setL_PartiPolitique(List)
 	 */
@@ -99,7 +99,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * Le nom du député proposant la loi. Cette chaune de caractère n'est pas
 	 * modifiable.
-	 * 
+	 *
 	 * @see Loi#getProposant()
 	 * @see Loi#setProposant(String)
 	 */
@@ -109,7 +109,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * La valeur du paramètre "influence" du proposant de la loi. Cette valeur
 	 * n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getInfluence()
 	 * @see Loi#setInfluence(float)
 	 */
@@ -119,7 +119,7 @@ public class Loi implements Comparable<Loi> {
 	/**
 	 * La valeur du paramètre "charisme" du proposant de la loi. Cette valeur
 	 * n'est pas modifiable.
-	 * 
+	 *
 	 * @see Loi#getCharisme()
 	 * @see Loi#setCharisme(float)
 	 */
@@ -130,7 +130,7 @@ public class Loi implements Comparable<Loi> {
 	 * La valeur du paramètre "popularité" du proposant de la loi. Cette valeur
 	 * n'est pas modifiable. Cette valeur correspond à la côté de popularité
 	 * dont bénéficie le député vis à vis du peuple.
-	 * 
+	 *
 	 * @see Loi#getPopularite()
 	 * @see Loi#setPopularite(float)
 	 */
@@ -141,7 +141,7 @@ public class Loi implements Comparable<Loi> {
 	 * La valeur du paramètre "notoriété" du proposant de la loi. Cette valeur
 	 * n'est pas modifiable. Cette valeur correspond à la côté de popularité
 	 * dont bénéficie le député vis à vis des entreprises.
-	 * 
+	 *
 	 * @see Loi#getNotoriete()
 	 * @see Loi#setNotoriete(float)
 	 */
@@ -153,7 +153,7 @@ public class Loi implements Comparable<Loi> {
 	 * <p>
 	 * À la contruction d'une loi, les attributs de l'objet sont initialisés.
 	 * </p>
-	 * 
+	 *
 	 * @param id
 	 *            L'identifiant unique de la loi.
 	 * @param nom
@@ -176,7 +176,7 @@ public class Loi implements Comparable<Loi> {
 	 *            La valeur de la popularite du proposant
 	 * @param notoriete
 	 *            La valeur de la notoriété du proposant
-	 * 
+	 *
 	 * @see Loi#id
 	 * @see Loi#nom
 	 * @see Loi#description
@@ -187,8 +187,8 @@ public class Loi implements Comparable<Loi> {
 	 * @see Loi#charisme
 	 * @see Loi#popularite
 	 * @see Loi#notoriete
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public Loi(int id, String nom, String description, float effet_qualite_vie, float effet_context_eco,
 			List<String> l_PartiPolitique, String proposant, float influence, float charisme, float popularite,
@@ -260,8 +260,8 @@ public class Loi implements Comparable<Loi> {
 		"notoriete : "+ this.notoriete);
 		return str;
 	}
-	
-	
+
+
 	/**
 	 * Affichage des informations d'une loi pour l'utilisateur.
 	 * <p>
@@ -280,7 +280,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne l'ID de la loi.
-	 * 
+	 *
 	 * @return L'identifiant de la loi.
 	 */
 	public int getId() {
@@ -289,7 +289,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour l'id de la loi
-	 * 
+	 *
 	 * @param _id
 	 *            Le nouvel id du membre
 	 */
@@ -324,7 +324,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne la description de la loi.
-	 * 
+	 *
 	 * @return La chaine de caractère décrivant la loi.
 	 */
 	public String getDescription() {
@@ -333,10 +333,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour la description de la loi.
-	 * 
+	 *
 	 * @param _description
 	 *            La nouvelle description de la loi.
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setDescription(String _description) {
@@ -345,7 +345,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne l'effet sur la qualité de vie dans le pays pour la loi.
-	 * 
+	 *
 	 * @return La valeur de l'effet sur la qualité de vie.
 	 */
 	public float getEffet_qualite_vie() {
@@ -354,10 +354,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour l'effet de la loi sur la qualité de vie du pays.
-	 * 
+	 *
 	 * @param _effet_qualite_vie
 	 *            Le nouvel effet sur la qualité de vie
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setEffet_qualite_vie(float _effet_qualite_vie) {
@@ -366,7 +366,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne l'effet sur la santé économique dans le pays pour la loi.
-	 * 
+	 *
 	 * @return La valeur de l'effet sur la santé économique du pays.
 	 */
 	public float getEffet_context_eco() {
@@ -375,10 +375,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour l'effet de la loi sur la santé économique du pays.
-	 * 
+	 *
 	 * @param effet_context_eco
 	 *            Le nouvel effet sur la santé économique.
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setEffet_context_eco(float effet_context_eco) {
@@ -387,7 +387,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne la liste des partis politiques susceptible de proposant la loi.
-	 * 
+	 *
 	 * @return La liste de chaines de caractères correspondant aux partis
 	 *         politiques susceptibles de proposer la loi.
 	 */
@@ -397,11 +397,11 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour la liste des partis politiques pouvant proposer la loi.
-	 * 
+	 *
 	 * @param _l_PartiPolitique
 	 *            La nouvelle liste des partis politiques pouvant proposer la
 	 *            loi.
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setL_PartiPolitique(List<String> _l_PartiPolitique) {
@@ -410,7 +410,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne le nom du proposant de la loi.
-	 * 
+	 *
 	 * @return La chaine de caractère correspondant au proposant de la loi.
 	 */
 	public String getProposant() {
@@ -419,10 +419,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour le nom du proposant de la loi.
-	 * 
+	 *
 	 * @param _proposant
 	 *            Le nouveau nom du proposant de la loi.
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setProposant(String _proposant) {
@@ -431,7 +431,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne la valeur de l'attribut influence du proposant de la loi.
-	 * 
+	 *
 	 * @return La valeur de l'influence du proposant.
 	 */
 	public float getInfluence() {
@@ -440,10 +440,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour la valeur de l'influence du proposant de la loi
-	 * 
+	 *
 	 * @param _influence
 	 *            La nouvelle valeur de l'influence du proposant
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setInfluence(float _influence) {
@@ -452,7 +452,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne la valeur de l'attribut charisme du proposant de la loi.
-	 * 
+	 *
 	 * @return La valeur du charisme du proposant.
 	 */
 	public float getCharisme() {
@@ -461,10 +461,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour la valeur du charisme du proposant de la loi
-	 * 
+	 *
 	 * @param _charisme
 	 *            La nouvelle valeur du charisme du proposant
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setCharisme(float _charisme) {
@@ -473,7 +473,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne la valeur de l'attribut popularité du proposant de la loi.
-	 * 
+	 *
 	 * @return La valeur de la popularité du proposant.
 	 */
 	public float getPopularite() {
@@ -482,10 +482,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour la valeur de la popularité du proposant de la loi
-	 * 
+	 *
 	 * @param _popularite
 	 *            La nouvelle valeur de la popularité du proposant.
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setPopularite(float _popularite) {
@@ -494,7 +494,7 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Retourne la valeur de l'attribut notoriété du proposant de la loi.
-	 * 
+	 *
 	 * @return La valeur de la notoriété du proposant.
 	 */
 	public float getNotoriete() {
@@ -503,10 +503,10 @@ public class Loi implements Comparable<Loi> {
 
 	/**
 	 * Met à jour la valeur de la notoriété du proposant de la loi
-	 * 
+	 *
 	 * @param _notoriete
 	 *            La nouvelle valeur de la notoriété du proposant
-	 * 
+	 *
 	 */
 	@JsonSetter
 	public void setNotoriete(float _notoriete) {
@@ -517,7 +517,7 @@ public class Loi implements Comparable<Loi> {
 	 * Retourne une booléen issu de la comparaison entre deux lois. Méthode
 	 * obligatoire pour implémenter complétement l'interface Comparable.
 	 * Utiliser pour trier une liste de loi par id croissant.
-	 * 
+	 *
 	 * @return La valeur -1, 1 ou 0 selon la comparaison entre deux lois.
 	 */
 	public int compareTo(Loi _to_compare) {

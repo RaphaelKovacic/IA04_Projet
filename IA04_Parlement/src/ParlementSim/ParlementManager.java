@@ -13,7 +13,6 @@ import java.util.List;
 
 /**
  * <b>ParlementManager est la classe permettant de requêter le DF.</b>
- * <p>
  *
  * <p>
  * ParlementManager est utilisé par toutes les classe lorsqu'elles

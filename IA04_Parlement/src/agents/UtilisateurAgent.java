@@ -631,7 +631,7 @@ public class UtilisateurAgent extends Agent {
 	}
 
 	/**
-	 * <b>ChooseAlaw est le sixième Behaviour de l'agent Utilisateur<./b>
+	 * <b>ChooseAlaw est le sixième Behaviour de l'agent Utilisateur.</b>
 	 * <p>
 	 * Il est de type Cyclic. Notre agent Utilisateur est en constante attente
 	 * d'une requête QUERY_IF venant de l'agent médiateur et demandant à l'agent
@@ -645,7 +645,7 @@ public class UtilisateurAgent extends Agent {
 	 * 
 	 * Cette action d'affichage termine la première partie des actions :
 	 * Proposer une loi ou Avis du parlement.
-	 * <p>
+	 * </p>
 	 * 
 	 * @author Etienne
 	 * @version 1.6

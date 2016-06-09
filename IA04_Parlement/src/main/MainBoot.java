@@ -25,6 +25,10 @@ public class MainBoot {
 	 * Méthode d'instanciation de notre conteneur principal avec les agents DF,
 	 * AMS et RMA La méthode utilise le fichier de configuration
 	 * MainProperties.txt du dossier Properties.
+	 * @param
+	 * 		args
+	 *
+	 * 	Arguements de bases de la fonction main
 	 */
 	public static void main(String[] args) {
 

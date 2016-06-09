@@ -16,8 +16,8 @@ import jade.core.AID;
  * <p>
  * Aid_vote est une classe qui est utilisée par l'agent loi (ALoi)
  * afin de garder l'historique des votes des membres du parlant à
- * chaque tour de vote (ou de demande d'avis)
- * </p>
+ * chaque tour de vote (ou de demande d'avis)</p>
+ *
  *
  * @author Benoit  Etienne
  * @version 2.1
