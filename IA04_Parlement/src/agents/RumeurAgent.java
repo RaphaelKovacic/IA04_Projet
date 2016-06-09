@@ -76,7 +76,7 @@ public class RumeurAgent extends Agent {
 	 * La liste des DeputeAttRumeur des agents députés du SMA. Variable
 	 * 
 	 * @see #setup()
-	 * @see #TreatRumourRequest
+	 * @see TreatRumourRequest
 	 */
 	List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<DeputeAttRumeur>();
 	
@@ -84,7 +84,7 @@ public class RumeurAgent extends Agent {
 	 * La valeur des caracteristiques de l'agent Utilisateur. Variable
 	 * 
 	 * @see #setup()
-	 * @see #TreatRumourRequest
+	 * @see TreatRumourRequest
 	 */
 	DeputeAttRumeur UtilisateurAttRumeur = null;
 	
@@ -95,8 +95,8 @@ public class RumeurAgent extends Agent {
 	 * Remis à <b>false</b> à la fin du comportement séquentiel de l'agent.
 	 * 
 	 * @see #setup()
-	 * @see #TreatRumourRequest
-	 * @see #ExecuteActionOnDeputyIDReception
+	 * @see TreatRumourRequest
+	 * @see ExecuteActionOnDeputyIDReception
 	 */
 	boolean processingDemand;
 	

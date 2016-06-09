@@ -154,7 +154,7 @@ public class DeputeAttRumeur {
 	/**
 	 * Met à jour l'id local à l'agent Rumeur.
 	 * 
-	 * @param credibilite
+	 * @param id
 	 *            La nouvelle valeur de l'id local à l'agent Rumeur.
 	 */
 	@JsonSetter
