@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <li>Un entier correspondant au numéro du tour en cours.</li>
  * </ul>
  * </p>
- * 
+ *
  * <p>
  * NumTour est une classe servant à serializer en JSON le numéro du tour actuel.
  * Elle est utilisée dans l'échange de messages entre agents.
  * </p>
- * 
+ *
  * @author Benoit
  * @version 1.0
  */
@@ -25,7 +25,7 @@ public class NumTour {
 
 	/**
 	 * Le numéro du tour en cours.
-	 * 
+	 *
 	 * @see NumTour#getNum()
 	 * @see NumTour#setNum(int)
 	 */
@@ -36,10 +36,10 @@ public class NumTour {
 	 * <p>
 	 * À la contruction d'un NumTour on fixe le numéro du tour.
 	 * </p>
-	 * 
+	 *
 	 * @param num
 	 *            Le numero du tour.
-	 * 
+	 *
 	 * @see NumTour#num
 	 */
 	public NumTour(int num) {
@@ -57,7 +57,7 @@ public class NumTour {
 
 	/**
 	 * Retourne le numéro du tour du NumTour
-	 * 
+	 *
 	 * @return Le numéro du tour
 	 */
 	public int getNum() {
@@ -66,7 +66,7 @@ public class NumTour {
 
 	/**
 	 * Met à jour le numéro de tour du NumTour
-	 * 
+	 *
 	 * @param _num
 	 *            Le nouveau numéro de tour
 	 */

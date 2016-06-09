@@ -56,7 +56,7 @@ public class ParlementManager{
 			DFAgentDescription[] result = DFService.search(a, template);
 			if (result.length > 0){
 				int i = (int)(Math.random() * (result.length));
-				rec = result[i].getName();				
+				rec = result[i].getName();
 			}
 		} catch(FIPAException fe) {
 

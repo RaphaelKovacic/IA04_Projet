@@ -48,8 +48,8 @@ import jade.lang.acl.MessageTemplate;
  * l'agent KB sont spécifiés dans les deux classes suivantes.
  * Les fonctions utilisées sont répertoriées à la fin de ce fichier.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit  Etienne
  * @version 2.2
  */
@@ -60,28 +60,28 @@ public class KB extends Agent {
 	/**
 	 * Le model à charger depuis notre fichier dans le formalisme turle.
 	 * Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	Model model;
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ALoi;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AMediateur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
@@ -124,11 +124,11 @@ public class KB extends Agent {
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
 				}
 				addBehaviour(new RequestLaw()); // réception d'un message de type REQUEST avec un nom de
-												// parti, on doit répondre avec la liste des lois (ou bien
-												// une seule) non encore votées correspondantes
+				// parti, on doit répondre avec la liste des lois (ou bien
+				// une seule) non encore votées correspondantes
 
 				addBehaviour(new VotedAckLaw()); // réception d'un message de type INFORM avec un id de
-												 // loi que l'on doit passer à is_voted = true
+				// loi que l'on doit passer à is_voted = true
 
 			}
 		});
@@ -147,7 +147,7 @@ public class KB extends Agent {
 	 * requêtant) ou une liste de loi (à l'agent médiateur forwardant le message
 	 * de l'utilisateur)
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 2.1
 	 */
@@ -155,7 +155,7 @@ public class KB extends Agent {
 
 		/**
 		 * Le parti politique contenu dans le message reçu. Non modifiable.
-		 * 
+		 *
 		 * @see #action()
 		 */
 		String parti_politique;
@@ -262,7 +262,7 @@ public class KB extends Agent {
 	 * "désactiver" les lois votées afin que celles-ci ne puissent l'être une et
 	 * une seule fois.
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.2
 	 */
@@ -330,16 +330,16 @@ public class KB extends Agent {
 	/**
 	 * Renvoie une liste de loi disponibles (non encore votées) pour un parti
 	 * spécifique.
-	 * 
+	 *
 	 * @param _s
 	 *            Chaîne de caractère correspondant au parti politique dont on
 	 *            cherche les lois disponibles au vote
-	 * 
+	 *
 	 * Retourne une liste d'objet de type Loi correspondant aux lois
 	 *            disponibles au vote pour le parti.
-	 * 
+	 *
 	 * @return Une liste d'objets Loi.
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 
@@ -390,16 +390,16 @@ public class KB extends Agent {
 	/**
 	 * Renvoie le nom JENA de la loi correspondant à l'id passé en paramètre. On
 	 * renvoie le sujet du triplet (sujet_voulu, law:id, _id)
-	 * 
+	 *
 	 * @param _id
 	 *            La chaine de caractère correspondant à un id de loi.
-	 * 
+	 *
 	 * Retourne le nom JENA dans une ressource correspondant à l'id
 	 *            de la loi voulue.
-	 * 
+	 *
 	 * @return Une ressource JENA correspondant au sujet de l'id de la loi
 	 *         passée en paramètre.
-	 * 
+	 *
 	 */
 
 	public Resource getLoiFromId(String _id) {
@@ -418,19 +418,19 @@ public class KB extends Agent {
 	/**
 	 * Renvoie une liste de Statement JENA filtrée sur le nom du parti politique
 	 * grâce au triple (sujet, law:politic_party, _parti)
-	 * 
+	 *
 	 * @param _parti
 	 *            Chaîne de caractère correspondant au parti politique dont on
 	 *            cherche les lois disponibles au vote
-	 * 
+	 *
 	 * Retourne une liste de statement correspondant aux triples
 	 *            (loi, law:politic_party, _parti)
-	 * 
+	 *
 	 * @return Une liste de statement.
-	 * 
+	 *
 	 * @see #getIsVotedFromSubject(Resource)
 	 * @see #checkIfNotVoted(Statement)
-	 * 
+	 *
 	 */
 
 	public ArrayList<Statement> getLoiFromParti(String _parti) {
@@ -459,15 +459,15 @@ public class KB extends Agent {
 
 	/**
 	 * Renvoie un booléen issu du test sur le statut d'une loi.
-	 * 
+	 *
 	 * @param _st
 	 *            Un statement JENA ou triple RDF
-	 * 
+	 *
 	 * Retourne un booléen pour savoir si la loi n'a pas été votée
 	 *            (true) ou votée (false)
-	 * 
+	 *
 	 * @return Un booléen.
-	 * 
+	 *
 	 * @see #getLoiFromParti(String)
 	 * @see #getIsVotedFromSubject(Resource)
 	 */
@@ -485,15 +485,15 @@ public class KB extends Agent {
 	 * la propriété law:id pour
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
-	 * 
+	 *
 	 * @param _rsc
 	 *            Une ressource "objet" JENA
-	 * 
+	 *
 	 * Retourne une chaine de caractère correspondant à la valeur de
 	 *            la propriété law:id
-	 * 
+	 *
 	 * @return Une chaine de caractère
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 
@@ -514,15 +514,15 @@ public class KB extends Agent {
 	 * Renvoie la chaine de caractère correspondant à la valeur de la propriété law:name pour
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
-	 * 
+	 *
 	 * @param _rsc
 	 *            Une ressource "objet" JENA
-	 * 
+	 *
 	 * Retourne une chaine de caractère correspondant à la valeur de
 	 *            la propriété law:name
-	 * 
+	 *
 	 * @return Une chaine de caractère
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 
@@ -543,15 +543,15 @@ public class KB extends Agent {
 	 * Renvoie la chaine de caractère correspondant à la valeur de la propriété law:id pour
 	 * un sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
-	 * 
+	 *
 	 * @param _rsc
 	 *            Une ressource "objet" JENA
-	 * 
+	 *
 	 * Retourne une chaine de caractère correspondant à la valeur de
 	 *            la propriété law:id
-	 * 
+	 *
 	 * @return Une chaine de caractère
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 
@@ -572,16 +572,16 @@ public class KB extends Agent {
 	 * Renvoie le float correspondant à la valeur de la propriété law:eco_effect pour un
 	 * sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
-	 * 
+	 *
 	 * @param _rsc
 	 *            Une ressource "objet" JENA
-	 * 
+	 *
 	 * Retourne un float correspondant à la valeur de la propriété
 	 *            law:eco_effect qui correspondant à l'effet économique d'une
 	 *            loi
-	 * 
+	 *
 	 * @return Un float
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 
@@ -606,16 +606,16 @@ public class KB extends Agent {
 	 * Renvoie le float correspondant à la valeur de la propriété law:life_effect pour un
 	 * sujet "loi" passé en paramètre. Assimilable à un "getter" JENA sur une
 	 * propriété donnée avec un sujet passé en argument.
-	 * 
+	 *
 	 * @param _rsc
 	 *            Une ressource "objet" JENA
-	 * 
+	 *
 	 * Retourne un float correspondant à la valeur de la propriété
 	 *            law:life_effect qui correspondant à l'effet sur la qualité de
 	 *            vie d'une loi
-	 * 
+	 *
 	 * @return Un float
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 	public float getLifeFromSubject(Resource _rsc) {
@@ -638,15 +638,15 @@ public class KB extends Agent {
 	/**
 	 * Récupère le sujet du triplet RDF (loi_a_examiner, law:is_voted,
 	 * sujet_voulu) sous la forme d'une chaine de caractère.
-	 * 
+	 *
 	 * @param _rsc
 	 *            Une ressource JENA qui est un sujet "loi"
-	 * 
+	 *
 	 * Retourne la chaine de caractère correspondant à la valeur de
 	 *            la propriété is_voted pour le sujet loi passé en paramètre.
-	 * 
+	 *
 	 * @return Une chaine de caractère
-	 * 
+	 *
 	 * @see #getLoiFromParti(String)
 	 * @see #checkIfNotVoted(Statement)
 	 * @see Class_For_JSON.Loi

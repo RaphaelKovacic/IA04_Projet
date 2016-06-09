@@ -36,8 +36,8 @@ import jade.core.Agent;
  * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent Environnement sont spécifiés dans les quatre classes suivantes.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit
  * @version 2.1
  */
@@ -47,42 +47,42 @@ public class EnvironmentalAgent extends Agent {
 
 	/**
 	 * L'état du contexte économique du pays dans un flottant. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float context_eco;
 
 	/**
 	 * L'état du contexte social du pays dans un flottant. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float qualite_vie;
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ALoi;
 
 	/**
 	 * L'AID de l'agent sondage. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ASondage;
 
 	/**
 	 * L'AID de l'agent simulation. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ASimulation;
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
@@ -146,16 +146,16 @@ public class EnvironmentalAgent extends Agent {
 	 * Il implémente le comportement suivant : Récupérer le message demandant
 	 * une mise à jour de ses variables.
 	 * <p>
-	 * 
+	 *
 	 * Cette action faite suite au vote d'une loi.
-	 * 
+	 *
 	 * <p>
 	 * Ce Behaviour va instancier un OneShotBehaviour qui sera en charge de la
 	 * suite du processus.
 	 * </p>
-	 * 
+	 *
 	 * @see MajBehaviour
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -190,18 +190,18 @@ public class EnvironmentalAgent extends Agent {
 	 * Il implémente le comportement suivant : Récupèrer le message demandant de
 	 * fournir les valeurs de ses variables.
 	 * <p>
-	 * 
+	 *
 	 * Cette action faite suite à la demande de sondage de la part de
 	 * l'utilisateur.
-	 * 
+	 *
 	 * <p>
 	 * Ce Behaviour va instancier un OneShotBehaviour qui sera en charge de la
 	 * suite du processus.
-	 * 
-	 * 
+	 *
+	 *
 	 * @see RepSondageBehaviour
-	 * 
-	 * 
+	 *
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -234,13 +234,13 @@ public class EnvironmentalAgent extends Agent {
 	 * Il implémente le comportement suivant : Modifier ses variables
 	 * d'environnements.
 	 * <p>
-	 * 
+	 *
 	 * Cette action faite suite au vote d'une loi.
-	 * 
+	 *
 	 * @see WaitSondageRequest
-	 * 
+	 *
 	 * @see RepSondageBehaviour
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */
@@ -309,11 +309,11 @@ public class EnvironmentalAgent extends Agent {
 	 * Il implémente le comportement suivant : Renvoyer les valeurs de ses
 	 * variables d'enregistrement.
 	 * <p>
-	 * 
+	 *
 	 * Cette action faite à la demande de sondage de la part de l'utilisateur.
-	 * 
+	 *
 	 * @see WaitLoiRequest
-	 * 
+	 *
 	 * @author Benoit
 	 * @version : 1.2
 	 */

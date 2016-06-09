@@ -14,13 +14,13 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * <li>Un float correspondant à l'effet sur la crédibilité du député.</li>
  * </ul>
  * </p>
- * 
+ *
  * <p>
  * MajDepute est une classe servant à serializer en JSON les modifications à
  * apporter sur les caractéristiques variable d'un député. Elle est utilisée
  * dans l'échange de messages entre agents.
  * </p>
- * 
+ *
  * @author Benoit
  * @version 1.1
  */
@@ -28,7 +28,7 @@ public class MajDepute {
 
 	/**
 	 * La valeur correspondant à l'effet sur l'influence du député.
-	 * 
+	 *
 	 * @see MajDepute#getEffet_Influence()
 	 * @see MajDepute#setEffet_Influence(float)
 	 */
@@ -36,7 +36,7 @@ public class MajDepute {
 
 	/**
 	 * La valeur correspondant à l'effet sur la popularité du député.
-	 * 
+	 *
 	 * @see MajDepute#getEffet_Popularite()
 	 * @see MajDepute#setEffet_Popularite(float)
 	 */
@@ -44,7 +44,7 @@ public class MajDepute {
 
 	/**
 	 * La valeur correspondant à l'effet sur la notoriété du député
-	 * 
+	 *
 	 * @see MajDepute#getEffet_Notoriete()
 	 * @see MajDepute#setEffet_Notoriete(float)
 	 */
@@ -52,7 +52,7 @@ public class MajDepute {
 
 	/**
 	 * La valeur correspondant à l'effet sur la crédibilité du député
-	 * 
+	 *
 	 * @see MajDepute#getEffet_Credibilite()
 	 * @see MajDepute#setEffet_Credibilite(float)
 	 */
@@ -64,19 +64,19 @@ public class MajDepute {
 	 * À la contruction d'un MajDepute on fixe tous les attributs de la classe :
 	 * l'effet sur chaque paramètre d'un député.
 	 * </p>
-	 * 
+	 *
 	 * @param effet_Influence
 	 *            La valeur de l'effet sur l'influence.
-	 * 
+	 *
 	 * @param effet_Popularite
 	 *            La valeur de l'effet sur la popularité.
-	 * 
+	 *
 	 * @param effet_Notoriete
 	 *            La valeur de l'effet sur la notoriété.
-	 * 
+	 *
 	 * @param effet_Credibilite
 	 *            La valeur de l'effet sur la crédibilité.
-	 * 
+	 *
 	 * @see MajDepute#effet_Influence
 	 * @see MajDepute#effet_Popularite
 	 * @see MajDepute#effet_Notoriete
@@ -102,7 +102,7 @@ public class MajDepute {
 
 	/**
 	 * Retourne la valeur de l'effet sur l'influence.
-	 * 
+	 *
 	 * @return La valeur de l'effet sur l'influence.
 	 */
 	public float getEffet_Influence() {
@@ -111,7 +111,7 @@ public class MajDepute {
 
 	/**
 	 * Met à jour l'effet sur l'influence.
-	 * 
+	 *
 	 * @param _effet_Influence
 	 *            La nouvelle valeur de l'effet sur l'influence.
 	 */
@@ -122,7 +122,7 @@ public class MajDepute {
 
 	/**
 	 * Retourne la valeur de l'effet sur la popularité.
-	 * 
+	 *
 	 * @return La valeur de l'effet sur la popularité.
 	 */
 	public float getEffet_Popularite() {
@@ -131,7 +131,7 @@ public class MajDepute {
 
 	/**
 	 * Met à jour l'effet sur la popularité.
-	 * 
+	 *
 	 * @param effet_Popularite
 	 *            La nouvelle valeur de l'effet sur la popularité.
 	 */
@@ -142,7 +142,7 @@ public class MajDepute {
 
 	/**
 	 * Retourne la valeur de l'effet sur la notoriété.
-	 * 
+	 *
 	 * @return La valeur de l'effet sur la notoriété.
 	 */
 	public float getEffet_Notoriete() {
@@ -151,7 +151,7 @@ public class MajDepute {
 
 	/**
 	 * Met à jour l'effet sur la notoriété.
-	 * 
+	 *
 	 * @param effet_Notoriete
 	 *            La nouvelle valeur de l'effet sur la notoriété.
 	 */
@@ -162,7 +162,7 @@ public class MajDepute {
 
 	/**
 	 * Retourne la valeur de l'effet sur la crédibilité.
-	 * 
+	 *
 	 * @return La valeur de l'effet sur la crédibilité.
 	 */
 	public float getEffet_Credibilite() {
@@ -171,7 +171,7 @@ public class MajDepute {
 
 	/**
 	 * Met à jour l'effet sur la crédibilité.
-	 * 
+	 *
 	 * @param effet_Credibilite
 	 *            La nouvelle valeur de l'effet sur la crédibilité.
 	 */

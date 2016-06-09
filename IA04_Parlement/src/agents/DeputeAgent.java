@@ -40,34 +40,34 @@ import jade.lang.acl.MessageTemplate;
  * député </li>
  * <li>Un attribut Charisme qui représente la le charisme du député </li>
  * <li>Un attribut Hésitation qui représente l'hésitation du député </li>
- * 
+ *
  * <li>Un attribut A qui représente l'importance de l'influence du député dans le calcul du score d'une loi préalable à la décision du député</li>
  * <li>Un attribut BP qui représente l'importance du contexte social de la loi dans le calcul du score d'une loi préalable à la décision du député</li>
  * <li>Un attribut BE qui représente l'importance du contexte économique de la loi dans le calcul du score d'une loi préalable à la décision du député</li>
  * <li>Un attribut G qui représente l'importance du charisme du député proposant  dans le calcul du score d'une loi préalable à la décision du député</li>
  * <li>Un attribut D qui représente le bonus si la loi provient d'un député du même parti dans le calcul du score d'une loi préalable à la décision du député</li>
- * 
+ *
  * <li>Un attribut APeuple qui représente l'importance de la popularité dans le calcul du score d'une loi</li>
  * <li>Un attribut BPeuple qui représente l'importance du contexte social du pays dans le calcul du score d'une loi</li>
  * <li>Un attribut AEntreprise qui représente l'importance de la notoriété dans le calcul du score d'une loi</li>
  * <li>Un attribut BEntreprise qui représente l'importance du contexte éco du pays dans le calcul du score d'une loi</li>
- * 
+ *
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent KB pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent rumeur pour les mêmes raisons qu'au dessus</li>
- * 
+ *
  * <li>Un attribut L_Parti qui est une liste de tous les partis politiques
  * possibles du jeu.</li>
  * <li>Le manager du parlement pour recevoir les AID ci-dessus</li>
- * 
+ *
  * </ul>
  * </p>
  * <p>
  * La première classe sert à l'instanciation de l'agent. Les comportements de
  * l'agent député sont spécifiés dans les classes suivantes
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit  Etienne
  * @version 4.3
  */
@@ -78,117 +78,117 @@ public class DeputeAgent extends Agent {
 
 	/**
 	 * L'influence du député. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Influence;
 
 	/**
 	 * La popularité du député. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Popularite;
 
 	/**
 	 * La notoriété du député. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Notoriete;
 
 	/**
 	 * La crédibilité du député. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Credibilite;
 
 	/**
 	 * Le parti politique du député. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	String Parti_Politique;
 
 	/**
 	 * L'influence de l'utilisateur. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Charisme;
-	
+
 	/**
 	 * La propension de l'utilisateur à hésiter. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Hesitation;
 
 	/**
 	 * Importance du député dans le calcul du score d'une loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
-	float A; 
-	
+	float A;
+
 	/**
 	 * Importance de l'apport social d'une loi dans le calcul du score de cette loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float BP;
-	
+
 	/**
 	 * Importance de l'apport économique d'une loi dans le calcul du score de cette loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float BE;
-	
+
 	/**
 	 * Importance du charisme du député dans le calcul du score d'une loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 *
 	 */
-	float G; 
-	
+	float G;
+
 	/**
 	 * Importance du parti politique (bonus si même parti que le député) dans le calcul du score d'une loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 *
 	 */
 	float D;
-	
+
 	/**
 	 * Importance de la popularité du député dans le calcul du score d'une loi. Statique.
-	 * 
- * @see #setup()
+	 *
+	 * @see #setup()
 	 *
 	 */
 	float APeuple;
-	
+
 	/**
 	 * Importancedu contexte social actuel dans le pays dans le calcul du score d'une loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 *
 	 */
 	float BPeuple;
-	
+
 	/**
 	 * Importance de la notoriété du député dans le calcul du score d'une loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 *
 	 */
 	float AEntreprise;
-	
+
 	/**
 	 * Importance du contexte économique actuel du pays dans le calcul du score d'une loi. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 *
 	 */
@@ -196,40 +196,40 @@ public class DeputeAgent extends Agent {
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ALoi;
-	
+
 	/**
 	 * L'AID de l'agent Rumeur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ARumeur;
-	
+
 	/**
 	 * L'AID de l'agent KB. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AKB;
 
 	/**
 	 * La liste de tous les partis possibles de l'utilisateur. Constante.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	List<String> L_Parti;
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
-	
+
 	/**
 	 * Méthode d'instanciation (appelée à la création) de notre agent
 	 * Deputé.
@@ -282,13 +282,13 @@ public class DeputeAgent extends Agent {
 		// implémenté...)
 		float higher = (A * 100 + BP * 25 + BE * 25 + G * 100 + D * 1
 				+ (APeuple * 100 + BPeuple * 25 + AEntreprise * 100 + BEntreprise * 25)); // maximum du score
-																						  // pour "voter une
-																						  // loi"
+		// pour "voter une
+		// loi"
 		float lower = (A * 0 + BP * (-25) + BE * (-25) + G * 0 + D * 0
 				+ (APeuple * 0 + BPeuple * (-25) + AEntreprise * 0 + BEntreprise * (-25)));// minimum du score pour
-																						   // "voter une loi"
+		// "voter une loi"
 		Hesitation = (float) (Math.random() * (higher - lower)) + lower; // un peu de random ne
-																	     // fait pas de mal :D
+		// fait pas de mal :D
 
 		System.out.println("Agent Député créé : " + this.getLocalName());
 
@@ -302,20 +302,20 @@ public class DeputeAgent extends Agent {
 					ARumeur = parl_mana.getReceiver(myAgent, "Parlement", "ARumeur");
 				}
 				addBehaviour(new RequestToProposeLaw()); // recéption d'un message demandant
-														 // de proposer une loi (provient de
-														 // ALoi)
-				
+				// de proposer une loi (provient de
+				// ALoi)
+
 				addBehaviour(new RequestToVote()); // réception d'un message demandant de voter pour
-													// une loi (provient de ALoi)
-				
+				// une loi (provient de ALoi)
+
 				addBehaviour(new RequestToSondage()); // réception d'un message demandant de donner
-												      // son avis pour une loi (provient de ALoi)
-				
+				// son avis pour une loi (provient de ALoi)
+
 				addBehaviour(new RequestToModifCara()); // réception d'un message demandant de
-														// modifier ses cara (provient de ALoi)
-				
+				// modifier ses cara (provient de ALoi)
+
 				addBehaviour(new ProposeLaw()); // envoie de la loi récupéré par KB à la loi
-				
+
 				addBehaviour(new AnswerRequestCharacteristicsFromRumourAgent()); // envoie les caractéristiques (influence, ...) à la demande de l'agent Rumeur
 			}
 		});
@@ -324,12 +324,12 @@ public class DeputeAgent extends Agent {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 		MainApp.addDepute("Depute", "Classique", this.Parti_Politique, this.Popularite, this.Credibilite, this.Notoriete, this.Charisme, this.getAID().getLocalName());// ajout dans le modele grpahique
 
 	}
 
-	
+
 	/**
 	 * <b>RequestToProposeLaw est le premier Behaviour de l'agent
 	 * Député.</b>
@@ -380,7 +380,7 @@ public class DeputeAgent extends Agent {
 	 * Il implémente le comportement suivant : Réalise la demande à l'agent KB
 	 * pour connaitre la loi qu'il va proposer.
 	 * <p>
-	 * 
+	 *
 	 * @see RequestToProposeLaw
 	 * @author Etienne
 	 * @version 1.3
@@ -412,7 +412,7 @@ public class DeputeAgent extends Agent {
 	 * envoyée par KB.
 	 * Loi qu'il doit proposer.
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 2.2
 	 */
@@ -483,7 +483,7 @@ public class DeputeAgent extends Agent {
 	 * de la part de l'agent Loi avec le conversation ID correspondant à un 
 	 * vote de loi et lui demandant de voter une proposition de loi.
 	 * <p>
-	 * 
+	 *
 	 * @see VoteLoi
 	 * @author Benoit
 	 * @version 1.3
@@ -522,7 +522,7 @@ public class DeputeAgent extends Agent {
 	 * de la part de l'agent Loi avec le conversation ID correspondant à une demande
 	 * d'avis sur une loi et lui demandant de rendre son avis dessus.
 	 * <p>
-	 * 
+	 *
 	 * @see SondageLoi
 	 * @author Etienne
 	 * @version 1.3
@@ -547,7 +547,7 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
-	
+
 	/**
 	 * <b>RequestToModifCara est le sixième Behaviour de l'agent
 	 * Député.</b>
@@ -562,7 +562,7 @@ public class DeputeAgent extends Agent {
 	 * de la part de l'agent Loi ou de l'agent Rumeur lui demandant de mettre à jour ses caractéristiques
 	 * internes.
 	 * <p>
-	 * 
+	 *
 	 * @author Benoit  Cristian
 	 * @version 1.4
 	 */
@@ -597,7 +597,7 @@ public class DeputeAgent extends Agent {
 						Notoriete = 0;
 					if (Credibilite < 0)
 						Credibilite = 0;
-					
+
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
@@ -613,7 +613,7 @@ public class DeputeAgent extends Agent {
 		}
 	}
 
-	
+
 	/**
 	 * <b>VoteLoi est le septième Behaviour de l'agent
 	 * Député.</b>
@@ -626,7 +626,7 @@ public class DeputeAgent extends Agent {
 	 * Il implémente le comportement suivant :Vote la loi récupérée dans le message
 	 * demandant de voter une loi par envoyée par l'agent loi.
 	 * <p>
-	 * 
+	 *
 	 * @see RequestToVote
 	 * @author Benoit
 	 * @version 1.3
@@ -719,7 +719,7 @@ public class DeputeAgent extends Agent {
 	 * de donner son avis sur choisie par l'utilisateur
 	 *  une loi par envoyée par l'agent loi.
 	 * <p>
-	 * 
+	 *
 	 * @see RequestToSondage
 	 * @author Etienne
 	 * @version 2.1
@@ -787,7 +787,7 @@ public class DeputeAgent extends Agent {
 				System.out.print("Debug sondage loi : "+sw1.toString());
 				String s1 = sw1.toString();
 				reply.setContent(s1);
-				
+
 			} else {
 
 				System.out.print("Depute AID "+myAgent.getAID());
@@ -809,7 +809,7 @@ public class DeputeAgent extends Agent {
 				System.out.print("Debug sondage loi : "+sw2.toString());
 				String s2 = sw2.toString();
 				reply.setContent(s2);
-				
+
 			}
 			// Envoie de l'avis :)
 			myAgent.send(reply);
@@ -846,11 +846,11 @@ public class DeputeAgent extends Agent {
 				// a l'agent Rumeur.
 				ACLMessage answer = message.createReply();
 				answer.setPerformative(ACLMessage.INFORM);
-				
+
 				ObjectMapper mapper1 = new ObjectMapper();
 				StringWriter sw = new StringWriter();
 				DeputeAttRumeur depAt = new DeputeAttRumeur(Influence, Popularite, Credibilite);
-				
+
 				try {
 					mapper1.writeValue(sw, depAt);
 					String s1 = sw.toString();
@@ -859,7 +859,7 @@ public class DeputeAgent extends Agent {
 				} catch (Exception ex) {
 					System.out.println(ex.getMessage());
 				}
-				
+
 			} else {
 				block();
 			}

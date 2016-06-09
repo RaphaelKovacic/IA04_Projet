@@ -42,10 +42,10 @@ import jade.lang.acl.MessageTemplate;
  * </li>
  * <li>Un attribut Parti_Politique qui stocke le parti politique de
  * l'utilisateur</li>
- * 
+ *
  * <li>Un attribut L_Parti qui est une liste de tous les partis politiques
  * possibles du jeu</li>
- * 
+ *
  * <li>L'AID de l'agent loi pour pouvoir rapidement communiquer avec lui</li>
  * <li>L'AID de l'agent médiateur pour les mêmes raisons qu'au dessus</li>
  * <li>L'AID de l'agent simulation pour les mêmes raisons qu'au dessus</li>
@@ -59,8 +59,8 @@ import jade.lang.acl.MessageTemplate;
  * l'agent KB sont spécifiés dans les huit classes suivantes.
  * La fonction utilisée se situe à la fin de ce fichier.
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit  Etienne
  * @version 3.1
  */
@@ -70,7 +70,7 @@ public class UtilisateurAgent extends Agent {
 
 	/**
 	 * L'influence de l'utilisateur. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Influence;
@@ -78,7 +78,7 @@ public class UtilisateurAgent extends Agent {
 	/**
 	 * La popularité de l'utilisateur. Variable. Sa cote d'amour auprès du
 	 * peuple. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Popularite;
@@ -86,77 +86,77 @@ public class UtilisateurAgent extends Agent {
 	/**
 	 * La notoriété de l'utilisateur. Variable. Sa cote d'amour auprès des
 	 * entreprises. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Notoriete;
 
 	/**
 	 * La crédibilité de l'utilisateur. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Credibilite;
 
 	/**
 	 * Le parti politique de l'utilisateur. Variable.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	String Parti_Politique;
 
 	/**
 	 * Le charisme de l'utilisateur. Statique.
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	float Charisme;
 
 	/**
 	 * La liste de tous les partis possibles de l'utilisateur. Constante
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	List<String> L_Parti;
 
 	/**
 	 * L'AID de l'agent loi. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID ALoi;
 
 	/**
 	 * L'AID de l'agent médiateur. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	AID AMediateur;
 
-    /**
-     * L'AID de l'agent simulation. Non modifiable
-     *
-     * @see #setup()
-     */
-    AID ASimulation;
-    
-    /**
-     * L'AID de l'agent simulation. Non modifiable
-     *
-     * @see #setup()
-     */
-    AID ARumeur;
+	/**
+	 * L'AID de l'agent simulation. Non modifiable
+	 *
+	 * @see #setup()
+	 */
+	AID ASimulation;
+
+	/**
+	 * L'AID de l'agent simulation. Non modifiable
+	 *
+	 * @see #setup()
+	 */
+	AID ARumeur;
 
 	/**
 	 * Le manager du parlement. Non modifiable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
 	/**
 	 * Le niveau actuel de l'utilisateur. Variable
-	 * 
+	 *
 	 * @see #setup()
 	 */
 	int grade_utilisateur = 0;
@@ -211,32 +211,32 @@ public class UtilisateurAgent extends Agent {
 				while (AMediateur == null || ALoi == null || ARumeur == null) {
 					AMediateur = parl_mana.getReceiver(myAgent, "Parlement", "AMediateur");
 					ALoi = parl_mana.getReceiver(myAgent, "Parlement", "ALoi");
-                    ASimulation = parl_mana.getReceiver(myAgent, "Parlement", "ASimulation");
-                    ARumeur = parl_mana.getReceiver(myAgent, "Parlement", "ARumeur");
+					ASimulation = parl_mana.getReceiver(myAgent, "Parlement", "ASimulation");
+					ARumeur = parl_mana.getReceiver(myAgent, "Parlement", "ARumeur");
 				}
 				addBehaviour(new LActionsFromMediateur()); // recéption d'un message proposant de choisir une
-															// action parmis plusieurs actions.
-				
+				// action parmis plusieurs actions.
+
 				addBehaviour(new PrecisonActionFromMediateur()); // recéption d'un message demandant des
-																// précisions sur l'action choisit
-				
+				// précisions sur l'action choisit
+
 				addBehaviour(new RequestToVote()); // réception d'un message proventant de l'ALoi
-													// demandant de voter pour une loi
-				
+				// demandant de voter pour une loi
+
 				addBehaviour(new RequestToModifCara()); // réception d'un message proventant de
-														// l'ALoi demandant de modifier ses caract
-				
+				// l'ALoi demandant de modifier ses caract
+
 				addBehaviour(new ChangeParty()); // Changer de parti
-				
+
 				addBehaviour(new GiveYourInfo()); // Envoyer son parti à l'agent médiateur
-				
+
 				addBehaviour(new ChooseAlaw()); // Recevoir la liste des lois envoyée par mediateur afin de
-												// les afficher et d'en choisir une
-				
+				// les afficher et d'en choisir une
+
 				addBehaviour(new ActualLevelOfUser()); // Pour checker et afficher le niveau actuel du joueur
-				
+
 				addBehaviour(new AnswerRequestCharacteristicsFromRumourAgent()); // envoie les caractéristiques (influence, ...) à la demande de l'agent Rumeur
-			
+
 				addBehaviour(new ReceiveDeputiesChoiceForRumours()); // reçoit les caractéristiques des députés pour répandre des rumeurs
 			}
 		});
@@ -245,7 +245,7 @@ public class UtilisateurAgent extends Agent {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 		MainApp.addDepute("Michel","Drucker",this.Parti_Politique,this.Popularite,this.Credibilite,this.Notoriete,this.Charisme,this.getAID().getLocalName());
 		int choix = -1;
 
@@ -274,7 +274,7 @@ public class UtilisateurAgent extends Agent {
 	 * Il implémente le comportement suivant : Affiche les actions possibles
 	 * lors du tour de jeu en cours et la procédure pour les réaliser.
 	 * <p>
-	 * 
+	 *
 	 * @author Benoit
 	 * @version 2.1
 	 */
@@ -309,43 +309,43 @@ public class UtilisateurAgent extends Agent {
 					System.out.println("------------------FIN ACTIONS POSSIBLES ---------------");
 					System.out.println();
 					switch(choix){
-			    	
-			    	//"Aucune"
-			    	//"Proposer une loi"
-			    	//"Faire un sondage"
-			    	//"Changer de parti"
-			    	//"Avis du parlement"
-			    	//"Repandre une rumeur"
 
-					case 0:{
-						addBehaviour(new SendMyAction("Proposer une loi")); // Envoi un message à Mediateur pour donner son choix.
-						break;
-					}
-					case 3:{
-						addBehaviour(new SendMyAction("Repandre une rumeur")); // Envoi un message à Mediateur pour donner son choix.
+						//"Aucune"
+						//"Proposer une loi"
+						//"Faire un sondage"
+						//"Changer de parti"
+						//"Avis du parlement"
+						//"Repandre une rumeur"
 
-						break;
-					}
-					case 4:{
-						addBehaviour(new SendMyAction("Faire un sondage")); // Envoi un message à Mediateur pour donner son choix.
+						case 0:{
+							addBehaviour(new SendMyAction("Proposer une loi")); // Envoi un message à Mediateur pour donner son choix.
+							break;
+						}
+						case 3:{
+							addBehaviour(new SendMyAction("Repandre une rumeur")); // Envoi un message à Mediateur pour donner son choix.
 
-						break;
-					}
-					case 5:{
-						addBehaviour(new SendMyAction("Avis du parlement")); // Envoi un message à Mediateur pour donner son choix.
+							break;
+						}
+						case 4:{
+							addBehaviour(new SendMyAction("Faire un sondage")); // Envoi un message à Mediateur pour donner son choix.
 
-						break;
-					}
-					case 6:{
-						addBehaviour(new SendMyAction("Changer de parti")); // Envoi un message à Mediateur pour donner son choix.
+							break;
+						}
+						case 5:{
+							addBehaviour(new SendMyAction("Avis du parlement")); // Envoi un message à Mediateur pour donner son choix.
 
-						break;
-					}
-					case 7:{
-						addBehaviour(new SendMyAction("Aucune")); // Envoi un message à Mediateur pour donner son choix.
+							break;
+						}
+						case 6:{
+							addBehaviour(new SendMyAction("Changer de parti")); // Envoi un message à Mediateur pour donner son choix.
 
-						break;
-					}
+							break;
+						}
+						case 7:{
+							addBehaviour(new SendMyAction("Aucune")); // Envoi un message à Mediateur pour donner son choix.
+
+							break;
+						}
 					}
 				} catch (Exception ex) {
 					System.out.println("EXCEPTION" + ex.getMessage());
@@ -369,7 +369,7 @@ public class UtilisateurAgent extends Agent {
 	 * changement de parti après que l'utilisateur ait choisi l'action de
 	 * changer de parti.
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne  Benoit
 	 * @version 2.1
 	 */
@@ -387,30 +387,30 @@ public class UtilisateurAgent extends Agent {
 			if (message != null) {
 				switch (message.getContent()) {
 
-				case "Change de parti":
-					// Construction de la liste des partis que l'utilisateur
-					// peut choisir lors de son changement de parti
-					List<String> liste_partis_possibles = new ArrayList<String>();
-					liste_partis_possibles = L_Parti;
+					case "Change de parti":
+						// Construction de la liste des partis que l'utilisateur
+						// peut choisir lors de son changement de parti
+						List<String> liste_partis_possibles = new ArrayList<String>();
+						liste_partis_possibles = L_Parti;
 
-					liste_partis_possibles.remove(Parti_Politique);
+						liste_partis_possibles.remove(Parti_Politique);
 
-					// Ecrit sur la console
-					System.out.println("-------------------------CHANGEMENT DE PARTI----------------------");
-					System.out.println("Vous êtes actuellement membre des " + Parti_Politique);
-					System.out.println();
-					System.out.println(
-							"Préciser le nouveau parti que vous voulez intégrer en envoyant un message comme suit :");
-					System.out.println("Voici la liste des partis possibles : " + liste_partis_possibles.toString());
-					System.out.println("Vous allez perdre influence, popularité, notorieté et credibilité;");
-					System.out.println(
-							"Merci de répondre à l'Agent Utilisateur (CONFIRM) avec le nom du parti voulu pour le changement");
-					System.out.println("-------------------------FIN CHANGEMENT DE PARTI----------------------");
+						// Ecrit sur la console
+						System.out.println("-------------------------CHANGEMENT DE PARTI----------------------");
+						System.out.println("Vous êtes actuellement membre des " + Parti_Politique);
+						System.out.println();
+						System.out.println(
+								"Préciser le nouveau parti que vous voulez intégrer en envoyant un message comme suit :");
+						System.out.println("Voici la liste des partis possibles : " + liste_partis_possibles.toString());
+						System.out.println("Vous allez perdre influence, popularité, notorieté et credibilité;");
+						System.out.println(
+								"Merci de répondre à l'Agent Utilisateur (CONFIRM) avec le nom du parti voulu pour le changement");
+						System.out.println("-------------------------FIN CHANGEMENT DE PARTI----------------------");
 
-					// Recrée la liste pour anticiper et gérer un éventuel
-					// prochain changement de parti
-					L_Parti.add(Parti_Politique);
-					break;
+						// Recrée la liste pour anticiper et gérer un éventuel
+						// prochain changement de parti
+						L_Parti.add(Parti_Politique);
+						break;
 				}
 
 			} else
@@ -431,7 +431,7 @@ public class UtilisateurAgent extends Agent {
 	 * du parti choisi par le joueur. C'est en quelque sorte la fin de l'action
 	 * "changer de parti".
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.2
 	 */
@@ -484,14 +484,14 @@ public class UtilisateurAgent extends Agent {
 	 * <p>
 	 * Il implémente le comportement suivant : Récupère la loi envoyée par
 	 * l'agent médiateur et pour lequel l'utilisateur doit donner son vote.
-	 * 
+	 *
 	 * Cette action de vote est obligatoire à chaque tour sauf si l'utilisateur
 	 * choisi l'action "proposer une loi".
-	 * 
+	 *
 	 * C'est cette action qui cloture le tour d'un utilisateur lorsqu'il n'a pas
 	 * choisi de proposer une loi de lui même.
 	 * <p>
-	 * 
+	 *
 	 * @author Benoit
 	 * @version 1.2
 	 */
@@ -520,7 +520,7 @@ public class UtilisateurAgent extends Agent {
 				System.out.println();
 				System.out.println("Vous devez voter pour la loi ci-desous");
 				MainApp.addHistorique("Demande de vote", -1);
-				
+
 				int choix = -1;
 				choix = MainApp.showChoicePopUp(1,loi_en_cours.afficheString(),null);
 				while (choix == -1){
@@ -531,25 +531,25 @@ public class UtilisateurAgent extends Agent {
 						e.printStackTrace();
 					}
 				}
-				
+
 				switch(choix){
-				case 1 :{
-					System.out.println("Vous avez accepté la loi");
-					if(message != null)
-						
-					myAgent.addBehaviour(new VoteLoi(message,true));
+					case 1 :{
+						System.out.println("Vous avez accepté la loi");
+						if(message != null)
 
-					
-					break;
-				}
-				case 2 :{
-					
-					System.out.println("Vous avez refusé la loi");
-					if(message != null)
-					myAgent.addBehaviour(new VoteLoi(message,false));
+							myAgent.addBehaviour(new VoteLoi(message,true));
 
-					break;
-				}
+
+						break;
+					}
+					case 2 :{
+
+						System.out.println("Vous avez refusé la loi");
+						if(message != null)
+							myAgent.addBehaviour(new VoteLoi(message,false));
+
+						break;
+					}
 				}
 				MainApp.addHistorique("Vote donné", choix);
 				loi_en_cours.affiche();
@@ -571,13 +571,13 @@ public class UtilisateurAgent extends Agent {
 	 * <p>
 	 * Il implémente le comportement suivant : Fourni les informations sur lui
 	 * même (info statiques) lorsqu'il le médiateur le demande.
-	 * 
+	 *
 	 * Cette action est très importante lorsque l'utilisateur choisi de demander
 	 * l'avis du parlement ou de proposer une loi puisque pour être votée ou
 	 * sondée, une loi doit contenir les informations du proposant. Dans le cas
 	 * de actions nommées ci avant ce sera les informations de l'utilisateur.
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.2
 	 */
@@ -596,33 +596,33 @@ public class UtilisateurAgent extends Agent {
 
 				switch (message.getContent()) {
 
-				case "Vos informations sur vous je vous prie":
+					case "Vos informations sur vous je vous prie":
 
-					// On créé une loi temporaire dans laquelle on va stocker
-					// nos informations propres qui sont importantes
-					List<String> l_PartiPolitique = new ArrayList<String>();
-					l_PartiPolitique.add(Parti_Politique);
-					Loi utilisateur_carac = new Loi(0, null, null, 0, 0, l_PartiPolitique, "Utilisateur", Influence, Charisme,
-							Popularite, Notoriete);
+						// On créé une loi temporaire dans laquelle on va stocker
+						// nos informations propres qui sont importantes
+						List<String> l_PartiPolitique = new ArrayList<String>();
+						l_PartiPolitique.add(Parti_Politique);
+						Loi utilisateur_carac = new Loi(0, null, null, 0, 0, l_PartiPolitique, "Utilisateur", Influence, Charisme,
+								Popularite, Notoriete);
 
-					// On sérialize cette loi que l'on envoie dans le message
-					// INFORM REF en réponse, à Médiateur
-					ObjectMapper mapper = new ObjectMapper();
-					StringWriter sw = new StringWriter();
+						// On sérialize cette loi que l'on envoie dans le message
+						// INFORM REF en réponse, à Médiateur
+						ObjectMapper mapper = new ObjectMapper();
+						StringWriter sw = new StringWriter();
 
-					try {
-						mapper.writeValue(sw, utilisateur_carac);
-						String s = sw.toString();
-						ACLMessage reply = message.createReply();
-						reply.setPerformative(ACLMessage.INFORM_REF);
-						reply.setContent(s);
-						myAgent.send(reply);
+						try {
+							mapper.writeValue(sw, utilisateur_carac);
+							String s = sw.toString();
+							ACLMessage reply = message.createReply();
+							reply.setPerformative(ACLMessage.INFORM_REF);
+							reply.setContent(s);
+							myAgent.send(reply);
 
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					break;
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						break;
 				}
 			} else
 				block();
@@ -642,11 +642,11 @@ public class UtilisateurAgent extends Agent {
 	 * Il implémente le comportement suivant : Affiche à l'utilisateur les lois
 	 * disponibles au vote ou à la demande d'avis et fournit la procédure à
 	 * celui ci pour effectuer l'une des deux actions.
-	 * 
+	 *
 	 * Cette action d'affichage termine la première partie des actions :
 	 * Proposer une loi ou Avis du parlement.
 	 * </p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.6
 	 */
@@ -705,13 +705,13 @@ public class UtilisateurAgent extends Agent {
 						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Proposition de loi")); // Envoi un message à Mediateur pour donner son choix.
 
 					}
-						else{
+					else{
 						System.out.println(
 								"Envoyer un message de type INFORM_IF à l'agent médiateur avec seulement l'ID de la loi choisie et 'Demande de sondage' en conversation-id.");
 						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Demande de Sondage")); // Envoi un message à Mediateur pour donner son choix.
 
-						}
-						System.out.println("------------------FIN RÉPONSE-------------------------");
+					}
+					System.out.println("------------------FIN RÉPONSE-------------------------");
 					System.out.println("-------------------------------------------------------");
 
 				} catch (IOException e) {
@@ -736,10 +736,10 @@ public class UtilisateurAgent extends Agent {
 	 * <p>
 	 * Il implémente le comportement suivant : Met à jour les informations
 	 * internes de l'agent utilisateur après un vote ou une rumeur.
-	 * 
+	 *
 	 * C'est la fin de l'action : Proposer une loi ou lorsque l'on vote une loi, ou bien lorsqu'on répand une rumeur.
 	 * <p>
-	 * 
+	 *
 	 * @author Benoit  Cristian
 	 * @version 1.7
 	 */
@@ -789,8 +789,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("Popularite :" + Popularite);
 				System.out.println("Notoriete :" + Notoriete);
 				System.out.println("Credibilite :" + Credibilite);
-                System.out.println("Moyenne :" + (Influence + Popularite + Notoriete + Credibilite)/4);
-                System.out.println("Grade :" + grade_utilisateur);
+				System.out.println("Moyenne :" + (Influence + Popularite + Notoriete + Credibilite)/4);
+				System.out.println("Grade :" + grade_utilisateur);
 			} else
 				block();
 
@@ -808,10 +808,10 @@ public class UtilisateurAgent extends Agent {
 	 * <p>
 	 * Il implémente le comportement suivant : Met à jour le niveau de
 	 * l'utilisateur et envoie un message de fin de partie à l'agent
-     * simulation si c'est nécessaire.
-	 * 
+	 * simulation si c'est nécessaire.
+	 *
 	 * <p>
-	 * 
+	 *
 	 * @author Etienne
 	 * @version 1.6
 	 */
@@ -819,7 +819,7 @@ public class UtilisateurAgent extends Agent {
 
 		@Override
 		public void action() {
-            
+
 			float moyenne = (Influence + Popularite + Notoriete + Credibilite ) /4;
 
 			//Fin de la partie
@@ -830,7 +830,7 @@ public class UtilisateurAgent extends Agent {
 				grade_utilisateur = -1;
 			}
 
-            //Achievements
+			//Achievements
 			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur <= 1) {
 				System.out.println("---------------ACHIEVEMENT-----------------");
 				System.out.println("FÉLICITATION on vous écoute enfin un minimum dans cette assemblée ! ");
@@ -859,44 +859,44 @@ public class UtilisateurAgent extends Agent {
 				grade_utilisateur = 5;
 			}
 
-            //Rétrogradations
-            else if (moyenne < 50 && moyenne > 20 && grade_utilisateur >= 2) {
-                System.out.println("-----------RÉTROGRADATION-----------");
-                System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député.");
-                System.out.println("------------------------------------------");
-                grade_utilisateur = 1;
-            }
-            else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur >= 3) {
-                System.out.println("-----------RÉTROGRADATION-----------");
-                System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député écouté.");
-                System.out.println("------------------------------------------");
-                grade_utilisateur = 2;
-            }
+			//Rétrogradations
+			else if (moyenne < 50 && moyenne > 20 && grade_utilisateur >= 2) {
+				System.out.println("-----------RÉTROGRADATION-----------");
+				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député.");
+				System.out.println("------------------------------------------");
+				grade_utilisateur = 1;
+			}
+			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur >= 3) {
+				System.out.println("-----------RÉTROGRADATION-----------");
+				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député écouté.");
+				System.out.println("------------------------------------------");
+				grade_utilisateur = 2;
+			}
 
-            else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur >= 4) {
-                System.out.println("-----------RÉTROGRADATION-----------");
-                System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député rapporteur.");
-                System.out.println("------------------------------------------");
-                grade_utilisateur = 3;
-            }
+			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur >= 4) {
+				System.out.println("-----------RÉTROGRADATION-----------");
+				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député rapporteur.");
+				System.out.println("------------------------------------------");
+				grade_utilisateur = 3;
+			}
 
 
-            // Envoi d'un message à l'agent de simulation pour finir le jeu
-            if(grade_utilisateur == -1)
-            {
-                ACLMessage message = new ACLMessage(ACLMessage.INFORM);
-                message.addReceiver(ASimulation);
-                message.setContent("perdu");
-                myAgent.send(message);
-            }
+			// Envoi d'un message à l'agent de simulation pour finir le jeu
+			if(grade_utilisateur == -1)
+			{
+				ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+				message.addReceiver(ASimulation);
+				message.setContent("perdu");
+				myAgent.send(message);
+			}
 
-            // Envoi d'un message à l'agent de simulation pour finir le jeu
-            else if (grade_utilisateur == 5){
-                ACLMessage message = new ACLMessage(ACLMessage.INFORM);
-                message.addReceiver(ASimulation);
-                message.setContent("gagne");
-                myAgent.send(message);
-            }
+			// Envoi d'un message à l'agent de simulation pour finir le jeu
+			else if (grade_utilisateur == 5){
+				ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+				message.addReceiver(ASimulation);
+				message.setContent("gagne");
+				myAgent.send(message);
+			}
 
 		}
 	}
@@ -904,7 +904,7 @@ public class UtilisateurAgent extends Agent {
 	/**
 	 * Vérifie les informations de l'utilisateur afin qu'elles ne descendent
 	 * jamais dans les négatifs.
-	 * 
+	 *
 	 * @see Class_For_JSON.Loi
 	 */
 	public void VerifierCarac() {
@@ -918,7 +918,7 @@ public class UtilisateurAgent extends Agent {
 		if (Credibilite < 0)
 			Credibilite = 0;
 	}
-	
+
 	/**
 	 * <b>AnswerRequestCharacteristicsFromRumourAgent est le neuvième Behaviour de l'agent
 	 * Utilisateur.</b>
@@ -949,11 +949,11 @@ public class UtilisateurAgent extends Agent {
 				// a l'agent Rumeur.
 				ACLMessage answer = message.createReply();
 				answer.setPerformative(ACLMessage.INFORM);
-				
+
 				ObjectMapper mapper1 = new ObjectMapper();
 				StringWriter sw = new StringWriter();
 				DeputeAttRumeur depAt = new DeputeAttRumeur(Influence, Popularite, Credibilite);
-				
+
 				try {
 					mapper1.writeValue(sw, depAt);
 					String s1 = sw.toString();
@@ -962,13 +962,13 @@ public class UtilisateurAgent extends Agent {
 				} catch (Exception ex) {
 					System.out.println(ex.getMessage());
 				}
-				
+
 			} else {
 				block();
 			}
 		}
 	}
-	
+
 	/**
 	 * <b>ReceiveDeputiesChoiceForRumours est le dixième Behaviour de l'agent
 	 * Utilisateur.</b>
@@ -1018,7 +1018,7 @@ public class UtilisateurAgent extends Agent {
 					// On donne le protocole de réponse à l'utilisateur
 					System.out.println("------------------RÉPONSE-----------------------------");
 					System.out.println(
-								"Envoyer un message de type ACCEPT_PROPOSAL à l'agent rumeur avec seulement l'ID du député choisi");
+							"Envoyer un message de type ACCEPT_PROPOSAL à l'agent rumeur avec seulement l'ID du député choisi");
 					System.out.println("------------------FIN RÉPONSE-------------------------");
 					System.out.println("-------------------------------------------------------");
 
@@ -1045,21 +1045,21 @@ public class UtilisateurAgent extends Agent {
 
 			// 	L'agent r�pond en pr�cisant son vote
 			ACLMessage reply = message.createReply();
-			
+
 			//R�cup�ration de loi (On deserialise le message)
 
 			if (test){
 				reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-				reply.setContent("Je vote pour");				
+				reply.setContent("Je vote pour");
 			}else{
 				reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
-				reply.setContent("Je vote contre");	
+				reply.setContent("Je vote contre");
 			}
 			// Envoie du vote
 			myAgent.send(reply);
 		}
 	}
-	
+
 	class LaunchGame extends OneShotBehaviour{
 		// Constructor
 		public LaunchGame() {
@@ -1071,9 +1071,9 @@ public class UtilisateurAgent extends Agent {
 			// 	L'agent r�pond en pr�cisant son vote
 			ACLMessage message2 = new ACLMessage(ACLMessage.REQUEST);
 			message2.addReceiver(ASimulation);
-			
 
-			message2.setContent("Lancement");	
+
+			message2.setContent("Lancement");
 			myAgent.send(message2);
 		}
 	}
@@ -1090,9 +1090,9 @@ public class UtilisateurAgent extends Agent {
 			// 	L'agent r�pond en pr�cisant son vote
 			ACLMessage message2 = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
 			message2.addReceiver(AMediateur);
-			
 
-			message2.setContent(message);	
+
+			message2.setContent(message);
 			myAgent.send(message2);
 		}
 	}
@@ -1115,10 +1115,10 @@ public class UtilisateurAgent extends Agent {
 			message2.addReceiver(AMediateur);
 			message2.setConversationId(conversID);
 
-			message2.setContent(message);	
+			message2.setContent(message);
 			myAgent.send(message2);
 		}
 	}
 
-	
+
 }

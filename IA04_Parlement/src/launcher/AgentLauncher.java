@@ -16,8 +16,8 @@ import jade.wrapper.ContainerController;
  * <li>Le nombre de député à intialiser dans notre parlement</li>
  * </ul>
  * </p>
- * 
- * 
+ *
+ *
  * @author Benoit
  * @version 1.0
  */
@@ -26,7 +26,7 @@ public class AgentLauncher {
 
 	/**
 	 * Le nombre d'agent Depute à instancier dans notre conteneur Parlement.
-	 * 
+	 *
 	 * @see #main(String[])
 	 */
 	public static int NB_DEPUTE = 5;
@@ -81,7 +81,7 @@ public class AgentLauncher {
 
 			// Agent Rumeur
 			(cc.createNewAgent("ARumeur", "agents.RumeurAgent", null)).start();
-						
+
 			// Agent Simulation
 			AgentController ac = cc.createNewAgent("ASimulation", "agents.SimulationAgent", null);
 			ac.start();
