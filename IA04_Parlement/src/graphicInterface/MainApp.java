@@ -197,8 +197,10 @@ public class MainApp extends Application {
 	}
 
 	
-	public static void showLois(List<Class_For_JSON.Loi> loi_a_choisir) {
+	public static int showLois(List<Class_For_JSON.Loi> loi_a_choisir) {
 	    final CountDownLatch latch = new CountDownLatch(1);
+		final SimpleIntegerProperty choixID = new SimpleIntegerProperty(-1);
+
 	    Platform.runLater(new Runnable() {
 	        @Override public void run() {
 	        	 try {
@@ -225,6 +227,7 @@ public class MainApp extends Application {
 					controller.setLois(listeLoi);
 	     	        dialogStage.showAndWait();
 	     	        Loi choix = controller.getLoi();
+	     	        choixID.set(choix.getId());
 	     	       removeLoiData();
 	     	        System.out.println(" choix :"+choix.getName());
 	     	        latch.countDown();
@@ -238,6 +241,7 @@ public class MainApp extends Application {
 	    } catch (InterruptedException e) {
 	      Platform.exit();
 	    }
+		return choixID.get();
 	}
 
 	

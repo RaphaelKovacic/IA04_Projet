@@ -679,7 +679,16 @@ public class UtilisateurAgent extends Agent {
 					// On les affiche
 					System.out.println("-------------------------------------------------------");
 					System.out.println("--------------------LOIS-------------------------------");
-					MainApp.showLois(Loi_a_choisir);
+					int choix = -1;
+					choix = MainApp.showLois(Loi_a_choisir);
+					while (choix == -1){
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					for (int y = 0; y < Loi_a_choisir.size(); y++) {
 						Loi_a_choisir.get(y).affiche_a_utilisateur();
 
@@ -690,13 +699,19 @@ public class UtilisateurAgent extends Agent {
 					System.out.println("------------------RÉPONSE-----------------------------");
 
 					// Affichage selon vote ou demande de sondage :
-					if (message.getConversationId().equalsIgnoreCase("Proposition de loi"))
+					if (message.getConversationId().equalsIgnoreCase("Proposition de loi")){
 						System.out.println(
 								"Envoyer un message de type INFORM_IF à l'agent médiateur avec seulement l'ID de la loi choisie et 'Proposition de loi' en conversation-id.");
-					else
+						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Proposition de loi")); // Envoi un message à Mediateur pour donner son choix.
+
+					}
+						else{
 						System.out.println(
 								"Envoyer un message de type INFORM_IF à l'agent médiateur avec seulement l'ID de la loi choisie et 'Demande de sondage' en conversation-id.");
-					System.out.println("------------------FIN RÉPONSE-------------------------");
+						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Demande de Sondage")); // Envoi un message à Mediateur pour donner son choix.
+
+						}
+						System.out.println("------------------FIN RÉPONSE-------------------------");
 					System.out.println("-------------------------------------------------------");
 
 				} catch (IOException e) {
@@ -1082,4 +1097,28 @@ public class UtilisateurAgent extends Agent {
 		}
 	}
 
+	class SendMyLaw extends OneShotBehaviour{
+		// Constructor
+		String message;
+		String conversID;
+
+		public SendMyLaw(String message,String conversID) {
+			this.message = message;
+			this.conversID = conversID;
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent r�pond en pr�cisant son vote
+			ACLMessage message2 = new ACLMessage(ACLMessage.INFORM_IF);
+			message2.addReceiver(AMediateur);
+			message2.setConversationId(conversID);
+
+			message2.setContent(message);	
+			myAgent.send(message2);
+		}
+	}
+
+	
 }

@@ -48,5 +48,7 @@ public class Loi {
 	   
 	   this.Description.set(Descri);
    }
-    
+public int getId() {
+	return id;
+}
 }

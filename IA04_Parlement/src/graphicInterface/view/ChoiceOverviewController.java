@@ -314,7 +314,6 @@ public class ChoiceOverviewController {
        	if(l_Actions.indexOf("Aucune") != -1){
         	aucuneButton.setDisable(false);
         	}
-
     	if(l_Actions.indexOf("Proposer une loi") != -1){
     	proposeLoi.setDisable(false);
     	}
@@ -341,7 +340,7 @@ public class ChoiceOverviewController {
     	
     	refuseLoi.setDisable(false);
     	accepteLoi.setDisable(false);
-    	caseTexte.setText("Ce à vous de voter");
+    	caseTexte.setText("à vous de voter");
     	
     	
     }
