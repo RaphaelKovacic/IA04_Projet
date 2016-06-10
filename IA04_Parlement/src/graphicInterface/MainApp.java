@@ -222,7 +222,7 @@ public class MainApp extends Application {
 	     	        controller.setDialogStage(dialogStage);
 	     	        // Show the dialog and wait until the user closes it
 					for (int y = 0; y < loi_a_choisir.size(); y++) {
-						addLoi(loi_a_choisir.get(y).getId(),loi_a_choisir.get(y).getNom(), loi_a_choisir.get(y).getDescription());;
+						addLoi(loi_a_choisir.get(y).getId(),loi_a_choisir.get(y).getNom(), loi_a_choisir.get(y).afficheString());;
 					}
 					controller.setLois(listeLoi);
 	     	        dialogStage.showAndWait();
@@ -360,6 +360,11 @@ public class MainApp extends Application {
     }
     public MainApp getMainAppClass(){
     	return this;
+    }
+    public static void setTabAchiev(int pos,int valeur){
+    	
+    	tabAchiev[pos] = valeur;
+    	
     }
 }
 

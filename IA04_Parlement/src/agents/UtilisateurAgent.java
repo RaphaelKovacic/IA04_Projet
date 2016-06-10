@@ -866,6 +866,7 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("-----------------------------------------------------------------");
 				System.out.println();
 				grade_utilisateur = 2;
+				MainApp.setTabAchiev(1, 1);
 			}
 
 			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur <= 2) {
@@ -875,6 +876,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("-----------------------------------------------------------------");
 				System.out.println();
 				grade_utilisateur = 3;
+				MainApp.setTabAchiev(2, 1);
+
 			}
 
 			else if (moyenne >= 70 && moyenne < 80 && grade_utilisateur <= 3) {
@@ -884,6 +887,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("-----------------------------------------------------------------");
 				System.out.println();
 				grade_utilisateur = 4;
+				MainApp.setTabAchiev(3, 1);
+
 			}
 
 			else if (moyenne >= 80 && grade_utilisateur <= 4) {
@@ -903,6 +908,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député.");
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println();
+				MainApp.setTabAchiev(1, 0);
+
 				grade_utilisateur = 1;
 			}
 			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur >= 3) {
@@ -911,6 +918,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("ATTENTION vous perdez de l'importance. On ne parle même plus de vous sur les réseaux sociaux.");
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println();
+				MainApp.setTabAchiev(2, 0);
+
 				grade_utilisateur = 2;
 			}
 
@@ -920,6 +929,8 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("ATTENTION vous perdez de l'importance. Vous êtes destitué du poste de président de votre groupe.");
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println();
+				MainApp.setTabAchiev(3, 0);
+
 				grade_utilisateur = 3;
 			}
 
@@ -1049,7 +1060,7 @@ public class UtilisateurAgent extends Agent {
 				try {
 					List_DeputeAttRumeur = new ObjectMapper().readValue(content, new TypeReference<List<DeputeAttRumeur>>() {
 					});
-					Collections.sort(List_DeputeAttRumeur);
+					//Collections.sort(List_DeputeAttRumeur);
 					// On les affiche
 					System.out.println();
 					System.out.println("----------------------------------------------------------------");

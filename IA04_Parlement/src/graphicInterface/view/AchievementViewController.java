@@ -75,31 +75,33 @@ public class AchievementViewController {
         }
 
         Achiev1.hoverProperty().addListener((observable)-> {
-
+        		if(tab[0]==0){
             if (Achiev1.isHover()) {
                 Achiev1.setEffect(colorAdjust1);
             		
             } else {
                 Achiev1.setEffect(colorAdjust);
-            }
+            }}
         });
         Achiev2.hoverProperty().addListener((observable)-> {
+    		if(tab[1]==0){
 
             if (Achiev2.isHover()) {
             	Achiev2.setEffect(colorAdjust1);
             		
             } else {
             	Achiev2.setEffect(colorAdjust);
-            }
+            }}
         });
         Achiev3.hoverProperty().addListener((observable)-> {
+    		if(tab[3]==0){
 
             if (Achiev3.isHover()) {
             	Achiev3.setEffect(colorAdjust1);
             		
             } else {
             	Achiev3.setEffect(colorAdjust);
-            }
+            }}
         });
     }
     public void setMainApp(MainApp mainApp) {
