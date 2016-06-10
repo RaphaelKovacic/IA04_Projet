@@ -83,7 +83,7 @@ public class ParlementManager{
 	 * @return Une liste d'AID
 	 */
 	public List<AID> getAllAidOf(Agent a,String S1, String S2) {
-		List<AID> L_AID = new ArrayList<AID>();
+		List<AID> L_AID = new ArrayList<>();
 		DFAgentDescription template = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();
 		sd.setType(S1);

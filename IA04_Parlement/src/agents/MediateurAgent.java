@@ -75,7 +75,7 @@ public class MediateurAgent extends Agent {
 	 *
 	 * @see #setup()
 	 */
-	List<String> L_Actions = new ArrayList<String>();
+	List<String> L_Actions = new ArrayList<>();
 
 	/**
 	 * L'action choisie par l'utilisateur à ce tour. Variable
@@ -138,7 +138,7 @@ public class MediateurAgent extends Agent {
 	 *
 	 * @see #setup()
 	 */
-	List<Loi> Loi_possibles_user = new ArrayList<Loi>();
+	List<Loi> Loi_possibles_user = new ArrayList<>();
 
 	/**
 	 * La loi soumise au vote par l'utilisateur. Variable
@@ -589,7 +589,6 @@ public class MediateurAgent extends Agent {
 				try {
 					mapper.writeValue(sw, loi_choisie);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				String s = sw.toString();
@@ -732,7 +731,6 @@ public class MediateurAgent extends Agent {
 					}
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -810,7 +808,7 @@ public class MediateurAgent extends Agent {
 							Loi_possibles_user.get(y).setPopularite(utilisateur_information.getPopularite());
 							Loi_possibles_user.get(y).setNotoriete(utilisateur_information.getNotoriete());
 
-							// TODO Delete : Affichage pour vérification
+							// Affichage pour vérification
 							System.out.println();
 							Loi_possibles_user.get(y).affiche();
 							System.out.println("------------------------------------------------");

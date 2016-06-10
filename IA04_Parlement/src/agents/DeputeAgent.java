@@ -5,6 +5,9 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Class_For_JSON.DeputeAttRumeur;
@@ -229,6 +232,11 @@ public class DeputeAgent extends Agent {
 	 */
 	ParlementManager parl_mana = new ParlementManager();
 
+	/**
+	 * Le logger pour gérer les interruption critique.
+	 *
+	 */
+	Logger logger = Logger.getAnonymousLogger();
 
 	/**
 	 * Méthode d'instanciation (appelée à la création) de notre agent
@@ -253,7 +261,7 @@ public class DeputeAgent extends Agent {
 		}
 
 		// Initialisation de la liste des partis (issue de l'univers Divergente)
-		L_Parti = new ArrayList<String>();
+		L_Parti = new ArrayList<>();
 		L_Parti.add("Altruistes");
 		L_Parti.add("Erudits");
 		L_Parti.add("Audacieux");
@@ -322,7 +330,7 @@ public class DeputeAgent extends Agent {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, "an exception was thrown", e);
 			e.printStackTrace();
 		}
 		MainApp.addDepute("Depute", "Classique", this.Parti_Politique, this.Popularite, this.Credibilite, this.Notoriete, this.Charisme, this.getAID().getLocalName());// ajout dans le modele grpahique
@@ -755,7 +763,7 @@ public class DeputeAgent extends Agent {
 				scoreLoi -= (scoreLoi * 7) / 100;
 			else if (Credibilite > 60)
 				scoreLoi -= (scoreLoi * 12) / 100;
-			else if (Credibilite > 60)
+			else if (Credibilite > 50)
 				scoreLoi -= (scoreLoi * 20) / 100;
 
 			// Vote oui ou non suivant le score de la loi et son hésitation.

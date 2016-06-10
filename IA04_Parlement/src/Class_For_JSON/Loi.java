@@ -518,6 +518,7 @@ public class Loi implements Comparable<Loi> {
 	 *
 	 * @return La valeur -1, 1 ou 0 selon la comparaison entre deux lois.
 	 */
+	@Override
 	public int compareTo(Loi _to_compare) {
 		if (this.id < _to_compare.getId())
 			return -1;
