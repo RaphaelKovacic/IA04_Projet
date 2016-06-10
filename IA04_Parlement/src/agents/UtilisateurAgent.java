@@ -200,14 +200,14 @@ public class UtilisateurAgent extends Agent {
 		L_Parti.add("Fraternels");
 
 		// Initialisation des caractèristiques dynamiques
-		Credibilite = (float) (Math.random() * 100); // Entre 0 et 100 au départ
-		Influence = (float) (Math.random() * 70); // Entre 0 et 70 au départ
+		Credibilite = (float) 40 + (int)(Math.random() * ((60 - 40) + 1)); // Entre 0 et 100 au départ
+		Influence = (float) 40 + (int)(Math.random() * ((60 - 40) + 1));  // Entre 0 et 70 au départ
 		Parti_Politique = L_Parti.get((int) (Math.random() * L_Parti.size())); // aléatoire
-		Popularite = (float) (Math.random() * 100); // Entre 0 et 100 au départ
-		Notoriete = (float) (Math.random() * 100); // Entre 0 et 100 au départ
+		Popularite = (float) 40 + (int)(Math.random() * ((60 - 40) + 1));  // Entre 0 et 100 au départ
+		Notoriete = (float) 40 + (int)(Math.random() * ((60 - 40) + 1)); // Entre 0 et 100 au départ
 
 		// Initialisation des caractèristiques statiques
-		Charisme = (float) (Math.random() * 100); // Entre 0 et 100 au départ
+		Charisme = (float) 30 + (int)(Math.random() * ((70 - 30) + 1)); // Entre 0 et 100 au départ
 
 		System.out.println("Agent Utilisateur crée : " + this.getLocalName());
 
@@ -871,7 +871,7 @@ public class UtilisateurAgent extends Agent {
 			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur <= 2) {
 				System.out.println();
 				System.out.println("---------------------------ACHIEVEMENT---------------------------");
-				System.out.println("FÉLICITATION vous devenez rapporteur au budget de l'assemblée ! ");
+				System.out.println("FÉLICITATION on parle enfin de vous sur les réseaux sociaux #FB #Twitter ! ");
 				System.out.println("-----------------------------------------------------------------");
 				System.out.println();
 				grade_utilisateur = 3;
@@ -908,7 +908,7 @@ public class UtilisateurAgent extends Agent {
 			else if (moyenne >= 50 && moyenne < 60 && grade_utilisateur >= 3) {
 				System.out.println();
 				System.out.println("---------------------------RÉTROGRADATION---------------------------");
-				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député écouté.");
+				System.out.println("ATTENTION vous perdez de l'importance. On ne parle même plus de vous sur les réseaux sociaux.");
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println();
 				grade_utilisateur = 2;
@@ -917,7 +917,7 @@ public class UtilisateurAgent extends Agent {
 			else if (moyenne >= 60 && moyenne < 70 && grade_utilisateur >= 4) {
 				System.out.println();
 				System.out.println("---------------------------RÉTROGRADATION---------------------------");
-				System.out.println("ATTENTION vous perdez de l'importance. Vous n'êtes plus qu'un simple député rapporteur.");
+				System.out.println("ATTENTION vous perdez de l'importance. Vous êtes destitué du poste de président de votre groupe.");
 				System.out.println("--------------------------------------------------------------------");
 				System.out.println();
 				grade_utilisateur = 3;
@@ -1049,6 +1049,7 @@ public class UtilisateurAgent extends Agent {
 				try {
 					List_DeputeAttRumeur = new ObjectMapper().readValue(content, new TypeReference<List<DeputeAttRumeur>>() {
 					});
+					Collections.sort(List_DeputeAttRumeur);
 					// On les affiche
 					System.out.println();
 					System.out.println("----------------------------------------------------------------");

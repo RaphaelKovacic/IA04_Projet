@@ -195,13 +195,23 @@ public class KB extends Agent {
 				List<Loi> liste_d_objet_loi_du_parti;
 				liste_d_objet_loi_du_parti = PossibleLaws(parti_politique);
 
+				int nombre_lois_possibles = liste_d_objet_loi_du_parti.size() -1 ;
+
+				List<Loi> liste_d_objet_loi_du_parti_a_envoyer = new ArrayList<>();
+
+				for(int z = 0; z <  5 ; z++) {
+					int id_depart_random = (int) (Math.random() * nombre_lois_possibles);
+					liste_d_objet_loi_du_parti_a_envoyer.add(liste_d_objet_loi_du_parti.get(id_depart_random));
+					liste_d_objet_loi_du_parti.remove(id_depart_random);
+					nombre_lois_possibles--;
+				}
 				// Gestion JSON : serialization
 				ObjectMapper mapper1 = new ObjectMapper();
 				StringWriter sw1 = new StringWriter();
 
 				try {
 
-					mapper1.writeValue(sw1, liste_d_objet_loi_du_parti);
+					mapper1.writeValue(sw1, liste_d_objet_loi_du_parti_a_envoyer);
 					String s1 = sw1.toString();
 
 					// Réponse à celui qui nous a envoyé la demande

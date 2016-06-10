@@ -583,6 +583,8 @@ public class DeputeAgent extends Agent {
 				// à modifer.
 				ObjectMapper mapper = new ObjectMapper();
 				try {
+
+
 					MajDepute ort = mapper.readValue(message.getContent(), MajDepute.class);
 					// Mise a jour des variables avec les valeurs du message
 					Influence += ort.getEffet_Influence();
