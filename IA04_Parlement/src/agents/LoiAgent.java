@@ -65,7 +65,7 @@ public class LoiAgent extends Agent {
 	 *
 	 * @see #setup()
 	 */
-	List<Aid_vote> L_AID_Vote = new ArrayList<Aid_vote>();
+	List<Aid_vote> L_AID_Vote = new ArrayList<>();
 
 	/**
 	 * La loi en cours d'étude (vote ou sondage) à ce tour. Variable.
@@ -135,7 +135,7 @@ public class LoiAgent extends Agent {
 	 *
 	 * @see #setup()
 	 */
-	List<AID> List_Depute = new ArrayList<AID>();
+	List<AID> List_Depute = new ArrayList<>();
 
 
 	/**

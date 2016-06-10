@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import agents.DeputeAgent.AnswerRequestCharacteristicsFromRumourAgent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import graphicInterface.MainApp;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -162,6 +164,12 @@ public class UtilisateurAgent extends Agent {
 	int grade_utilisateur = 0;
 
 	/**
+	 * Le logger pour gérer les interruption critique.
+	 *
+	 */
+	Logger logger = Logger.getAnonymousLogger();
+
+	/**
 	 * Méthode d'instanciation (appelée à la création) de notre agent
 	 * Utilisateur
 	 * <p>
@@ -184,7 +192,7 @@ public class UtilisateurAgent extends Agent {
 		}
 
 		// Initialisation de la liste des partis #Divergente
-		L_Parti = new ArrayList<String>();
+		L_Parti = new ArrayList<>();
 		L_Parti.add("Altruistes");
 		L_Parti.add("Erudits");
 		L_Parti.add("Audacieux");
@@ -256,7 +264,7 @@ public class UtilisateurAgent extends Agent {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			logger.log(Level.SEVERE, "an exception was thrown", e);
 			e.printStackTrace();
 		}
 		MainApp.addDepute("Michel","Drucker",this.Parti_Politique,this.Popularite,this.Credibilite,this.Notoriete,this.Charisme,this.getAID().getLocalName());
@@ -267,7 +275,7 @@ public class UtilisateurAgent extends Agent {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}
@@ -305,7 +313,7 @@ public class UtilisateurAgent extends Agent {
 			ACLMessage message = myAgent.receive(mt);
 			if (message != null) {
 				// On deserialise la liste d'actions.
-				List<String> L_Actions = new ArrayList<String>();
+				List<String> L_Actions = new ArrayList<>();
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					L_Actions = mapper.readValue(message.getContent(), L_Actions.getClass());
@@ -395,7 +403,7 @@ public class UtilisateurAgent extends Agent {
 					case "Change de parti":
 						// Construction de la liste des partis que l'utilisateur
 						// peut choisir lors de son changement de parti
-						List<String> liste_partis_possibles = new ArrayList<String>();
+						List<String> liste_partis_possibles;
 						liste_partis_possibles = L_Parti;
 
 						liste_partis_possibles.remove(Parti_Politique);
@@ -530,7 +538,6 @@ public class UtilisateurAgent extends Agent {
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -603,7 +610,7 @@ public class UtilisateurAgent extends Agent {
 
 						// On créé une loi temporaire dans laquelle on va stocker
 						// nos informations propres qui sont importantes
-						List<String> l_PartiPolitique = new ArrayList<String>();
+						List<String> l_PartiPolitique = new ArrayList<>();
 						l_PartiPolitique.add(Parti_Politique);
 						Loi utilisateur_carac = new Loi(0, null, null, 0, 0, l_PartiPolitique, "Utilisateur", Influence, Charisme,
 								Popularite, Notoriete);
@@ -622,7 +629,7 @@ public class UtilisateurAgent extends Agent {
 							myAgent.send(reply);
 
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+
 							e.printStackTrace();
 						}
 						break;
@@ -671,7 +678,7 @@ public class UtilisateurAgent extends Agent {
 
 				// Stocke les lois envoyées par Mediateur dans liste de lois
 				// locale
-				List<Loi> Loi_a_choisir = new ArrayList<Loi>();
+				List<Loi> Loi_a_choisir;
 
 				try {
 					Loi_a_choisir = new ObjectMapper().readValue(content, new TypeReference<List<Loi>>() {
@@ -686,7 +693,7 @@ public class UtilisateurAgent extends Agent {
 						try {
 							Thread.sleep(10000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
+
 							e.printStackTrace();
 						}
 					}
@@ -714,7 +721,6 @@ public class UtilisateurAgent extends Agent {
 					System.out.println();
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else
@@ -778,15 +784,8 @@ public class UtilisateurAgent extends Agent {
 					Notoriete += ort.getEffet_Notoriete();
 					Credibilite += ort.getEffet_Credibilite();
 
-					// TODO Utiliser fonction VerifCarac()
-					if (Influence < 0)
-						Influence = 0;
-					if (Popularite < 0)
-						Popularite = 0;
-					if (Notoriete < 0)
-						Notoriete = 0;
-					if (Credibilite < 0)
-						Credibilite = 0;
+					VerifierCarac();
+
 					MainApp.setDeputeData(this.getAgent().getAID().getLocalName(),Parti_Politique,Popularite, Influence, Notoriete,Credibilite);
 
 				} catch (Exception ex) {
@@ -856,7 +855,7 @@ public class UtilisateurAgent extends Agent {
 				System.out.println("Vos caractéristiques commencent à être basses ..réctifiez le tir !");
 				System.out.println("-----------------------------------------------------------------");
 				System.out.println();
-				grade_utilisateur = -1;
+				grade_utilisateur = 0;
 			}
 
 			//Achievements
@@ -1045,7 +1044,7 @@ public class UtilisateurAgent extends Agent {
 
 				// Stocke les caractéristiques envoyées par Mediateur dans liste de caractéristiques
 				// locale
-				List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<DeputeAttRumeur>();
+				List<DeputeAttRumeur> List_DeputeAttRumeur;
 
 				try {
 					List_DeputeAttRumeur = new ObjectMapper().readValue(content, new TypeReference<List<DeputeAttRumeur>>() {
@@ -1070,7 +1069,6 @@ public class UtilisateurAgent extends Agent {
 					System.out.println();
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else

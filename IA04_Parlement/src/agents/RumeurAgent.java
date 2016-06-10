@@ -70,7 +70,7 @@ public class RumeurAgent extends Agent {
 	 *
 	 * @see #setup()
 	 */
-	List<AID> List_Depute = new ArrayList<AID>();
+	List<AID> List_Depute = new ArrayList<>();
 
 	/**
 	 * La liste des DeputeAttRumeur des agents députés du SMA. Variable
@@ -78,7 +78,7 @@ public class RumeurAgent extends Agent {
 	 * @see #setup()
 	 * @see TreatRumourRequest
 	 */
-	List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<DeputeAttRumeur>();
+	List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<>();
 
 	/**
 	 * La valeur des caracteristiques de l'agent Utilisateur. Variable
@@ -232,7 +232,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
-			// TODO Auto-generated method stub
 
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
 					MessageTemplate.MatchSender(resultSender));
@@ -268,7 +267,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public boolean done() {
-			// TODO Auto-generated method stub
 			return received;
 		}
 	}
@@ -277,7 +275,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
-			// TODO Auto-generated method stub
 
 			ACLMessage message = new ACLMessage(ACLMessage.PROPOSE);
 			message.addReceiver(AUtilisateur);
@@ -307,7 +304,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
-			// TODO Auto-generated method stub
 
 			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
 			ACLMessage message = myAgent.receive(mt);
@@ -379,7 +375,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public int onEnd() {
-			// TODO Auto-generated method stub
 
 			// Remise à false du drapeau processingDemand, permettant de commencer le traitement d'une nouvelle requête de répandre des rumeurs.
 			processingDemand = false;
@@ -389,7 +384,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public boolean done() {
-			// TODO Auto-generated method stub
 			return done;
 		}
 	}

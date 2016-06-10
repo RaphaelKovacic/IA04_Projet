@@ -192,7 +192,7 @@ public class KB extends Agent {
 				// Récupère le nom du parti
 				parti_politique = message.getContent();
 
-				List<Loi> liste_d_objet_loi_du_parti = new ArrayList<Loi>();
+				List<Loi> liste_d_objet_loi_du_parti;
 				liste_d_objet_loi_du_parti = PossibleLaws(parti_politique);
 
 				// Gestion JSON : serialization
@@ -222,7 +222,7 @@ public class KB extends Agent {
 				// Récupère le nom du parti
 				parti_politique = message.getContent();
 
-				List<Loi> liste_d_objet_loi_du_parti = new ArrayList<Loi>();
+				List<Loi> liste_d_objet_loi_du_parti;
 				liste_d_objet_loi_du_parti = PossibleLaws(parti_politique);
 
 				Loi au_hasard = liste_d_objet_loi_du_parti
@@ -299,7 +299,7 @@ public class KB extends Agent {
 						.listStatements(new SimpleSelector(law_voted_node, voted_property, (Resource) null));
 
 				// Liste contenant notre statement à modifier
-				ArrayList<Statement> statementsToModify = new ArrayList<Statement>();
+				ArrayList<Statement> statementsToModify = new ArrayList<>();
 
 				// Obligation de JENA pour changer la valeur d'un noeud RDF il
 				// faut le faire en deux fois : d'abord itérer et récupèrer le
@@ -345,12 +345,12 @@ public class KB extends Agent {
 
 	public List<Loi> PossibleLaws(String _s) {
 
-		ArrayList<Statement> statement_lois_du_parti = new ArrayList<Statement>();
+		ArrayList<Statement> statement_lois_du_parti;
 
 		// Récupère loi du parti
 		statement_lois_du_parti = getLoiFromParti(_s);
 
-		List<Loi> liste_d_objet_loi_du_parti = new ArrayList<Loi>();
+		List<Loi> liste_d_objet_loi_du_parti = new ArrayList<>();
 
 		for (int w = 0; w < statement_lois_du_parti.size(); w++) {
 			// Gestion selon le formalisme JENA pour chaque statement de la
@@ -369,7 +369,7 @@ public class KB extends Agent {
 			float life_impact_current = getLifeFromSubject(subject_law_current);
 			float eco_impact_current = getEcoFromSubject(subject_law_current);
 
-			List<String> L_PartiPolitique = new ArrayList<String>();
+			List<String> L_PartiPolitique = new ArrayList<>();
 			L_PartiPolitique.add(_s);
 
 			// Instancie un objet de type loi
@@ -431,7 +431,7 @@ public class KB extends Agent {
 
 	public ArrayList<Statement> getLoiFromParti(String _parti) {
 
-		ArrayList<Statement> statementsLawFromParti = new ArrayList<Statement>();
+		ArrayList<Statement> statementsLawFromParti = new ArrayList<>();
 
 		String lawPrefix = model.getNsPrefixURI("law");
 		Property politic_party_property = model.getProperty(lawPrefix + "politic_party");
