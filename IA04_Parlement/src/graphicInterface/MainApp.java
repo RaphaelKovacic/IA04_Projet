@@ -10,6 +10,7 @@ import graphicInterface.model.Depute;
 import graphicInterface.model.HistoryData;
 import graphicInterface.model.Loi;
 import graphicInterface.view.AchievementViewController;
+import graphicInterface.view.ChangePartyController;
 import graphicInterface.view.ChoiceOverviewController;
 import graphicInterface.view.HistoryViewController;
 import graphicInterface.view.LaunchGameController;
@@ -21,6 +22,7 @@ import graphicInterface.view.StatisticsViewController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +38,8 @@ public class MainApp extends Application {
     private static ObservableList<Depute> DeputeData = FXCollections.observableArrayList();
     private static ObservableList<HistoryData> listeHistorique = FXCollections.observableArrayList();
     private static ObservableList<Loi> listeLoi = FXCollections.observableArrayList();
+    private static ObservableList<String> listeParti = FXCollections.observableArrayList();
+
     private static int  tabAchiev[] = {0,0,0};
     private String style;
 	@Override
@@ -245,6 +249,54 @@ public class MainApp extends Application {
 	}
 
 	
+	
+	public static String showPartis(List<String> Partis) {
+	    final CountDownLatch latch = new CountDownLatch(1);
+		final SimpleStringProperty choix = new SimpleStringProperty("");
+
+	    Platform.runLater(new Runnable() {
+	        @Override public void run() {
+	        	 try {
+	     	    	
+	     	        // Load the fxml file and create a new stage for the popup dialog.
+	     	        FXMLLoader loader = new FXMLLoader();
+	     	        loader.setLocation(MainApp.class.getResource("view/ChangePartyView.fxml"));
+	     	        AnchorPane page = (AnchorPane) loader.load();
+
+	     	        // Create the dialog Stage.
+	     	        Stage dialogStage = new Stage();
+	     	        dialogStage.setTitle("Choix");
+	     	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	     	        dialogStage.initOwner(primaryStage);
+	     	        Scene scene = new Scene(page);
+	     	        dialogStage.setScene(scene);
+
+	     	       ChangePartyController controller = loader.getController();
+	     	        controller.setDialogStage(dialogStage);
+	     	        // Show the dialog and wait until the user closes it
+					for (int y = 0; y < Partis.size(); y++) {
+						addParti(Partis.get(y));
+					}
+					controller.setPartis(listeParti);
+	     	        dialogStage.showAndWait();
+	     	        choix.set(controller.getParti());
+	     	       removeLoiData();
+	     	        System.out.println(" choix :"+choix.getName());
+	     	        latch.countDown();
+	     	    } catch (IOException e) {
+	     	        e.printStackTrace();
+	     	    }	        }
+	      });
+
+	    try {
+	      latch.await();
+	    } catch (InterruptedException e) {
+	      Platform.exit();
+	    }
+		return choix.get();
+	}
+
+	
 	public void showStatistics() {
 	    try {
 	        // Load the fxml file and create a new stage for the popup.
@@ -327,6 +379,17 @@ public class MainApp extends Application {
     }
     public static void removeLoiData() {
          listeLoi.clear();
+    }
+    
+    public ObservableList<String> getPartiData() {
+        return this.listeParti;
+    }
+    public static void removeStringData() {
+         listeParti.clear();
+    }
+    public static void addParti(String parti){
+    	
+    	listeParti.add(parti);
     }
     private static Depute parcoursDeputeData(String idDepute_){
     	Depute dep_;

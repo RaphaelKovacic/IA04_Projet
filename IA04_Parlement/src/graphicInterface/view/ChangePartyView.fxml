@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" styleClass="proposeLoiclass" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphicInterface.view.ChangePartyController">
+   <children>
+      <ChoiceBox fx:id="choiceList" layoutX="128.0" layoutY="75.0" prefWidth="150.0" />
+      <Button fx:id="proposerButt" layoutX="148.0" layoutY="154.0" mnemonicParsing="false" text="Proposer" />
+   </children>
+</AnchorPane>

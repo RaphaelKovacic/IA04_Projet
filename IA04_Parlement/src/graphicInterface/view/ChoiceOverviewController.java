@@ -338,6 +338,7 @@ public class ChoiceOverviewController {
     
     public void enableButtons1(){
     	
+    	aucuneButton.setDisable(true);
     	refuseLoi.setDisable(false);
     	accepteLoi.setDisable(false);
     	caseTexte.setText("à vous de voter");

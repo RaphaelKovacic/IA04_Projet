@@ -410,6 +410,17 @@ public class UtilisateurAgent extends Agent {
 
 						// Ecrit sur la console
 						System.out.println("---------------------------CHANGEMENT DE PARTI---------------------------");
+						String choix = null;
+						choix = MainApp.showPartis(liste_partis_possibles);
+						while (choix == null){
+							try {
+								Thread.sleep(10000);
+							} catch (InterruptedException e) {
+
+								e.printStackTrace();
+							}
+						}
+						addBehaviour(new SendMyParti(choix)); // Envoi un message à Mediateur pour donner son choix.
 						System.out.println("Vous êtes actuellement membre des " + Parti_Politique);
 						System.out.println();
 						System.out.println(
@@ -1176,6 +1187,24 @@ public class UtilisateurAgent extends Agent {
 			myAgent.send(message2);
 		}
 	}
+	class SendMyParti extends OneShotBehaviour{
+		// Constructor
+		String message;
 
+		public SendMyParti(String message) {
+			this.message = message;
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent r�pond en pr�cisant son vote
+			ACLMessage message2 = new ACLMessage(ACLMessage.CONFIRM);
+			message2.addReceiver(this.getAgent().getAID());
+
+			message2.setContent(message);
+			myAgent.send(message2);
+		}
+	}
 
 }
