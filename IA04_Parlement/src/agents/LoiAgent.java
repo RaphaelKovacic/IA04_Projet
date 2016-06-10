@@ -692,13 +692,13 @@ public class LoiAgent extends Agent {
 						or.setEffet_Influence(5);
 
 						// qualite de vie
-						if (loi_en_cours.getEffet_qualite_vie() > 0)
+						if (loi_en_cours.getEffet_qualite_vie() >= 0)
 							or.setEffet_Popularite(5);
 						else
 							or.setEffet_Popularite(-5);
 
 						// eco
-						if (loi_en_cours.getEffet_context_eco() > 0)
+						if (loi_en_cours.getEffet_context_eco() >= 0)
 							or.setEffet_Notoriete(5);
 						else
 							or.setEffet_Notoriete(-5);
@@ -708,13 +708,13 @@ public class LoiAgent extends Agent {
 						or.setEffet_Influence(-5);
 
 						// qualite de vie
-						if (loi_en_cours.getEffet_qualite_vie() > 0)
+						if (loi_en_cours.getEffet_qualite_vie() >= 0)
 							or.setEffet_Popularite(-5);
 						else
 							or.setEffet_Popularite(5);
 
 						// eco
-						if (loi_en_cours.getEffet_context_eco() > 0)
+						if (loi_en_cours.getEffet_context_eco() >= 0)
 							or.setEffet_Notoriete(-5);
 						else
 							or.setEffet_Notoriete(5);
@@ -751,13 +751,13 @@ public class LoiAgent extends Agent {
 						or.setEffet_Influence(-5);
 
 						// qualite de vie
-						if (loi_en_cours.getEffet_qualite_vie() > 0)
+						if (loi_en_cours.getEffet_qualite_vie() >= 0)
 							or.setEffet_Popularite(5);
 						else
 							or.setEffet_Popularite(-5);
 
 						// eco
-						if (loi_en_cours.getEffet_context_eco() > 0)
+						if (loi_en_cours.getEffet_context_eco() >= 0)
 							or.setEffet_Notoriete(5);
 						else
 							or.setEffet_Notoriete(-5);
@@ -767,13 +767,13 @@ public class LoiAgent extends Agent {
 						or.setEffet_Influence(5);
 
 						// qualite de vie
-						if (loi_en_cours.getEffet_qualite_vie() > 0)
+						if (loi_en_cours.getEffet_qualite_vie() >= 0)
 							or.setEffet_Popularite(-5);
 						else
 							or.setEffet_Popularite(5);
 
 						// eco
-						if (loi_en_cours.getEffet_context_eco() > 0)
+						if (loi_en_cours.getEffet_context_eco() >= 0)
 							or.setEffet_Notoriete(-5);
 						else
 							or.setEffet_Notoriete(5);
@@ -832,16 +832,16 @@ public class LoiAgent extends Agent {
 			MajDepute or = new MajDepute(0, 0, 0, 0);
 
 			// qualite de vie
-			if (loi_en_cours.getEffet_qualite_vie() > 0)
-				or.setEffet_Popularite(-10);
-			else
+			if (loi_en_cours.getEffet_qualite_vie() >= 0)
 				or.setEffet_Popularite(10);
+			else
+				or.setEffet_Popularite(-10);
 
 			// eco
-			if (loi_en_cours.getEffet_context_eco() > 0)
-				or.setEffet_Notoriete(-10);
+			if (loi_en_cours.getEffet_context_eco() >= 0)
+				or.setEffet_Notoriete(+10);
 			else
-				or.setEffet_Notoriete(10);
+				or.setEffet_Notoriete(-10);
 
 			// Si la loi passe
 			if (nb_vote_pour > nb_vote_contre) {

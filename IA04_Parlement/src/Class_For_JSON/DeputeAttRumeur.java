@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
  * @author Cristian
  * @version 1.0
  */
-public class DeputeAttRumeur {
+public class DeputeAttRumeur implements Comparable<DeputeAttRumeur> {
 
 	/**
 	 * La valeur correspondant à l'id du député, local à l'agent Rumeur.
@@ -174,4 +174,15 @@ public class DeputeAttRumeur {
 		System.out.println("crédibilité : " + this.credibilite);
 		System.out.println("------------------------------------------------------");
 	}
+
+	@Override
+	public int compareTo(DeputeAttRumeur _to_compare) {
+		if (this.id < _to_compare.get_Id())
+			return -1;
+		else if (this.id > _to_compare.get_Id())
+			return 1;
+		else
+			return 0;
+	}
+
 }
