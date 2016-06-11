@@ -9,6 +9,8 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
+import agents.SimulationAgent.WaitMessMediateur;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Class_For_JSON.DeputeAttRumeur;
@@ -70,15 +72,16 @@ public class RumeurAgent extends Agent {
 	 *
 	 * @see #setup()
 	 */
-	List<AID> List_Depute = new ArrayList<>();
+	List<AID> List_Depute = new ArrayList<AID>();
 
 	/**
-	 * La liste des DeputeAttRumeur des agents députés du SMA. Variable
+	 * La liste des DeputeAttRumeur des agents députés du SMA. Variable, réinitialisée à chaque fois que l'agent reçoit une
+	 * requête pour répandre des rumeurs.
 	 *
 	 * @see #setup()
 	 * @see TreatRumourRequest
 	 */
-	List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<>();
+	List<DeputeAttRumeur> List_DeputeAttRumeur = new ArrayList<DeputeAttRumeur>();
 
 	/**
 	 * La valeur des caracteristiques de l'agent Utilisateur. Variable
@@ -148,7 +151,7 @@ public class RumeurAgent extends Agent {
 	 * <b>TreatRumourRequest est le premier Behaviour de l'agent
 	 * Rumeur</b>
 	 * <p>
-	 * Il est de type Cyclic. Notre agent Rumeur est en constante attente
+	 * Il s'agit d'un CyclicBehaviour. Notre agent Rumeur est en constante attente
 	 * d'une requête REQUEST de l'agent Mediateur lui demandant de commencer la procédure pour répandre une rumeur.
 	 * </p>
 	 * <p>
@@ -159,6 +162,7 @@ public class RumeurAgent extends Agent {
 	 * <li>un Behaviour qui, à la réception d'un ACCEPT_PROPOSAL avec l'id du député pour lequel on répand les rumeurs,
 	 * calcule les conséquences de l'action sur l'utilisateur et le député et les informe du résultat.</li>
 	 * </ul>
+	 * Aussi, donne la valeur <b>true</b> au drapeau processingDemand.
 	 * <p>
 	 *
 	 * @author Cristian
@@ -218,10 +222,38 @@ public class RumeurAgent extends Agent {
 		}
 	}
 
-
+	/**
+	 * <b>ReceiveCharacteristicsFromDeputyOrUser est le second Behaviour de l'agent Rumeur</b>
+	 * <p>
+	 * Il s'agit d'un Behaviour générique. Plusieurs comportements de ce type feront partie du comportement
+	 * parallèle initié à la réception d'une requête (message REQUEST) de la part de l'agent Mediateur.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Attendre la réception des caractéristiques (influence, popularité et crédibilité)
+	 * du député (ou Utilisateur) dont l'AID est gardé localement (message INFORM). A la réception du message, ajouter les caractéristiques reçues
+	 * à la liste des attributs des députés gardée localement dans l'agent Rumeur, ou bien les affecter à la variable gardant les attributs
+	 * de l'agent Utilisateur si son AID est utilisé par le behaviour. Le behaviour est terminé une fois que le message est reçu
+	 * et les caractéristiques sont ajoutées à la liste ou à la variable mentionnée précedamment.
+	 * <p>
+	 *
+	 * @see TreatRumourRequest
+	 *
+	 * @author Cristian
+	 * @version : 1.0
+	 */
 	class ReceiveCharacteristicsFromDeputyOrUser extends Behaviour {
 
+		/**
+		 * L'AID de l'agent Député ou Utilisateur. Non modifiable
+		 *
+		 */
 		AID resultSender;
+
+		/**
+		 * Valeur booléenne marquant la réception du message dont l'expéditeur correspond à l'AID.
+		 *
+		 * @see #done()
+		 */
 		boolean received;
 
 		public ReceiveCharacteristicsFromDeputyOrUser(Agent a, AID sender) {
@@ -232,6 +264,7 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
+			// TODO Auto-generated method stub
 
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
 					MessageTemplate.MatchSender(resultSender));
@@ -267,14 +300,32 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public boolean done() {
+			// TODO Auto-generated method stub
 			return received;
 		}
 	}
 
+	/**
+	 * <b>ProposeDeputyCharacteristicsToUser est le troisième Behaviour de l'agent Rumeur</b>
+	 * <p>
+	 * Il s'agit d'un OneShotBehaviour. C'est le comportement qui suit de manière séquentielle la fin du comportement
+	 * parallèle initié à la réception d'une requête (message REQUEST) de la part de l'agent Mediateur.
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Envoyer la liste des caractéristiques des députés remplie lors du déroulement
+	 * du comportement parallèle à l'agent Utilisateur (message PROPOSE).
+	 * <p>
+	 *
+	 * @see TreatRumourRequest
+	 *
+	 * @author Cristian
+	 * @version : 1.0
+	 */
 	class ProposeDeputyCharacteristicsToUser extends OneShotBehaviour {
 
 		@Override
 		public void action() {
+			// TODO Auto-generated method stub
 
 			ACLMessage message = new ACLMessage(ACLMessage.PROPOSE);
 			message.addReceiver(AUtilisateur);
@@ -293,8 +344,33 @@ public class RumeurAgent extends Agent {
 		}
 	}
 
+	/**
+	 * <b>ExecuteActionOnDeputyIDReception est le quatrième Behaviour de l'agent Rumeur</b>
+	 * <p>
+	 * Il s'agit d'un Behaviour générique. C'est le comportement qui suit de manière séquentielle la fin du comportement
+	 * envoyant les caractéristiques des députés à l'utilisateur. Il marque la fin de l'action "Répandre une rumeur".
+	 * </p>
+	 * <p>
+	 * Il implémente le comportement suivant : Attendre le choix du député pour lequel une rumeur est répandue de la part de l'agent Utilisateur
+	 * (message ACCEPT_PROPOSAL). A sa réception, comparer les caractéristiques du député choisi avec celles de l'agent Utilisateur
+	 * pour conclure sur les conséquences de l'action (réussite/échec). La fin du behaviour est marquée après l'envoi de
+	 * messages INFORM à l'agent Député et à l'agent Utilisateur dont le contenu sert à mettre à jour leur influence et leur popularité.
+	 * A la fin du comportement, le drapeau processingDemand reprend la valeur <b>false</b>.
+	 * <p>
+	 *
+	 * @see TreatRumourRequest
+	 *
+	 * @author Cristian
+	 * @version : 1.0
+	 */
 	class ExecuteActionOnDeputyIDReception extends Behaviour {
 
+		/**
+		 * Variable booléenne marquant la fin du comportement.
+		 *
+		 * @see #done()
+		 *
+		 */
 		boolean done;
 
 		public ExecuteActionOnDeputyIDReception() {
@@ -304,6 +380,7 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
+			// TODO Auto-generated method stub
 
 			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
 			ACLMessage message = myAgent.receive(mt);
@@ -341,7 +418,7 @@ public class RumeurAgent extends Agent {
 				ACLMessage loserMsg = new ACLMessage(ACLMessage.INFORM);
 				loserMsg.setContent(sLoser);
 
-				// le rapport de puissance permet d'ajuster la valeur aléatoire qui permet de nommer le gagnant 
+				// le rapport de puissance permet d'ajuster la valeur aléatoire qui permet de nommer le gagnant
 				float rapportPuissance = (float)(UtilisateurAttRumeur.get_Influence() * UtilisateurAttRumeur.get_Popularite() * UtilisateurAttRumeur.get_Credibilite()) /
 						(caracteristiques.get_Influence() * caracteristiques.get_Popularite() * caracteristiques.get_Credibilite());
 
@@ -373,8 +450,15 @@ public class RumeurAgent extends Agent {
 			}
 		}
 
+		/**
+		 * Méthode contenant les actions à faire après la fin du comportement.
+		 * <p>
+		 * Remet à <b>false</b> le drapeau processingDemand permettant de commencer une autre action de type "Repandre des rumeurs".
+		 * </p>
+		 */
 		@Override
 		public int onEnd() {
+			// TODO Auto-generated method stub
 
 			// Remise à false du drapeau processingDemand, permettant de commencer le traitement d'une nouvelle requête de répandre des rumeurs.
 			processingDemand = false;
@@ -384,6 +468,7 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public boolean done() {
+			// TODO Auto-generated method stub
 			return done;
 		}
 	}

@@ -25,11 +25,11 @@ import jade.wrapper.ContainerController;
 public class AgentLauncher {
 
 	/**
-	 * Le nombre d'agent Depute à instancier dans notre conteneur Parlement.
+	 * Le nombre d'agent Depute à instanier dans notre conteneur Parlement.
 	 *
 	 * @see #main(String[])
 	 */
-	public static final int NB_DEPUTE = 30;
+	public static final int NB_DEPUTE = 5;
 
 	/**
 	 * Méthode de création de notre conteneur secondaire Parlement.
