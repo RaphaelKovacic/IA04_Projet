@@ -1064,7 +1064,7 @@ public class UtilisateurAgent extends Agent {
 					System.out.println();
 					System.out.println("----------------------------------------------------------------");
 					System.out.println("----------------------------DEPUTES-----------------------------");
-					 Collections.sort(List_DeputeAttRumeur);
+					 //Collections.sort(List_DeputeAttRumeur);
 					
 					for (int y = 0; y < List_DeputeAttRumeur.size(); y++) {
 						List_DeputeAttRumeur.get(y).affiche_a_utilisateur();
