@@ -39,7 +39,6 @@ public class ChangePartyController {
             @Override
             public void handle(ActionEvent event) {
             	choix = choiceList.getSelectionModel().getSelectedItem();
-            	System.out.println("clickOnProposerButt!");
                 dialogStage.close();
             }
         }); 

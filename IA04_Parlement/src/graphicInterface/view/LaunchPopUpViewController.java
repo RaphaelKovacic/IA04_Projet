@@ -20,7 +20,7 @@ public class LaunchPopUpViewController {
         Launch.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("accepteLoiButton!");
+                //System.out.println("accepteLoiButton!");
                 dialogStage.close();
             }
         });

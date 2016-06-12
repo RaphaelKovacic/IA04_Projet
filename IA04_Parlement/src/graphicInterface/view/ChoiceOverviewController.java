@@ -52,7 +52,6 @@ public class ChoiceOverviewController {
         proposeLoi.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("proposeLoiButton!");
                 choix = 0;
                 dialogStage.close();
             }
@@ -74,7 +73,6 @@ public class ChoiceOverviewController {
         accepteLoi.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("accepteLoiButton!");
                 choix = 1;
                 dialogStage.close();
             }
@@ -94,7 +92,6 @@ public class ChoiceOverviewController {
         refuseLoi.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("refuseLoiButton!");
                 choix = 2;
                 dialogStage.close();
             }
@@ -114,7 +111,6 @@ public class ChoiceOverviewController {
         rumeur.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("rumeurButton!");
                 choix = 3;
                 dialogStage.close();
             }
@@ -133,7 +129,6 @@ public class ChoiceOverviewController {
         sondage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("sondageButton!");
                 choix = 4;
                 dialogStage.close();
             }
@@ -178,7 +173,6 @@ public class ChoiceOverviewController {
         changerParti.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("AvisButton!");
                 choix = 6;
                 dialogStage.close();
             }
@@ -200,7 +194,6 @@ public class ChoiceOverviewController {
         aucuneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("aucuneButton!");
                 choix = 7;
                 dialogStage.close();
             }
@@ -227,7 +220,6 @@ public class ChoiceOverviewController {
         proposeLoi.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("proposeLoiButton!");
                 choix = 0;
                 dialogStage.close();
             }
@@ -235,7 +227,6 @@ public class ChoiceOverviewController {
         accepteLoi.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("accepteLoiButton!");
                 choix = 1;
                 dialogStage.close();
             }
@@ -244,7 +235,6 @@ public class ChoiceOverviewController {
         refuseLoi.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("refuseLoiButton!");
                 choix = 2;
                 dialogStage.close();
             }
@@ -252,7 +242,6 @@ public class ChoiceOverviewController {
         rumeur.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("rumeurButton!");
                 choix = 3;
                 dialogStage.close();
             }
@@ -260,7 +249,6 @@ public class ChoiceOverviewController {
         sondage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("sondageButton!");
                 choix = 4;
                 dialogStage.close();
             }
@@ -268,7 +256,6 @@ public class ChoiceOverviewController {
         butt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("aviButton!");
                 choix = 5;
                 dialogStage.close();
             }
@@ -276,7 +263,6 @@ public class ChoiceOverviewController {
         changerParti.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("PartiButton!");
                 choix = 6;
                 dialogStage.close();
             }
@@ -284,7 +270,6 @@ public class ChoiceOverviewController {
         aucuneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("aucuneButton!");
                 choix = 7;
                 dialogStage.close();
             }

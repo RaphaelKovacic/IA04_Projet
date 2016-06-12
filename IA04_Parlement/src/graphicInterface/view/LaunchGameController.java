@@ -33,7 +33,7 @@ public class LaunchGameController {
         Launch.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Lancement du jeu!");
+                //System.out.println("Lancement du jeu!");
                 dialogStage.close();
             }
         }); 

@@ -46,7 +46,7 @@ public class ProposeLoiViewController {
             @Override
             public void handle(ActionEvent event) {
             	choix = FindLoi( choiceList.getSelectionModel().getSelectedItem());
-            	System.out.println("clickOnProposerButt!");
+            	//System.out.println("clickOnProposerButt!");
                 dialogStage.close();
             }
         }); 
@@ -78,7 +78,7 @@ public class ProposeLoiViewController {
 		
 		int i = 0;
 		while (i < this.listeLoi .size()){
-			System.out.println(this.listeLoi .get(i).getId() + this.listeLoi .get(i).getDescription());
+			//System.out.println(this.listeLoi .get(i).getId() + this.listeLoi .get(i).getDescription());
 			listeLoiName.add(this.listeLoi.get(i).getName());
 			i+=1;
 		}
@@ -103,7 +103,7 @@ public class ProposeLoiViewController {
 		    	    		  setTextArea(loi.getDescription());
 		    	    		  
 		    	    	  }else{
-		    	    			System.out.println("BABAYAGA");
+		    	    			//System.out.println("BABAYAGA");
 
 		    	    	  }				    }
 				});
@@ -111,11 +111,11 @@ public class ProposeLoiViewController {
 				
 	}
 	public Loi FindLoi(String i){
-		System.out.println("/////"+i);
+		//System.out.println("/////"+i);
 
 		int x = 0;
 		while( x < this.listeLoi.size()){
-		System.out.println("/////"+this.listeLoi.get(x).getId());
+		//System.out.println("/////"+this.listeLoi.get(x).getId());
 		if(this.listeLoi.get(x).getName() == i){
 			return this.listeLoi.get(x);
 		}

@@ -49,7 +49,7 @@ public class ListDeputesViewController {
             @Override
             public void handle(ActionEvent event) {
             	choix = (Integer) choiceList.getSelectionModel().getSelectedItem();
-            	System.out.println("clickOnProposerButt!");
+            	//System.out.println("clickOnProposerButt!");
                 dialogStage.close();
             }
         }); 
@@ -76,11 +76,11 @@ public class ListDeputesViewController {
 
 	public void setLois(ObservableList<DeputeForList> observableList) {
 		myList = observableList;
-		System.out.println("entreee"+observableList.size());
+		//System.out.println("entreee"+observableList.size());
 		
 		int i = 0;
 		while (i < myList.size()){
-			System.out.println(myList.get(i).getId() + myList.get(i).getDescription());
+			//System.out.println(myList.get(i).getId() + myList.get(i).getDescription());
 			arrayL.add(myList.get(i).getId());
 			i+=1;
 		}
@@ -100,7 +100,7 @@ public class ListDeputesViewController {
     	    		  setTextArea(deput.getDescription());
     	    		  
     	    	  }else{
-    	    			System.out.println("BABAYAGA");
+    	    			//System.out.println("BABAYAGA");
 
     	    	  }
     	      
@@ -110,11 +110,11 @@ public class ListDeputesViewController {
 	}
     
 	public DeputeForList FindDepute(Integer i){
-		System.out.println("/////"+i);
+		//System.out.println("/////"+i);
 
 		int x = 0;
 		while( x < myList.size()){
-		System.out.println("/////"+myList.get(x).getId());
+		//System.out.println("/////"+myList.get(x).getId());
 		if(myList.get(x).getId() == i){
 			return myList.get(x);
 		}

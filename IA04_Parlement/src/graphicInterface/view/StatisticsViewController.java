@@ -43,7 +43,7 @@ public class StatisticsViewController {
 
 	        	monthCounter[month]++;
 	        }
-        	System.out.println(partis);
+        	//System.out.println(partis);
 
 
 	        XYChart.Series<String, Integer> series = new XYChart.Series<>();
