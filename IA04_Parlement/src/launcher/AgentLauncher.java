@@ -24,6 +24,7 @@ import jade.wrapper.ContainerController;
 
 public class AgentLauncher {
 
+	
 	/**
 	 * Le nombre d'agent Depute à instanier dans notre conteneur Parlement.
 	 *

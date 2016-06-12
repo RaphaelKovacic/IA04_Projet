@@ -175,6 +175,13 @@ public class DeputeAttRumeur implements Comparable<DeputeAttRumeur> {
 		System.out.println("------------------------------------------------------");
 	}
 
+	public String affiche_a_utilisateur_String() {
+		return new String("influence : " + this.influence+"\n"+
+				"popularité : " + this.popularite+"\n"+
+				"crédibilité : " + this.credibilite+"\n");
+	}
+
+	
 	@Override
 	public int compareTo(DeputeAttRumeur _to_compare) {
 		if (this.id < _to_compare.get_Id())

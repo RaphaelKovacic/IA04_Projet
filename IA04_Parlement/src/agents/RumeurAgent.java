@@ -463,6 +463,12 @@ public class RumeurAgent extends Agent {
 			// Remise à false du drapeau processingDemand, permettant de commencer le traitement d'une nouvelle requête de répandre des rumeurs.
 			processingDemand = false;
 
+			ACLMessage msg = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+			msg.addReceiver(AMediateur);
+			msg.setContent("Aucune");
+			myAgent.send(msg);
+			
+			
 			return 0;
 		}
 

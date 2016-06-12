@@ -439,7 +439,7 @@ public class MediateurAgent extends Agent {
 				// Si ce n'est pas à l'utilisateur de proposer une loi, alors il
 				// faut prévenir l'agent Loi qu'il demande à un député d'en
 				// proposer une
-				if (!action_choisit.equals("Proposer une loi") && !action_choisit.equals("Avis du parlement")) {
+				if (!action_choisit.equals("Proposer une loi") && !action_choisit.equals("Avis du parlement")  && !action_choisit.equals("Repandre une rumeur")) {
 
 					// Envoie d'un message à l'Agent loi pour lancer une
 					// proposition de loi par un député

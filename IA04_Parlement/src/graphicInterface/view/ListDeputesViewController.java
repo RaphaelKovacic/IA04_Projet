@@ -1,5 +1,7 @@
 package graphicInterface.view;
 
+import java.util.ArrayList;
+
 import graphicInterface.MainApp;
 import graphicInterface.model.Depute;
 import graphicInterface.model.DeputeForList;
@@ -19,23 +21,24 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-public class ProposeLoiViewController {
+public class ListDeputesViewController {
     @FXML
-    private ChoiceBox<String> choiceList = new ChoiceBox<String>();;
+    private ChoiceBox<Integer> choiceList;
 
     @FXML
     private Button proposerButt;
     @FXML
     private TextArea textZone;
     Stage dialogStage;
-    Loi choix;
+    Integer choix;
+    private ObservableList<DeputeForList> myList  = FXCollections.observableArrayList();
+    private ObservableList<Integer> arrayL = FXCollections.observableArrayList();
 
     // Reference to the main application.
     private MainApp mainApp;
-    private ObservableList<Loi> listeLoi = FXCollections.observableArrayList();
-    private ObservableList<String> listeLoiName = FXCollections.observableArrayList();
-
-    public ProposeLoiViewController() {
+    
+    
+    public ListDeputesViewController() {
  
     }
 
@@ -45,7 +48,7 @@ public class ProposeLoiViewController {
         proposerButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	choix = FindLoi( choiceList.getSelectionModel().getSelectedItem());
+            	choix = (Integer) choiceList.getSelectionModel().getSelectedItem();
             	System.out.println("clickOnProposerButt!");
                 dialogStage.close();
             }
@@ -57,13 +60,12 @@ public class ProposeLoiViewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-       // choiceList.setItems(mainApp.getLoiData());
 
     }
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-    public Loi getLoi(){
+    public int getDeputeID(){
     	return this.choix;
     }
     public void setTextArea(String text){
@@ -72,57 +74,53 @@ public class ProposeLoiViewController {
     	
     }
 
-	public void setLois(ObservableList<Loi> listeLoi) {
+	public void setLois(ObservableList<DeputeForList> observableList) {
 		// TODO Auto-generated method stub
-		this.listeLoi = listeLoi;
-		
+		myList = observableList;
+		System.out.println("entreee"+observableList.size());
 		
 		int i = 0;
-		while (i < this.listeLoi .size()){
-			System.out.println(this.listeLoi .get(i).getId() + this.listeLoi .get(i).getDescription());
-			listeLoiName.add(this.listeLoi.get(i).getName());
+		while (i < myList.size()){
+			System.out.println(myList.get(i).getId() + myList.get(i).getDescription());
+			arrayL.add(myList.get(i).getId());
 			i+=1;
 		}
 			
 		
-				choiceList.setItems(listeLoiName);
-				
-				
-				
-		 ///       choiceList.getSelectionModel().selectedItemProperty().addListener(
-         //       (observable, oldValue, newValue) -> setTextArea(((Loi) newValue).getDescription()));
+       choiceList.setItems(arrayL);
+   //    choiceList.getSelectionModel().selectedItemProperty().addListener(
+   //            (observable, oldValue, newValue) -> setTextArea((FindDepute(newValue)).getDescription()));
 
+       
+       choiceList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+    	      @Override
+    	      public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+    	    	  DeputeForList deput = FindDepute(number2.intValue());
+    	    	  if(deput != null){
+    	    		  
+    	    		  setTextArea(deput.getDescription());
+    	    		  
+    	    	  }else{
+    	    			System.out.println("BABAYAGA");
 
-			       
-				choiceList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
-				{
-				    public void changed(ObservableValue<? extends String> source, String oldValue, String newValue)
-				    {
-				     	  Loi loi = FindLoi(newValue);
-		    	    	  if(loi != null){
-		    	    		  
-		    	    		  setTextArea(loi.getDescription());
-		    	    		  
-		    	    	  }else{
-		    	    			System.out.println("BABAYAGA");
-
-		    	    	  }				    }
-				});
-				
-				
+    	    	  }
+    	      
+    	      }
+    	    });
+       
 	}
-	public Loi FindLoi(String i){
+    
+	public DeputeForList FindDepute(Integer i){
 		System.out.println("/////"+i);
 
 		int x = 0;
-		while( x < this.listeLoi.size()){
-		System.out.println("/////"+this.listeLoi.get(x).getId());
-		if(this.listeLoi.get(x).getName() == i){
-			return this.listeLoi.get(x);
+		while( x < myList.size()){
+		System.out.println("/////"+myList.get(x).getId());
+		if(myList.get(x).getId() == i){
+			return myList.get(x);
 		}
 		x+=1;
 	}
 	return null;
 	}
-
 }

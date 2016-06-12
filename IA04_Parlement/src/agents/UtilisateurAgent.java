@@ -1076,10 +1076,15 @@ public class UtilisateurAgent extends Agent {
 					System.out.println();
 					System.out.println("----------------------------------------------------------------");
 					System.out.println("----------------------------DEPUTES-----------------------------");
+					
+					
 					for (int y = 0; y < List_DeputeAttRumeur.size(); y++) {
 						List_DeputeAttRumeur.get(y).affiche_a_utilisateur();
 
 					}
+					
+
+					
 					System.out.println("---------------------------FIN DEPUTES---------------------------");
 					System.out.println();
 					// On donne le protocole de réponse à l'utilisateur
@@ -1090,10 +1095,24 @@ public class UtilisateurAgent extends Agent {
 					System.out.println("---------------------------FIN RÉPONSE---------------------------");
 					System.out.println("------------------------------------------------------------------");
 					System.out.println();
+					int choix = MainApp.showDeputes(List_DeputeAttRumeur);
+					while (choix == -1){
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+
+							e.printStackTrace();
+						}
+					}
+					addBehaviour(new SendMyDepute( Integer.toString(choix))); // Envoi un message à Mediateur pour donner son choix.
 
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+
+				
+				
+				
 			} else
 				block();
 
@@ -1207,4 +1226,26 @@ public class UtilisateurAgent extends Agent {
 		}
 	}
 
+	class SendMyDepute extends OneShotBehaviour{
+		// Constructor
+		String message;
+		public SendMyDepute(String message) {
+			this.message = message;
+		}
+
+		// Task to do
+		public void action() {
+
+			// 	L'agent r�pond en pr�cisant son vote
+			ACLMessage message2 = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+			message2.addReceiver(ARumeur);
+
+
+			message2.setContent(message);
+			myAgent.send(message2);
+		}
+	}
+
+	
+	
 }

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.FutureTask;
 
+import Class_For_JSON.DeputeAttRumeur;
 import graphicInterface.model.Depute;
+import graphicInterface.model.DeputeForList;
 import graphicInterface.model.HistoryData;
 import graphicInterface.model.Loi;
 import graphicInterface.view.AchievementViewController;
@@ -15,6 +17,7 @@ import graphicInterface.view.ChoiceOverviewController;
 import graphicInterface.view.HistoryViewController;
 import graphicInterface.view.LaunchGameController;
 import graphicInterface.view.LaunchPopUpViewController;
+import graphicInterface.view.ListDeputesViewController;
 import graphicInterface.view.PersonOverviewController;
 import graphicInterface.view.ProposeLoiViewController;
 import graphicInterface.view.RootLayoutController;
@@ -39,6 +42,7 @@ public class MainApp extends Application {
     private static ObservableList<HistoryData> listeHistorique = FXCollections.observableArrayList();
     private static ObservableList<Loi> listeLoi = FXCollections.observableArrayList();
     private static ObservableList<String> listeParti = FXCollections.observableArrayList();
+    private static ObservableList<DeputeForList> listeDeput = FXCollections.observableArrayList();
 
     private static int  tabAchiev[] = {0,0,0};
     private String style;
@@ -248,7 +252,52 @@ public class MainApp extends Application {
 		return choixID.get();
 	}
 
-	
+
+	public static int showDeputes(List<DeputeAttRumeur> list_DeputeAttRumeur) {
+	    final CountDownLatch latch = new CountDownLatch(1);
+		final SimpleIntegerProperty choixID = new SimpleIntegerProperty(-1);
+
+	    Platform.runLater(new Runnable() {
+	        @Override public void run() {
+	        	 try {
+	     	    	
+	     	        // Load the fxml file and create a new stage for the popup dialog.
+	     	        FXMLLoader loader = new FXMLLoader();
+	     	        loader.setLocation(MainApp.class.getResource("view/ListDeputesView.fxml"));
+	     	        AnchorPane page = (AnchorPane) loader.load();
+
+	     	        // Create the dialog Stage.
+	     	        Stage dialogStage = new Stage();
+	     	        dialogStage.setTitle("Choix");
+	     	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	     	        dialogStage.initOwner(primaryStage);
+	     	        Scene scene = new Scene(page);
+	     	        dialogStage.setScene(scene);
+	     	        ListDeputesViewController controller = loader.getController();
+	     	        controller.setDialogStage(dialogStage);
+	     	        // Show the dialog and wait until the user closes it
+					for (int y = 0; y < list_DeputeAttRumeur.size(); y++) {
+						addDepuList(list_DeputeAttRumeur.get(y).get_Id(), list_DeputeAttRumeur.get(y).affiche_a_utilisateur_String());
+					}
+					System.out.println(listeDeput);
+					controller.setLois(getDeputeListData());
+	     	        dialogStage.showAndWait();
+	     	        Integer choix = controller.getDeputeID();
+	     	        choixID.set(choix);
+	     	       removeDepuListData();
+	     	        latch.countDown();
+	     	    } catch (IOException e) {
+	     	        e.printStackTrace();
+	     	    }	        }
+	      });
+
+	    try {
+	      latch.await();
+	    } catch (InterruptedException e) {
+	      Platform.exit();
+	    }
+		return choixID.get();
+	}
 	
 	public static String showPartis(List<String> Partis) {
 	    final CountDownLatch latch = new CountDownLatch(1);
@@ -391,6 +440,19 @@ public class MainApp extends Application {
     	
     	listeParti.add(parti);
     }
+    
+    public static ObservableList<DeputeForList> getDeputeListData() {
+        return listeDeput;
+    }
+    public static void removeDepuListData() {
+    	listeDeput.clear();
+    }
+    public static void addDepuList(int id, String description){
+    	
+    	listeDeput.add(new DeputeForList(id,description));
+    }
+    
+    
     private static Depute parcoursDeputeData(String idDepute_){
     	Depute dep_;
     	int i = 0;
