@@ -329,7 +329,7 @@ public class MainApp extends Application {
 					controller.setPartis(listeParti);
 	     	        dialogStage.showAndWait();
 	     	        choix.set(controller.getParti());
-	     	       removeLoiData();
+	     	       removeStringData();
 	     	        System.out.println(" choix :"+choix.getName());
 	     	        latch.countDown();
 	     	    } catch (IOException e) {
