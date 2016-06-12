@@ -860,13 +860,13 @@ public class UtilisateurAgent extends Agent {
 			}
 
 			//Avertissement
-			if (moyenne <= 30){
+			if (moyenne <= 30 && grade_utilisateur != -2){
 				System.out.println();
 				System.out.println("---------------------------ÉTAT CRITIQUE--------------------------");
 				System.out.println("Vos caractéristiques commencent à être basses ..réctifiez le tir !");
 				System.out.println("-----------------------------------------------------------------");
 				System.out.println();
-				grade_utilisateur = 0;
+				grade_utilisateur = -2;
 			}
 
 			//Achievements
