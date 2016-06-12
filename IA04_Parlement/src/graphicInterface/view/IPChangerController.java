@@ -48,13 +48,10 @@ public class IPChangerController {
                         new FileOutputStream("src/Properties/SecondaryProperties.txt"), "utf-8"))) {
              writer.write("main=false\ngui=false\ncontainer-name = Parlement\nhost = "+getIp()+"\n#local-port=1099\n");
           } catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

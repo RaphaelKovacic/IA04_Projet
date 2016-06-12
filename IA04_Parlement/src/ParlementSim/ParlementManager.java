@@ -29,7 +29,6 @@ import java.util.List;
 
 public class ParlementManager{
 
-	//TODO Compléter la JAVADOC
 	/**
 	 * Retourne l'AID de l'agent à partir de son nom et son type.
 	 *

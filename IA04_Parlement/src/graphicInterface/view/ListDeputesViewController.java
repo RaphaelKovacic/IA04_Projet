@@ -75,7 +75,6 @@ public class ListDeputesViewController {
     }
 
 	public void setLois(ObservableList<DeputeForList> observableList) {
-		// TODO Auto-generated method stub
 		myList = observableList;
 		System.out.println("entreee"+observableList.size());
 		

@@ -605,11 +605,6 @@ public class DeputeAgent extends Agent {
 					System.out.println("EXCEPTION" + ex.getMessage());
 				}
 
-				/*
-				 * // Juste pour debug System.out.println("");
-				 * System.out.println(myAgent.getLocalName());
-				 * System.out.println("Influence :"+Influence);
-				 */
 			} else {
 				block();
 			}

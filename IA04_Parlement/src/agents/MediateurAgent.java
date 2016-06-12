@@ -582,7 +582,7 @@ public class MediateurAgent extends Agent {
 				System.out.println();
 
 
-				// On seriaalize la loi choisie puis on l'envoie à l'agent loi
+				// On serialize la loi choisie puis on l'envoie à l'agent loi
 				ObjectMapper mapper = new ObjectMapper();
 				StringWriter sw = new StringWriter();
 
@@ -650,9 +650,7 @@ public class MediateurAgent extends Agent {
 						message2.setContent("Proposer une loi");
 						myAgent.send(message2);
 						vote_en_cours = true;
-						// System.out.println(myAgent.getLocalName()+" ->
-						// "+ALoi.getLocalName() +" : " +message2.getContent()
-						// );
+
 					}
 				}
 
@@ -727,7 +725,7 @@ public class MediateurAgent extends Agent {
 
 					else {
 						System.out
-								.println("Il y a corruption, on est pas dans un tour de prposition de loi par l'user");
+								.println("Il y a corruption, on est pas dans un tour de proposition de loi par l'user");
 					}
 
 				} catch (IOException e) {

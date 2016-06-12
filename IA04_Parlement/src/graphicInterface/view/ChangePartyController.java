@@ -62,7 +62,6 @@ public class ChangePartyController {
 
 
 	public void setPartis(ObservableList<String> listePartis) {
-		// TODO Auto-generated method stub
         choiceList.setItems(listePartis);
 	}
     
