@@ -73,7 +73,6 @@ public class ProposeLoiViewController {
     }
 
 	public void setLois(ObservableList<Loi> listeLoi) {
-		// TODO Auto-generated method stub
 		this.listeLoi = listeLoi;
 		
 		

@@ -260,7 +260,6 @@ public class LoiAgent extends Agent {
 					// Sinon
 				} else {
 
-					// TODO DELETE ? USELESS ?
 					// Le proposant est forcément l'utilisateur
 					proposant = AUtilisateur;
 
@@ -534,7 +533,6 @@ public class LoiAgent extends Agent {
 
 					L_AID_Vote.add(current_vote);
 				} else {
-					//TODO Récupérer parti de l'utilisateur pour la liste sur l'historique du vote de chaque député au tour courant
 					Aid_vote e = new Aid_vote(AUtilisateur.getLocalName(), "pour", null);
 					L_AID_Vote.add(e);
 				}

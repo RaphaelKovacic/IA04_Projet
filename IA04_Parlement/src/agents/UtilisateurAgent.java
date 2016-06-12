@@ -423,12 +423,7 @@ public class UtilisateurAgent extends Agent {
 						addBehaviour(new SendMyParti(choix)); // Envoi un message à Mediateur pour donner son choix.
 						System.out.println("Vous êtes actuellement membre des " + Parti_Politique);
 						System.out.println();
-						System.out.println(
-								"Préciser le nouveau parti que vous voulez intégrer en envoyant un message comme suit :");
-						System.out.println("Voici la liste des partis possibles : " + liste_partis_possibles.toString());
 						System.out.println("Vous allez perdre influence, popularité, notorieté et credibilité;");
-						System.out.println(
-								"Merci de répondre à l'Agent Utilisateur (CONFIRM) avec le nom du parti voulu pour le changement");
 						System.out.println("---------------------------FIN CHANGEMENT DE PARTI------------------------");
 
 						// Recrée la liste pour anticiper et gérer un éventuel
@@ -473,9 +468,7 @@ public class UtilisateurAgent extends Agent {
 			if (message != null) {
 				parti_a_rejoindre = message.getContent();
 				if (L_Parti.contains(parti_a_rejoindre)) {
-
-					// TODO Ajuster l'impact du changement de parti :
-					// actuellement -20% à toutes les caractéristiques.
+					//Influence du changement de parti : perte 20% sur chaque caractéristique du joueur
 					Influence = Influence - ((Influence * 20) / 100);
 					Popularite = Popularite - ((Popularite * 20) / 100);
 					Notoriete = Notoriete - ((Notoriete * 20) / 100);
@@ -486,7 +479,6 @@ public class UtilisateurAgent extends Agent {
 					Parti_Politique = parti_a_rejoindre;
 					System.out.println("---------------------------NOUVEAU PARTI---------------------------");
 					System.out.println("Vous venez de rejoindre les " + Parti_Politique + " ! Bienvenue !");
-					System.out.println("Voter pour la loi proposée ci-dessus pour finir le tour.");
 					System.out.println("---------------------------FIN NOUVEAU PARTI------------------------");
 				} else
 					System.out.println(
@@ -716,14 +708,10 @@ public class UtilisateurAgent extends Agent {
 
 					// Affichage selon vote ou demande de sondage :
 					if (message.getConversationId().equalsIgnoreCase("Proposition de loi")){
-						System.out.println(
-								"Envoyer un message de type INFORM_IF à l'agent médiateur avec seulement l'ID de la loi choisie et 'Proposition de loi' en conversation-id.");
 						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Proposition de loi")); // Envoi un message à Mediateur pour donner son choix.
 
 					}
 					else{
-						System.out.println(
-								"Envoyer un message de type INFORM_IF à l'agent médiateur avec seulement l'ID de la loi choisie et 'Demande de sondage' en conversation-id.");
 						addBehaviour(new SendMyLaw( Integer.toString(choix) ,"Demande de Sondage")); // Envoi un message à Mediateur pour donner son choix.
 
 					}
@@ -1076,24 +1064,14 @@ public class UtilisateurAgent extends Agent {
 					System.out.println();
 					System.out.println("----------------------------------------------------------------");
 					System.out.println("----------------------------DEPUTES-----------------------------");
-					
+					 //Collections.sort(List_DeputeAttRumeur);
 					
 					for (int y = 0; y < List_DeputeAttRumeur.size(); y++) {
 						List_DeputeAttRumeur.get(y).affiche_a_utilisateur();
 
 					}
-					
 
-					
 					System.out.println("---------------------------FIN DEPUTES---------------------------");
-					System.out.println();
-					// On donne le protocole de réponse à l'utilisateur
-					System.out.println();
-					System.out.println("---------------------------RÉPONSE-------------------------------");
-					System.out.println(
-							"Envoyer un message de type ACCEPT_PROPOSAL à l'agent rumeur avec seulement l'ID du député choisi");
-					System.out.println("---------------------------FIN RÉPONSE---------------------------");
-					System.out.println("------------------------------------------------------------------");
 					System.out.println();
 					int choix = MainApp.showDeputes(List_DeputeAttRumeur);
 					while (choix == -1){
@@ -1127,7 +1105,6 @@ public class UtilisateurAgent extends Agent {
 			this.test = test;
 		}
 
-		// Task to do
 		public void action() {
 
 			// 	L'agent r�pond en pr�cisant son vote
@@ -1152,7 +1129,6 @@ public class UtilisateurAgent extends Agent {
 		public LaunchGame() {
 		}
 
-		// Task to do
 		public void action() {
 
 			// 	L'agent r�pond en pr�cisant son vote
@@ -1171,7 +1147,6 @@ public class UtilisateurAgent extends Agent {
 			this.message = message;
 		}
 
-		// Task to do
 		public void action() {
 
 			// 	L'agent r�pond en pr�cisant son vote
@@ -1194,7 +1169,6 @@ public class UtilisateurAgent extends Agent {
 			this.conversID = conversID;
 		}
 
-		// Task to do
 		public void action() {
 
 			// 	L'agent r�pond en pr�cisant son vote
@@ -1214,7 +1188,6 @@ public class UtilisateurAgent extends Agent {
 			this.message = message;
 		}
 
-		// Task to do
 		public void action() {
 
 			// 	L'agent r�pond en pr�cisant son vote
@@ -1233,7 +1206,6 @@ public class UtilisateurAgent extends Agent {
 			this.message = message;
 		}
 
-		// Task to do
 		public void action() {
 
 			// 	L'agent r�pond en pr�cisant son vote

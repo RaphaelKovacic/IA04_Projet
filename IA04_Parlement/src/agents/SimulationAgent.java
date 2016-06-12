@@ -197,9 +197,7 @@ public class SimulationAgent extends Agent {
 					message1.addReceiver(AMediateur);
 					message1.setContent(String.valueOf(s1));
 					myAgent.send(message1);
-					// System.out.println(myAgent.getLocalName()+" ->
-					// "+AMediateur.getLocalName() +" : " +message1.getContent()
-					// );
+
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}

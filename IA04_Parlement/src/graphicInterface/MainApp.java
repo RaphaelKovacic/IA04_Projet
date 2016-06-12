@@ -158,7 +158,6 @@ public class MainApp extends Application {
 	    }
 
 
-	    System.out.println("hhehehe" + choix.intValue());
 	        return choix.intValue();
 	}
 	
@@ -237,7 +236,6 @@ public class MainApp extends Application {
 	     	        Loi choix = controller.getLoi();
 	     	        choixID.set(choix.getId());
 	     	       removeLoiData();
-	     	        System.out.println(" choix :"+choix.getName());
 	     	        latch.countDown();
 	     	    } catch (IOException e) {
 	     	        e.printStackTrace();
@@ -279,7 +277,6 @@ public class MainApp extends Application {
 					for (int y = 0; y < list_DeputeAttRumeur.size(); y++) {
 						addDepuList(list_DeputeAttRumeur.get(y).get_Id(), list_DeputeAttRumeur.get(y).affiche_a_utilisateur_String());
 					}
-					System.out.println(listeDeput);
 					controller.setLois(getDeputeListData());
 	     	        dialogStage.showAndWait();
 	     	        Integer choix = controller.getDeputeID();
@@ -330,7 +327,6 @@ public class MainApp extends Application {
 	     	        dialogStage.showAndWait();
 	     	        choix.set(controller.getParti());
 	     	       removeStringData();
-	     	        System.out.println(" choix :"+choix.getName());
 	     	        latch.countDown();
 	     	    } catch (IOException e) {
 	     	        e.printStackTrace();

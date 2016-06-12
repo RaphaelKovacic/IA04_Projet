@@ -264,7 +264,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
-			// TODO Auto-generated method stub
 
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
 					MessageTemplate.MatchSender(resultSender));
@@ -300,7 +299,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public boolean done() {
-			// TODO Auto-generated method stub
 			return received;
 		}
 	}
@@ -325,7 +323,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
-			// TODO Auto-generated method stub
 
 			ACLMessage message = new ACLMessage(ACLMessage.PROPOSE);
 			message.addReceiver(AUtilisateur);
@@ -339,7 +336,6 @@ public class RumeurAgent extends Agent {
 				message.setContent(s1);
 				myAgent.send(message);
 			} catch (Exception ex) {
-				System.out.println(ex.getMessage());
 			}
 		}
 	}
@@ -380,7 +376,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public void action() {
-			// TODO Auto-generated method stub
 
 			MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
 			ACLMessage message = myAgent.receive(mt);
@@ -427,6 +422,8 @@ public class RumeurAgent extends Agent {
 				utilisateurGagne = (Math.random()*rapportPuissance) >= 0.5;
 
 				// on fixe les destinataires des changements de caractéristiques positifs et négatifs
+				System.out.println();
+				System.out.println("---------------------------RÉSULTAT RUMEURS---------------------------");
 				if (utilisateurGagne) {
 					System.out.println("Les gens ont cru aux rumeurs!");
 					winnerMsg.addReceiver(AUtilisateur);
@@ -436,7 +433,8 @@ public class RumeurAgent extends Agent {
 					winnerMsg.addReceiver(List_Depute.get(Integer.parseInt(message.getContent())));
 					loserMsg.addReceiver(AUtilisateur);
 				}
-
+				System.out.println("---------------------------FIN RÉSULTATS RUMEURS---------------------------");
+				System.out.println();
 				// on envoie les messages de màj au gagnant et au perdant
 				myAgent.send(winnerMsg);
 				myAgent.send(loserMsg);
@@ -458,7 +456,6 @@ public class RumeurAgent extends Agent {
 		 */
 		@Override
 		public int onEnd() {
-			// TODO Auto-generated method stub
 
 			// Remise à false du drapeau processingDemand, permettant de commencer le traitement d'une nouvelle requête de répandre des rumeurs.
 			processingDemand = false;
@@ -474,7 +471,6 @@ public class RumeurAgent extends Agent {
 
 		@Override
 		public boolean done() {
-			// TODO Auto-generated method stub
 			return done;
 		}
 	}
