@@ -669,7 +669,7 @@ public class LoiAgent extends Agent {
 			// Le vote est terminé...
 			System.out.println("---------------------------RÉSULTAT VOTE--------------------------------");
 			System.out.println(
-					"La Loi a été votée avec : " + nb_vote_pour + " vote Pour et " + nb_vote_contre + " vote Contre.");
+					"Résultat du vote : " + nb_vote_pour + " vote POUR et " + nb_vote_contre + " vote CONTRE.");
 			System.out.println("---------------------------FIN RÉSULTAT VOTE---------------------------");
 
 			// Pour chaque député ayant voté
