@@ -65,13 +65,25 @@ public class AchievementViewController {
 
         if(tab[0] == 0){
         Achiev1.setEffect(colorAdjust);
+        }else{
+            Achiev1.setEffect(colorAdjust1);
+
+        	
         }
         if(tab[1] == 0){
         Achiev2.setEffect(colorAdjust);
+        }else{
+            Achiev2.setEffect(colorAdjust1);
+
+        	
         }
         if(tab[2] == 0){
 
         Achiev3.setEffect(colorAdjust);
+        }else{
+        	
+            Achiev3.setEffect(colorAdjust1);
+
         }
 
         Achiev1.hoverProperty().addListener((observable)-> {
