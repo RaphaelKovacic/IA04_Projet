@@ -44,11 +44,11 @@ public class AchievementViewController {
     @FXML
     private void initialize() {
 
-        Text t1 = new Text("Faire passer votre première loi au sein du parlement.");
+        Text t1 = new Text("FÉLICITATION on vous écoute enfin un minimum dans cette assemblée.");
         Achiev1T.getChildren().add(t1);
-        Text t2 = new Text("Détroner un des leaders.");
+        Text t2 = new Text("FÉLICITATION on parle enfin de vous sur les réseaux sociaux #FB #Twitter.");
         Achiev2T.getChildren().add(t2);
-        Text t3 = new Text("Devenir une des personnes le plus influents au sein du parlement.");
+        Text t3 = new Text("FÉLICITATION vous avez atteint le stade de président de votre parti.");
         Achiev3T.getChildren().add(t3);
         
         colorAdjust = new ColorAdjust();
@@ -63,28 +63,9 @@ public class AchievementViewController {
         colorAdjust1.setBrightness(0.0);
         colorAdjust1.setSaturation(0.0);
 
-        if(tab[0] == 0){
-        Achiev1.setEffect(colorAdjust);
-        }else{
-            Achiev1.setEffect(colorAdjust1);
 
-        	
-        }
-        if(tab[1] == 0){
-        Achiev2.setEffect(colorAdjust);
-        }else{
-            Achiev2.setEffect(colorAdjust1);
-
-        	
-        }
-        if(tab[2] == 0){
-
-        Achiev3.setEffect(colorAdjust);
-        }else{
-        	
-            Achiev3.setEffect(colorAdjust1);
-
-        }
+        
+		if(tab[0]==0){
 
         Achiev1.hoverProperty().addListener((observable)-> {
         		if(tab[0]==0){
@@ -94,27 +75,31 @@ public class AchievementViewController {
             } else {
                 Achiev1.setEffect(colorAdjust);
             }}
-        });
+        });}
+        
+        
+		if(tab[1]==0){
+
         Achiev2.hoverProperty().addListener((observable)-> {
-    		if(tab[1]==0){
 
             if (Achiev2.isHover()) {
             	Achiev2.setEffect(colorAdjust1);
             		
             } else {
             	Achiev2.setEffect(colorAdjust);
-            }}
-        });
+            }
+        });}
+		if(tab[2]==0){
+
         Achiev3.hoverProperty().addListener((observable)-> {
-    		if(tab[3]==0){
 
             if (Achiev3.isHover()) {
             	Achiev3.setEffect(colorAdjust1);
             		
             } else {
             	Achiev3.setEffect(colorAdjust);
-            }}
-        });
+            }
+        });}
     }
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -145,6 +130,5 @@ public class AchievementViewController {
     	this.tab[0] = tab[0];
     	this.tab[1] = tab[1];
     	this.tab[2] = tab[2];
-
     }
 }

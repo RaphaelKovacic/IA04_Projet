@@ -57,8 +57,8 @@ public class MainApp extends Application {
 	}
 
 	public static void main(String[] args) {
-		MainApp app = new MainApp();
-		app.launch(args);
+	        	 MainApp app = new MainApp();
+				app.launch(args);
 	}
 	
 	public void initRootLayout() {
@@ -387,6 +387,24 @@ public class MainApp extends Application {
 	        // Set the persons into the controller.
 	        AchievementViewController controller = loader.getController();
 	        controller.setAchiev(this.tabAchiev);
+	        
+	        if(this.tabAchiev[0] == 1){
+	        	
+	        	controller.unlock_achiev1();
+	        	
+	        }
+	        if(this.tabAchiev[1] == 1){
+	        	
+	        	controller.unlock_achiev2();
+	        	
+	        }
+	        
+	        if(this.tabAchiev[2] == 1){
+	        	
+	        	controller.unlock_achiev3();
+	        	
+	        }
+	        
 	        dialogStage.show();
 
 	    } catch (IOException e) {

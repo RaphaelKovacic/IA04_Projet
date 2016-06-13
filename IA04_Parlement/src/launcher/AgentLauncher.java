@@ -30,7 +30,7 @@ public class AgentLauncher {
 	 *
 	 * @see #main(String[])
 	 */
-	public static final int NB_DEPUTE = 5;
+	public static final int NB_DEPUTE = 30;
 
 	/**
 	 * Méthode de création de notre conteneur secondaire Parlement.
